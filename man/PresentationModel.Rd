@@ -1,0 +1,45 @@
+\name{PresentationModel}
+\alias{PresentationModel}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{PresentationModel object
+
+}
+\description{
+\code{PresentationModel()} initializes an object of class \code{PresentationModel}.
+}
+\usage{
+PresentationModel(...)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{\dots}{
+defines the arguments passed to create the object of class \code{PresentationModel}.
+}
+}
+\details{
+Presentation models can be used to create a customized structure to report the results. Project information, structure of the sections and subsections, as well as sorting the results tables and labeling of scenarios can be defined.
+
+\code{PresentationModel()} is used to create an object of class \code{PresentationModel} incrementally, using the '+' operator to add objects to the existing \code{PresentationModel} object. The advantage is to explicitely define which objects are added to the \code{PresentationModel} object. Initialization with \code{PresentationModel()} is highly recommended.
+
+Objects of class \code{Project}, \code{Section}, \code{Subsection}, \code{Table} and \code{CustomLabel} can be added to an object of class \code{PresentationModel}.
+}
+
+\references{
+\url{http://biopharmnet.com/mediana}
+}
+
+\seealso{
+See Also \code{\link{Project}}, \code{\link{Section}}, \code{\link{Subsection}}, \code{\link{Table}} and \code{\link{CustomLabel}}.
+}
+\examples{
+presentation.model = PresentationModel() +
+  Project(username = "Gautier Paux",
+          title = "Clinical trial",
+          description = "Simulation report for my clinical trial") +
+  Section(by = "outcome.parameter") +
+  Table(by = "sample.size") +
+  CustomLabel(param = "sample.size",
+              label= paste0("N = ",c(50, 55, 60, 65, 70))) +
+  CustomLabel(param = "outcome.parameter",
+              label=c("Standard 1", "Standard 2"))
+}
