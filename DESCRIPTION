@@ -5,6 +5,7 @@ Version: 1.0.1
 Date: 2015-07-26
 Author: Gautier Paux, Alex Dmitrienko.
 Maintainer: Gautier Paux <gautier@paux.fr>
+BugReports: https://github.com/gpaux/Mediana/issues
 Description: Provides a general framework for clinical trial simulations based on the Clinical Scenario Evaluation (CSE) approach. The package supports a broad class of data models (including clinical trials with continuous, binary, survival-type and count-type endpoints as well as multivariate outcomes that are based on combinations of different endpoints), analysis strategies and commonly used evaluation criteria.
 Imports: doParallel, doRNG, foreach, MASS, mvtnorm, ReporteRs, stats, survival, utils
 License: GPL-2
