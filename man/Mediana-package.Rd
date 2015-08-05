@@ -12,7 +12,7 @@ Provides a general framework for clinical trial simulations based on the Clinica
 \tabular{ll}{
 Package: \tab Mediana\cr
 Type: \tab Package\cr
-Version: \tab 1.0.1\cr
+Version: \tab 1.0.2\cr
 Date: \tab 2015-07-26\cr
 License: \tab GPL-2\cr
 }
