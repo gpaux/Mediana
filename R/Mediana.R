@@ -6073,22 +6073,22 @@ OutcomeDist = function(outcome.dist, outcome.type = NULL) {
   if (is.null(object))
     return(datamodel)
 
-  if (class(object) = "SampleSize"){
+  if (class(object) == "SampleSize"){
     datamodel$general$sample.size = unclass(unlist(object))
   }
-  else if (class(object) = "Event"){
+  else if (class(object) == "Event"){
     datamodel$general$event$n.events = unclass(unlist(object$n.events))
     datamodel$general$event$rando.ratio = unclass(object$rando.ratio)
   }
-  else if (class(object) = "OutcomeDist"){
+  else if (class(object) == "OutcomeDist"){
     datamodel$general$outcome.dist = unclass(object$outcome.dist)
     datamodel$general$outcome.type = unclass(object$outcome.type)
   }
-  else if (class(object) = "Sample"){
+  else if (class(object) == "Sample"){
     nsample = length(datamodel$samples)
     datamodel$samples[[nsample+1]] = unclass(object)
   }
-  else if (class(object) = "Design"){
+  else if (class(object) == "Design"){
     ndesign = length(datamodel$general$design)
     datamodel$general$design[[ndesign+1]] = unclass(object)
   }
@@ -6471,26 +6471,26 @@ Interim = function(sample = NULL, criterion = NULL, fraction = NULL) {
 
   if (is.null(object))
     return(analysismodel)
-  else if (class(object) = "Test"){
+  else if (class(object) == "Test"){
     ntest = length(analysismodel$tests)
     analysismodel$tests[[ntest+1]] = unclass(object)
   }
-  else if (class(object) = "Statistic"){
+  else if (class(object) == "Statistic"){
     nstatistic = length(analysismodel$statistics)
     analysismodel$statistics[[nstatistic+1]] = unclass(object)
   }
-  else if (class(object) = "Interim"){
+  else if (class(object) == "Interim"){
     analysismodel$general$interim$interim.analysis = unclass(object)
   }
-  else if (class(object) = "MultAdjProc"){
+  else if (class(object) == "MultAdjProc"){
     nmultadj = length(analysismodel$general$mult.adjust)
     analysismodel$general$mult.adjust[[nmultadj + 1]] = list(unclass(object))
   }
-  else if (class(object) = "MultAdjStrategy"){
+  else if (class(object) == "MultAdjStrategy"){
     nmultadj = length(analysismodel$general$mult.adjust)
     analysismodel$general$mult.adjust[[nmultadj + 1]] = list(unclass(object))
   }
-  else if (class(object) = "MultAdj"){
+  else if (class(object) == "MultAdj"){
     nmultadj = length(analysismodel$general$mult.adjust)
     if (length(object)>1) analysismodel$general$mult.adjust = c(analysismodel$general$mult.adjust, unclass(object))
     else analysismodel$general$mult.adjust[[nmultadj + 1]] = unclass(object)
@@ -6607,7 +6607,7 @@ Criterion = function(id, method, tests = NULL, statistics = NULL, par = NULL, la
 
   if (is.null(object))
     return(evaluationmodel)
-  else if (class(object) = "Criterion"){
+  else if (class(object) == "Criterion"){
     ncriteria = length(evaluationmodel$criteria)
     evaluationmodel$criteria[[ncriteria+1]] = unclass(object)
   }
@@ -6909,21 +6909,21 @@ CustomLabel = function(param, label) {
 
   if (is.null(object))
     return(presentationmodel)
-  else if (class(object) = "Project"){
+  else if (class(object) == "Project"){
     presentationmodel$project$username = object$username
     presentationmodel$project$title = object$title
     presentationmodel$project$description = object$description
   }
-  else if (class(object) = "Section"){
+  else if (class(object) == "Section"){
     presentationmodel$section.by = unclass(object)
   }
-  else if (class(object) = "SubSection"){
+  else if (class(object) == "SubSection"){
     presentationmodel$subsection.by = unclass(object)
   }
-  else if (class(object) = "Table"){
+  else if (class(object) == "Table"){
     presentationmodel$table.by = unclass(object)
   }
-  else if (class(object) = "CustomLabel"){
+  else if (class(object) == "CustomLabel"){
     ncustomlabel = length(presentationmodel$custom.label)
     presentationmodel$custom.label[[ncustomlabel+1]] = unclass(object)
   }
