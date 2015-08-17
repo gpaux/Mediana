@@ -6050,8 +6050,10 @@ OutcomeDist = function(outcome.dist, outcome.type = NULL) {
 
   # Error checks
   if (!is.character(outcome.dist)) stop("Outcome: outcome distribution must be character.")
-  if (!is.null(outcome.type) & !is.character(outcome.type)) stop("Outcome: outcome type must be character.")
-  if (!is.null(outcome.type) & !(outcome.type %in% c("event","standard"))) stop("Outcome: outcome type must be event or standard")
+  if (!is.null(outcome.type)) {
+    if (!is.character(outcome.type)) stop("Outcome: outcome type must be character.")
+    if(!(outcome.type %in% c("event","standard"))) stop("Outcome: outcome type must be event or standard")
+  }
 
   outcome = list(outcome.dist = outcome.dist,
                  outcome.type = outcome.type)
