@@ -5838,7 +5838,7 @@ DataModel.default = function(...) {
   }
   else {
     datamodel = structure(list(general = list(outcome.dist = NULL,
-                                              #outcome.type = NULL,
+                                              outcome.type = NULL,
                                               sample.size = NULL,
                                               event = NULL,
                                               rando.ratio = NULL,
@@ -6046,12 +6046,16 @@ Design = function(enroll.period = NULL,  enroll.dist = NULL, enroll.dist.par = N
 # Argument: Outcome Distribution and Outcome Type
 # Description: This function is used to create an object of class Outcome.
 #' @export
-OutcomeDist = function(outcome.dist) {
+OutcomeDist = function(outcome.dist, outcome.type = NULL) {
 
   # Error checks
   if (!is.character(outcome.dist)) stop("Outcome: outcome distribution must be character.")
+  if (!is.null(outcome.type) & !is.character(outcome.type)) stop("Outcome: outcome type must be character.")
+  if (!is.null(outcome.type) & !(outcome.type %in% c("event","standard"))) stop("Outcome: outcome type must be event or standard")
 
-  outcome = list(outcome.dist = outcome.dist)
+  outcome = list(outcome.dist = outcome.dist,
+                 outcome.type = outcome.type)
+
   class(outcome) = "OutcomeDist"
   return(outcome)
   invisible(outcome)
@@ -6078,7 +6082,7 @@ OutcomeDist = function(outcome.dist) {
   }
   else if (class(object) = "OutcomeDist"){
     datamodel$general$outcome.dist = unclass(object$outcome.dist)
-    #if (!is.null(object$outcome.type)) datamodel$general$outcome.type = unclass(object$outcome.type)
+    datamodel$general$outcome.type = unclass(object$outcome.type)
   }
   else if (class(object) = "Sample"){
     nsample = length(datamodel$samples)

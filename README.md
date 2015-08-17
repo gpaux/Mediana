@@ -21,4 +21,5 @@ devtools::install_github("gpaux/Mediana")
 
 # Online Manual
 
-A detailed online manual is accessible at http://biopharmnet.com/mediana-manual/ 
+A detailed online manual is accessible at http://biopharmnet.com/mediana-manual/
+
