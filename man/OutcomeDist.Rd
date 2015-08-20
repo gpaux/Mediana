@@ -7,19 +7,22 @@
 This function creates an object of class \code{OutcomeDist} which can be added to an object of class \code{DataModel}.
 }
 \usage{
-OutcomeDist(outcome.dist)
+OutcomeDist(outcome.dist, outcome.type = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{outcome.dist}{
 defines the outcome distribution.
 }
+  \item{outcome.type}{
+defines the outcome type.
+}
 }
 
 \details{
 Objects of class \code{OutcomeDist} are used in objects of class \code{DataModel} to specify the outcome distribution of the generated data. A single object of class \code{OutcomeDist} can be added to an object of class \code{DataModel}.
 
-Several distribution are already implemented in the Mediana package (listed below, along with the required parameters to specify in the \code{outcome.par} argument of the \code{Sample} object):
+Several distribution are already implemented in the Mediana package (listed below, along with the required parameters to specify in the \code{outcome.par} argument of the \code{Sample} object) to be used in the \code{outcome.dist} argument:
 \itemize{
 \item \code{UniformDist}: generate data following a univariate distribution. Required parameter: \code{max}.
 \item \code{NormalDist}: generate data following a normal distribution. Required parameters: \code{mean} and \code{sd}.
@@ -39,6 +42,13 @@ Several distribution are already implemented in the Mediana package (listed belo
 }
 For each generated endpoint, the \code{par} parameter must contain the required parameters according to the type of distribution. The \code{corr} parameter specifies the correlation matrix for the endpoints.
 }
+
+The \code{outcome.type} argument defines the outcome's type. This argument accepts only two values:
+\itemize{
+\item \code{standard}: for fixed design setting.
+\item \code{event}: for event-driven design setting.
+}
+The outcome's type must be defined for each endpoint in case of multivariate disribution, e.g. \code{c("event","event")} in case of multivariate exponential distribution.
 
 }
 
