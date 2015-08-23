@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Data Model
-header: Data Model
+title: Analysis Model
+header: Analysis Model
 group: navigation
 language: R
 ---

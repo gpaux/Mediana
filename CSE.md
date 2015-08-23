@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Data Model
-header: Data Model
+title: CSE Model
+header: CSE Model
 group: navigation
 language: R
 ---
