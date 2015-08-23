@@ -3,7 +3,7 @@ layout: page
 title: Evaluation Model
 header: Evaluation Model
 group: navigation
-language: R
+weight: 3
 ---
 {% include JB/setup %}
 

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Mediana
+title: Mediana R package
 header: Mediana R package
 group: navigation
 ---

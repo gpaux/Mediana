@@ -3,7 +3,7 @@ layout: page
 title: Analysis Model
 header: Analysis Model
 group: navigation
-language: R
+weight: 2
 ---
 {% include JB/setup %}
 

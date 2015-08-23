@@ -3,7 +3,7 @@ layout: page
 title: Data Model
 header: Data Model
 group: navigation
-language: R
+weight: 1
 ---
 {% include JB/setup %}
 
