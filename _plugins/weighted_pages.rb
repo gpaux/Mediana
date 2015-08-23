@@ -1,3 +1,7 @@
+# Generates a copy of site.pages as site.weighted_pages
+# with pages sorted by weight attribute. Pages with no
+# weight specified are placed after the pages with specified weight.
+
 module Jekyll
   
   class WeightedPagesGenerator < Generator
