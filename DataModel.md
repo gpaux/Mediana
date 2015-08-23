@@ -14,9 +14,9 @@ Data models define the process of generating patient data in clinical trials.
 
 A data model can be initialized using the following command
 
-```R
+{% highlight R %}
 data.model = DataModel()
-```
+{% endhighlight %}
 
 Initialization with this command is higlhy recommended as it will simplify the add of related objects, such as 
 `Sample`, `SampleSize`, `Event`, `Design` objects. 
