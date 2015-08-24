@@ -1,8 +1,6 @@
 ---
 layout: page
 title: Mediana R package
-header: Mediana R package
-group: navigation
 ---
 {% include JB/setup %}
 
