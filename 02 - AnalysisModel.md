@@ -3,7 +3,6 @@ layout: page
 title: Analysis Model
 header: Analysis Model
 group: navigation
-weight: 2
 ---
 {% include JB/setup %}
 
@@ -14,9 +13,9 @@ Analysis models define statistical methods that are applied to the study data in
 
 An Analysis Model can be initialized using the following command
 
-```R
+{% highlight R %}
 analysis.model = AnalysisModel()
-```
+{% endhighlight %}
 
 Initialization with this command is higlhy recommended as it will simplify the add of related objects, such as 
 `MultAdj`, `MultAdjProc`, `MultAdjStrategy`, `Test`, `Statistic` objects.

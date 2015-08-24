@@ -3,7 +3,6 @@ layout: page
 title: Data Model
 header: Data Model
 group: navigation
-weight: 1
 ---
 {% include JB/setup %}
 

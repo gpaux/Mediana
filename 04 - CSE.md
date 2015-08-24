@@ -3,7 +3,6 @@ layout: page
 title: CSE Model
 header: CSE Model
 group: navigation
-weight: 4
 ---
 {% include JB/setup %}
 
