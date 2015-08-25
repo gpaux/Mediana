@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Mediana R package
+tagline:
 ---
 {% include JB/setup %}
 
@@ -13,16 +14,16 @@ Find out more at [http://biopharmnet.com/mediana/](http://biopharmnet.com/median
 
 Get the released version from CRAN:
 
-```R
+{% highlight R %}
 install.packages("Mediana")
-```
+{% endhighlight %}
 
 Or the development version from github:
 
-```R
+{% highlight R %}
 # install.packages("devtools")
 devtools::install_github("gpaux/Mediana")
-```
+{% endhighlight %}
 
 # Online Manual
 
