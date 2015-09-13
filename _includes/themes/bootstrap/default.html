@@ -7,24 +7,14 @@
     {% include JB/analytics %}
 
     <link href="{{ ASSET_PATH }}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--link href="{{ ASSET_PATH }}/resources/bootstrap/css/bootstrap.css" rel="stylesheet"-->
     <link href="{{ ASSET_PATH }}/css/style.css" rel="stylesheet">
     <link href="{{ ASSET_PATH }}/css/jquery.tocify.css" rel="stylesheet">
 
     <script src="{{ ASSET_PATH }}/resources/jquery/jquery.min.js"></script>
+    <script src="{{ ASSET_PATH }}/resources/jquery/jquery-ui.js"></script>
     <script src="{{ ASSET_PATH }}/resources/jquery/jquery.tocify.js"></script>
     <script src="{{ ASSET_PATH }}/resources/bootstrap/js/bootstrap.min.js"></script>
-    
-    <script>
-      $('body').scrollspy({
-        target: '.bs-docs-sidebar',
-        offset: 0
-      });   
-    </script>
-
-    <title>{{ page.title }}</title>
-    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
-    <meta name="author" content="{{ site.author.name }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--[if lt IE 9]>
       <script src="{{ ASSET_PATH }}/resources/respond/Respond.min.js"></script>
@@ -33,9 +23,14 @@
     <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
     <link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
 
+    <title>{{ page.title }}</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    <meta name="author" content="{{ site.author.name }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   </head>
 
-  <body data-spy="scroll" data-offset="0">
+  <body>
     <nav class="navbar navbar-custom">
       <div class="container">
         <div class="navbar-header">
@@ -73,32 +68,20 @@
       </div>
     </nav>
     <div class="container">
-      <div class="row MainContent">
+      <div class="row MainContent" id="toc-tocify">
         <div class="col-md-9" role="main">
           {{ content }}
         </div>
-          <script> hljs.initHighlightingOnLoad();</script>
           <script>
-            $(document).ready(function(){
-              $("h2,h3,h4,h5,h6").each(function(i,item){
-                var tag = $(item).get(0).localName;
-                $(item).attr("id","toc"+i);
-                $("#toc").append('<li><a class="new'+tag+'" href="#toc'+i+'">'+$(this).text()+'</a></li>');
-                $(".newh2").css("margin-left",0);
-                $(".newh3").css("margin-left",10);
-                $(".newh4").css("margin-left",20);
-                $(".newh5").css("margin-left",30);
-                $(".newh6").css("margin-left",40);
+              $(function() {
+                 $("#tocc").tocify({selectors: "h2,h3,h4,h5,h6", highlightOffset: 0, extendPageOffset: 50});
+                 $("#tocc").append('<p>')
+                 $("#tocc").append('<a class="back-to-top" href="#top">Back to top</a>')
               });
-              $("#toc").append('<p>')
-              $("#toc").append('<a class="back-to-top" href="#top">Back to top</a>')
-            });            
           </script>
-        <nav class="col-md-3 bs-docs-sidebar">
-          <ul class="nav nav-stacked fixed" id="toc">
-
-          </ul>
-        </nav>
+        <div class="col-md-3 bs-docs-sidebar" >
+          <div id="tocc"></div>
+        </div>
       </div>
     </div>
     <div class="container">

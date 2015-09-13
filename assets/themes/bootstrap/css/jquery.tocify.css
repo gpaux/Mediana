@@ -10,7 +10,7 @@
     overflow: auto;
     margin-left: 2%;
     position: fixed;
-    border: 1px solid #ccc;
+    border: 0px solid #ccc;
     webkit-border-radius: 6px;
     moz-border-radius: 6px;
     border-radius: 6px;
@@ -22,7 +22,7 @@
     margin: 0;
     padding: 0;
     border: none;
-    line-height: 30px;
+    line-height: 20px;
 }
 
 /* Top level header elements */
