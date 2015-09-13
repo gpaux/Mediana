@@ -18,6 +18,7 @@ Data models define the process of generating patient data in clinical trials.
 
 A data model can be initialized using the following command
 {% highlight R %}
+# DataModel initialization
 data.model = DataModel()
 {% endhighlight %}
 
@@ -45,8 +46,9 @@ For more information about the `OutcomeDist` object, see the R documentation [Ou
 
 [insert a table with all available outcome distributions]
 
-An `OutcomeDist` object can be added to an existing `DataModel` object using the following command
+Example of `OutcomeDist` object:	
 {% highlight R %}
+# Outcome distribution
 OutcomeDist(outcome.dist = "NormalDist")
 {% endhighlight %}
 
@@ -96,6 +98,7 @@ For more information about the `SampleSize` object, see the R documentation [Sam
 Example of `SampleSize` objects:
 
 {% highlight R %}
+# Equivalent specification of SampleSize object
 SampleSize(c(50, 55, 60, 65, 70))
 SampleSize(list(50, 55, 60, 65, 70))
 SampleSize(seq(50, 70, 5))
@@ -140,6 +143,7 @@ For more information about the `Design` object, see the R documentation [Design]
 
 Example of `Design` object: 
 {% highlight R %}
+# Design parameters
 Design(enroll.period = 9,
        study.duration = 21,
        enroll.dist = "UniformDist",

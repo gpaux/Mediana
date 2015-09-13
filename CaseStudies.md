@@ -2,7 +2,7 @@
 layout: page
 title: Case studies
 header: Case studies
-group: 
+group: navigation
 ---
 {% include JB/setup %}
 
