@@ -6,10 +6,10 @@ group: navigation
 ---
 {% include JB/setup %}
 
-# About
+## About
 Analysis models define statistical methods that are applied to the study data in a clinical trial.
 
-# Initialization
+## Initialization
 
 An Analysis Model can be initialized using the following command
 

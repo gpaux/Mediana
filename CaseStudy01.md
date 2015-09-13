@@ -4,11 +4,12 @@ title: Case study 1
 header: Case study 1
 group: 
 ---
+
 {% include JB/setup %}
 
 Clinical trial in patients with pulmonary arterial hypertension.
 
-# Data Model
+## Data Model
 ---------------------------------------
 
 {% highlight R %}
@@ -31,7 +32,7 @@ case.study1.data.model = DataModel() +
 
 {% endhighlight %}
 
-# Analysis Model
+## Analysis Model
 ---------------------------------------
 
 {% highlight R %}
@@ -45,7 +46,7 @@ case.study1.analysis.model = AnalysisModel() +
             samples = samples("Treatment"))
 {% endhighlight %}
 
-# Evaluation Model
+## Evaluation Model
 ---------------------------------------
 
 {% highlight R %}
@@ -62,7 +63,7 @@ case.study1.evaluation.model = EvaluationModel() +
             labels = c("Average Mean Treatment"))
 {% endhighlight %}
 
-# Clinical Scenario Evaluation
+## Clinical Scenario Evaluation
 ---------------------------------------
 
 {% highlight R %}
@@ -77,19 +78,19 @@ case.study1.results = CSE(case.study1.data.model,
                           case.study1.sim.parameters)
 {% endhighlight %}
 
-# Summary of results and reporting
+## Summary of results and reporting
 ---------------------------------------
 
-## Summary of results in R console 
+### Summary of results in R console 
 
 {% highlight R %}
 # Print the simulation results
 summary(case.study1.results)
 {% endhighlight %}
 
-## Reporting
+### Reporting
 
-### Presentation Model
+#### Presentation Model
 
 {% highlight R %}
 # Presentation Model
@@ -105,7 +106,7 @@ case.study1.presentation.model =   PresentationModel() +
               label=c("Standard 1", "Standard 2"))
 {% endhighlight %}
 
-### Generation of report
+#### Generation of report
 
 {% highlight R %}
 # Report Generation

@@ -6,10 +6,10 @@ group: navigation
 ---
 {% include JB/setup %}
 
-# About
+## About
 Evaluation models are used within the Mediana package to specify the measures (metrics) for evaluating the performance of the selected clinical scenario (combination of data and analysis models).
 
-# Initialization
+## Initialization
 
 An evaluation model can be initialized using the following command
 

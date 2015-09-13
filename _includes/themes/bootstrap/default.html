@@ -4,13 +4,28 @@
   <head>
     <meta charset="utf-8">
 
+    {% include JB/analytics %}
+
+    <link href="{{ ASSET_PATH }}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ ASSET_PATH }}/css/style.css" rel="stylesheet">
+    <link href="{{ ASSET_PATH }}/css/jquery.tocify.css" rel="stylesheet">
+
+    <script src="{{ ASSET_PATH }}/resources/jquery/jquery.min.js"></script>
+    <script src="{{ ASSET_PATH }}/resources/jquery/jquery.tocify.js"></script>
+    <script src="{{ ASSET_PATH }}/resources/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script>
+      $('body').scrollspy({
+        target: '.bs-docs-sidebar',
+        offset: 0
+      });   
+    </script>
+
     <title>{{ page.title }}</title>
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     <meta name="author" content="{{ site.author.name }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="{{ ASSET_PATH }}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  
     <!--[if lt IE 9]>
       <script src="{{ ASSET_PATH }}/resources/respond/Respond.min.js"></script>
     <![endif]-->
@@ -20,8 +35,8 @@
 
   </head>
 
-  <body>
-    <nav class="navbar navbar-custom" role="navigation">
+  <body data-spy="scroll" data-offset="0">
+    <nav class="navbar navbar-custom">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -32,16 +47,18 @@
           </button>
           <a class="navbar-brand" href="{{ HOME_PATH }}">{{ site.title }}</a>
         </div>
-
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            {% assign pages_list = site.pages %}
-            {% assign group = 'navigation' %}
-            {% include JB/pages_list %}
+            <li><a href="DataModel.html">Data Model</a></li>
+            <li><a href="AnalysisModel.html">Analysis Model</a></li>
+            <li><a href="EvaluationModel.html">Evaluation Model</a></li>
+            <li><a href="CSE.html">CSE</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Case studies<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="cs01.html">Case study 1</a></li>
+                <li><a href="Casestudies.html">Case studies</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="Casestudy01.html">Case study 1</a></li>
                 <li><a href="#">Case study 2</a></li>
                 <li><a href="#">Case study 3</a></li>
                 <!--<li role="separator" class="divider"></li>-->
@@ -55,21 +72,50 @@
       </div>
     </nav>
     <div class="container">
-      {{ content }}
-      <hr>
-      <footer>
-        <p>
-          &copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
-          <span class="pull-right text-muted">
-            powered by
-            <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.3.5</a>
-          </span>
-        </p>
-      </footer>
-    </div>
+      <div class="row MainContent">
+        <div class="col-md-9" role="main">
+          {{ content }}
+        </div>
+          <script> hljs.initHighlightingOnLoad();</script>
+          <script>
+            $(document).ready(function(){
+              $("h2,h3,h4,h5,h6").each(function(i,item){
+                var tag = $(item).get(0).localName;
+                $(item).attr("id","toc"+i);
+                $("#toc").append('<li><a class="new'+tag+'" href="#toc'+i+'">'+$(this).text()+'</a></li>');
+                $(".newh2").css("margin-left",0);
+                $(".newh3").css("margin-left",10);
+                $(".newh4").css("margin-left",20);
+                $(".newh5").css("margin-left",30);
+                $(".newh6").css("margin-left",40);
+              });
+              $("#toc").append('<p>')
+              $("#toc").append('<a class="back-to-top" href="#top">Back to top</a>')
+            });            
+          </script>
+        <nav class="col-md-3 bs-docs-sidebar">
+          <ul class="nav nav-stacked fixed" id="toc">
 
-    {% include JB/analytics %}
-    <script src="{{ ASSET_PATH }}/resources/jquery/jquery.min.js"></script>
-    <script src="{{ ASSET_PATH }}/resources/bootstrap/js/bootstrap.min.js"></script>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="container">
+      <footer class="bs-docs-footer" role="contentinfo">
+  <div class="container">
+    <p>Maintained by Gautier Paux</p>
+    <p>Code licensed under <a href="https://gnu.org/licenses/gpl.html"> GPL-3 </a></p>
+    <ul class="bs-docs-footer-links text-muted">
+      <li><a href="https://cran.r-project.org/web/packages/Mediana/index.html">Currently v1.0.1</a></li>
+      <li>&middot;</li>
+      <li><a href="https://github.com/gpaux/Mediana">GitHub</a></li>
+      <li>&middot;</li>
+      <li><a href="https://github.com/gpaux/Mediana/issues">Issues</a></li>
+      <li>&middot;</li>
+      <li><a href="https://github.com/gpaux/Mediana/releases">Releases</a></li>
+    </ul>
+  </div>
+</footer>
+    </div>
   </body>
 </html>

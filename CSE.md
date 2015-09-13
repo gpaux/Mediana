@@ -6,5 +6,5 @@ group: navigation
 ---
 {% include JB/setup %}
 
-# About
+## About
 Clinical Scenario Evaluation (CSE) is performed according to the data, analysis and evaluation models.
