@@ -10,7 +10,6 @@ group:
 Clinical trial in patients with pulmonary arterial hypertension.
 
 ## Data Model
----------------------------------------
 
 {% highlight R %}
 # Outcome parameter set 1
@@ -33,7 +32,6 @@ case.study1.data.model = DataModel() +
 {% endhighlight %}
 
 ## Analysis Model
----------------------------------------
 
 {% highlight R %}
 # Analysis model
@@ -47,7 +45,6 @@ case.study1.analysis.model = AnalysisModel() +
 {% endhighlight %}
 
 ## Evaluation Model
----------------------------------------
 
 {% highlight R %}
 # Evaluation model
@@ -64,7 +61,6 @@ case.study1.evaluation.model = EvaluationModel() +
 {% endhighlight %}
 
 ## Clinical Scenario Evaluation
----------------------------------------
 
 {% highlight R %}
 # Simulation Parameters
@@ -79,7 +75,6 @@ case.study1.results = CSE(case.study1.data.model,
 {% endhighlight %}
 
 ## Summary of results and reporting
----------------------------------------
 
 ### Summary of results in R console 
 

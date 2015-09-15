@@ -8,13 +8,9 @@ group: navigation
 
 ## About
 
-----------
-
 Clinical Scenario Evaluation (CSE) is performed according to the data, analysis and evaluation models. The simulation parameters are specified in a specific object of class `SimParameter`.
 
 ## Clinical Trial Simulations
-
-----------
 
 ### SimParameters
 

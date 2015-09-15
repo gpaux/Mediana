@@ -8,13 +8,9 @@ group: navigation
 
 ## About
 
-----------
-
 Data models define the process of generating patient data in clinical trials.
 
 ## Initialization
-
-----------
 
 A data model can be initialized using the following command
 {% highlight R %}
@@ -27,11 +23,10 @@ Initialization with this command is higlhy recommended as it will simplify the a
 
 ## Specific objects
 
-----------
-
 Once a `DataModel` object has been initialized, specific objects can be added by using the '+' operator to add objects to it.
 
 ### OutcomeDist
+
 Specify the outcome distribution of the generated data. An `OutcomeDist` object is defined by two arguments:
 
 - `outcome.dist`, which defines the outcome distribution.
@@ -53,6 +48,7 @@ OutcomeDist(outcome.dist = "NormalDist")
 {% endhighlight %}
 
 ### Sample
+
 Specify a sample (e.g. treatment group). A `Sample` object is defined by three arguments:
 
 - `id`, which defines the ID of the sample.
@@ -87,6 +83,7 @@ Sample(id = "Treatment",
 
 
 ### SampleSize
+
 Specify the sample size in case of balanced design (all samples will have the same sample size). A `SampleSize` object is defined by one argument:
 
 - `sample.size`, which specifies a list or vector of sample size(s).
@@ -105,6 +102,7 @@ SampleSize(seq(50, 70, 5))
 {% endhighlight %}
 
 ### Event
+
 Specify the total number of events among all samples in an event-driven clinical trial. A `Event` object is defined by two arguments:
 
 - `n.events`, which defines a vector of number of events required.
@@ -127,6 +125,7 @@ Event(n.events = event.count.total,
 {% endhighlight %}
 
 ### Design
+
 Specify the design parameters used in event-driven designs if the user is interested in modeling the enrollment (or accrual) and dropout (or loss to follow up) processes that will be applied to the Clinical Scenario. A `Design` object is defined by seven arguments:
 
 - `enroll.period`, which defines the length of the enrollment period.

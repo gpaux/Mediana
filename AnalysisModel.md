@@ -8,13 +8,10 @@ group: navigation
 
 ## About
 
-----------
 
 Analysis models define statistical methods that are applied to the study data in a clinical trial.
 
 ## Initialization
-
-----------
 
 An Analysis Model can be initialized using the following command
 
@@ -27,8 +24,6 @@ Initialization with this command is higlhy recommended as it will simplify the a
 `MultAdj`, `MultAdjProc`, `MultAdjStrategy`, `Test`, `Statistic` objects.
 
 ## Specific objects
-
-----------
 
 ### Test
 
