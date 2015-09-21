@@ -9,10 +9,17 @@ tagline:
 
 Mediana is an R package which provides a general framework for clinical trial simulations based on the Clinical Scenario Evaluation approach. The package supports a broad class of data models (including clinical trials with continuous, binary, survival-type and count-type endpoints as well as multivariate outcomes that are based on combinations of different endpoints), analysis strategies and commonly used evaluation criteria.
 
-Find out more at [http://biopharmnet.com/mediana/](http://biopharmnet.com/mediana/), and check out the case studies.
+## Expert and development teams
+
+**Package design**: Alex Dmitrienko (Quintiles).
+
+**Core development team**: [Gautier Paux (Servier)](mailto: gautier@paux.fr), Alex Dmitrienko (Quintiles).
+
+**Extended development team**: Thomas Brechenmacher (Novartis), Fei Chen (Johnson and Johnson), Ilya Lipkovich (Quintiles), Ming-Dauh Wang (Lilly), Jay Zhang (MedImmune), Haiyan Zheng (Osaka University).
+
+**Expert team**: Keaven Anderson (Merck), Frank Harrell (Vanderbilt University), Mani Lakshminarayanan (Pfizer), Brian Millen (Lilly), Jose Pinheiro (Johnson and Johnson), Thomas Schmelter (Bayer).
 
 ## Installation
-
 
 ### Official release
 
@@ -36,7 +43,7 @@ devtools::install_github("gpaux/Mediana")
 
 ## Clinical Scenario Evaluation Framework
 
-The Mediana R package was developed to provide a general software implementation of the Clinical Scenario Evaluation framework. This framework introduced by [Benda et al. (2010)]() and [Friede et al. (2010)]() recognizes that sample size calculation and power evaluation in clinical trials are high-dimensional statistical problems. This approach helps to decompose this complex problem by identifying key elements of the evaluation process. These components are termed models:
+The Mediana R package was developed to provide a general software implementation of the Clinical Scenario Evaluation framework. This framework introduced by [Benda et al. (2010)](http://dij.sagepub.com/content/44/3/299.abstract) and [Friede et al. (2010)](http://dij.sagepub.com/content/44/6/713.abstract) recognizes that sample size calculation and power evaluation in clinical trials are high-dimensional statistical problems. This approach helps to decompose this complex problem by identifying key elements of the evaluation process. These components are termed models:
 
 
 - [Data models](DataModel.html) define the process of generating trial data (e.g., sample sizes and randomization ratios, outcome distribution and parameters).

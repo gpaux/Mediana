@@ -27,27 +27,81 @@ Once a `DataModel` object has been initialized, specific objects can be added by
 
 ### OutcomeDist
 
+#### Description
+
 Specify the outcome distribution of the generated data. An `OutcomeDist` object is defined by two arguments:
 
 - `outcome.dist`, which defines the outcome distribution.
+
 - `outcome.type`, which defines the outcome type (optional). This arguments only accepts:
 
 	- `standard`: for fixed design setting.
+
 	- `event`: for event-driven design setting.
+
+Several distributions are already implemented in the Mediana package (listed below, along with the required parameters to specify in the `outcome.par` argument of the Sample object) to be used in the `outcome.dist` argument:
+
+- `UniformDist`: generate data following a **univariate distribution**. Required parameter: `max`.
+
+- `NormalDist`: generate data following a **normal distribution**. Required parameters: `mean` and `sd`.
+
+- `BinomDist`: generate data following a **binomial distribution**. Required parameter: `prop`.
+
+- `ExpoDist`: generate data following an **exponential distribution**. Required parameter: `rate`.
+
+- `PoissonDist`: generate data following a **Poisson distribution**. Required parameter: `lambda`.
+
+- `NegBinomDist`: generate data following a **negative binomial distribution**. Required parameters: `dispersion` and `mean`.
+
+- `MVNormalDist`: generate data following a **multivariate normal distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameters `mean` and `sd`. The `corr` parameter specifies the correlation matrix for the endpoints.
+
+- `MVBinomDist`: generate data following a **multivariate binomial distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `prop`. The `corr` parameter specifies the correlation matrix for the endpoints.
+
+- `MVExpoDist`: generate data following a **multivariate exponential distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `rate`. The `corr `parameter specifies the correlation matrix for the endpoints.
+
+- `MVExpoPFSOSDist`: generate data following a **multivariate exponential distribution to generate PFS and OS endpoints**. The PFS value is imputed to the OS value if the latter occurs earlier. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `rate`. The` corr` parameter specifies the correlation matrix for the endpoints.
+
+- `MVMixedDist`: generate data following a **multivariate mixed distribution**. Required parameters: `type`, `par` and `corr`. The type parameter can take the following values:
+
+	- `NormalDist`
+
+	- `BinomDist`
+
+	- `ExpoDist`
+
+  For each generated endpoint, the par parameter must contain the required parameters according to the type of distribution. The `corr` parameter specifies the correlation matrix for the endpoints.
 
 A single `OutcomeDist` object can be added to a `DataModel`object.
 
-For more information about the `OutcomeDist` object, see the R documentation [OutcomeDist](). A summary of available outcome distributions is presented below:
+For more information about the `OutcomeDist` object, see the R documentation [OutcomeDist]().
 
-[insert a table with all available outcome distributions]
+
+
+#### Example
 
 Example of `OutcomeDist` object:	
+
+- **Univariate distributions**
+
 {% highlight R %}
-# Outcome distribution
+# Normal distribution
 OutcomeDist(outcome.dist = "NormalDist")
+
+# Binomial distribution
+OutcomeDist(outcome.dist = "BinomDist")
+
+# Exponential distribution
+OutcomeDist(outcome.dist = "ExpoDist")
 {% endhighlight %}
 
+- **Mixed Multivariate distributions**
+{% highlight R %}
+# Multivariate Mixed distribution
+OutcomeDist(outcome.dist = "MVMixedDist")
+{% endhighlight %}
 ### Sample
+
+#### Description
 
 Specify a sample (e.g. treatment group). A `Sample` object is defined by three arguments:
 
@@ -61,28 +115,119 @@ Several `Sample` objects can be added to a `DataModel`object.
 
 For more information about the `Sample` object, see the R documentation [Sample]().
 
+#### Example
+
 Example of `Sample` objects:
 
+- **Continuous endpoint following a Normal distribution**
+
 {% highlight R %}
-# Outcome parameter set 1
+# Outcome parameters set 1
 outcome1.placebo = parameters(mean = 0, sd = 70)
 outcome1.treatment = parameters(mean = 40, sd = 70)
 
-# Outcome parameter set 2
+# Outcome parameters set 2
 outcome2.placebo = parameters(mean = 0, sd = 70)
 outcome2.treatment = parameters(mean = 50, sd = 70)
 
 # Placebo sample object
 Sample(id = "Placebo",
-       outcome.par = parameters(outcome1.placebo, outcome2.placebo))
+       outcome.par = parameters(outcome1.placebo, 
+                                outcome2.placebo))
 
 # Treatment sample object
 Sample(id = "Treatment",
-       outcome.par = parameters(outcome1.treatment, outcome2.treatment))
+       outcome.par = parameters(outcome1.treatment, 
+                                outcome2.treatment))
+{% endhighlight %}
+
+- **Binary endpoint following a Binomial distribution**
+
+{% highlight R %}
+# Outcome parameters set
+outcome.placebo = parameters(prop = 0.30)
+outcome.treatment = parameters(prop = 0.50)
+
+# Placebo sample object
+Sample(id = "Placebo",
+       outcome.par = parameters(outcome1.placebo))
+
+# Treatment sample object
+Sample(id = "Treatment",
+       outcome.par = parameters(outcome1.treatment))
+{% endhighlight %}
+
+- **Time-to-event endpoint following an Exponential distribution**
+
+{% highlight R %}
+# Outcome parameters
+median.time.placebo = 6
+rate.placebo = log(2)/median.time.placebo
+outcome.placebo = parameters(rate = rate.placebo)
+
+median.time.treatment = 9
+rate.treatment = log(2)/median.time.treatment
+outcome.treatment = parameters(rate = rate.treatment)
+
+# Placebo sample object
+Sample(id = "Placebo",
+       outcome.par = parameters(outcome.placebo))
+
+# Treatment sample object
+Sample(id = "Treatment",
+       outcome.par = parameters(outcome.treatment))
+{% endhighlight %}
+
+- **Two key primary endpoints following a Binomial and a Normal distribution respectively**
+
+{% highlight R %}
+# Variable types
+var.type = list("BinomDist", "NormalDist")
+
+# Outcome distribution parameters
+placebo.par = parameters(parameters(prop = 0.3), 
+                         parameters(mean = -0.10, sd = 0.5))
+
+dosel.par = parameters(parameters(prop = 0.40), 
+                       parameters(mean = -0.20, sd = 0.5))
+
+doseh.par = parameters(parameters(prop = 0.50), 
+                       parameters(mean = -0.30, sd = 0.5))
+
+# Correlation between two endpoints
+corr.matrix = matrix(c(1.0, 0.5,
+                       0.5, 1.0), 2, 2)
+
+# Outcome parameters set
+outcome.placebo = parameters(type = var.type, 
+                             par = plac.par, 
+                             corr = corr.matrix)
+
+outcome.dosel = parameters(type = var.type, 
+                           par = dosel.par, 
+                           corr = corr.matrix)
+
+outcome.doseh = parameters(type = var.type, 
+                           par = doseh.par, 
+                           corr = corr.matrix)
+
+# Placebo sample object
+Sample(id = list("Plac ACR20", "Plac HAQ-DI"),
+       outcome.par = parameters(outcome.placebo))
+
+# Low Dose sample object
+Sample(id = list("DoseL ACR20", "DoseL HAQ-DI"),
+       outcome.par = parameters(outcome.dosel))
+
+# High Dose sample object
+Sample(id = list("DoseH ACR20", "DoseH HAQ-DI"),
+       outcome.par = parameters(outcome.doseh))
 {% endhighlight %}
 
 
 ### SampleSize
+
+#### Description
 
 Specify the sample size in case of balanced design (all samples will have the same sample size). A `SampleSize` object is defined by one argument:
 
@@ -92,16 +237,21 @@ A single `SampleSize` object can be added to a `DataModel`object.
 
 For more information about the `SampleSize` object, see the R documentation [SampleSize]().
 
+#### Example
+
 Example of `SampleSize` objects:
 
+- **Equivalent specifications of SampleSize object**
+
 {% highlight R %}
-# Equivalent specification of SampleSize object
 SampleSize(c(50, 55, 60, 65, 70))
 SampleSize(list(50, 55, 60, 65, 70))
 SampleSize(seq(50, 70, 5))
 {% endhighlight %}
 
 ### Event
+
+#### Description
 
 Specify the total number of events among all samples in an event-driven clinical trial. A `Event` object is defined by two arguments:
 
@@ -112,7 +262,11 @@ A single `Event` object can be added to a `DataModel`object.
 
 For more information about the `Event` object, see the R documentation [Event]().
 
-Example of `Event` object with a  2:1 randomization ratio (Treatment:Placebo):
+#### Example
+
+Example of `Event` object:
+
+- **Specify the number of events with a 2:1 randomization ratio (Treatment:Placebo)**
 
 {% highlight R %}
 # Event parameters
@@ -125,6 +279,8 @@ Event(n.events = event.count.total,
 {% endhighlight %}
 
 ### Design
+
+#### Description
 
 Specify the design parameters used in event-driven designs if the user is interested in modeling the enrollment (or accrual) and dropout (or loss to follow up) processes that will be applied to the Clinical Scenario. A `Design` object is defined by seven arguments:
 
@@ -140,9 +296,14 @@ Several `Design` objects can be added to a `DataModel`object.
 
 For more information about the `Design` object, see the R documentation [Design]().
 
+#### Example
+
 Example of `Design` object: 
+
+- **Modelling the inclusion and dropout of patients**
+
 {% highlight R %}
-# Design parameters
+# Design parameters (in months)
 Design(enroll.period = 9,
        study.duration = 21,
        enroll.dist = "UniformDist",
