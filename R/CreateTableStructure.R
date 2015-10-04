@@ -41,7 +41,10 @@ CreateTableStructure = function(results = NULL, presentation.model = NULL, custo
     custom.label.all = list(label = "Results", custom = FALSE)
   }
   subsection.by = presentation.model$subsection.by$by
+  if (any(section.by %in% subsection.by)) stop("PresentationModel: the parameters must be defined either in the Section or in the Subsection object, but not in both")
   table.by = presentation.model$table.by$by
+  if (any(section.by %in% table.by)) stop("PresentationModel: the parameters must be defined either in the Section or in the Table object, but not in both")
+  if (any(subsection.by %in% table.by)) stop("PresentationModel: the parameters must be defined either in the Subsection or in the Table object, but not in both")
 
   # If the user used event, the "by" "event" need to be changed by "sample.size" as the
   if (event) {
