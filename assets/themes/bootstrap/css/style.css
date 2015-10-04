@@ -136,3 +136,7 @@ h3:after
     border:1px solid #eee;
     margin-top: 10px;
 }
+
+.product .img-responsive {
+    margin: 0 auto;
+}

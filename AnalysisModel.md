@@ -57,7 +57,8 @@ Several methods are already implemented in the Mediana package (listed below, al
 
 - `LogrankTest`: perform a **Log-rank test** between the two samples defined in the samples argument.
 
-It is to be noted that the statistical tests implemented are **one-sided**.
+It is to be noted that the statistical tests implemented are **one-sided** and thus the sample order is important. In particular, the Mediana package assumes that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas
+Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure).
 
 Several `Test` objects can be added to an `AnalysisModel`object.
 

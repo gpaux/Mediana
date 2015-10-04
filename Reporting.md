@@ -269,3 +269,9 @@ GenerateReport(presentation.model = case.study1.presentation.model,
 {% endhighlight %}
 
 An example of Clinical Scenario Evaluation Report can be dowloaded [here](Case study 1 (normally distributed endpoint).docx).
+
+<div class="col-xs-6 col-md-3">
+  <a href="Case study 1 (normally distributed endpoint).docx" class="thumbnail">
+    <img src="Logo_Microsoft_Word.png" class="img-responsive">
+  </a>
+</div>
