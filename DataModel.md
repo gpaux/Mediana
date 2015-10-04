@@ -75,7 +75,7 @@ A single `OutcomeDist` object can be added to a `DataModel`object.
 
 For more information about the `OutcomeDist` object, see the R documentation [OutcomeDist]().
 
-
+If a distribution is not implemented in the Mediana Package, the user can create his own function and use it within the Mediana Package (see [User-defined functions](#User-definedfunctions)).
 
 #### Example
 
@@ -309,4 +309,63 @@ Design(enroll.period = 9,
        enroll.dist = "UniformDist",
        dropout.dist = "ExpoDist",
        dropout.dist.par = parameters(rate = 0.0115)) 
+{% endhighlight %}
+
+## User-defined functions
+
+If a distribution is not implemented by default in the Mediana package, the user can defined his own function. In order to be used within the package, the user must respect the following templates.
+
+### Template for outcome distributions
+
+The following template can be used by the user to create his own function to generate data. The parts of the function that has to be modified are identified within a block.
+
+As an example, this function is used to generate data following a `Template` distribution and has two parameters, `parameter1` and `parameter2`.
+
+{% highlight R %}
+# Template of a function to generate data
+TemplateDist = function(parameter) {
+
+  # Determine the function call, either to generate distribution or to return description
+  call = (parameter[[1]] == "description")
+
+  # Generate random variables
+  if (call == FALSE) {
+    # The number of patients to generate
+    n = parameter[[1]]
+
+    ##############################################################
+    # To modify according to the function
+    # Get the other parameter (kept in the parameter[[2]] list)
+    parameter1 = parameter[[2]][[1]]
+    parameter2 = parameter[[2]][[2]]
+    ##############################################################
+
+    # Error checks (other checks could be added by the user if needed)
+    if (n%%1 != 0)
+      stop("Data model: TemplateDist distribution: Number of observations must be an integer.")
+    if (n <= 0)
+      stop("Data model: TemplateDist distribution: Number of observations must be positive.")
+
+    ##############################################################
+    # To modify according to the function
+    # Data are generated using the function "fundist" and assign to the object result
+    result = fundist(n = n, parameter1 = parameter1, parameter2 = parameter2)
+    ##############################################################
+
+  } else {
+    # Provide information about the distribution function
+    if (call == TRUE) {
+
+      ##############################################################
+      # To modify according to the function
+      # The labels of the distributional parameters and the label of the distribution must be put in the list
+      result = list(list(parameter1 = "parameter1", parameter2 = "parameter2"),
+                    list("Template"))
+      ##############################################################
+
+    }
+  }
+  return(result)
+
+}
 {% endhighlight %}

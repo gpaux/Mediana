@@ -7,7 +7,9 @@ group:
 
 {% include JB/setup %}
 
-## Clinical trial in patients with pulmonary arterial hypertension.
+## Normally distributed endpoint
+
+Clinical trial in patients with pulmonary arterial hypertension.
 
 ### Data Model
 
