@@ -31,19 +31,7 @@ case.study1.data.model = DataModel() +
 case.study1.analysis.model = AnalysisModel() +
   Test(id = "Placebo vs treatment",
        samples = samples("Placebo", "Treatment"),
-       method = "LogrankTest") +
-  Statistic(id = "Events Placebo",
-            samples = samples("Placebo"),
-            method = "EventCountStat") +
-  Statistic(id = "Events Treatment",
-            samples = samples("Treatment"),
-            method = "EventCountStat")  +
-  Statistic(id = "Patients Placebo",
-            samples = samples("Placebo"),
-            method = "PatientCountStat") +
-  Statistic(id = "Patients Treatment",
-            samples = samples("Treatment"),
-            method = "PatientCountStat")
+       method = "LogrankTest")
 
 # Evaluation model
 case.study1.evaluation.model = EvaluationModel() +
@@ -51,23 +39,7 @@ case.study1.evaluation.model = EvaluationModel() +
             method = "MarginalPower",
             tests = tests("Placebo vs treatment"),
             labels = c("Placebo vs treatment"),
-            par = parameters(alpha = 0.025))  +
-  Criterion(id = "Mean Events Placebo",
-            method = "MeanSumm",
-            statistics = statistics("Events Placebo"),
-            labels = c("Mean Events")) +
-  Criterion(id = "Mean Events Treatment ",
-            method = "MeanSumm",
-            statistics = statistics("Events Treatment"),
-            labels = c("Mean Events"))  +
-  Criterion(id = "Mean Patients Placebo",
-            method = "MeanSumm",
-            statistics = statistics("Patients Placebo"),
-            labels = c("Mean Patients")) +
-  Criterion(id = "Mean Patients Treatment",
-            method = "MeanSumm",
-            statistics = statistics("Patients Treatment"),
-            labels = c("Mean Patients"))
+            par = parameters(alpha = 0.025))
 
 # Simulation Parameters
 case.study1.sim.parameters =  SimParameters(n.sims = 1000, 

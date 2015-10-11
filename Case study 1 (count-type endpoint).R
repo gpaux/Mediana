@@ -20,16 +20,16 @@ case.study1.data.model = DataModel() +
 
 # Analysis model
 case.study1.analysis.model = AnalysisModel() +
-  Test(id = "Placebo vs treatment",
-       samples = samples("Placebo", "Treatment"),
+  Test(id = "Treatment vs Placebo",
+       samples = samples( "Treatment", "Placebo"),
        method = "GLMNegBinomTest")
 
 # Evaluation model
 case.study1.evaluation.model = EvaluationModel() +
   Criterion(id = "Marginal power",
             method = "MarginalPower",
-            tests = tests("Placebo vs treatment"),
-            labels = c("Placebo vs treatment"),
+            tests = tests("Treatment vs Placebo"),
+            labels = c("Treatment vs Placebo"),
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters

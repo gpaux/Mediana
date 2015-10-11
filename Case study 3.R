@@ -6,43 +6,43 @@ library(Mediana)
 ###################################################################
 
 # Outcome parameters
-outcome.plac.minus = parameters(mean = 0.12, sd = 0.45)
-outcome.plac.plus = parameters(mean = 0.12, sd = 0.45)
-outcome.treat.minus = parameters(mean = 0.24, sd = 0.45)
-outcome.treat.plus = parameters(mean = 0.30, sd = 0.45)
+outcome.placebo.minus = parameters(mean = 0.12, sd = 0.45)
+outcome.placebo.plus = parameters(mean = 0.12, sd = 0.45)
+outcome.treatment.minus = parameters(mean = 0.24, sd = 0.45)
+outcome.treatment.plus = parameters(mean = 0.30, sd = 0.45)
 
 # Sample size parameters
 sample.size.total = c(330, 340, 350)
-sample.size.plac.minus = as.list(0.3 * sample.size.total)
-sample.size.plac.plus = as.list(0.2 * sample.size.total)
-sample.size.treat.minus = as.list(0.3 * sample.size.total)
-sample.size.treat.plus = as.list(0.2 * sample.size.total)
+sample.size.placebo.minus = as.list(0.3 * sample.size.total)
+sample.size.placebo.plus = as.list(0.2 * sample.size.total)
+sample.size.treatment.minus = as.list(0.3 * sample.size.total)
+sample.size.treatment.plus = as.list(0.2 * sample.size.total)
 
 # Data model
 case.study3.data.model = DataModel() +
   OutcomeDist(outcome.dist = "NormalDist") +
-  Sample(id = "Plac M-",
-         sample.size = sample.size.plac.minus,
-         outcome.par = parameters(outcome.plac.minus)) +
-  Sample(id = "Plac M+",
-         sample.size = sample.size.plac.plus,
-         outcome.par = parameters(outcome.plac.plus)) +
-  Sample(id = "Treat M-",
-         sample.size = sample.size.treat.minus,
-         outcome.par = parameters(outcome.treat.minus)) +
-  Sample(id = "Treat M+",
-         sample.size = sample.size.treat.plus,
-         outcome.par = parameters(outcome.treat.plus))
+  Sample(id = "Placebo M-",
+         sample.size = sample.size.placebo.minus,
+         outcome.par = parameters(outcome.placebo.minus)) +
+  Sample(id = "Placebo M+",
+         sample.size = sample.size.placebo.plus,
+         outcome.par = parameters(outcome.placebo.plus)) +
+  Sample(id = "Treatment M-",
+         sample.size = sample.size.treatment.minus,
+         outcome.par = parameters(outcome.treatment.minus)) +
+  Sample(id = "Treatment M+",
+         sample.size = sample.size.treatment.plus,
+         outcome.par = parameters(outcome.treatment.plus))
 
 # Analysis model
 case.study3.analysis.model = AnalysisModel() +
   MultAdjProc(proc = "HochbergAdj") +
   Test(id = "OP test",
-       samples = samples(c("Plac M-", "Plac M+"),
-                         c("Treat M-", "Treat M+")),
+       samples = samples(c("Placebo M-", "Placebo M+"),
+                         c("Treatment M-", "Treatment M+")),
        method = "TTest") +
   Test(id = "M+ test",
-       samples = samples("Plac M+", "Treat M+"),
+       samples = samples("Placebo M+", "Treatment M+"),
        method = "TTest")
 
 # Evaluation model
