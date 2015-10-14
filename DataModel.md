@@ -73,7 +73,7 @@ Several distributions are already implemented in the Mediana package (listed bel
 
 A single `OutcomeDist` object can be added to a `DataModel`object.
 
-For more information about the `OutcomeDist` object, see the R documentation [OutcomeDist]().
+For more information about the `OutcomeDist` object, see the R documentation [OutcomeDist](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 If a distribution is not implemented in the Mediana Package, the user can create his own function and use it within the Mediana Package (see [User-defined functions](#User-definedfunctions)).
 
@@ -106,14 +106,16 @@ OutcomeDist(outcome.dist = "MVMixedDist")
 Specify a sample (e.g. treatment group). A `Sample` object is defined by three arguments:
 
 - `id`, which defines the ID of the sample.
+
 - `outcome.par`, which defines the parameters of the outcome distribution of the sample.
+
 - `sample.size`, which defines the sample size of the sample (optional).
 
 The `sample.size` argument is optional but must be used to define the sample size if unbalance samples have to be defined. The sample size must be either defined in the `Sample` object or in the `SampleSize` object, but not in both. 
 
 Several `Sample` objects can be added to a `DataModel`object.
 
-For more information about the `Sample` object, see the R documentation [Sample]().
+For more information about the `Sample` object, see the R documentation [Sample](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
@@ -235,7 +237,7 @@ Specify the sample size in case of balanced design (all samples will have the sa
 
 A single `SampleSize` object can be added to a `DataModel`object.
 
-For more information about the `SampleSize` object, see the R documentation [SampleSize]().
+For more information about the `SampleSize` object, see the R documentation [SampleSize](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
@@ -256,11 +258,12 @@ SampleSize(seq(50, 70, 5))
 Specify the total number of events among all samples in an event-driven clinical trial. A `Event` object is defined by two arguments:
 
 - `n.events`, which defines a vector of number of events required.
+
 - `rando.ratio`, which defines a vector of randomization ratios for each `Sample` object defined in the `DataModel`object.
 
 A single `Event` object can be added to a `DataModel`object.
 
-For more information about the `Event` object, see the R documentation [Event]().
+For more information about the `Event` object, see the R documentation [Event](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
@@ -285,16 +288,22 @@ Event(n.events = event.count.total,
 Specify the design parameters used in event-driven designs if the user is interested in modeling the enrollment (or accrual) and dropout (or loss to follow up) processes that will be applied to the Clinical Scenario. A `Design` object is defined by seven arguments:
 
 - `enroll.period`, which defines the length of the enrollment period.
+
 - `enroll.dist`, which defines the enrollment distribution.
+
 - `enroll.dist.par`, which defines the parameters of the enrollment distribution (optional).
+
 - `followup.period`, which defines the length of the follow-up period for each patient in study designs with a fixed follow-up period, i.e., the length of time from the enrollment to planned discontinuation is constant across patients. The user must specify either followup.period or study.duration.
+
 - `study.duration`, which defines the total study duration in study designs with a variable follow-up period. The total study duration is defined as the length of time from the enrollment of the first patient to the discontinuation of the last patient.
+
 - `dropout.dist`, which defines the dropout distribution.
+
 - `dropout.dist.par`, which defines the parameters of the dropout distribution.
 
 Several `Design` objects can be added to a `DataModel`object.
 
-For more information about the `Design` object, see the R documentation [Design]().
+For more information about the `Design` object, see the R documentation [Design](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
@@ -336,8 +345,8 @@ TemplateDist = function(parameter) {
     ##############################################################
     # To modify according to the function
     # Get the other parameter (kept in the parameter[[2]] list)
-    parameter1 = parameter[[2]][[1]]
-    parameter2 = parameter[[2]][[2]]
+    parameter1 = parameter[[2]]$parameter1
+    parameter2 = parameter[[2]]$parameter2
     ##############################################################
 
     # Error checks (other checks could be added by the user if needed)
@@ -369,3 +378,13 @@ TemplateDist = function(parameter) {
 
 }
 {% endhighlight %}
+
+The R template code can be downloaded below.
+
+<center>
+  <div class="col-md-12">
+    <a href="TemplateDist.R" class="img-responsive">
+      <img src="Logo_R.png" class="img-responsive" height="100">
+    </a>
+  </div>
+</center>

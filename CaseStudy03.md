@@ -9,7 +9,7 @@ group:
 
 ## About
 
-This case study deals with a Phase III clinical trial in patients with mild or moderate asthma (it is based on a clinical trial example from Millen et al., 2014, Section 2.2). The trial is intended to support a tailoring strategy. In particular, the treatment effect of a single dose of a new treatment will be compared to that of placebo in the overall population of patients as well as a pre-specified subpopulation of patients with a marker-positive status at baseline (for compactness, the overall population
+This case study deals with a Phase III clinical trial in patients with mild or moderate asthma (it is based on a clinical trial example from [Millen et al., 2014, Section 2.2](http://dij.sagepub.com/content/48/4/453.abstract)). The trial is intended to support a tailoring strategy. In particular, the treatment effect of a single dose of a new treatment will be compared to that of placebo in the overall population of patients as well as a pre-specified subpopulation of patients with a marker-positive status at baseline (for compactness, the overall population
 is denoted by OP, marker-positive subpopulation is denoted by M+ and marker- negative subpopulation is denoted by M−). 
 
 Marker-positive patients are more likely to receive benefit from the experimental treatment. The overall objective of the clinical trial accounts for the fact that the treatment’s effect may, in fact, be limited to the marker-positive subpopulation. The trial will be declared successful if the treatment’s beneficial effect is established in the overall population of patients or, alternatively, the effect is established only in
@@ -19,13 +19,13 @@ the subpopulation. The primary endpoint in the clinical trial is defined as an i
 
 To set up a data model for this clinical trial, it is natural to define samples (mutually exclusive groups of patients) as follows:
 
-- Sample 1: Marker-negative patients in the placebo arm.
+- **Sample 1:** Marker-negative patients in the placebo arm.
 
-- Sample 2: Marker-positive patients in the placebo arm.
+- **Sample 2:** Marker-positive patients in the placebo arm.
 
-- Sample 3: Marker-negative patients in the treatment arm.
+- **Sample 3:** Marker-negative patients in the treatment arm.
 
-- Sample 4: Marker-positive patients in the treatment arm.
+- **Sample 4:** Marker-positive patients in the treatment arm.
 
 Using this definition of samples, the trial’s sponsor can model the fact that the treatment’s effect is most pronounced in patients with a marker-positive status.
 
@@ -118,7 +118,7 @@ Further, the treatment effect test in the subpopulation of marker-positive patie
 
 - **Treatment arm:** Sample 4 (`Treatment M+`).
 
-These analysis samples are specified in the analysis model below. The samples defined in the data model are merged using `c()` or `list()` function, e.g., c("Placebo M-", "Placebo M+") defines the placebo arm and list("Treatment M-", "Treatment M+") defines the experimental treatment arm in the overall population test.
+These analysis samples are specified in the analysis model below. The samples defined in the data model are merged using `c()` or `list()` function, e.g., `c("Placebo M-", "Placebo M+")`defines the placebo arm and `list("Treatment M-", "Treatment M+")` defines the experimental treatment arm in the overall population test.
 
 {% highlight R %}
 # Analysis model
@@ -140,7 +140,7 @@ It is reasonable to consider the following success criteria in this case study:
 
 - **Disjunctive power:** Probability of a significant treatment effect in the overall population (OP) or marker-positive subpopulation (M+). This metric defines the overall probability of success in this clinical trial.
  
-- **Conjunctive power:** Probability of simultaneously achieving significance in the overall population and marker-positive subpopulation. This criterion will be useful if the trial’s sponsor is interested in pursuing an enhanced efficacy claim (Millen et al., 2012).
+- **Conjunctive power:** Probability of simultaneously achieving significance in the overall population and marker-positive subpopulation. This criterion will be useful if the trial’s sponsor is interested in pursuing an enhanced efficacy claim ([Millen et al., 2012](http://dij.sagepub.com/content/46/6/647.abstract)).
  
 The following evaluation model applies the three criteria to the two tests listed in the analysis model:
 
@@ -183,5 +183,4 @@ The R code utilized and the Clinical Scenario Evaluation Report generated in thi
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
-</div>
 </center>

@@ -252,7 +252,7 @@ GenerateReport(presentation.model = case.study1.presentation.model,
 
 ### Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be dowloaded below.
+The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
 
 <center>
   <div class="col-md-6">
@@ -265,7 +265,6 @@ The R code utilized and the Clinical Scenario Evaluation Report generated in thi
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
-</div>
 </center>
 
 ## Binary endpoint
@@ -355,7 +354,7 @@ case.study1.evaluation.model = EvaluationModel() +
 {% endhighlight %}
 
 ### Download
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be dowloaded below.
+The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
 
 <center>
   <div class="col-md-6">
@@ -368,7 +367,6 @@ The R code utilized and the Clinical Scenario Evaluation Report generated in thi
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
-</div>
 </center>
 
 An extension of this clinical trial example is provided in [Case study 5](CaseStudy05.html). The extension deals with a more complex setting involving several trial endpoints and multiple treatment arms.
@@ -457,7 +455,7 @@ case.study1.evaluation.model = EvaluationModel() +
 
 ### Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be dowloaded below.
+The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
 
 <center>
   <div class="col-md-6">
@@ -470,7 +468,6 @@ The R code utilized and the Clinical Scenario Evaluation Report generated in thi
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
-</div>
 </center>
 
 ## Survival-type endpoint (with censoring)
@@ -582,7 +579,7 @@ case.study1.evaluation.model = EvaluationModel() +
 
 ### Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be dowloaded below.
+The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
 
 <center>
   <div class="col-md-6">
@@ -595,12 +592,11 @@ The R code utilized and the Clinical Scenario Evaluation Report generated in thi
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
-</div>
 </center>
 
 ## Count-type endpoint
 
-The last clinical trial example within Case study 1 deals with a Phase III clinical trial in patients with relapsing-remitting multiple sclerosis (RRMS). The trial aims at assessing the safety and efficacy of a single dose of a novel treatment compared to placebo. The primary endpoint is the number of new gadolinium enhancing lesions seen during a 6-month period on monthly MRIs of the brain and a smaller number indicates treatment benefit. The distribution of such endpoints has been widely studied in the literature and Sormani et al. (1999a, 1999b) showed that a negative
+The last clinical trial example within Case study 1 deals with a Phase III clinical trial in patients with relapsing-remitting multiple sclerosis (RRMS). The trial aims at assessing the safety and efficacy of a single dose of a novel treatment compared to placebo. The primary endpoint is the number of new gadolinium enhancing lesions seen during a 6-month period on monthly MRIs of the brain and a smaller number indicates treatment benefit. The distribution of such endpoints has been widely studied in the literature and Sormani et al. ([1999a](http://www.jns-journal.com/article/S0022-510X(99)00015-5/abstract), [1999b](http://jnnp.bmj.com/content/66/4/465.long)) showed that a negative
 binomial distribution provides a relatively good fit to the data.
 
 The table below gives the expected treatment effect in the experimental treatment and placebo arms (the negative binomial distribution is parameterized using the mean rather than the probability of success in each trial).
@@ -678,7 +674,7 @@ case.study1.evaluation.model = EvaluationModel() +
 
 ### Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be dowloaded below.
+The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
 
 <center>
   <div class="col-md-6">
@@ -691,5 +687,4 @@ The R code utilized and the Clinical Scenario Evaluation Report generated in thi
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
-</div>
 </center>

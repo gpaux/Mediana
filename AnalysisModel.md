@@ -8,7 +8,6 @@ group: navigation
 
 ## About
 
-
 Analysis models define statistical methods that are applied to the study data in a clinical trial.
 
 ## Initialization
@@ -35,8 +34,11 @@ Once an `AnalysisModel` object has been initialized, specific objects can be add
 Specify a statistical test that will be applied to the data. A `Test` object is defined by four arguments:
 
 - `id`, which defines the ID of the test.
+
 - `method`, which defines the statistical test method.
+
 - `samples`, which defines the samples (pre-defined in the data model) to be used within the statistical test method.  
+
 - `par`, which defines the parameter(s) of the statistical test method.
 
 Several methods are already implemented in the Mediana package (listed below, along with the required parameters to define in the par parameter):
@@ -62,7 +64,7 @@ Sample 2 should include patients allocated to the experimental treatment arm. Th
 
 Several `Test` objects can be added to an `AnalysisModel`object.
 
-For more information about the `Test` object, see the R documentation [Test]().
+For more information about the `Test` object, see the R documentation [Test](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
@@ -95,8 +97,11 @@ Test(id = "OP test",
 Specify a statistical calculations that will be applied to the data. A `Statistic` object is defined by four arguments:
 
 - `id`, which defines the ID of the statistic.
+
 - `method`, which defines the type of statistics/method for computing the statistic.
+
 - `samples`, which defines the samples (pre-defined in the data model) to be used within the statistic method.  
+
 - `par`, which defines the parameter(s) of the statistic method.
 
 Several methods are already implemented in the Mediana package (listed below, along with the required parameters to define in the par parameter):
@@ -135,12 +140,14 @@ Several methods are already implemented in the Mediana package (listed below, al
 
 Several `Statistic` objects can be added to an `AnalysisModel`object.
 
-For more information about the `Statistic` object, see the R documentation [Statistic]().
+For more information about the `Statistic` object, see the R documentation [Statistic](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
 Example of `Statistic` objects:
+
 - **Mean statistic**
+
 {% highlight R %}
 # Placebo and Treatment samples have been previously defined in the data model
 Statistic(id = "Mean Treatment",
@@ -156,7 +163,9 @@ Statistic(id = "Mean Treatment",
 Specify a multiplicity adjustment procedure that will be applied to the statistical tests to adjust the p-value in order to protect the overall Type-I error rate. A `MultAdjProc` object is defined by three arguments:
 
 - `proc`, which defines a multiplicity adjustment procedure.
+
 - `par`, which defines the parameter(s) of the multiplicity adjustment procedure (optional).
+
 - `tests`, which defines the tests (pre-defined in the analysis model) to be used within the multiplicity adjustment procedure.  
 
 If no `tests` are defined, the multiplicity adjustment procedure will be applied to all tests defined in the `AnalysisModel` object.
@@ -181,7 +190,7 @@ Several procedures are already implemented in the Mediana package (listed below,
 
 Several `MultAdjProc` objects can be added to an `AnalysisModel`object, using the '+' operator or by grouping them into a MultAdj object.
 
-For more information about the `MultAdjProc` object, see the R documentation [MultAdjProc]().
+For more information about the `MultAdjProc` object, see the R documentation [MultAdjProc](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
@@ -241,7 +250,7 @@ Specify a multiplicity adjustment strategy that will be applied to the Clinical 
 
 A `MultAdjStrategy` object wraps up object of class `MultAdjProc`.
 
-For more information about the `MultAdjStrategy` object, see the R documentation [MultAdjStrategy]().
+For more information about the `MultAdjStrategy` object, see the R documentation [MultAdjStrategy](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Examples
 
@@ -309,7 +318,7 @@ analysis.model = AnalysisModel() +
 
 This function can be used to wrap-up several objects of class `MultAdjProc` or `MultAdjStrategy` and add them to an object of class `AnalysisModel`. Its use is optional as objects of class `MultAdjProc` or `MultAdjStrategy` can be added to an object of class `AnalysisModel` incrementally using the '+' operator.
 
-For more information about the `MultAdj` object, see the R documentation [MultAdj]().
+For more information about the `MultAdj` object, see the R documentation [MultAdj](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Examples
 
@@ -352,3 +361,69 @@ analysis.model = AnalysisModel() +
                       method = "TTest")
 
 {% endhighlight %}
+
+## User-defined functions
+
+If a test, a statistic or a multiplicity adjustment procedure is not implemented by default in the Mediana package, the user can defined his own function. In order to be used within the package, the user must respect the following templates.
+
+### Template for test
+
+The following template can be used by the user to create his own function to perform a statistical test. The parts of the function that has to be modified are identified within a block.
+
+As an example, this function is used to perform a test named `Template` and has one parameter, `parameter1`.
+
+{% highlight R %}
+# Template of a function to perform a test
+TemplateTest = function(sample.list, parameter) {
+
+  # Determine the function call, either to generate the p-value or to return description
+  call = (parameter[[1]] == "Description")
+
+  # Perform the test
+  if (call == FALSE | is.na(call)) {
+
+    ##############################################################
+    # To modify according to the function
+    # Get the other parameter (kept in the parameter[[2]] list)
+    if (is.na(parameter[[2]]$parameter1))
+      stop("Analysis model: TemplateTest test: parameter1 must be specified.")
+
+    parameter1 = parameter[[2]]$parameter1
+    ##############################################################
+
+
+    # Sample list is assumed to include two data frames that represent two analysis samples
+
+    # Outcomes in Sample 1
+    outcome1 = sample.list[[1]][, "outcome"]
+    # Remove the missing values due to dropouts/incomplete observations
+    outcome1.complete = outcome1[stats::complete.cases(outcome1)]
+
+    # Outcomes in Sample 2
+    outcome2 = sample.list[[2]][, "outcome"]
+    # Remove the missing values due to dropouts/incomplete observations
+    outcome2.complete = outcome2[stats::complete.cases(outcome2)]
+
+    ##############################################################
+    # To modify according to the function
+    # The function must return a one-sided p-value (treatment effect in sample 2 is expected to be greater than in sample 1)
+    result = funtest(outcome2.complete, outcome1.complete, parameter1)$p.value
+    ##############################################################
+  }
+  else if (call == TRUE) {
+    result = list("Template Test", "Parameter1 = ")
+  }
+
+  return(result)
+}
+{% endhighlight %}
+
+The R template code can be downloaded below.
+
+<center>
+  <div class="col-md-12">
+    <a href="TemplateTest.R" class="img-responsive">
+      <img src="Logo_R.png" class="img-responsive" height="100">
+    </a>
+  </div>
+</center>

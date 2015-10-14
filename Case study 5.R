@@ -9,8 +9,8 @@ library(Mediana)
 var.type = list("BinomDist", "NormalDist")
 
 # Outcome distribution parameters
-plac.par = parameters(parameters(prop = 0.3), 
-                      parameters(mean = -0.10, sd = 0.5))
+placebo.par = parameters(parameters(prop = 0.3), 
+                         parameters(mean = -0.10, sd = 0.5))
 
 dosel.par1 = parameters(parameters(prop = 0.40), 
                         parameters(mean = -0.20, sd = 0.5))
@@ -31,9 +31,9 @@ corr.matrix = matrix(c(1.0, 0.5,
                        0.5, 1.0), 2, 2)
 
 # Outcome parameter set 1
-outcome1.plac = parameters(type = var.type, 
-                           par = plac.par, 
-                           corr = corr.matrix)
+outcome1.placebo = parameters(type = var.type, 
+                              par = placebo.par, 
+                              corr = corr.matrix)
 outcome1.dosel = parameters(type = var.type, 
                             par = dosel.par1, 
                             corr = corr.matrix)
@@ -42,9 +42,9 @@ outcome1.doseh = parameters(type = var.type,
                             corr = corr.matrix)
 
 # Outcome parameter set 2
-outcome2.plac = parameters(type = var.type, 
-                           par = plac.par, 
-                           corr = corr.matrix)
+outcome2.placebo = parameters(type = var.type, 
+                              par = placebo.par, 
+                              corr = corr.matrix)
 outcome2.dosel = parameters(type = var.type, 
                             par = dosel.par2, 
                             corr = corr.matrix)
@@ -53,9 +53,9 @@ outcome2.doseh = parameters(type = var.type,
                             corr = corr.matrix)
 
 # Outcome parameter set 3
-outcome3.plac = parameters(type = var.type, 
-                           par = plac.par, 
-                           corr = corr.matrix)
+outcome3.placebo = parameters(type = var.type, 
+                              par = placebo.par, 
+                              corr = corr.matrix)
 outcome3.doseh = parameters(type = var.type, 
                             par = doseh.par3, 
                             corr = corr.matrix)
@@ -67,8 +67,8 @@ outcome3.dosel = parameters(type = var.type,
 case.study5.data.model = DataModel() +
   OutcomeDist(outcome.dist = "MVMixedDist") +
   SampleSize(c(100, 120)) +
-  Sample(id = list("Plac ACR20", "Plac HAQ-DI"),
-         outcome.par = parameters(outcome1.plac, outcome2.plac, outcome3.plac)) +
+  Sample(id = list("Placebo ACR20", "Placebo HAQ-DI"),
+         outcome.par = parameters(outcome1.placebo, outcome2.placebo, outcome3.placebo)) +
   Sample(id = list("DoseL ACR20", "DoseL HAQ-DI"),
          outcome.par = parameters(outcome1.dosel, outcome2.dosel, outcome3.dosel)) +
   Sample(id = list("DoseH ACR20", "DoseH HAQ-DI"),
@@ -76,10 +76,10 @@ case.study5.data.model = DataModel() +
 
 # Parameters of the gatekeeping procedure procedure (multiple-sequence gatekeeping procedure)
 # Tests to which the multiplicity adjustment will be applied
-test.list = tests("Pl vs DoseH - ACR20", 
-                  "Pl vs DoseL - ACR20", 
-                  "Pl vs DoseH - HAQ-DI", 
-                  "Pl vs DoseL - HAQ-DI")
+test.list = tests("Placebo vs DoseH - ACR20", 
+                  "Placebo vs DoseL - ACR20", 
+                  "Placebo vs DoseH - HAQ-DI", 
+                  "Placebo vs DoseL - HAQ-DI")
 
 # Families of hypotheses
 family = families(family1 = c(1, 2), 
@@ -101,42 +101,42 @@ case.study5.analysis.model = AnalysisModel() +
                                proc = component.procedure, 
                                gamma = gamma),
               tests = test.list) +
-  Test(id = "Pl vs DoseL - ACR20",
+  Test(id = "Placebo vs DoseL - ACR20",
        method = "PropTest",
-       samples = samples("Plac ACR20", "DoseL ACR20")) +
-  Test(id = "Pl vs DoseH - ACR20",
+       samples = samples("Placebo ACR20", "DoseL ACR20")) +
+  Test(id = "Placebo vs DoseH - ACR20",
        method = "PropTest",
-       samples = samples("Plac ACR20", "DoseH ACR20")) +
-  Test(id = "Pl vs DoseL - HAQ-DI",
+       samples = samples("Placebo ACR20", "DoseH ACR20")) +
+  Test(id = "Placebo vs DoseL - HAQ-DI",
        method = "TTest",
-       samples = samples("DoseL HAQ-DI", "Plac HAQ-DI")) +
-  Test(id = "Pl vs DoseH - HAQ-DI",
+       samples = samples("DoseL HAQ-DI", "Placebo HAQ-DI")) +
+  Test(id = "Placebo vs DoseH - HAQ-DI",
        method = "TTest",
-       samples = samples("DoseH HAQ-DI", "Plac HAQ-DI"))
+       samples = samples("DoseH HAQ-DI", "Placebo HAQ-DI"))
 
 # Evaluation model
 case.study5.evaluation.model = EvaluationModel() +
   Criterion(id = "Marginal power",
             method = "MarginalPower",
-            tests = tests("Pl vs DoseL - ACR20",
-                          "Pl vs DoseH - ACR20",
-                          "Pl vs DoseL - HAQ-DI",
-                          "Pl vs DoseH - HAQ-DI"),
-            labels = c("Pl vs DoseL - ACR20",
-                       "Pl vs DoseH - ACR20",
-                       "Pl vs DoseL - HAQ-DI",
-                       "Pl vs DoseH - HAQ-DI"),
+            tests = tests("Placebo vs DoseL - ACR20",
+                          "Placebo vs DoseH - ACR20",
+                          "Placebo vs DoseL - HAQ-DI",
+                          "Placebo vs DoseH - HAQ-DI"),
+            labels = c("Placebo vs DoseL - ACR20",
+                       "Placebo vs DoseH - ACR20",
+                       "Placebo vs DoseL - HAQ-DI",
+                       "Placebo vs DoseH - HAQ-DI"),
             par = parameters(alpha = 0.025)) +
   Criterion(id = "Disjunctive power - ACR20",
             method = "DisjunctivePower",
-            tests = tests("Pl vs DoseL - ACR20",
-                          "Pl vs DoseH - ACR20"),
+            tests = tests("Placebo vs DoseL - ACR20",
+                          "Placebo vs DoseH - ACR20"),
             labels = "Disjunctive power - ACR20",
             par = parameters(alpha = 0.025)) +
   Criterion(id = "Disjunctive power - HAQ-DI",
             method = "DisjunctivePower",
-            tests = tests("Pl vs DoseL - HAQ-DI",
-                          "Pl vs DoseH - HAQ-DI"),
+            tests = tests("Placebo vs DoseL - HAQ-DI",
+                          "Placebo vs DoseH - HAQ-DI"),
             labels = "Disjunctive power - HAQ-DI",
             par = parameters(alpha = 0.025))
 
@@ -158,6 +158,8 @@ case.study5.presentation.model = PresentationModel() +
           description = "Clinical trial in patients with rheumatoid arthritis") +
   Section(by = "outcome.parameter") +
   Table(by = "multiplicity.adjustment") +
+  CustomLabel(param = "outcome.parameter", 
+              label = c("Conservative", "Standard", "Optimistic")) +
   CustomLabel(param = "sample.size", 
               label = paste0("N = ", c(100, 120))) +
   CustomLabel(param = "multiplicity.adjustment", 

@@ -57,4 +57,4 @@ Wihtin the Mediana R package, these models are used to perform the Clinical Scen
 Case studies facilitating the implementation of the Clinical Scenario Evaluation for several type of clinical trials using the Mediana R package are provided and will be updated in a continuous basis. Find out more [here](CaseStudies.html).
 
 The Mediana package has been successfully used in multiple clinical
-trial optimization exercises. See [Dmitrienko et al. (2015)]() and [Dmitrienko et al. (2016)]().
+trial optimization exercises. See [Dmitrienko et al. (2015)](http://www.tandfonline.com/doi/full/10.1080/10543406.2015.1092032#.Vh6xnXrtmko) and [Dmitrienko et al. (to appear, 2015)]().

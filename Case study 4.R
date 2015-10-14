@@ -26,21 +26,21 @@ outcome.os.treatment = parameters(rate = rate.os.treatment)
 hazard.os.ratio = rate.os.treatment/rate.os.placebo
 
 # Parameter lists
-plac.par = parameters(parameters(rate = rate.pfs.placebo), 
-                      parameters(rate = rate.os.placebo))
+placebo.par = parameters(parameters(rate = rate.pfs.placebo), 
+                         parameters(rate = rate.os.placebo))
 
-treat.par = parameters(parameters(rate = rate.pfs.treatment), 
-                       parameters(rate = rate.os.treatment))
+treatment.par = parameters(parameters(rate = rate.pfs.treatment), 
+                           parameters(rate = rate.os.treatment))
 
 # Correlation between two endpoints
 corr.matrix = matrix(c(1.0, 0.3,
                        0.3, 1.0), 2, 2)
 
 # Outcome parameters
-outcome.plac = parameters(par = plac.par, corr = corr.matrix)
-outcome.treat = parameters(par = treat.par, corr = corr.matrix)
+outcome.placebo = parameters(par = placebo.par, corr = corr.matrix)
+outcome.treatment = parameters(par = treatment.par, corr = corr.matrix)
 
-# Sample size parameters
+# Number of events
 event.count.total = c(270, 300)
 randomization.ratio = c(1, 2)
 
@@ -49,10 +49,10 @@ case.study4.data.model = DataModel() +
   OutcomeDist(outcome.dist = "MVExpoPFSOSDist") +
   Event(n.events = event.count.total, 
         rando.ratio = randomization.ratio) +
-  Sample(id = list("Plac PFS", "Plac OS"),
-         outcome.par = parameters(outcome.plac)) +
-  Sample(id = list("Treat PFS", "Treat OS"),
-         outcome.par = parameters(outcome.treat))
+  Sample(id = list("Placebo PFS", "Placebo OS"),
+         outcome.par = parameters(outcome.placebo)) +
+  Sample(id = list("Treatment PFS", "Treatment OS"),
+         outcome.par = parameters(outcome.treatment))
 
 # Parameters of the chain procedure (fixed-sequence procedure)
 # Vector of hypothesis weights
@@ -66,10 +66,10 @@ case.study4.analysis.model = AnalysisModel() +
   MultAdjProc(proc = "ChainAdj",
               par = parameters(weight = chain.weight, transition = chain.transition)) +
   Test(id = "PFS test",
-       samples = samples("Plac PFS", "Treat PFS"),
+       samples = samples("Placebo PFS", "Treatment PFS"),
        method = "LogrankTest") +
   Test(id = "OS test",
-       samples = samples("Plac OS", "Treat OS"),
+       samples = samples("Placebo OS", "Treatment OS"),
        method = "LogrankTest")
 
 # Evaluation model
@@ -80,12 +80,6 @@ case.study4.evaluation.model = EvaluationModel() +
                           "OS test"),
             labels = c("PFS test",
                        "OS test"),
-            par = parameters(alpha = 0.025)) +
-  Criterion(id = "Conjunctive power",
-            method = "ConjunctivePower",
-            tests = tests("PFS test",
-                          "OS test"),
-            labels = "Conjunctive power",
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters
@@ -98,7 +92,6 @@ case.study4.results = CSE(case.study4.data.model,
                           case.study4.analysis.model,
                           case.study4.evaluation.model,
                           case.study4.sim.parameters)
-
 
 # Reporting
 case.study4.presentation.model = PresentationModel() +
