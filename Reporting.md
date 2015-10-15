@@ -268,11 +268,11 @@ GenerateReport(presentation.model = case.study1.presentation.model,
                report.filename = "Case study 1 (normally distributed endpoint).docx")
 {% endhighlight %}
 
-An example of Clinical Scenario Evaluation Report can be dowloaded [here](Case study 1 (normally distributed endpoint).docx).
+An example of Clinical Scenario Evaluation Report can be dowloaded here:
 
 <center>
   <div class="col-md-12">
-    <a href="Case study 3.docx" class="img-responsive">
+    <a href="Case study 1 (normally distributed endpoint).docx" class="img-responsive">
       <img src="Logo_Microsoft_Word.png" class="img-responsive" height="100">
     </a>
   </div>
