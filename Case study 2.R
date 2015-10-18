@@ -6,7 +6,7 @@ library(Mediana)
 ###################################################################
 
 # Outcome parameters
-outcome.pl = parameters(mean = 16, sd = 18)
+outcome.placebo = parameters(mean = 16, sd = 18)
 outcome.dosel = parameters(mean = 19.5, sd = 18)
 outcome.dosem = parameters(mean = 21, sd = 18)
 outcome.doseh = parameters(mean = 21, sd = 18)
@@ -16,7 +16,7 @@ case.study2.data.model = DataModel() +
   OutcomeDist(outcome.dist = "NormalDist") +
   SampleSize(seq(220, 260, 20)) +
   Sample(id = "Placebo",
-         outcome.par = parameters(outcome.pl)) +
+         outcome.par = parameters(outcome.placebo)) +
   Sample(id = "Dose L",
          outcome.par = parameters(outcome.dosel)) +
   Sample(id = "Dose M",
@@ -27,13 +27,13 @@ case.study2.data.model = DataModel() +
 # Analysis model
 case.study2.analysis.model = AnalysisModel() +
   MultAdjProc(proc = "HochbergAdj") +
-  Test(id = "Pl vs Dose L",
+  Test(id = "Placebo vs Dose L",
        samples = samples("Placebo", "Dose L"),
        method = "TTest") +
-  Test(id = "Pl vs Dose M",
+  Test(id = "Placebo vs Dose M",
        samples = samples ("Placebo", "Dose M"),
        method = "TTest") +
-  Test(id = "Pl vs Dose H",
+  Test(id = "Placebo vs Dose H",
        samples = samples("Placebo", "Dose H"),
        method = "TTest")
 
@@ -50,25 +50,25 @@ case.study2.criterion = function(test.result, statistic.result, parameter) {
 case.study2.evaluation.model = EvaluationModel() +
   Criterion(id = "Marginal power",
             method = "MarginalPower",
-            tests = tests("Pl vs Dose L",
-                          "Pl vs Dose M",
-                          "Pl vs Dose H"),
-            labels = c("Pl vs Dose L",
-                       "Pl vs Dose M",
-                       "Pl vs Dose H"),
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
+            labels = c("Placebo vs Dose L",
+                       "Placebo vs Dose M",
+                       "Placebo vs Dose H"),
             par = parameters(alpha = 0.025)) +
   Criterion(id = "Disjunctive power",
             method = "DisjunctivePower",
-            tests = tests("Pl vs Dose L",
-                          "Pl vs Dose M",
-                          "Pl vs Dose H"),
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
             labels = "Disjunctive power",
             par = parameters(alpha = 0.025)) +
   Criterion(id = "Dose H and at least one dose",
             method = "case.study2.criterion",
-            tests = tests("Pl vs Dose L",
-                          "Pl vs Dose M",
-                          "Pl vs Dose H"),
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
             labels = "Dose H and at least one of the two other doses are significant",
             par = parameters(alpha = 0.025))
 

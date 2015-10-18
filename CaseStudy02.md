@@ -137,7 +137,7 @@ case.study2.criterion = function(test.result, statistic.result, parameter) {
 
 The function’s first argument (`test.result`) is a matrix of p-values produced by the `Test` objects defined in the Analysis Model and the second argument (`statistic.result`) is a matrix of results produced by the `Statistic` objects defined in the Analysis Model. In this example, the criteria will only use the `test.result` argument, which will contain the p-values produced by the tests associated with the three dose-placebo comparisons. The last argument (`parameter`) contains the optional parameter(s) defined by the user in the `Criterion` object. In this example, the `par` argument contains the overal alpha level.
 
-The case.study2.criterion function computes the probability of a significant treatment effect at Dose H (`test.result[,3] <= alpha`) and a significant treatment difference at Dose L or Dose M (`(test.result[,1] <= alpha) | (test.result[,2]<= alpha)`). Since this criterion assumes that the third test is based on the comparison of Dose H versus Placebo, the order in which the tests are included in the evaluation model is important.
+The `case.study2.criterion` function computes the probability of a significant treatment effect at Dose H (`test.result[,3] <= alpha`) and a significant treatment difference at Dose L or Dose M (`(test.result[,1] <= alpha) | (test.result[,2]<= alpha)`). Since this criterion assumes that the third test is based on the comparison of Dose H versus Placebo, the order in which the tests are included in the evaluation model is important.
 
 The following evaluation model specifies marginal and disjunctive power as well as the custom evaluation criterion defined above:
 
