@@ -48,4 +48,6 @@ This case study will serve to introduce a **clinical trial with several endpoint
 
 ## Case study 6
 
+This case study is an extenston of [Case study 2](CaseStudy02.html) and will serve to illustrate how the package can be used to compare the performance of several MTPs. Customized report generation will also be illustrated in this case study.
+
 [Clinical trial in patients with schizophrenia](CaseStudy06.html)
