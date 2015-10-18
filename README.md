@@ -2,7 +2,7 @@
 
 Mediana is an R package which provides a general framework for clinical trial simulations based on the Clinical Scenario Evaluation approach. The package supports a broad class of data models (including clinical trials with continuous, binary, survival-type and count-type endpoints as well as multivariate outcomes that are based on combinations of different endpoints), analysis strategies and commonly used evaluation criteria.
 
-Find out more at http://biopharmnet.com/mediana/, and check out the case studies.
+Find out more at http://gpaux.github.io/Mediana/, and check out the case studies.
 
 # Installation
 
@@ -21,5 +21,5 @@ devtools::install_github("gpaux/Mediana")
 
 # Online Manual
 
-A detailed online manual is accessible at http://biopharmnet.com/mediana-manual/
+A detailed online manual is accessible at http://gpaux.github.io/Mediana/
 
