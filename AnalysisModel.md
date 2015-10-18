@@ -138,7 +138,7 @@ Several methods are already implemented in the Mediana package (listed below, al
 
 - `PatientCountStat`: generate the **number of patients** observed in the sample(s) defined in the samples argument
 
-Several `Statistic` objects can be added to an `AnalysisModel`object.
+Several `Statistic` objects can be added to an `AnalysisModel` object.
 
 For more information about the `Statistic` object, see the R documentation [Statistic](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
@@ -248,7 +248,7 @@ MultAdjProc(proc = "MultipleSequenceGatekeepingAdj",
 
 Specify a multiplicity adjustment strategy that will be applied to the Clinical Scenario Evaluation. This function can be used when several Multiplicity Adjustment Procedures have to be used, e.g. when several case studies are simulated into the same Clinical Scenario Evaluation.
 
-A `MultAdjStrategy` object wraps up object of class `MultAdjProc`.
+A `MultAdjStrategy` object wraps up several `MultAdjProc` objects.
 
 For more information about the `MultAdjStrategy` object, see the R documentation [MultAdjStrategy](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
@@ -316,7 +316,7 @@ analysis.model = AnalysisModel() +
 
 #### Description
 
-This function can be used to wrap-up several objects of class `MultAdjProc` or `MultAdjStrategy` and add them to an object of class `AnalysisModel`. Its use is optional as objects of class `MultAdjProc` or `MultAdjStrategy` can be added to an object of class `AnalysisModel` incrementally using the '+' operator.
+This function can be used to wrap-up several `MultAdjProc` or  `MultAdjStrategy` objects and add them to an `AnalysisModel` object . Its use is optional as `MultAdjProc` or `MultAdjStrategy` objects can be added to an `AnalysisModel`  object incrementally using the '+' operator.
 
 For more information about the `MultAdj` object, see the R documentation [MultAdj](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 

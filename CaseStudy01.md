@@ -191,7 +191,7 @@ case.study1.results = CSE(case.study1.data.model,
                           case.study1.sim.parameters)
 {% endhighlight %}
 
-The results are saved in an evaluation object (result). The object contains complete information about this particular evaluation, including the data, analysis and evaluation models. The most important component of this object is the data frame contained in the list named *simulation.results*, which includes the power and the statistics results based on the metrics in the evaluation model.
+The results are saved in an `CSE` object (`case.study1.results`). This object contains complete information about this particular evaluation, including the data, analysis and evaluation models. The most important component of this object is the data frame contained in the list named *simulation.results* (`case.study1.results$simulation.results`), which includes the power and the statistics results based on the metrics in the evaluation model.
 
 ### Summary of results and reporting
 
@@ -304,7 +304,7 @@ Consider a Phase III clinical trial for the treatment of rheumatoid arthritis (R
 </div>
 
 ### Data Model
-The three outcome parameter sets displayed in the table are combined with four sample size sets (`SampleSize(c(80, 90, 100, 110))`) and the distribution of the primary endpoint (`OutcomeDist(outcome.dist = "BinomDist")`) is specified in the data model object `case.study1.data.model`:
+The three outcome parameter sets displayed in the table are combined with four sample size sets (`SampleSize(c(80, 90, 100, 110))`) and the distribution of the primary endpoint (`OutcomeDist(outcome.dist = "BinomDist")`) is specified in the `DataModel` object `case.study1.data.model`:
 
 {% highlight R %}
 # Outcome parameter set 1

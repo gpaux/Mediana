@@ -163,7 +163,7 @@ these parameters are given by
   </div>
 </center>
 
-Two objects (`chain.weight` and `chain.transition`) are defined below to pass the hypothesis weights and transition parameters to the multiplicity adjustment parameters.
+Two objects (named `chain.weight` and `chain.transition`) are defined below to pass the hypothesis weights and transition parameters to the multiplicity adjustment parameters.
 
 {% highlight R %}
 # Parameters of the chain procedure (fixed-sequence procedure)
@@ -185,8 +185,7 @@ case.study4.analysis.model = AnalysisModel() +
        method = "LogrankTest")
 {% endhighlight %}
 
-As shown above, the two tests included in the analysis model reflect the two-fold
-objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (`id = "PFS test"`) whereas the other test is carried out to
+As shown above, the two tests included in the analysis model reflect the two-fold objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (`id = "PFS test"`) whereas the other test is carried out to
 assess the treatment effect on OS (`test.id = "OS test"`).
 
 ## Evaluation Model

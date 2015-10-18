@@ -53,7 +53,7 @@ Several methods are already implemented in the Mediana package (listed below, al
 
 - `ExpectedRejPower`: generate the expected number of rejected hypotheses. Required parameter: `alpha`.
 
-Several `Criterion` objects can be added to an `EvaluationModel`object.
+Several `Criterion` objects can be added to an `EvaluationModel` object.
 
 For more information about the `Criterion` object, see the R documentation [Criterion](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 

@@ -118,7 +118,7 @@ Further, the treatment effect test in the subpopulation of marker-positive patie
 
 - **Treatment arm:** Sample 4 (`Treatment M+`).
 
-These analysis samples are specified in the analysis model below. The samples defined in the data model are merged using `c()` or `list()` function, e.g., `c("Placebo M-", "Placebo M+")`defines the placebo arm and `list("Treatment M-", "Treatment M+")` defines the experimental treatment arm in the overall population test.
+These analysis samples are specified in the analysis model below. The samples defined in the data model are merged using `c()` or `list()` function, e.g., `c("Placebo M-", "Placebo M+")`defines the placebo arm and `c("Treatment M-", "Treatment M+")` defines the experimental treatment arm in the overall population test.
 
 {% highlight R %}
 # Analysis model

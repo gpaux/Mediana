@@ -18,8 +18,7 @@ A data model can be initialized using the following command
 data.model = DataModel()
 {% endhighlight %}
 
-Initialization with this command is higlhy recommended as it will simplify the add of related objects, such as 
-`OutcomeDist`, `Sample`, `SampleSize`, `Event`, `Design` objects. 
+Initialization with this command is higlhy recommended as it will simplify the add of related objects, such as `OutcomeDist`, `Sample`, `SampleSize`, `Event`, `Design` objects. 
 
 ## Specific objects
 
@@ -39,7 +38,7 @@ Specify the outcome distribution of the generated data. An `OutcomeDist` object 
 
 	- `event`: for event-driven design setting.
 
-Several distributions are already implemented in the Mediana package (listed below, along with the required parameters to specify in the `outcome.par` argument of the Sample object) to be used in the `outcome.dist` argument:
+Several distributions are already implemented in the Mediana package (listed below, along with the required parameters to specify in the `outcome.par` argument of the `Sample` object) to be used in the `outcome.dist` argument:
 
 - `UniformDist`: generate data following a **univariate distribution**. Required parameter: `max`.
 
@@ -71,7 +70,7 @@ Several distributions are already implemented in the Mediana package (listed bel
 
   For each generated endpoint, the par parameter must contain the required parameters according to the type of distribution. The `corr` parameter specifies the correlation matrix for the endpoints.
 
-A single `OutcomeDist` object can be added to a `DataModel`object.
+A single `OutcomeDist` object can be added to a `DataModel` object.
 
 For more information about the `OutcomeDist` object, see the R documentation [OutcomeDist](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
@@ -113,7 +112,7 @@ Specify a sample (e.g. treatment group). A `Sample` object is defined by three a
 
 The `sample.size` argument is optional but must be used to define the sample size if unbalance samples have to be defined. The sample size must be either defined in the `Sample` object or in the `SampleSize` object, but not in both. 
 
-Several `Sample` objects can be added to a `DataModel`object.
+Several `Sample` objects can be added to a `DataModel` object.
 
 For more information about the `Sample` object, see the R documentation [Sample](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
@@ -235,7 +234,7 @@ Specify the sample size in case of balanced design (all samples will have the sa
 
 - `sample.size`, which specifies a list or vector of sample size(s).
 
-A single `SampleSize` object can be added to a `DataModel`object.
+A single `SampleSize` object can be added to a `DataModel` object.
 
 For more information about the `SampleSize` object, see the R documentation [SampleSize](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
@@ -259,9 +258,9 @@ Specify the total number of events among all samples in an event-driven clinical
 
 - `n.events`, which defines a vector of number of events required.
 
-- `rando.ratio`, which defines a vector of randomization ratios for each `Sample` object defined in the `DataModel`object.
+- `rando.ratio`, which defines a vector of randomization ratios for each `Sample` object defined in the `DataModel` object.
 
-A single `Event` object can be added to a `DataModel`object.
+A single `Event` object can be added to a `DataModel` object.
 
 For more information about the `Event` object, see the R documentation [Event](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
@@ -301,7 +300,7 @@ Specify the design parameters used in event-driven designs if the user is intere
 
 - `dropout.dist.par`, which defines the parameters of the dropout distribution.
 
-Several `Design` objects can be added to a `DataModel`object.
+Several `Design` objects can be added to a `DataModel` object.
 
 For more information about the `Design` object, see the R documentation [Design](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 

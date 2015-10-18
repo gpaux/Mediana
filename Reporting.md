@@ -9,13 +9,13 @@ group: navigation
 
 ## About
 
-The Mediana R package uses the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) to generate a Word-based report of the Clinical Scenario Evaluation. 
+The Mediana R package uses the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) to generate a Microsoft Word-based report to summarize the results of Clinical Scenario Evaluation-based simulations. 
 
-The user has the possibility to custom his report, by adding a description of the project as well as labels to each scenario, i.e. data scenarios (sample size, outcome distribution parameters, design parameters) and analysis scenarios (multipliticy adjustment). The user can also customize how the report will create sections, subsections and how the table are sorted out.
+The user can easily customize a Clinical Scenario Evaluation report by adding a description of the project as well as labels to each scenario, including data scenarios (sample size, outcome distribution parameters, design parameters) and analysis scenarios (multiplicity adjustment). The user can also customize the report's structure, e.g., create sections and subsections within the report and specify how the rows will be sorted within each table.
 
-In order to customize the report, the user have to use a `PresentationModel` object described below.
+In order to customize the report, the user has to use a `PresentationModel` object described below.
 
-Once a `PresentationModel` object has been defined, the function `GenerateReport` can be used to generate the Clinical Scenario Evaluation Report.
+Once a `PresentationModel` object has been defined, the `GenerateReport` function can be called to generate a Clinical Scenario Evaluation report.
 
 ## Initialization
 
@@ -25,32 +25,31 @@ A presentation model can be initialized using the following command
 presentation.model = PresentationModel()
 {% endhighlight %}
 
-Initialization with this command is higlhy recommended as it will simplify the add of related objects, such as 
-`Project`, `Section`, `Subsection`, `Table`, `CustomLabel` objects. 
-
+Initialization with this command is highly recommended as it will simplify the process of adding related objects, e.g., the `Project`, `Section`, `Subsection`, `Table`, `CustomLabel` objects. 
 
 ## Specific objects
 
-Once a `PresentationModel` object has been initialized, specific objects can be added by using the '+' operator to add objects to it.
+Once the `PresentationModel` object has been initialized, specific objects can be added by simply using the '+' operator as in data, analysis and evaluation models.
 
 ### Project
 
 #### Description
 
-Specify a description of the project. A `Project` object is defined by three optional arguments:
+Specify a description of the project. The `Project` object is defined by three optional arguments:
 
-- `username`, which defines the username to be printed in the report (by default "[Unknown User]").
+- `username`, which defines the username to be included in the report (by default, the username is "[Unknown User]").
 
-- `title`, which defines the title of the project to be printed in the report (by default "[Unknown title]").
+- `title`, which defines the project's in the report (the default value is "[Unknown title]").
 
-- `description`, which defines the description of the project to be printed in the report (by default "[No description]").
+- `description`, which defines the project's description (the default value is "[No description]").
 
 This information will be added in the report generated using the `GenerateReport` function. 
 
-A single object of class `Project` can be added to an object of class `PresentationModel`.
+A single object of the `Project` class can be added to an object the `PresentationModel` class.
 
 #### Examples
-Example of `Project` object: 
+
+A simple `Project` object can be created as follows: 
 
 {% highlight R %}
 Project(username = "Gautier Paux",
@@ -62,36 +61,37 @@ Project(username = "Gautier Paux",
 
 #### Description
 
-Specify how the sections of the report will be created. A `Section` object is defined by a single argument:
+Specify how the sections will be created  within the report. A `Section` object is defined by a single argument:
 
-- `by`, which defines how the sections of the report will be created.
+- `by`, which defines the rules for setting up sections.
 
-The `by` argument can contain several parameters, the value must be contained in the following list:
+The `by` argument can contain several parameters from the following list:
 
-- `sample.size`: a section will be created for each sample size.
+- `sample.size`: a separate section will be created for each sample size.
 
-- `event`: a section will be created for each number of events.
+- `event`: a separate section will be created for each event count.
 
-- `outcome.parameter`: a section will be created for each outcome parameter scenario.
+- `outcome.parameter`: a separate section will be created for each outcome parameter scenario.
 
-- `design.parameter`: a section will be created for each design parameter scenario.
+- `design.parameter`: a separate section will be created for each design parameter scenario.
 
-- `multiplicity.adjustment`: a section will be created for multiplicity adjustment scenario.
-- 
-If a parameter is defined in the `by` argument it must be defined only in this object (i.e. neither in the `Subection` object nor in the `Table` object).
+- `multiplicity.adjustment`: a separate section will be created for each multiplicity adjustment scenario.
+ 
+Note that, if a parameter is defined in the `by` argument, it must be defined only in this object (i.e. neither in the `Subection` object nor in the `Table` object).
 
-A single object of class `Section` can be added to an object of class `PresentationModel`.
+A single object of the `Section` class can be added to an object of the `PresentationModel` class.
 
 #### Examples
-Example of `Section` object: 
 
-- Section by outcome parameter scenario
+A `Section` object can be defined as follows: 
+
+- Create a separate section within the report for each outcome parameter scenario:
 
 {% highlight R %}
 Section(by = "outcome.parameter") 
 {% endhighlight %}
 
-- Section by sample size and outcome parameter scenario
+- Create a separate section for each unique combination of the sample size and outcome parameter scenarios:
 
 {% highlight R %}
 Section(by = c("sample.size", "outcome.parameter"))
@@ -101,36 +101,37 @@ Section(by = c("sample.size", "outcome.parameter"))
 
 #### Description
 
-Specify how the subsections of the report will be created. A `Subsection` object is defined by a single argument:
+Specify the rules for creating subsections within the report. A `Subection` object is defined by a single argument:
 
-- `by`, which defines how the subsections of the report will be created.
+- `by`, which defines the rules for creating subsections.
 
-The `by` argument can contain several parameters, the value must be contain in the following list:
+The `by` argument can contain several parameters from the following list:
 
-- `sample.size`: a subsection will be created for each sample size.
+- `sample.size`: a separate subsection will be created for each sample size.
 
-- `event`: a subsection will be created for each number of events.
+- `event`: a separate subsection will be created for each number of events.
 
-- `outcome.parameter`: a subsection will be created for each outcome parameter scenario.
+- `outcome.parameter`: a separate subsection will be created for each outcome parameter scenario.
 
-- `design.parameter`: a subsection will be created for each design parameter scenario.
+- `design.parameter`: a separate subsection will be created for each design parameter scenario.
 
-- `multiplicity.adjustment`: a subsection will be created for multiplicity adjustment scenario.
+- `multiplicity.adjustment`: a separate subsection will be created for each multiplicity adjustment scenario.
 
-If a parameter is defined in the `by` argument it must be defined only in this object (i.e. neither in the `Section` object nor in the `Table` object).
+As before, if a parameter is defined in the `by` argument, it must be defined only in this object (i.e. neither in the `Section` object nor in the `Table` object).
 
-A single object of class `Subsection` can be added to an object of class `PresentationModel`.
+A single object of the `Subsection` class can be added to an object of the `PresentationModel` class. 
 
 #### Examples
-Example of `Subsection` object: 
 
-- Subsection by sample size
+`Subsection` objects can be set up as follows: 
+
+- Create a separate subsection for each sample size scenario:
 
 {% highlight R %}
 Subsection(by = "sample.size") 
 {% endhighlight %}
 
-- Subsection by sample size and outcome parameter scenario
+- Create a separate subsection for each unique combination of the sample size and outcome parameter scenarios:
 
 {% highlight R %}
 Subsection(by = c("sample.size", "outcome.parameter"))

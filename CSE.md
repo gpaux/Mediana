@@ -8,7 +8,7 @@ group: navigation
 
 ## About
 
-Clinical Scenario Evaluation (CSE) is performed according to the data, analysis and evaluation models. The simulation parameters are specified in a specific object of class `SimParameter`.
+Clinical Scenario Evaluation (CSE) is performed according to the data, analysis and evaluation models. The simulation parameters are specified in a `SimParameter` object.
 
 ## Clinical Trial Simulations
 
@@ -57,13 +57,16 @@ SimParameters(n.sims = 10000,
 
 #### Description
 
-This `CSE` is used to perform the Clinical Scenario Evaluation according to the objects of class `DataModel`, `AnalysisModel` and `EvaluationModel` specified respectively in the arguments `data`, `analysis` and `evaluation` of the function.
+This `CSE` is used to perform the Clinical Scenario Evaluation according to the `DataModel`, `AnalysisModel` and `EvaluationModel` objects specified respectively in the arguments `data`, `analysis` and `evaluation` of the function.
 
 The `CSE` function uses four arguments:
 
 - `data`, which defines a `DataModel` object
+
 - `analysis`, which defines an `AnalysisModel` object
+
 - `evaluation`, which defines an `EvaluationModel` object
+
 - `simulation`, which defines a `SimParameters` object
 
 #### Examples
@@ -116,17 +119,17 @@ case.study1.results = CSE(case.study1.data.model,
 
 ### Summary of results
 
-Once the Clinical Scenario Evaluation has been performed, the object  of class `CSE` returned by the `CSE` function contains a list with:
+Once the Clinical Scenario Evaluation has been performed, the `CSE`  object returned by the `CSE` function contains a list with:
 
 - `simulation.results`, a data frame containing the results of the simulations for each scenario.
 
 - `analysis.scenario.grid`, a data frame containing the grid of the combination of data and analysis scenarios.
 
-- `data.structure`, a list containing the data structure according to the DataModel object.
+- `data.structure`, a list containing the data structure according to the `DataModel` object.
 
-- `analysis.structure`, a list containing the analysis structure according to the AnalysisModel object.
+- `analysis.structure`, a list containing the analysis structure according to the `AnalysisModel` object.
 
-- `evaluation.structure`, a list containing the evaluation structure according to the EvaluationModel object.
+- `evaluation.structure`, a list containing the evaluation structure according to the `EvaluationModel` object.
 
 - `sim.parameters`, a list containing the simulation parameters according to SimParameters object.
 
