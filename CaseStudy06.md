@@ -9,7 +9,7 @@ group:
 
 ## About
 
-Case study 6 is an extension of [Case study 2](CaseStudy02.html) where the objective of the sponsor is to compare several Multiple Testing Procedures (MTPs). The only difference is in the specification of the analysis model.
+Case study 6 is an extension of [Case study 2](CaseStudy02.html) where the objective of the sponsor is to compare several Multiple Testing Procedures (MTPs). The main difference is in the specification of the analysis model.
 
 ## Data Model
 
