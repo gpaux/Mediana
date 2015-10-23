@@ -103,10 +103,10 @@ JB :
   analytics :
     provider : google
     google :
-        tracking_id : 'UA-***'
+        tracking_id : 'UA-69182553-1'
     googleUA :
-        tracking_id : 'UA-***'
-        property_name : 'PROPERTY NAME'
+        tracking_id : 'UA-69182553-1'
+        property_name : 'Mediana R package'
     getclicky :
       site_id : 
     mixpanel :
