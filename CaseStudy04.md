@@ -7,13 +7,13 @@ group:
 
 {% include JB/setup %}
 
-## About
+## Summary
 
-Case study 4 serves as an extension of the oncology clinical trial example presented in [Case study 1](CaseStudy01.html). Consider again a Phase III trial in patients with metastatic colorectal cancer (MCC). The same general design will be assumed in this section; however, an additional endpoint (overall survival) will be introduced. The case of two endpoints helps showcase the package’s ability to model complex design and analysis strategies in trials with multivariate outcomes.
+Case study 4 serves as an extension of the oncology clinical trial example presented in [Case study 1](CaseStudy01.html). Consider again a Phase III trial in patients with metastatic colorectal cancer (MCC). The same general design will be assumed in this section; however, an additional endpoint (overall survival) will be introduced. The case of two endpoints helps showcase the package's ability to model complex design and analysis strategies in trials with multivariate outcomes.
 
 Progression-free survival (PFS) is the primary endpoint in this clinical trial and overall survival (OS) serves as the key secondary endpoint, which provides supportive evidence of treatment efficacy. A hierarchical testing approach will be utilized in the analysis of the two endpoints. The PFS analysis will be performed first at &alpha; = 0.025 (one-sided), followed by the OS analysis at the same level if a significant effect on PFS is established. The resulting testing procedure is equivalent to the fixed-sequence procedure and controls the overall Type I error rate ([Dmitrienko and D’Agostino, 2013](http://onlinelibrary.wiley.com/doi/10.1002/sim.5990/abstract)).
 
-The treatment effect assumptions that will be used in clinical scenario evaluation are listed in the next Table. The table shows the hypothesized median times along with the corresponding hazard rates for the primary and secondary endpoints. It follows from the table that the expected effect size is much larger for PFS compared to OS (PFS hazard ratio is lower than OS hazard ratio).
+The treatment effect assumptions that will be used in clinical scenario evaluation are listed in the table below. The table shows the hypothesized median times along with the corresponding hazard rates for the primary and secondary endpoints. It follows from the table that the expected effect size is much larger for PFS compared to OS (PFS hazard ratio is lower than OS hazard ratio).
 
 <div class="table-responsive">
     <table class="table">
@@ -63,7 +63,7 @@ The treatment effect assumptions that will be used in clinical scenario evaluati
     </table>
 </div>
 
-## Data Model
+## Define a Data Model
 
 In this clinical trial two endpoints are evaluated for each patient (PFS and OS) and thus their joint distribution needs to be listed in the general set.
 
@@ -76,7 +76,7 @@ The next several statements specify the parameters of the bivariate exponential 
 - Correlation matrix of the underlying multivariate normal distribution used in the copula method.
 
 The hazard rates for PFS and OS in each treatment arm are defined based on
-the information presented in the previous Table (`placebo.par` and `treatment.par`) and the correlation matrix is specified based on historical information (`corr.matrix`). These parameters are combined to define the outcome parameter sets (`outcome.placebo` and  `outcome.treatment`) that will be included in the sample-specific set of data model parameters (`Sample` object).
+the information presented in the table above (`placebo.par` and `treatment.par`) and the correlation matrix is specified based on historical information (`corr.matrix`). These parameters are combined to define the outcome parameter sets (`outcome.placebo` and  `outcome.treatment`) that will be included in the sample-specific set of data model parameters (`Sample` object).
 
 {% highlight R %}
 # Outcome parameters: Progression-free survival
@@ -115,7 +115,7 @@ outcome.placebo = parameters(par = placebo.par, corr = corr.matrix)
 outcome.treatment = parameters(par = treatment.par, corr = corr.matrix)
 {% endhighlight %}
 
-To define the sample-specific data model parameters, a 2:1 randomization ratio will be used in this clinical trial and thus the number of events as well as the randomization ratio are specified by the user in the `Event` objet. Secondly, a separate sample ID needs to be assigned to each endpoint within the two samples (e.g. `Placebo PFS` and `Placebo OS`) corresponding to the two treatment arms. This will enable the user to construct analysis models for examining the treatment effect on each endpoint.
+To define the sample-specific data model parameters, a 2:1 randomization ratio will be used in this clinical trial and thus the number of events as well as the randomization ratio are specified by the user in the `Event` object. Secondly, a separate sample ID needs to be assigned to each endpoint within the two samples (e.g. `Placebo PFS` and `Placebo OS`) corresponding to the two treatment arms. This will enable the user to construct analysis models for examining the treatment effect on each endpoint.
 
 {% highlight R %}
 # Number of events
@@ -133,9 +133,9 @@ case.study4.data.model = DataModel() +
          outcome.par = parameters(outcome.treatment))
 {% endhighlight %}
 
-## Analysis Model
+## Define an Analysis Model
 
-The treatment comparisons for both endpoints will be carried out based on the log-rank test (`method = "LogrankTest"`). Further, as was stated in the beginning of this page, the two endpoints will be tested hierarchically using a multiplicity adjustment procedure known as the fixed-sequence procedure. This procedure belongs to the class of chain procedures (`proc = "ChainAdj"`) and the Figure below provides a visual summary of the decision rules used in this procedure. 
+The treatment comparisons for both endpoints will be carried out based on the log-rank test (`method = "LogrankTest"`). Further, as was stated in the beginning of this page, the two endpoints will be tested hierarchically using a multiplicity adjustment procedure known as the fixed-sequence procedure. This procedure belongs to the class of chain procedures (`proc = "ChainAdj"`) and the following figure provides a visual summary of the decision rules used in this procedure. 
 
 <center>
   <div class="col-md-12">
@@ -153,8 +153,7 @@ The value displayed above a circle defines the initial weight of each null hypot
 All of the overall &alpha; is allocated to H1 to ensure that the OS test will be carried out only after the PFS test is significant and the arrow indicates that H2 will be tested
 after H1 is rejected.
 
-More formally, a chain procedure is uniquely defined by specifying a vector of hy-
-pothesis weights (W) and matrix of transition parameters (G). Based on the Figure,
+More formally, a chain procedure is uniquely defined by specifying a vector of hypothesis weights (W) and matrix of transition parameters (G). Based on the figure,
 these parameters are given by
 
 <center>
@@ -185,10 +184,10 @@ case.study4.analysis.model = AnalysisModel() +
        method = "LogrankTest")
 {% endhighlight %}
 
-As shown above, the two tests included in the analysis model reflect the two-fold objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (`id = "PFS test"`) whereas the other test is carried out to
-assess the treatment effect on OS (`test.id = "OS test"`).
+As shown above, the two significance tests included in the analysis model reflect the two-fold objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (`id = "PFS test"`) whereas the other test is carried out to assess the treatment effect on OS (`test.id = "OS test"`).
 
-## Evaluation Model
+## Define an Evaluation Model
+
 The evaluation model specifies the most basic criterion for assessing the probability
 of success in the PFS and OS analyses (marginal power). A criterion based on disjunctive power could be considered but it would not provide additional information.
 
@@ -210,7 +209,8 @@ case.study4.evaluation.model = EvaluationModel() +
 
 ## Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
+
 
 <center>
   <div class="col-md-6">

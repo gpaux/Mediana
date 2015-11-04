@@ -6,137 +6,134 @@ group: navigation
 ---
 {% include JB/setup %}
 
-## About
+## Summary
 
-Analysis models define statistical methods that are applied to the study data in a clinical trial.
+Analysis models define statistical methods (e.g., significance tests or descriptive statistics) that are applied to the study data in a clinical trial.
 
 ## Initialization
 
-An Analysis Model can be initialized using the following command
+An analysis model can be initialized using the following command:
 
 {% highlight R %}
 # AnalysisModel initialization
 analysis.model = AnalysisModel()
 {% endhighlight %}
 
-Initialization with this command is higlhy recommended as it will simplify the add of related objects, such as 
-`MultAdj`, `MultAdjProc`, `MultAdjStrategy`, `Test`, `Statistic` objects.
+It is highly recommended to use this command to initialize an analysis model as it will simplify the process of specifying components of the data model, including the `MultAdj`, `MultAdjProc`, `MultAdjStrategy`, `Test`, `Statistic` objects.
 
-## Specific objects
+## Components of an analysis model
 
-Once an `AnalysisModel` object has been initialized, specific objects can be added by using the '+' operator to add objects to it.
+After an `AnalysisModel` object has been initialized, components of the analysis model can be specified by adding objects to the model using the '+' operator as shown below.
 
-
-### Test
+### `Test` object
 
 #### Description
 
-Specify a statistical test that will be applied to the data. A `Test` object is defined by four arguments:
+This object specifies a significance test that will be applied to one or more samples defined in a data model. A `Test` object is defined by the following four arguments:
 
-- `id`, which defines the ID of the test.
+- `id` defines the test's unique ID (label).
 
-- `method`, which defines the statistical test method.
+- `method` defines the significance test.
 
-- `samples`, which defines the samples (pre-defined in the data model) to be used within the statistical test method.  
+- `samples` defines the IDs of the samples (defined in the data model) that the significance test is applied to.
 
-- `par`, which defines the parameter(s) of the statistical test method.
+- `par` defines the parameter(s) of the statistical test.
 
-Several methods are already implemented in the Mediana package (listed below, along with the required parameters to define in the par parameter):
+Several commonly used significance tests are already implemented in the Mediana package. In addition, the user can easily define custom significance tests. The built-in tests are listed below along with the required parameters that need to be included in the `par` argument:
 
-- `TTest`: perform a **two-sample t-test** between the two samples defined in the samples argument.
+- `TTest`: perform the **two-sample t-test** between the two samples defined in the `samples` argument.
 
-- `TTestNI`: perform a **non-inferiority two-sample t-test** between the two samples defined in the samples argument. Required parameter: `delta`.
+- `TTestNI`: perform the **non-inferiority two-sample t-test** between the two samples defined in the `samples` argument. Required parameter: `delta` (positive non-inferiority margin).
 
-- `WilcoxTest`: perform a **Wilcoxon-Mann-Whitney test** between the two samples defined in the samples argument.
+- `WilcoxTest`: perform the **Wilcoxon-Mann-Whitney test** between the two samples defined in the `samples` argument.
 
-- `PropTest`: perform a **two-sample test for proportions** between the two samples defined in the samples argument. Optional parameter: `yates` (Yates' continuity correction `TRUE` or `FALSE`).
+- `PropTest`: perform the **two-sample test for proportions** between the two samples defined in the `samples` argument. Optional parameter: `yates` (Yates' continuity correction flag that is set to `TRUE` or `FALSE`).
 
-- `FisherTest`: perform a **Fisher exact test** between the two samples defined in the samples argument.
+- `FisherTest`: perform the **Fisher exact test** between the two samples defined in the `samples` argument.
 
-- `GLMPoissonTest`: perform a **Poisson regression test** between the two samples defined in the samples argument.
+- `GLMPoissonTest`: perform the **Poisson regression test** between the two samples defined in the `samples` argument.
 
-- `GLMNegBinomTest`: perform a **Negative-binomial regression test** between the two samples defined in the samples argument.
+- `GLMNegBinomTest`: perform the **Negative-binomial regression test** between the two `samples` defined in the `samples` argument.
 
-- `LogrankTest`: perform a **Log-rank test** between the two samples defined in the samples argument.
+- `LogrankTest`: perform the **Log-rank test** between the two samples defined in the `samples` argument.
 
-It is to be noted that the statistical tests implemented are **one-sided** and thus the sample order is important. In particular, the Mediana package assumes that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas
+It needs to be noted that the significance tests listed above are implemented as **one-sided** tests and thus the sample order in the `samples` argument is important. In particular, the Mediana package assumes that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas
 Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure).
 
 Several `Test` objects can be added to an `AnalysisModel`object.
 
-For more information about the `Test` object, see the R documentation [Test](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `Test` object, see the package's documentation [Test](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
 
 #### Example
 
-Example of `Test` objects:
+Examples of `Test` objects:
 
-- **Two-sample t-test**
+Carry out the two-sample t-test:
 
 {% highlight R %}
-# Placebo and Treatment samples have been previously defined in the data model
+# Placebo and Treatment samples were defined in the data model
 Test(id = "Placebo vs treatment",
      samples = samples("Placebo", "Treatment"),
      method = "TTest")
 {% endhighlight %}
 
-
-- **Two-sample t-test with pooled samples**
+Carry out the two-sample t-test with pooled samples:
 
 {% highlight R %}
-# Placebo M-, Placebo M+, Treatment M- and Treatment M+ samples have been previously defined in the data model
+# Placebo M-, Placebo M+, Treatment M- and Treatment M+ samples were defined in the data model
 Test(id = "OP test",
      samples = samples(c("Placebo M-", "Placebo M+"),
                        c("Treatment M-", "Treatment M+")),
      method = "TTest") +
 {% endhighlight %}
 
-### Statistic
+### `Statistic` object
 
 #### Description
 
-Specify a statistical calculations that will be applied to the data. A `Statistic` object is defined by four arguments:
+This object specifies a descriptive statistic that will be computed based on one or more samples defined in a data model. A `Statistic` object is defined by four arguments:
 
-- `id`, which defines the ID of the statistic.
+- `id` defines the descriptive statistic's unique ID (label).
 
-- `method`, which defines the type of statistics/method for computing the statistic.
+- `method` defines the type of statistic/method for computing the statistic.
 
-- `samples`, which defines the samples (pre-defined in the data model) to be used within the statistic method.  
+- `samples` defines the samples (pre-defined in the data model) to be used for computing the statistic.  
 
-- `par`, which defines the parameter(s) of the statistic method.
+- `par` defines the parameter(s) of the statistic.
 
-Several methods are already implemented in the Mediana package (listed below, along with the required parameters to define in the par parameter):
+Several methods for computing descriptive statistics are already implemented in the Mediana package and the user can also define custom functions for computing descriptive statistics. These methods are shown below along with the required parameters that need to be defined in the `par` argument:
 
-- `MedianStat`: generate the **median** of the sample defined in the samples argument.
+- `MedianStat`: compute the **median** of the sample defined in the `samples` argument.
 
-- `MeanStat`: generate the **mean** of the sample defined in the samples argument.
+- `MeanStat`: compute the **mean** of the sample defined in the `samples` argument.
 
-- `SdStat`: generate the **standard deviation** of the sample defined in the samples argument.
+- `SdStat`: compute the **standard deviation** of the sample defined in the `samples` argument.
 
-- `MinStat`: generate the **minimum** of the sample defined in the samples argument.
+- `MinStat`: compute the **minimum** value in the sample defined in the `samples` argument.
 
-- `MaxStat`: generate the **maximum** of the sample defined in the samples argument.
+- `MaxStat`: compute the **maximum** value in the sample defined in the `samples` argument.
 
-- `DiffMeanStat`: generate the **difference of means** between the two samples defined in the samples argument. Two samples must be defined.
+- `DiffMeanStat`: compute the **difference of means** between the two samples defined in the `samples` argument. Two samples must be defined.
 
-- `EffectSizeContStat`: generate the **effect size** for a continuous endpoint. Two samples must be defined.
+- `EffectSizeContStat`: compute the **effect size** for a continuous endpoint. Two samples must be defined.
 
-- `RatioEffectSizeContStat`: generate the **ratio of two effect sizes** for a continuous endpoint. Four samples must be defined.
+- `RatioEffectSizeContStat`: compute the **ratio of two effect sizes** for a continuous endpoint. Four samples must be defined.
 
-- `DiffPropStat`: generate the **difference of the proportions** between the two samples defined in the samples argument. Two samples must be defined.
+- `DiffPropStat`: compute the **difference of the proportions** between the two samples defined in the `samples` argument. Two samples must be defined.
 
-- `EffectSizePropStat`: generate the **effect size** for a binary endpoint. Two samples must be defined.
+- `EffectSizePropStat`: compute the **effect size** for a binary endpoint. Two samples must be defined.
 
-- `RatioEffectSizePropStat`: generate the **ratio of two effect sizes** for a binary endpoint. Four samples must be defined.
+- `RatioEffectSizePropStat`: compute the **ratio of two effect sizes** for a binary endpoint. Four samples must be defined.
 
-- `HazardRatioStat`: generate the **hazard ratio** of the two samples defined in the samples argument. Two samples must be defined.
+- `HazardRatioStat`: compute the **hazard ratio** of the two samples defined in the samples argument. Two samples must be defined.
 
-- `EffectSizeEventStat`: generate the **effect size** for a survival endpoint (log of the HR). Two samples must be defined. Two samples must be defined.
+- `EffectSizeEventStat`: compute the **effect size** for a survival endpoint (log of the HR). Two samples must be defined. Two samples must be defined.
 
-- `RatioEffectSizeEventStat`: generate the **ratio of two effect sizes** for a survival endpoint. Four samples must be defined.
+- `RatioEffectSizeEventStat`: compute the **ratio of two effect sizes** for a survival endpoint. Four samples must be defined.
 
-- `EventCountStat`: generate the **number of events** observed in the sample(s) defined in the samples argument.
+- `EventCountStat`: compute the **number of events** observed in the sample(s) defined in the `samples` argument.
 
-- `PatientCountStat`: generate the **number of patients** observed in the sample(s) defined in the samples argument
+- `PatientCountStat`: compute the **number of patients** observed in the sample(s) defined in the `samples` argument
 
 Several `Statistic` objects can be added to an `AnalysisModel` object.
 
@@ -144,59 +141,59 @@ For more information about the `Statistic` object, see the R documentation [Stat
 
 #### Example
 
-Example of `Statistic` objects:
+Examples of `Statistic` objects:
 
-- **Mean statistic**
+Compute the mean of a single sample:
 
 {% highlight R %}
-# Placebo and Treatment samples have been previously defined in the data model
+# Treatment sample was defined in the data model
 Statistic(id = "Mean Treatment",
           method = "MeanStat",
           samples = samples("Treatment"))
 {% endhighlight %}
 
 
-### MultAdjProc
+### `MultAdjProc` object
 
 #### Description
 
-Specify a multiplicity adjustment procedure that will be applied to the statistical tests to adjust the p-value in order to protect the overall Type-I error rate. A `MultAdjProc` object is defined by three arguments:
+This object specifies a multiplicity adjustment procedure that will be applied to the significance tests in order to protect the overall Type I error rate. A `MultAdjProc` object is defined by three arguments:
 
-- `proc`, which defines a multiplicity adjustment procedure.
+- `proc` defines a multiplicity adjustment procedure.
 
-- `par`, which defines the parameter(s) of the multiplicity adjustment procedure (optional).
+- `par` defines the parameter(s) of the multiplicity adjustment procedure (optional).
 
-- `tests`, which defines the tests (pre-defined in the analysis model) to be used within the multiplicity adjustment procedure.  
+- `tests` defines the specific tests (defined in the analysis model) to which the multiplicity adjustment procedure will be applied.  
 
 If no `tests` are defined, the multiplicity adjustment procedure will be applied to all tests defined in the `AnalysisModel` object.
 
-Several procedures are already implemented in the Mediana package (listed below, along with the required or optional parameters to specify in the par argument):
+Several commonly used multiplicity adjustment procedures are included in the Mediana package. In addition, the user can easily define custom multiplicity adjustments. The built-in multiplicity adjustments are defined below along with the required parameters that need to be included in the `par` argument:
 
-- `BonferroniAdj`: **Bonferroni** procedure. Optional parameter: `weight`.
+- `BonferroniAdj`: **Bonferroni** procedure. Optional parameter: `weight` (vector of hypothesis weights).
 
-- `HolmAdj`: **Holm** procedure. Optional parameter: `weight`.
+- `HolmAdj`: **Holm** procedure. Optional parameter: `weight` (vector of hypothesis weights).
 
-- `HochbergAdj`: **Hochberg** procedure. Optional parameter: `weight`.
+- `HochbergAdj`: **Hochberg** procedure. Optional parameter: `weight` (vector of hypothesis weights).
 
-- `HommelAdj`: **Hommel** procedure. Optional parameter: `weight`.
+- `HommelAdj`: **Hommel** procedure. Optional parameter: `weight` (vector of hypothesis weights).
 
-- `ChainAdj`: Family of **chain procedures**. Required parameters: `weight` and `transition`.
+- `ChainAdj`: Family of **chain procedures**. Required parameters: `weight` (vector of hypothesis weights) and `transition` (matrix of transition parameters).
 
-- `NormalParamAdj`: **Parametric multiple testing procedure** derived from a multivariate normal distribution. Required parameter: `corr`. Optional parameter: `weight`.
+- `NormalParamAdj`: **Parametric multiple testing procedure** derived from a multivariate normal distribution. Required parameter: `corr` (correlation matrix of the multivariate normal distribution). Optional parameter: `weight` (vector of hypothesis weights).
 
-- `ParallelGatekeepingAdj`: Family of **parallel gatekeeping procedures**. Required parameters: `family`, `proc`, `gamma`.
+- `ParallelGatekeepingAdj`: Family of **parallel gatekeeping procedures**. Required parameters: `family` (vectors of hypotheses included in each family), `proc` (vector of procedure names applied to each family), `gamma` (vector of truncation parameters).
 
-- `MultipleSequenceGatekeepingAdj`: Family of **multiple-sequence gatekeeping procedures**. Required parameters: `family`, `proc`, `gamma`.
+- `MultipleSequenceGatekeepingAdj`: Family of **multiple-sequence gatekeeping procedures**. Required parameters: `family` (vectors of hypotheses included in each family), `proc` (vector of procedure names applied to each family), `gamma` (vector of truncation parameters).
 
-Several `MultAdjProc` objects can be added to an `AnalysisModel`object, using the '+' operator or by grouping them into a MultAdj object.
+Several `MultAdjProc` objects can be added to an `AnalysisModel`object using the '+' operator or by grouping them into a MultAdj object.
 
-For more information about the `MultAdjProc` object, see the R documentation [MultAdjProc](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `MultAdjProc` object, see the package's documentation [MultAdjProc](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
-Example of `MultAdjProc` objects:
+Examples of `MultAdjProc` objects:
 
-- **Chain procedure**
+Apply a multiplicity adjustment based on the chain procedure:
 
 {% highlight R %}
 # Parameters of the chain procedure (fixed-sequence procedure)
@@ -212,10 +209,10 @@ MultAdjProc(proc = "ChainAdj",
                              transition = chain.transition))
 {% endhighlight %}
 
-- **Multiple-sequence gatekeeping procedure**
+Apply a multiple-sequence gatekeeping procedure:
 
 {% highlight R %}
-# Parameters of the Multiple-sequence gatekeeping procedure
+# Parameters of the multiple-sequence gatekeeping procedure
 # Tests to which the multiplicity adjustment will be applied (defined in the AnalysisModel)
 test.list = tests("Pl vs DoseH - ACR20", 
                   "Pl vs DoseL - ACR20", 
@@ -242,21 +239,21 @@ MultAdjProc(proc = "MultipleSequenceGatekeepingAdj",
             tests = test.list)
 {% endhighlight %}
 
-### MultAdjStrategy
+### `MultAdjStrategy` object
 
 #### Description
 
-Specify a multiplicity adjustment strategy that will be applied to the Clinical Scenario Evaluation. This function can be used when several Multiplicity Adjustment Procedures have to be used, e.g. when several case studies are simulated into the same Clinical Scenario Evaluation.
+This object specifies a multiplicity adjustment strategy that can include several multiplicity adjustment procedures. A multiplicity adjustment strategy may be defined when the same Clinical Scenario Evaluation approach is applied to several clinical trials.
 
-A `MultAdjStrategy` object wraps up several `MultAdjProc` objects.
+A `MultAdjStrategy` object serves as a wrapper for several `MultAdjProc` objects.
 
-For more information about the `MultAdjStrategy` object, see the R documentation [MultAdjStrategy](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `MultAdjStrategy` object, see the package's documentation [MultAdjStrategy](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
-#### Examples
+#### Example
 
-Examples of `MultAdjStrategy` object:
+Example of a `MultAdjStrategy` object:
 
-- **Clinical Scenario Evaluation with two clinical trials and three endpoints**
+Perform complex multiplicity adjustments based on gatekeeping procedures in two clinical trials with three endpoints:
 
 {% highlight R %}
 # Parallel gatekeeping procedure parameters
@@ -312,19 +309,19 @@ analysis.model = AnalysisModel() +
 {% endhighlight %}
 
 
-### MultAdj
+### `MultAdj` function
 
 #### Description
 
-This function can be used to wrap-up several `MultAdjProc` or  `MultAdjStrategy` objects and add them to an `AnalysisModel` object . Its use is optional as `MultAdjProc` or `MultAdjStrategy` objects can be added to an `AnalysisModel`  object incrementally using the '+' operator.
+This function can be used to combine several `MultAdjProc` or  `MultAdjStrategy` objects and add them as a single object to an `AnalysisModel` object . This function is provided mainly for convenience and its use is optional.  Alternatively, `MultAdjProc` or `MultAdjStrategy` objects can be added to an `AnalysisModel` object incrementally using the '+' operator.
 
-For more information about the `MultAdj` object, see the R documentation [MultAdj](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `MultAdj` object, see the package's documentation [MultAdj](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
-#### Examples
+#### Example
 
-Examples of `MultAdj` object:
+Example of a `MultAdj` object:
 
-- **Clinical Scenario Evaluation with three Multiplicity Adjustment Procedures to compare**
+Perform Clinical Scenario Evaluation to compare three candidate multiplicity adjustment procedures:
 
 {% highlight R %}
 # Multiplicity adjustments to compare
@@ -345,7 +342,7 @@ analysis.model = AnalysisModel() +
                       samples = samples("Placebo", "Dose H"),
                       method = "TTest")
 
-# Equivalent to:
+# Note that the code presented above is equivalent to:
 analysis.model = AnalysisModel() +
                  mult.adj1 +
                  mult.adj2 +
@@ -362,18 +359,18 @@ analysis.model = AnalysisModel() +
 
 {% endhighlight %}
 
-## User-defined functions
+## User-defined functions 
 
-If a test, a statistic or a multiplicity adjustment procedure is not implemented by default in the Mediana package, the user can defined his own function. In order to be used within the package, the user must respect the following templates.
+If a significance test, descriptive statistic or multiplicity adjustment procedure is not included in the Mediana package, the user can easily define a custom function that implements a test, computes a descriptive statistic or performs a multiplicity adjustment. The user must follow the guidelines presented below to create valid custom functions.
 
-### Template for test
+### Custom functions for implementing a significance test
 
-The following template can be used by the user to create his own function to perform a statistical test. The parts of the function that has to be modified are identified within a block.
+The following template must be used by the user to define a function that implements a significance test in an analysis model. The test-specific components that need to be modified if the user wishes to implement a different test are identified in the comments.
 
-As an example, this function is used to perform a test named `Template` and has one parameter, `parameter1`.
+As an example, the function defined below carries out a test named `TemplateTest` with a single required parameter labeled `parameter1`.
 
 {% highlight R %}
-# Template of a function to perform a test
+# Template of a function to perform a significance test
 TemplateTest = function(sample.list, parameter) {
 
   # Determine the function call, either to generate the p-value or to return description
@@ -383,8 +380,8 @@ TemplateTest = function(sample.list, parameter) {
   if (call == FALSE | is.na(call)) {
 
     ##############################################################
-    # To modify according to the function
-    # Get the other parameter (kept in the parameter[[2]] list)
+    # Test-specific component
+    # Get the test's parameter (stored in the parameter[[2]] list)
     if (is.na(parameter[[2]]$parameter1))
       stop("Analysis model: TemplateTest test: parameter1 must be specified.")
 
@@ -405,20 +402,23 @@ TemplateTest = function(sample.list, parameter) {
     outcome2.complete = outcome2[stats::complete.cases(outcome2)]
 
     ##############################################################
-    # To modify according to the function
-    # The function must return a one-sided p-value (treatment effect in sample 2 is expected to be greater than in sample 1)
+    # Test-specific component
+    # The function must return a one-sided p-value (the treatment effect in sample 2 is expected to be numerically larger than the treatment effect in sample 1)
+    # The one-sided p-value is computed by calling the "funtest" function and saved in the "result" object
     result = funtest(outcome2.complete, outcome1.complete, parameter1)$p.value
     ##############################################################
   }
   else if (call == TRUE) {
-    result = list("Template Test", "Parameter1 = ")
+    result = list("TemplateTest", "Parameter1 = ")
   }
 
   return(result)
 }
 {% endhighlight %}
 
-The R template code can be downloaded below.
+### Download 
+
+Click on the icon to download this template:
 
 <center>
   <div class="col-md-12">

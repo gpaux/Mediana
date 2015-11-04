@@ -21,19 +21,19 @@ Mediana is an R package which provides a general framework for clinical trial si
 
 ## Installation
 
-### Official release
+### Latest release
 
-Get the official released version from CRAN in R:
+Install the latest version of the Mediana package from CRAN using the *install.packages* command in R:
 
 {% highlight R %}
 install.packages("Mediana")
 {% endhighlight %}
 
-Or by downloading the package from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html).
+Alternatively, you can download the package from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html).
 
 ### Development version
 
-The up-to-date development version can be found and installed directly from GitHub. Its installation requires the package *devtools*:
+The up-to-date development version can be found and installed directly from the GitHub web site. You need to install the *devtools* package and then call the *install_github* function in R:
 
 {% highlight R %}
 # install.packages("devtools")
@@ -43,18 +43,20 @@ devtools::install_github("gpaux/Mediana")
 
 ## Clinical Scenario Evaluation Framework
 
-The Mediana R package was developed to provide a general software implementation of the Clinical Scenario Evaluation framework. This framework introduced by [Benda et al. (2010)](http://dij.sagepub.com/content/44/3/299.abstract) and [Friede et al. (2010)](http://dij.sagepub.com/content/44/6/713.abstract) recognizes that sample size calculation and power evaluation in clinical trials are high-dimensional statistical problems. This approach helps to decompose this complex problem by identifying key elements of the evaluation process. These components are termed models:
+The Mediana R package was developed to provide a general software implementation of the Clinical Scenario Evaluation (CSE) framework. This framework introduced by [Benda et al. (2010)](http://dij.sagepub.com/content/44/3/299.abstract) and [Friede et al. (2010)](http://dij.sagepub.com/content/44/6/713.abstract) recognizes that sample size calculation and power evaluation in clinical trials are high-dimensional statistical problems. This approach helps decompose this complex problem by identifying key elements of the evaluation process. These components are termed models:
 
+- [Data models](DataModel.html) define the process of generating trial data (e.g., sample sizes,  outcome distributions and parameters).
+- [Analysis models](AnalysisModel.html) define the statistical methods applied to the trial data (e.g., statistical tests, multiplicity adjustments).
+- [Evaluation models](EvaluationModel.html) specify the measures for evaluating the performance of the analysis strategies (e.g., traditional success criteria such as marginal power or composite criteria such as disjunctive power).
 
-- [Data models](DataModel.html) define the process of generating trial data (e.g., sample sizes and randomization ratios, outcome distribution and parameters).
-- [Analysis models](AnalysisModel.html) define the statistical methods applied to the trial data (e.g., statistical tests, multiplicity adjustments, timing of interim analysis).
-- [Evaluation models](EvaluationModel.html) specify the measures for evaluating the performance of the analysis strategies (e.g. traditional success criteria such as disjunctive or weighted power).
-
-Wihtin the Mediana R package, these models are used to perform the Clinical Scenario Evaluation. Find out more about each model and how to define them in the dedicated pages.
+Find out more about the role of each model and how to specify the three models to perform Clinical Scenario Evaluation by reviewing the dedicated pages (click on the links above).
 
 ## Case studies
 
-Case studies facilitating the implementation of the Clinical Scenario Evaluation for several type of clinical trials using the Mediana R package are provided and will be updated in a continuous basis. Find out more [here](CaseStudies.html).
+Multiple [case studies](CaseStudies.html) are provided on this web site to facilitate the implementation of Clinical Scenario Evaluation in different clinical trial settings using the Mediana package. These case studies will be updated on a regular basis. 
 
-The Mediana package has been successfully used in multiple clinical
-trial optimization exercises. See [Dmitrienko et al. (2015)](http://www.tandfonline.com/doi/full/10.1080/10543406.2015.1092032#.Vh6xnXrtmko) and [Dmitrienko et al. (to appear, 2015)]().
+The Mediana package has been successfully used in multiple clinical trials to perform power calculations as well as optimally select trial designs and analysis strategies (clinical trial optimization). For more information on applications of the Mediana package, download the following papers:
+
+- Dmitrienko, A., Paux, G., Brechenmacher, T. (2015). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. To appear.
+- Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics.  To appear.
+

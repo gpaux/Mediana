@@ -7,15 +7,14 @@ group:
 
 {% include JB/setup %}
 
-## About
+## Summary
 
 This case study deals with a Phase III clinical trial in patients with mild or moderate asthma (it is based on a clinical trial example from [Millen et al., 2014, Section 2.2](http://dij.sagepub.com/content/48/4/453.abstract)). The trial is intended to support a tailoring strategy. In particular, the treatment effect of a single dose of a new treatment will be compared to that of placebo in the overall population of patients as well as a pre-specified subpopulation of patients with a marker-positive status at baseline (for compactness, the overall population
 is denoted by OP, marker-positive subpopulation is denoted by M+ and marker- negative subpopulation is denoted by M−). 
 
-Marker-positive patients are more likely to receive benefit from the experimental treatment. The overall objective of the clinical trial accounts for the fact that the treatment’s effect may, in fact, be limited to the marker-positive subpopulation. The trial will be declared successful if the treatment’s beneficial effect is established in the overall population of patients or, alternatively, the effect is established only in
-the subpopulation. The primary endpoint in the clinical trial is defined as an increase from baseline in the forced expiratory volume in one second (FEV1). This endpoint is normally distributed and improvement is associated with a larger change in FEV1.
+Marker-positive patients are more likely to receive benefit from the experimental treatment. The overall objective of the clinical trial accounts for the fact that the treatment's effect may, in fact, be limited to the marker-positive subpopulation. The trial will be declared successful if the treatment's beneficial effect is established in the overall population of patients or, alternatively, the effect is established only in the subpopulation. The primary endpoint in the clinical trial is defined as an increase from baseline in the forced expiratory volume in one second (FEV1). This endpoint is normally distributed and improvement is associated with a larger change in FEV1.
 
-## Data Model
+## Define a Data Model
 
 To set up a data model for this clinical trial, it is natural to define samples (mutually exclusive groups of patients) as follows:
 
@@ -27,7 +26,7 @@ To set up a data model for this clinical trial, it is natural to define samples 
 
 - **Sample 4:** Marker-positive patients in the treatment arm.
 
-Using this definition of samples, the trial’s sponsor can model the fact that the treatment’s effect is most pronounced in patients with a marker-positive status.
+Using this definition of samples, the trial's sponsor can model the fact that the treatment's effect is most pronounced in patients with a marker-positive status.
 
 The treatment effect assumptions in the four samples are summarized in the next table (expiratory volume in FEV1 is measured in liters). As shown in the table, the mean change in FEV1 is constant across the marker-negative and marker-positive subpopulations in the placebo arm (Samples 1 and 2). A positive treatment effect is expected in both subpopulations in the treatment arm but marker-positive patients will experience most of the beneficial effect (Sample 4).
 
@@ -65,7 +64,7 @@ The treatment effect assumptions in the four samples are summarized in the next 
     </table>
 </div>
 
-The following data model incorporates the assumptions displayed in Table 1.10 by defining a single set of outcome parameters. The data model includes three sample size sets (total sample size is set to 330, 340 and 350 patients). The sizes of the individual samples are computed based on historic information (40% of patients in the population of interest are expected to have a marker-positive status). In order to define specific sample size for each sample, they will be specified within each `Sample` object.
+The following data model incorporates the assumptions listed above by defining a single set of outcome parameters. The data model includes three sample size sets (total sample size is set to 330, 340 and 350 patients). The sizes of the individual samples are computed based on historic information (40% of patients in the population of interest are expected to have a marker-positive status). In order to define specific sample size for each sample, they will be specified within each `Sample` object.
 
 {% highlight R %}
 # Outcome parameters
@@ -98,7 +97,7 @@ case.study3.data.model = DataModel() +
          outcome.par = parameters(outcome.treatment.plus))
 {% endhighlight %}
 
-## Analysis Model
+## Define an Analysis Model
 
 The analysis model in this clinical trial example is generally similar to that used in [Case study 2](CaseStudy02.html) but there is an important difference which is described below.
 
@@ -133,14 +132,15 @@ case.study3.analysis.model = AnalysisModel() +
        method = "TTest")
 {% endhighlight %}
 
-## Evaluation Model
+## Define an Evaluation Model
+
 It is reasonable to consider the following success criteria in this case study:
 
 - **Marginal power:** Probability of a significant outcome in each patient population.
 
 - **Disjunctive power:** Probability of a significant treatment effect in the overall population (OP) or marker-positive subpopulation (M+). This metric defines the overall probability of success in this clinical trial.
  
-- **Conjunctive power:** Probability of simultaneously achieving significance in the overall population and marker-positive subpopulation. This criterion will be useful if the trial’s sponsor is interested in pursuing an enhanced efficacy claim ([Millen et al., 2012](http://dij.sagepub.com/content/46/6/647.abstract)).
+- **Conjunctive power:** Probability of simultaneously achieving significance in the overall population and marker-positive subpopulation. This criterion will be useful if the trial's sponsor is interested in pursuing an enhanced efficacy claim ([Millen et al., 2012](http://dij.sagepub.com/content/46/6/647.abstract)).
  
 The following evaluation model applies the three criteria to the two tests listed in the analysis model:
 
@@ -170,7 +170,7 @@ case.study3.evaluation.model = EvaluationModel() +
 
 ## Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be dowloaded below.
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
   <div class="col-md-6">

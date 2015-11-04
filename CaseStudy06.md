@@ -7,13 +7,13 @@ group:
 
 {% include JB/setup %}
 
-## About
+## Summary
 
 Case study 6 is an extension of [Case study 2](CaseStudy02.html) where the objective of the sponsor is to compare several Multiple Testing Procedures (MTPs). The main difference is in the specification of the analysis model.
 
-## Data Model
+## Define a Data Model
 
-The same data model as in [Case study 2](CaseStudy02.html) will be used in this case study. However, a new set of outcome parameters will be added in this case study (optimistic).
+The same data model as in [Case study 2](CaseStudy02.html) will be used in this case study. However, as shown in the table below, a new set of outcome parameters will be added in this case study (an optimistic set of parameters).
 
 <div class="table-responsive">
     <table class="table">
@@ -99,9 +99,9 @@ case.study6.data.model = DataModel() +
          outcome.par = parameters(outcome1.doseh, outcome2.doseh))
 {% endhighlight %}
 
-## Analysis Model
+## Define an Analysis Model
 
-As in case study 2, each Placebo comparisons will be done using a one-sided two-sample *t*-test (`TTest` method defined in each `Test` object). The same nomenclature will be used to define the hypothesis, i.e.:
+As in [Case study 2](CaseStudy02.html), each dose-placebo comparison will be performed using a one-sided two-sample *t*-test (`TTest` method defined in each `Test` object). The same nomenclature will be used to define the hypotheses, i.e.:
 
 - H1: Null hypothesis of no difference between Dose L and placebo.
 
@@ -150,9 +150,9 @@ case.study6.analysis.model = AnalysisModel() +
        method = "TTest")
 {% endhighlight %}
 
-For the sake of compactness, all MTPs are wraped in a `MultAdj` object, but it is worth mentionning that each MTPs could have been directly added to the `AnalysisModel` object using the `+` operator.
+For the sake of compactness, all MTPs are combined using a `MultAdj` object, but it is worth mentioning that each MTP could have been directly added to the `AnalysisModel` object using the `+` operator.
 
-## Evaluation Model
+## Define an Evaluation Model
 
 As for the data model, the same evaluation model as in [Case study 2](CaseStudy02.html) will be used in this case study. Refer to [Case study 2](CaseStudy02.html) for more information.
 
@@ -186,9 +186,9 @@ case.study6.evaluation.model = EvaluationModel() +
 
 The last `Criterion` object specifies the custom criterion which computes the probability of a significant treatment effect at Dose H and a significant treatment difference at Dose L or Dose M. 
 
-## Clinical Scenario Evaluation
+## Perform Clinical Scenario Evaluation
 
-Using the data, analysis and evaluation models, the Clinical Scenario Evaluation can be performed:
+Using the data, analysis and evaluation models, simulation-based Clinical Scenario Evaluation is performed by calling the `CSE` function:
 
 {% highlight R %}
 # Simulation Parameters
@@ -203,23 +203,23 @@ case.study6.results = CSE(case.study6.data.model,
                           case.study6.sim.parameters)
 {% endhighlight %}
 
-## Summary of results and reporting
+## Generate a Simulation Report
 
-This case study will also illustrate how to customize the Word-based report, by defining sections and subsections.
+This case study will also illustrate the process of customizing a Word-based simulation report. This can be accomplished by defining custom sections and subsections to provide a structured summary of the complex set of simulation results.
 
-### Reporting
+### Create a Customized Simulation Report
 
-#### Presentation Model
+#### Define a Presentation Model
 
-Several presentation models will be used in order to customize the report:
+Several presentation models will be used produce customized simulation reports:
 
-- A report without subsections,
+- A report without subsections.
 
-- A report with subsections,
+- A report with subsections.
 
 - A report with combined sections.
 
-A default `PresentationModel` object (`case.study6.presentation.model.default`) will firstly be created, to specify the related objects that do not change between each presentation model. The information about the project (`Project` object), the sorting of the table (`Table` object) and the specification of the customized labels (`CustomLabel` objects) are included in this object.
+First of all, a default `PresentationModel` object (`case.study6.presentation.model.default`) will  be created. This object will include the common components of the report that are shared across the presentation models. The project information (`Project` object), sorting options in summary tables (`Table` object) and specification of custom labels (`CustomLabel` objects) are included in this object:
 
 {% highlight R %}
 case.study6.presentation.model.default = PresentationModel() +
@@ -233,10 +233,9 @@ case.study6.presentation.model.default = PresentationModel() +
               label = c("No adjustment", "Bonferroni adjustment", "Holm adjustment", "Hochberg adjustment"))
 {% endhighlight %}
 
-
 #### Report without subsections
 
-The first generated report will contains a section for each outcome parameter set. A `Section` object is added to the default `PresentationModel` object and the report is generated.
+The first simulation report will include a section for each outcome parameter set. To accomplish this, a `Section` object is added to the default `PresentationModel` object and the report is generated:
 
 {% highlight R %}
 # Reporting 1 - Without subsections
@@ -251,7 +250,7 @@ GenerateReport(presentation.model = case.study6.presentation.model1,
 
 #### Report with subsections
 
-The second generated report will contains a section for each outcome parameter and a subsection for each multiplicity adjustment procedures. A `Section` and a `Subsection` objects are added to the default `PresentationModel` object and the report is generated.
+The second report will include a section for each outcome parameter set and, in addition, a subsection will be created for each multiplicity adjustment procedure. The `Section` and `Subsection` objects are added to the default `PresentationModel` object as shown below and the report is generated:
 
 {% highlight R %}
 # Reporting 2 - With subsections
@@ -267,7 +266,7 @@ GenerateReport(presentation.model = case.study6.presentation.model2,
 
 #### Report with combined sections
 
-The last generated report will contains a section for each combination of each outcome parameter each MTPs. A `Section` object is added to the default `PresentationModel` object and specifies both the outcome parameter and the multiplicity adjustment in the `by` argument.
+Finally, the third report will include a section for each combination of outcome parameter set and  each multiplicity adjustment procedure. This is accomplished by adding a `Section` object to the default `PresentationModel` object and specifying the outcome parameter and multiplicity adjustment in the section's `by` argument.
 
 {% highlight R %}
 # Reporting 3 - Combined sections
@@ -282,7 +281,7 @@ GenerateReport(presentation.model = case.study6.presentation.model3,
 
 ## Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be dowloaded below.
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
   <div class="col-md-6">

@@ -7,7 +7,7 @@ group:
 
 {% include JB/setup %}
 
-Case study 1 deals with a simple setting, a clinical trial with two treatment arms (experimental treatment versus placebo) and a single endpoint, where power calculations can be performed analytically. In this setting, closed-form expressions for the sample size can be derived using the central limit theorem or other approximations and operating characteristics of candidate designs are easily evaluated.
+Case study 1 deals with a simple setting, namely, a clinical trial with two treatment arms (experimental treatment versus placebo) and a single endpoint. Power calculations can be performed analytically in this setting. Specifically, closed-form expressions for the power function can be derived using the central limit theorem or other approximations.
 
 Several distribution will be illustrated in this case study:
 
@@ -25,29 +25,31 @@ Several distribution will be illustrated in this case study:
 
 Suppose that a sponsor is designing a Phase III clinical trial in patients with pulmonary arterial hypertension (PAH). The efficacy of experimental treatments for PAH is commonly evaluated using a six-minute walk test and the primary endpoint is defined as the change from baseline to the end of the 16-week treatment period in the six-minute walk distance.
 
-### Data Model
+### Define a Data Model
 
-The first step is to initialize the Data Model. 
+The first step is to initialize the data model:
+
 {% highlight R %}
 case.study1.data.model = DataModel()
 {% endhighlight %}
 
-After the initialization, specific objects can be added to the `DataModel` object incrementally using the `+` operator.
+After the initialization, components of the data model can be added to the `DataModel` object incrementally using the `+` operator.
 
-The change from baseline in the six-minute walk distance is assumed to follow a normal distribution and the distribution of the primary endpoint is defined in the `OutcomeDist` object.
+The change from baseline in the six-minute walk distance is assumed to follow a normal distribution. The distribution of the primary endpoint is defined in the `OutcomeDist` object:
+
 {% highlight R %}
 case.study1.data.model =  case.study1.data.model +
   OutcomeDist(outcome.dist = "NormalDist")
 {% endhighlight %}
 
-The sponsor would like to perform power evaluation over a broad range of sample sizes in each treatment arm.
+The sponsor would like to perform power evaluation over a broad range of sample sizes in each treatment arm:
+
 {% highlight R %}
 case.study1.data.model =  case.study1.data.model +
   SampleSize(c(50, 55, 60, 65, 70)) 
 {% endhighlight %}
 
-As a side note, the `seq` function can be used to compactly define sample sizes in
-a data model:
+As a side note, the `seq` function can be used to compactly define sample sizes in a data model:
 {% highlight R %}
 case.study1.data.model =  case.study1.data.model +
   SampleSize(seq(50, 70, 5)) 
@@ -85,20 +87,18 @@ The sponsor is interested in performing power calculations under two treatment e
 Therefore, the mean change in the placebo arm is set to &mu; = 0 and the mean changes in the six-minute walk distance in the experimental arm are set to &mu; = 40 (standard scenario) or &mu; = 50 (optimistic scenario). The common standard deviation is  &sigma; = 70.
 
 {% highlight R %}
-# Outcome parameter set 1
+# Outcome parameter set 1 (standard scenario)
 outcome1.placebo = parameters(mean = 0, sd = 70)
 outcome1.treatment = parameters(mean = 40, sd = 70)
 
-# Outcome parameter set 2
+# Outcome parameter set 2 (optimistic scenario)
 outcome2.placebo = parameters(mean = 0, sd = 70)
 outcome2.treatment = parameters(mean = 50, sd = 70)
 {% endhighlight %}
 
-Note that the mean and standard deviation are explicitly identified in each list.
-This is done mainly for the user’s convenience. The use of named items such as
-mean and sd is mandatory.
+Note that the mean and standard deviation are explicitly identified in each list. This is done mainly for the user's convenience. The use of named items such as `mean` and `sd` is not mandatory.
 
-After having defined the outcome parameters for each sample, the `Sample` objects can be created and added to the `DataModel` object:
+After having defined the outcome parameters for each sample, two `Sample` objects that define the two treatment arms in this trial can be created and added to the `DataModel` object:
 
 {% highlight R %}
 case.study1.data.model =  case.study1.data.model +
@@ -108,15 +108,15 @@ case.study1.data.model =  case.study1.data.model +
          outcome.par = parameters(outcome1.treatment, outcome2.treatment))
 {% endhighlight %}
 
-### Analysis Model
+### Define an Analysis Model
 
-As for the Data Model, the Analysis Model must be initialized:
+Just like the data model, the analysis model needs to be initialized as follows:
+
 {% highlight R %}
 case.study1.analysis.model = AnalysisModel()
 {% endhighlight %}
 
-Only one test is planned to performed in the PAH clinical trial (treatment versus placebo) and the treatment comparison will be carried out using the one-sided two-sample
-*t*-test.
+Only one significance test is planned to be carried out in the PAH clinical trial (treatment versus placebo). The treatment effect will be assessed using the one-sided two-sample *t*-test:
 
 {% highlight R %}
 case.study1.analysis.model = case.study1.analysis.model +
@@ -125,10 +125,10 @@ case.study1.analysis.model = case.study1.analysis.model +
        method = "TTest")
 {% endhighlight %}
 
-According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the Data Model
-defied earlier. As explained in the [Analysis Model page](AnalysisModel.html#Description), the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 compared to Sample 1. This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.
+According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see [Analysis Model](AnalysisModel.html#Description), the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.
 
-To illustrate the use of the `Statistic` object, the mean statistic will be produced:
+To illustrate the use of the `Statistic` object, the mean change in the six-minute walk distance in the treatment arm can be computed using the `MeanStat` statistic:
+
 {% highlight R %}
 case.study1.analysis.model = case.study1.analysis.model +
   Statistic(id = "Mean Treatment",
@@ -136,16 +136,17 @@ case.study1.analysis.model = case.study1.analysis.model +
             samples = samples("Treatment"))
 {% endhighlight %}
 
-### Evaluation Model
+### Define an Evaluation Model
 
-The Data and Analysis models specified above collectively define the Clinical Scenarios to be examined in the PAH clinical trial. The scenarios are evaluated using metrics that are aligned with the clinical objectives of the trial, e.g., in this case it is most appropriate to use regular power or, more formally, *marginal power*. This metric is specified using an Evaluation Model.
+The data and analysis models specified above collectively define the Clinical Scenarios to be examined in the PAH clinical trial. The scenarios are evaluated using success criteria or metrics that are aligned with the clinical objectives of the trial. In this case it is most appropriate to use regular power or, more formally, *marginal power*. This success criterion is specified in the evaluation model.
 
-Again, the Evaluation Model must be initialized:
+First of all, the evaluation model must be initialized:
+
 {% highlight R %}
 case.study1.evaluation.model = EvaluationModel()
 {% endhighlight %}
 
-The metric of interest (marginal power) is defined using the `Criterion` object:
+Secondly, the success criterion of interest (marginal power) is defined using the `Criterion` object:
 {% highlight R %}
 case.study1.evaluation.model = case.study1.evaluation.model +
   Criterion(id = "Marginal power",
@@ -155,10 +156,10 @@ case.study1.evaluation.model = case.study1.evaluation.model +
             par = parameters(alpha = 0.025))
 {% endhighlight %}
 
-The `tests` argument lists the IDs of the tests (defined in the analysis model) to which each metric is applied (more than one test can be specified). The test IDs link the evaluation with the corresponding analysis model. In this particular case, marginal power will be computed for the t-test which compares the mean change in the six-minute walk
+The `tests` argument lists the IDs of the tests (defined in the analysis model) to which the criterion is applied (note that more than one test can be specified). The test IDs link the evaluation model with the corresponding analysis model. In this particular case, marginal power will be computed for the t-test that compares the mean change in the six-minute walk
 distance in the placebo and treatment arms (Placebo vs treatment).
 
-In order to get the average over the simulation runs of the treatment mean, another `Criterion` object must be added:
+In order to compute the average value of the mean statistic specified in the analysis model (i.e., the mean change in the six-minute walk distance in the treatment arm) over the simulation runs, another `Criterion` object needs to be added:
 {% highlight R %}
 case.study1.evaluation.model = case.study1.evaluation.model +
   Criterion(id = "Average Mean",
@@ -167,22 +168,22 @@ case.study1.evaluation.model = case.study1.evaluation.model +
             labels = c("Average Mean Treatment"))
 {% endhighlight %}
 
-As for the marginal power criterion, the `statistics` argument lists the IDs of the statistics (defined in the analysis model) to with the metric is applied (e.g. `Mean Treatment`).
+The `statistics` argument of this `Criterion` object lists the ID of the statistic (defined in the analysis model) to which this metric is applied (e.g., `Mean Treatment`).
 
-### Clinical Scenario Evaluation
+### Perform Clinical Scenario Evaluation
 
-After the clinical scenarios (data and analysis models) and evaluation model have been defined, the user is ready to evaluate the operating characteristics by calling the `CSE` function. 
+After the clinical scenarios (data and analysis models) and evaluation model have been defined, the user is ready to evaluate the success criteria specified in the evaluation model by calling the `CSE` function. 
 
-The first step, is to define the simulation parameters in a `SimParameters` object:
+To accomplish this, the simulation parameters need to be defined in a `SimParameters` object:
+
 {% highlight R %}
-# Simulation Parameters
+# Simulation parameters
 case.study1.sim.parameters = SimParameters(n.sims = 1000, 
                                            proc.load = "full", 
                                            seed = 42938001)
 {% endhighlight %}
 
-As shown below, the function call specifies the individual components of the Clinical Scenario Evaluation
-in this case study as well as the simulation parameters:
+The function call for `CSE` specifies the individual components of Clinical Scenario Evaluation in this case study as well as the simulation parameters:
 {% highlight R %}
 # Perform clinical scenario evaluation
 case.study1.results = CSE(case.study1.data.model,
@@ -191,37 +192,39 @@ case.study1.results = CSE(case.study1.data.model,
                           case.study1.sim.parameters)
 {% endhighlight %}
 
-The results are saved in an `CSE` object (`case.study1.results`). This object contains complete information about this particular evaluation, including the data, analysis and evaluation models. The most important component of this object is the data frame contained in the list named *simulation.results* (`case.study1.results$simulation.results`), which includes the power and the statistics results based on the metrics in the evaluation model.
+The simulation results are saved in an `CSE` object (`case.study1.results`). This object contains complete information about this particular evaluation, including the data, analysis and evaluation models specified by the user. The most important component of this object is the data frame contained in the list named *simulation.results* (`case.study1.results$simulation.results`). This data frame includes the values of the success criteria and metrics defined in the evaluation model.
 
-### Summary of results and reporting
+### Summarize the Simulation Results
 
-#### Summary of results in R console 
+#### Summary of simulation results in R console 
 
-To facilitate the review of the results, the user can invoke the summary function, which reports in the R console the data frame containing the simulation results.
+To facilitate the review of the simulation results produced by the `CSE` function, the user can invoke the `summary` function. This function displays the data frame containing the simulation results in the R console:
 
 {% highlight R %}
 # Print the simulation results in the R console
 summary(case.study1.results)
 {% endhighlight %}
 
-This data frame can also be assigned to an object in order to be used for graphical summaries using the [ggplot2](http://ggplot2.org/) R package:
+If the user is interested in generate graphical summaries of the simulation results (using the the [ggplot2](http://ggplot2.org/) package or other packages), this data frame can also be saved to an object:
+
 {% highlight R %}
 # Print the simulation results in the R console
 case.study1.simulation.results = summary(case.study1.results)
 {% endhighlight %}
 
-#### Reporting
+#### General a Simulation Report
 
 ##### Presentation Model
 
-Another feature of the Mediana package is to provide a Clinical Scenario Evaluation Report in a Word-based format. The first step is to create a `PresentationModel` object.
+A very useful feature of the Mediana package is generation of a Microsoft Word-based report to provide a summary of Clinical Scenario Evaluation Report. 
 
-As for other models, it must be  initialized:
+To generate a simulation report, the user needs to define a presentation model by creating a `PresentationModel` object. This object must be initialized as follows:
+
 {% highlight R %}
 case.study1.presentation.model = PresentationModel()
 {% endhighlight %}
 
-Project information can be added to the report using the `Project` object:
+Project information can be added to the presentation model using the `Project` object:
 {% highlight R %}
 case.study1.presentation.model = case.study1.presentation.model +
   Project(username = "[Mediana's User]",
@@ -229,7 +232,8 @@ case.study1.presentation.model = case.study1.presentation.model +
           description = "Clinical trial in patients with pulmonary arterial hypertension")
 {% endhighlight %}
 
-The user can also customize his report by defining the structure of the result section. In this example, a section will be created for each outcome parameters scenarios (using the `Section` object) and the tables will be sorted by sample size (using the `Table` object). In order to explicitely define the outcome parameters scenarios and the sample size, labels will be assigned using the `CustomLabel` object:
+The user can easily customize the simulation report by defining report sections and specifying properties of summary tables in the report. The code shown below creates a separate section within the report for each set of outcome parameters (using the `Section` object) and sets the sorting option for the summary tables (using the `Table` object). The tables will be sorted by the sample size. Further, in order to define descriptive labels for the outcome parameter scenarios and sample size scenarios, the `CustomLabel` object needs to be used:
+
 {% highlight R %}
 case.study1.presentation.model = case.study1.presentation.model +
   Section(by = "outcome.parameter") +
@@ -240,9 +244,10 @@ case.study1.presentation.model = case.study1.presentation.model +
               label=c("Standard", "Optismistic"))
 {% endhighlight %}
 
-##### Generation of report
+##### Report generation
 
-Once the Presentation Model has been defined, the report is ready to be generated using the `GenerateReport` function:
+Once the presentation model has been defined, the simulation report is ready to be generated using the `GenerateReport` function:
+
 {% highlight R %}
 # Report Generation
 GenerateReport(presentation.model = case.study1.presentation.model,
@@ -252,7 +257,7 @@ GenerateReport(presentation.model = case.study1.presentation.model,
 
 ### Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
+Click on the icons below to download the R code used in this case study and Clinical Scenario Evaluation Report generated by the `GenerateReport` function:
 
 <center>
   <div class="col-md-6">
@@ -269,7 +274,7 @@ The R code utilized and the Clinical Scenario Evaluation Report generated in thi
 
 ## Binary endpoint
 
-Consider a Phase III clinical trial for the treatment of rheumatoid arthritis (RA). The primary endpoint is a response rate based on the American College of Rheumatology (ACR) definition of improvement. The trial’s sponsor in interested in performing power calculations using the treatment effect assumptions listed in the table below:
+Consider a Phase III clinical trial for the treatment of rheumatoid arthritis (RA). The primary endpoint is the response rate based on the American College of Rheumatology (ACR) definition of improvement. The trial's sponsor in interested in performing power calculations using the treatment effect assumptions listed in the table below:
 
 <div class="table-responsive">
     <table class="table">
@@ -285,7 +290,7 @@ Consider a Phase III clinical trial for the treatment of rheumatoid arthritis (R
         </thead>
         <tbody>
             <tr>
-                <td>Pessimist</td>
+                <td>Pessimistic</td>
                 <td>30%</td>
                 <td>50%</td>
             </tr>
@@ -295,7 +300,7 @@ Consider a Phase III clinical trial for the treatment of rheumatoid arthritis (R
                 <td>55%</td>
             </tr>
             <tr>
-                <td>Optimist</td>
+                <td>Optimistic</td>
                 <td>30%</td>
                 <td>60%</td>
             </tr>
@@ -303,7 +308,8 @@ Consider a Phase III clinical trial for the treatment of rheumatoid arthritis (R
     </table>
 </div>
 
-### Data Model
+### Define a Data Model
+
 The three outcome parameter sets displayed in the table are combined with four sample size sets (`SampleSize(c(80, 90, 100, 110))`) and the distribution of the primary endpoint (`OutcomeDist(outcome.dist = "BinomDist")`) is specified in the `DataModel` object `case.study1.data.model`:
 
 {% highlight R %}
@@ -330,8 +336,9 @@ case.study1.data.model = DataModel() +
 
 {% endhighlight %}
 
-### Analysis Model
-The analysis model uses a standard two-sample test for comparing proportions (`method = "PropTest"`) to assess the treatment effect in this clinical trial example.
+### Define an Analysis Model
+
+The analysis model uses a standard two-sample test for comparing proportions (`method = "PropTest"`) to assess the treatment effect in this clinical trial example:
 
 {% highlight R %}
 # Analysis model
@@ -341,8 +348,10 @@ case.study1.analysis.model = AnalysisModel() +
        method = "PropTest")
 {% endhighlight %}
 
-### Evaluation Model
-Power evaluations are easily performed in this clinical trial example using the same evaluation model utilized in the case of a normally distributed endpoint, i.e. evaluations rely on marginal power.
+### Define an Evaluation Model
+
+Power evaluations are easily performed in this clinical trial example using the same evaluation model utilized in the case of a normally distributed endpoint, i.e., evaluations rely on marginal power:
+
 {% highlight R %}
 # Evaluation model
 case.study1.evaluation.model = EvaluationModel() +
@@ -354,7 +363,8 @@ case.study1.evaluation.model = EvaluationModel() +
 {% endhighlight %}
 
 ### Download
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
+
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
   <div class="col-md-6">
@@ -373,14 +383,13 @@ An extension of this clinical trial example is provided in [Case study 5](CaseSt
 
 ## Survival-type endpoint
 
-If the trial’s primary objective is formulated in terms of analyzing the time to a clinically important event (progression or death in an oncology setting), data and analysis models can be set up based on an exponential distribution and the log-rank test.
+If the trial's primary objective is formulated in terms of analyzing the time to a clinically important event (progression or death in an oncology setting), data and analysis models can be set up based on an exponential distribution and the log-rank test.
 
-As an illustration, consider a Phase III trial which will be conducted to
-study a new treatment for metastatic colorectal cancer (MCC). Patients will be randomized in a 2:1 ratio to an experimental treatment or placebo (in addition to best supportive care).
+As an illustration, consider a Phase III trial which will be conducted to evaluate the efficacy of a new treatment for metastatic colorectal cancer (MCC). Patients will be randomized in a 2:1 ratio to an experimental treatment or placebo (in addition to best supportive care).
 
-The trial’s primary objective is to assess the effect of the experimental treatment on progression-free survival.
+The trial's primary objective is to assess the effect of the experimental treatment on progression-free survival (PFS).
 
-### Data Model
+### Define a Data Model
 
 A single treatment effect scenario is considered in this clinical trial example. Specifically, the median time to progression is assumed to be:
 
@@ -388,7 +397,7 @@ A single treatment effect scenario is considered in this clinical trial example.
 
 - Treatment: t1 = 9 months. 
 
-Under an exponential distribution assumption (i.e. specified using the `ExpoDist` distribution), the median times correspond to the following hazard rates:
+Under an exponential distribution assumption (which is specified using the `ExpoDist` distribution), the median times correspond to the following hazard rates:
 
 - &lambda;0 = log(2)/t0 = 0.116, 
 
@@ -407,9 +416,9 @@ rate.treatment = log(2)/median.time.treatment
 outcome.treatment = parameters(rate = rate.treatment)
 {% endhighlight %}
 
-It is important to note that, if no censoring mechanisms are specified in a data model with a time-to-event endpoint, all patients will reach the endpoint of interest (e.g., progression) and thus the number of patients will be equal to the number of events. Using this property, power calculations can be done using either the `Event` object, or the `SampleSize` object. For the purpose of illustration, the `Event` object will be used in this example.
+It is important to note that, if no censoring mechanisms are specified in a data model with a time-to-event endpoint, all patients will reach the endpoint of interest (e.g., progression) and thus the number of patients will be equal to the number of events. Using this property, power calculations can be performed using either the `Event` object or `SampleSize` object. For the purpose of illustration, the `Event` object will be used in this example.
 
-To define a data model in the MCC clinical trial, the total event count in the trial is assumed to range between 270 and 300. Since the group are not balanced, the randomization eatio needs to be specified within the `Event` object.
+To define a data model in the MCC clinical trial, the total event count in the trial is assumed to range between 270 and 300. Since the trial's design is not balanced, the randomization ratio needs to be specified in the `Event` object:
 
 {% highlight R %}
 # Number of events parameters
@@ -426,11 +435,11 @@ case.study1.data.model = DataModel() +
          outcome.par = parameters(outcome.treatment))
 {% endhighlight %}
 
-It is worth noting that the primary endpoint’s type (`outcome.type` argument in the `OutcomeDist` object) is not specified. By default, the outcome type is set to `fixed`, which means that a design with a fixed follow-up is assumed even though the primary endpoint in this clinical trial is clearly a time-to-event endpoint. This is due to the fact that, as was explained earlier in this case study, there is no censoring
-in this design and all patients are followed until the event of interest is observed. In fact, it is easy to verify that the same results are obtained if the outcome type is set to `event`.
+It is worth noting that the primary endpoint's type (i.e., the`outcome.type` argument in the `OutcomeDist` object) is not specified. By default, the outcome type is set to `fixed`, which means that a design with a fixed follow-up is assumed even though the primary endpoint in this clinical trial is clearly a time-to-event endpoint. This is due to the fact that, as was explained earlier in this case study, there is no censoring in this design and all patients are followed until the event of interest is observed. It is easy to verify that the same results are obtained if the outcome type is set to `event`.
 
-### Analysis Model
-The analysis model in this clinical trial is very similar to the analysis models defined in the case study with normal and binomial distribution. The only difference is the choice of the statistical method utilized in the primary analysis (`method = "LogrankTest"`).
+### Define an Analysis Model
+
+The analysis model in this clinical trial is very similar to the analysis models defined in the case studies with normal and binomial outcome variables. The only difference is the choice of the statistical method utilized in the primary analysis (`method = "LogrankTest"`):
 
 {% highlight R %}
 # Analysis model
@@ -440,8 +449,9 @@ case.study1.analysis.model = AnalysisModel() +
        method = "LogrankTest")
 {% endhighlight %}
 
-### Evaluation Model
-An evaluation model identical to that used earlier in the case study with normal and binomial distribution can be applied to examine the power function at the selected event counts.
+### Define an Evaluation Model
+
+An evaluation model identical to that used earlier in the case studies with normal and binomial distribution can be applied to compute the power function at the selected event counts:
 
 {% highlight R %}
 # Evaluation model
@@ -455,7 +465,7 @@ case.study1.evaluation.model = EvaluationModel() +
 
 ### Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
   <div class="col-md-6">
@@ -472,14 +482,15 @@ The R code utilized and the Clinical Scenario Evaluation Report generated in thi
 
 ## Survival-type endpoint (with censoring)
 
-The power calculations presented earlier in the previous case study assumed an idealized setting where each patient is followed until the event of interest is observed. In this case, the sample size (number of patients) in each treatment arm is equal to the number of events. In reality, events are often censored and a sponsor is generally interested in determining the number of patients to be recruited in order to ensure a target number of events, which translates into desirable power.
+The power calculations presented in the previous case study assume an idealized setting where each patient is followed until the event of interest (e.g., progression) is observed. In this case, the sample size (number of patients) in each treatment arm is equal to the number of events. In reality, events are often censored and a sponsor is generally interested in determining the number of patients to be recruited in order to ensure a target number of events, which translates into desirable power.
 
-The Mediana package can be used to perform power calculations in event-driven trials in the presence of censoring. This is accomplished by setting up design parameters such as the length of the enrollment and follow-up periods in the Data Model using a `Design` object.
+The Mediana package can be used to perform power calculations in event-driven trials in the presence of censoring. This is accomplished by setting up design parameters such as the length of the enrollment and follow-up periods in a data model using a `Design` object.
 
 In general, even though closed-form solutions have been derived for sample size calculations in event-driven designs, the available approaches force clinical trial researchers to make a variety of simplifying assumptions, e.g., assumptions on the enrollment distribution are commonly made, see, for example, Julious (2009, Chapter 15). A general simulation-based approach to power and sample size calculations implemented in the Mediana package enables clinical trial sponsors to remove these artificial restrictions and examine a very broad set of plausible design parameters.
 
-### Data Model
-Suppose, for example, that a standard design with a variable follow-up will be used in the MCC trial introduced in the previous case study. The total study duration will be 21 months, which includes a 9-month enrollment (accrual) period and a minimum follow-up of 12 months. The patients are assumed to be recruited at a uniform rate. The set of design parameters also includes the dropout distribution and its parameters. In this clinical trial, the dropout distribution is exponential with a rate determined from historical data. These desing parameters are specified in a `Design` object. 
+### Define a Data Model
+
+Suppose, for example, that a standard design with a variable follow-up will be used in the MCC trial introduced in the previous case study. The total study duration will be 21 months, which includes a 9-month enrollment (accrual) period and a minimum follow-up of 12 months. The patients are assumed to be recruited at a uniform rate. The set of design parameters also includes the dropout distribution and its parameters. In this clinical trial, the dropout distribution is exponential with a rate determined from historical data. These design parameters are specified in a `Design` object: 
 
 {% highlight R %}
 # Dropout parameters
@@ -493,9 +504,9 @@ case.study1.design = Design(enroll.period = 9,
                             dropout.dist.par = dropout.par) 
 {% endhighlight %}
 
-Finally, the primary endpoint’s type is set to `event` in the `OutcomeDist` object to indicate that a variable follow-up will utilized in this clinical trial.
+Finally, the primary endpoint's type is set to `event` in the `OutcomeDist` object to indicate that a variable follow-up will be utilized in this clinical trial.
 
-The complete data model for this case study is defined as:
+The complete data model in this case study is defined as follows:
 
 {% highlight R %}
 # Number of events parameters
@@ -529,9 +540,9 @@ case.study1.data.model = DataModel() +
          outcome.par = parameters(outcome.treatment))
 {% endhighlight %}
 
-### Analysis Model
+### Define an Analysis Model
 
-As in this example the number of events has been fixed, and some patients will not get the event of interest, it could be interesting to know approximately the number of patients required to get the number of events according to the design parameters. In the Mediana package, this can be accomplished by specifying `Statistic` object using the method `EventCountStat`. Another interesting statistics that could be get is the number of events that will be observed in each sample. In this case, a `Statistic` object with method `EventCountStat` can be used. 
+Since the number of events has been fixed in this clinical trial example and some patients will not reach the event of interest, it will be important to estimate the number of patients required to accrue the required number of events. In the Mediana package, this can be accomplished by specifying a descriptive statistic named `PatientCountStat` (this statistic needs to be specified in a `Statistic` object). Another descriptive statistic that would be of interest is the event count in each sample. To compute this statistic, `EventCountStat` needs to be included in a `Statistic` object. 
 
 {% highlight R %}
 # Analysis model
@@ -553,11 +564,9 @@ case.study1.analysis.model = AnalysisModel() +
             method = "PatientCountStat")
 {% endhighlight %}
 
-### Evaluation Model
+### Define an Evaluation Model
 
-In order to get a summary over the simulation runs of the number of patients and events in each sample, two `Criterion` objects will be specified, additionaly to the `Criterion` object defined to get the marginal power.
-
-In these two `Criterion` objects, the IDs of the `Statistic` object will be specified in the `statistics` argument. 
+In order to compute the average values of the two statistics (`PatientCountStat` and `EventCountStat`) in each sample over the simulation runs, two `Criterion` objects need to be specified, in addition to the `Criterion` object defined to obtain marginal power. The IDs of the corresponding `Statistic` objects will be included in the `statistics` argument of the two `Criterion` objects: 
 
 {% highlight R %}
 # Evaluation model
@@ -579,7 +588,7 @@ case.study1.evaluation.model = EvaluationModel() +
 
 ### Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
   <div class="col-md-6">
@@ -597,9 +606,9 @@ The R code utilized and the Clinical Scenario Evaluation Report generated in thi
 ## Count-type endpoint
 
 The last clinical trial example within Case study 1 deals with a Phase III clinical trial in patients with relapsing-remitting multiple sclerosis (RRMS). The trial aims at assessing the safety and efficacy of a single dose of a novel treatment compared to placebo. The primary endpoint is the number of new gadolinium enhancing lesions seen during a 6-month period on monthly MRIs of the brain and a smaller number indicates treatment benefit. The distribution of such endpoints has been widely studied in the literature and Sormani et al. ([1999a](http://www.jns-journal.com/article/S0022-510X(99)00015-5/abstract), [1999b](http://jnnp.bmj.com/content/66/4/465.long)) showed that a negative
-binomial distribution provides a relatively good fit to the data.
+binomial distribution provides a fairly good fit.
 
-The table below gives the expected treatment effect in the experimental treatment and placebo arms (the negative binomial distribution is parameterized using the mean rather than the probability of success in each trial).
+The table below gives the expected treatment effect in the experimental treatment and placebo arms (note that the negative binomial distribution is parameterized using the mean rather than the probability of success in each trial).
 
 <div class="table-responsive">
     <table class="table">
@@ -625,11 +634,11 @@ The table below gives the expected treatment effect in the experimental treatmen
     </table>
 </div>
 
-The corresponding treatment effect, i.e., the relative reduction in the mean number of new lesions counts, is 100x(13 − 7.8)/13 = 40%. The assumptions in the table define a single outcome parameter set.
+The corresponding treatment effect, i.e., the relative reduction in the mean number of new lesions counts, is 100 * (13 − 7.8)/13 = 40%. The assumptions in the table define a single outcome parameter set.
 
-### Data Model
+### Define a Data Model
 
-The `OutcomeDist` object defines the distribution of the trial endpoint (`NegBinomDist`). Further, a balanced design will be utilized in this clinical trial and the range of sample sizes is defined in the `SampleSize` object (it is convenient to do this using the seq function). The `Sample` objects includes the parameters required by the negative binomial distribution (dispersion and mean).
+The `OutcomeDist` object defines the distribution of the trial endpoint (`NegBinomDist`). Further, a balanced design is utilized in this clinical trial and the range of sample sizes is defined in the `SampleSize` object (it is convenient to do this using the `seq` function). The `Sample` object includes the parameters required by the negative binomial distribution (dispersion and mean).
 
 {% highlight R %}
 # Outcome parameters
@@ -646,8 +655,9 @@ case.study1.data.model = DataModel() +
          outcome.par = parameters(outcome.treatment))
 {% endhighlight %}
 
-### Analysis Model
-The treatment effect will be assessed in this clinical trial example using a negative binomial generalized linear model (NBGLM). In the Mediana package, this test is defined in a `Test` object using the `GLMNegBinomTest` method. Of note, it should be noted that as a smaller value indicates a treatment benefit, the first sample defined in the `samples` argument must be `Treatment`.
+### Define an Analysis Model
+
+The treatment effect will be assessed in this clinical trial example using a negative binomial generalized linear model (NBGLM). In the Mediana package, the corresponding test is carrying out using the `GLMNegBinomTest` method which is specified in the `Test` object. It should be noted that as a smaller value indicates a treatment benefit, the first sample defined in the `samples` argument must be `Treatment`.
 
 {% highlight R %}
 # Analysis model
@@ -657,10 +667,9 @@ case.study1.analysis.model = AnalysisModel() +
        method = "GLMNegBinomTest")
 {% endhighlight %}
 
-### Evaluation Model
+### Define an Evaluation Model
 
-The objective of this clinical trial is identical to that of the clinical trials presented earlier in this page, i.e., evaluation will be based on marginal power of the primary endpoint test. As a consequence, the
-same evaluation model can be applied.
+The objective of this clinical trial is identical to that of the clinical trials presented earlier on this page, i.e., evaluation will be based on marginal power of the primary endpoint test. As a consequence, the same evaluation model can be applied.
 
 {% highlight R %}
 # Evaluation model
@@ -674,7 +683,7 @@ case.study1.evaluation.model = EvaluationModel() +
 
 ### Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be downloaded below.
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
   <div class="col-md-6">

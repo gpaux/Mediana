@@ -6,62 +6,62 @@ group: navigation
 ---
 {% include JB/setup %}
 
-## About
+## Summary
 
-Evaluation models are used within the Mediana package to specify the measures (metrics) for evaluating the performance of the selected clinical scenario (combination of data and analysis models).
+Evaluation models are used within the Mediana package to specify the success criteria or metrics for evaluating the performance of the selected clinical scenario (combination of data and analysis models).
 
 ## Initialization
 
-An evaluation model can be initialized using the following command
+An evaluation model can be initialized using the following command:
 
 {% highlight R %}
 # EvaluationModel initialization
 evaluation.model = EvaluationModel()
 {% endhighlight %}
 
-Initialization with this command is higlhy recommended as it will simplify the add of related objects, such as `Criterion` objects.
+It is highly recommended to use this command to initialize an evaluation model because it simplifies the process of specifying components of the evaluation model such as `Criterion` objects. 
 
-## Specific objects
+## Components of an evaluation model
 
-### Criterion
+### `Criterion` object
 
 #### Description
 
-Specify the criteria that will be applied to the Clinical Scenario. A `Criterion` object is defined by six arguments:
+This object specifies the success criteria that will be applied to a clinical scenario to evaluate the performance of selected analysis methods. A `Criterion` object is defined by six arguments:
 
-- `id`, which defines the ID of the criterion.
+- `id` defines the criterion's unique ID (label). 
 
-- `method`, which defines the criterion method.
+- `method` defines the criterion.
 
-- `tests`, which defines the tests (pre-defined in the analysis model) to be used within the criterion method.  
+- `tests` defines the IDs of the significance tests (defined in the analysis model) that the criterion is applied to.
 
-- `statistics`, which defines the statistics (pre-defined in the analysis model) to be used within the criterion method.  
+- `statistics` defines the IDs the descriptive statistics (defined in the analysis model) that the criterion is applied to. 
 
-- `par`, which defines the parameter(s) of the criterion method.
+- `par` defines the parameter(s) of the criterion.
 
-- `label`, which defines the label(s) of the results.
+- `label` defines the label(s) of the criterion values (the label(s) will be used in the simulation report).
 
-Several methods are already implemented in the Mediana package (listed below, along with the required parameters to define in the par parameter):
+Several commonly used success criteria are implemented in the Mediana package. The user can also define custom significance criteria. The built-in success criteria are listed below along with the required parameters that need to be included in the `par` argument:
 
-- `MarginalPower`: generate the marginal power of all tests defined in the test argument. Required parameter: `alpha`.
+- `MarginalPower`: compute the marginal power of all tests included in the `test` argument. Required parameter: `alpha` (significance level used in each test).
 
-- `WeightedPower`: generate the weighted power of all tests defined in the test argument. Required parameters: `alpha` and `weight `.
+- `WeightedPower`: compute the weighted power of all tests included in the `test` argument. Required parameters: `alpha` (significance level used in each test) and `weight` (vector of weights assigned to the significance tests).
 
-- `DisjunctivePower`: generate the disjunctive power (probability to reject at least one hypothesis defined in the test argument). Required parameter: `alpha`.
+- `DisjunctivePower`: compute the disjunctive power (probability of achieving statistical significance in at least one test included in the `test` argument). Required parameter: `alpha` (significance level used in each test).
 
-- `ConjunctivePower`: generate the conjunctive power (probability to reject all hypotheses defined in the test argument). Required parameter: `alpha`.
+- `ConjunctivePower`: compute the conjunctive power (probability of achieving statistical significance in all tests included in the `test` argument). Required parameter: `alpha` (significance level used in each test).
 
-- `ExpectedRejPower`: generate the expected number of rejected hypotheses. Required parameter: `alpha`.
+- `ExpectedRejPower`: compute the expected number of statistical significant tests. Required parameter: `alpha`(significance level used in each test).
 
 Several `Criterion` objects can be added to an `EvaluationModel` object.
 
-For more information about the `Criterion` object, see the R documentation [Criterion](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `Criterion` object, see the package's documentation [Criterion](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Examples
 
-Example of `Criterion` objects:
+Examples of `Criterion` objects:
 
-- **Traditional Power (alpha = 0.025)**
+Compute marginal power with alpha = 0.025:
 
 {% highlight R %}
 Criterion(id = "Marginal power",
@@ -71,7 +71,7 @@ Criterion(id = "Marginal power",
           par = parameters(alpha = 0.025))
 {% endhighlight %}
 
-- **Weighted Power (unequal weights, alpha = 0.025)**
+Compute weighted power with alpha = 0.025 and unequal test-specific weights:
 
 {% highlight R %}
 Criterion(id = "Weighted power",
@@ -84,7 +84,7 @@ Criterion(id = "Weighted power",
                            weight = c(2/3, 1/3)))
 {% endhighlight %}
 
-- **Disjunctive Power**
+Compute disjunctive power with alpha = 0.025:
 
 {% highlight R %}
 Criterion(id = "Disjunctive power",
@@ -100,36 +100,37 @@ Criterion(id = "Disjunctive power",
 
 ## User-defined functions
 
-If a criterion is not implemented by default in the Mediana package, the user can defined his own function. In order to be used within the package, the user must respect the following templates.
+If the user wishes to apply a custom success criterion that is not included in the Mediana package, the guidelines presented below must be followed to create a valid custom function that implements this criterion.
 
-### Template for criterion
+### Custom functions for implementing a success criterion
 
-The following template can be used by the user to create his own function to perform an evaluation based on a custom criterion. The parts of the function that has to be modified are identified within a block.
+The following template must be used by the user to define a function that implements a success criterion in an evaluation model. The components that need to be modified if the user wishes to implement a different criterion are identified in the comments.
 
-As an example, this function is used to perform an evaluation based on two tests and one statistic.  This function is named `Template` and has two parameters, `parameter1` that will be compared to the tests results, and `parameter2` that will be compared to statistics results. To be successfull, at least one of the two test result must be lower than the parameter 1 and the statistic result must be greater than parameter 2.
+As an illustration, the function defined below implements a criterion named `TemplateCriterion` based on two significance tests and one descriptive statistic with two required parameters. The first parameter, labeled `parameter1`, is applied to the significance tests and the second parameter, labeled `parameter2`, is applied to the statistic. Success is achieved if at least one of the two tests is less than `parameter1` and the statistic is greater than `parameter2`.
 
 {% highlight R %}
-# Template of a function to perform an evaluation
+# Template of a function to implement a success criterion
 TemplateCriterion = function(test.result, statistic.result, parameter)  {
   
   ##############################################################
-  # To modify according to the function
-  # Get the parameter (kept in the parameter[[1]] list)
+  # Criterion-specific component
+  # Get the criterion's parameter (stored in the parameter list)
   parameter1 = parameter[[1]]
   parameter2 = parameter[[2]]
   ##############################################################
   
   ##############################################################
-  # To modify according to the function
+  # Criterion-specific component
   # Binary variable (success/failure of the criterion)
-  # If the criterion is based on p-value returned by Test object, the test.result matrix must be used
-  # test.result matrix has as many row as the number of simulations, and as many columns as the number
-  # of tests specified in the Criterion argument tests
-  # If the criterion is based on statistics returned by Statistic object, the statistic.result matrix must be used
-  # statistic.result matrix has as many row as the number of simulations, and as many columns as the number
-  # of statistics specified in the Criterion argument statistics
-  # Example with two tests and one statistics (at least one test must be significant, 
-  # and the statistics must be greater than a threshold)
+  # If the criterion is based on a p-value returned by a Test object, the test.result 
+  # matrix must be used. The test.result matrix has as many rows as the number of simulations, 
+  # and as many columns as the number of tests specified in the tests argument of this criterion.
+  # If the criterion is based on a descriptive statistic returned by a Statistic object, 
+  # the statistic.result matrix must be used. This matrix has as many rows as the number 
+  # of simulations, and as many columns as the number of statistics specified in the 
+  # the statistics argument of this criterion.
+  # Two tests and one statistic are used in this example. At least one test value must 
+  # be less than parameter1 and the statistic must be greater than parameter2.
   significant = ((test.result[,1] <= parameter1) | ((test.result[,2] <= parameter1) | (statistic.result[,2] > parameter2)))
   ##############################################################
 
@@ -138,7 +139,9 @@ TemplateCriterion = function(test.result, statistic.result, parameter)  {
 }
 {% endhighlight %}
 
-The R template code can be downloaded below.
+### Download 
+
+Click on the icon to download this template:
 
 <center>
   <div class="col-md-12">

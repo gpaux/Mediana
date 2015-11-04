@@ -7,11 +7,11 @@ group: navigation
 {% include JB/setup %}
 
 
-## About
+## Summary
 
-The Mediana R package uses the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) to generate a Microsoft Word-based report to summarize the results of Clinical Scenario Evaluation-based simulations. 
+The Mediana R package uses the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) package to generate a Microsoft Word-based report that summarizes the results of Clinical Scenario Evaluation-based simulations. 
 
-The user can easily customize a Clinical Scenario Evaluation report by adding a description of the project as well as labels to each scenario, including data scenarios (sample size, outcome distribution parameters, design parameters) and analysis scenarios (multiplicity adjustment). The user can also customize the report's structure, e.g., create sections and subsections within the report and specify how the rows will be sorted within each table.
+The user can easily customize this simulation report by adding a description of the project as well as labels to each scenario, including data scenarios (sample size, outcome distribution parameters, design parameters) and analysis scenarios (multiplicity adjustment). The user can also customize the report's structure, e.g., create sections and subsections within the report and specify how the rows will be sorted within each table.
 
 In order to customize the report, the user has to use a `PresentationModel` object described below.
 
@@ -31,21 +31,21 @@ Initialization with this command is highly recommended as it will simplify the p
 
 Once the `PresentationModel` object has been initialized, specific objects can be added by simply using the '+' operator as in data, analysis and evaluation models.
 
-### Project
+### `Project` object
 
 #### Description
 
-Specify a description of the project. The `Project` object is defined by three optional arguments:
+This object specifies a description of the project. The `Project` object is defined by three optional arguments:
 
-- `username`, which defines the username to be included in the report (by default, the username is "[Unknown User]").
+- `username` defines the username to be included in the report (by default, the username is "[Unknown User]").
 
-- `title`, which defines the project's in the report (the default value is "[Unknown title]").
+- `title` defines the project's in the report (the default value is "[Unknown title]").
 
-- `description`, which defines the project's description (the default value is "[No description]").
+- `description` defines the project's description (the default value is "[No description]").
 
 This information will be added in the report generated using the `GenerateReport` function. 
 
-A single object of the `Project` class can be added to an object the `PresentationModel` class.
+A single object of the `Project` class can be added to an object of the `PresentationModel` class.
 
 #### Examples
 
@@ -57,13 +57,13 @@ Project(username = "Gautier Paux",
         description = "Clinical trial in patients with pulmonary arterial hypertension")
 {% endhighlight %}
 
-### Section
+### `Section` object
 
 #### Description
 
-Specify how the sections will be created  within the report. A `Section` object is defined by a single argument:
+This object specifies the sections that will be created within the simulation report. A `Section` object is defined by a single argument:
 
-- `by`, which defines the rules for setting up sections.
+- `by` defines the rules for setting up sections.
 
 The `by` argument can contain several parameters from the following list:
 
@@ -77,7 +77,7 @@ The `by` argument can contain several parameters from the following list:
 
 - `multiplicity.adjustment`: a separate section will be created for each multiplicity adjustment scenario.
  
-Note that, if a parameter is defined in the `by` argument, it must be defined only in this object (i.e. neither in the `Subection` object nor in the `Table` object).
+Note that, if a parameter is defined in the `by` argument, it must be defined only in this object (i.e., neither in the `Subection` object nor in the `Table` object).
 
 A single object of the `Section` class can be added to an object of the `PresentationModel` class.
 
@@ -85,25 +85,25 @@ A single object of the `Section` class can be added to an object of the `Present
 
 A `Section` object can be defined as follows: 
 
-- Create a separate section within the report for each outcome parameter scenario:
+Create a separate section within the report for each outcome parameter scenario:
 
 {% highlight R %}
 Section(by = "outcome.parameter") 
 {% endhighlight %}
 
-- Create a separate section for each unique combination of the sample size and outcome parameter scenarios:
+Create a separate section for each unique combination of the sample size and outcome parameter scenarios:
 
 {% highlight R %}
 Section(by = c("sample.size", "outcome.parameter"))
 {% endhighlight %}
 
-### Subsection
+### `Subsection` object
 
 #### Description
 
-Specify the rules for creating subsections within the report. A `Subection` object is defined by a single argument:
+This object specifies the rules for creating subsections within the simulation report. A `Subsection` object is defined by a single argument:
 
-- `by`, which defines the rules for creating subsections.
+- `by` defines the rules for creating subsections.
 
 The `by` argument can contain several parameters from the following list:
 
@@ -117,121 +117,124 @@ The `by` argument can contain several parameters from the following list:
 
 - `multiplicity.adjustment`: a separate subsection will be created for each multiplicity adjustment scenario.
 
-As before, if a parameter is defined in the `by` argument, it must be defined only in this object (i.e. neither in the `Section` object nor in the `Table` object).
+As before, if a parameter is defined in the `by` argument, it must be defined only in this object (i.e., neither in the `Section` object nor in the `Table` object).
 
 A single object of the `Subsection` class can be added to an object of the `PresentationModel` class. 
-
 #### Examples
 
 `Subsection` objects can be set up as follows: 
 
-- Create a separate subsection for each sample size scenario:
+Create a separate subsection for each sample size scenario:
 
 {% highlight R %}
 Subsection(by = "sample.size") 
 {% endhighlight %}
 
-- Create a separate subsection for each unique combination of the sample size and outcome parameter scenarios:
+Create a separate subsection for each unique combination of the sample size and outcome parameter scenarios:
 
 {% highlight R %}
 Subsection(by = c("sample.size", "outcome.parameter"))
 {% endhighlight %}
 
-### Table
+### `Table` object
 
 #### Description
 
-Specify how the summary of results tables of the report will be sorted. A `Table` object is defined by a single argument:
+This object specifies how the summary tables will be sorted within the report. A `Table` object is defined by a single argument:
 
-- `by`, which defines how the tables of the report will be sorted.
+- `by` defines how the tables of the report will be sorted.
 
 The `by` argument can contain several parameters, the value must be contain in the following list:
 
-- `sample.size`: the tables will be sorted by sample size.
+- `sample.size`: the tables will be sorted by the sample size.
 
-- `event`: the tables will be sorted by number of events.
+- `event`: the tables will be sorted by the number of events.
 
-- `outcome.parameter`: the tables will be sorted by outcome parameter scenario.
+- `outcome.parameter`: the tables will be sorted by the outcome parameter scenario.
 
-- `design.parameter`: the tables will be sorted by design parameter scenario.
+- `design.parameter`: the tables will be sorted by the design parameter scenario.
 
-- `multiplicity.adjustment`: the tables will be sorted by multiplicity adjustment scenario.
+- `multiplicity.adjustment`: the tables will be sorted by the multiplicity adjustment scenario.
 
-If a parameter is defined in the `by` argument it must be defined only in this object (i.e. neither in the `Section` object nor in the `Subsection` object).
+If a parameter is defined in the `by` argument it must be defined only in this object (i.e., neither in the `Section` object nor in the `Subsection` object).
 
 A single object of class `Table` can be added to an object of class `PresentationModel`.
 
 #### Examples
-Example of `Table` object: 
 
-- Table sorted by sample size
+Examples of `Table` objects: 
+
+Create a summary table sorted by sample size scenarios:
 
 {% highlight R %}
 Table(by = "sample.size") 
 {% endhighlight %}
 
-- Table by sample size and outcome parameter scenario
+Create a summary table sorted by sample size and outcome parameter scenarios:
 
 {% highlight R %}
 Table(by = c("sample.size", "outcome.parameter"))
 {% endhighlight %}
-### CustomLabel
+
+### `CustomLabel` object
 
 #### Description
-Specify the labels that will be assigned to the parameter. These labels will be used in the section and subsection title of the Clinical Scenario Evaluation Report, as well as in the summary of results tables. A `CustomLabel` object is defined by two arguments:
 
-- `param`, which defines  a parameter for which the labels will be assigned.
+This object specifies the labels that will be assigned to sets of parameter values or simulation scenarios. These labels will be used in the section and subsection titles of the Clinical Scenario Evaluation Report as well as in the summary tables. A `CustomLabel` object is defined by two arguments:
 
-- `label`, which defines the label(s) to assign to each value of the parameter.
+- `param` defines a parameter (scenario) to which the current set of labels will be assigned.
 
-The `param` argument can contain several parameters, the value must be contain in the following list:
+- `label` defines the label(s) to assign to each value of the parameter.
 
-- `sample.size`: the labels will be applied to the sample size values.
+The `param` argument can contain several parameters from the following list:
 
-- `event`: the labels will be applied to the number of events values.
+- `sample.size`:  labels will be applied to sample size values.
 
-- `outcome.parameter`: the labels will be applied to the outcome parameter scenario.
+- `event`:  labels will be applied to number of events values.
 
-- `design.parameter`: the labels will be applied to the design parameter scenario.
+- `outcome.parameter`:  labels will be applied to outcome parameter scenarios.
 
-- `multiplicity.adjustment`: the labels will be applied to the multiplicity adjustment scenario.
+- `design.parameter`:  labels will be applied to design parameter scenarios.
 
-Several objects of class `CustomLabel` can be added to an object of class `PresentationModel`.
+- `multiplicity.adjustment`:  labels will be applied to multiplicity adjustment scenarios.
+
+Several objects of the `CustomLabel` class can be added to an object of the `PresentationModel` class.
 
 #### Examples
-Example of `CustomLabel` object: 
 
-- Custom label for the sample size parameter
+Examples of `CustomLabel` objects: 
+
+Assign a custom label to the sample size values:
 
 {% highlight R %}
 CustomLabel(param = "sample.size",
             label= paste0("N = ",c(50, 55, 60, 65, 70)))
 {% endhighlight %}
 
-- Custom label for the outcome parameter scenario
+Assign a custom label to the outcome parameter scenarios:
 
 {% highlight R %}
 CustomLabel(param = "outcome.parameter", 
-            label=c("Pessimiste", "Expected", "Optimist"))
+            label=c("Pessimistic", "Expected", "Optimistic"))
 {% endhighlight %}
 
-## GenerateReport function
+## `GenerateReport` function
 
 ### Description
 
-The Clinical Scenario Evaluation Report is generated using the `GenerateReport`function. This function has four arguments:
+The Clinical Scenario Evaluation Report is generated using the `GenerateReport` function. This function has four arguments:
 
-- `presentation.model`, which defines a `PresentationModel` object.
+- `presentation.model` defines a `PresentationModel` object.
 
-- `cse.result`, which defines a `CSE` object returned by the CSE function..
+- `cse.result` defines a `CSE` object returned by the CSE function.
 
-- `report.filename`, which defines the output filename of the word-based document generated.
+- `report.filename` defines the filename of the Word-based report generated by this function.
 
-- `report.template`, defines a word-based template (optional).
+- `report.template` defines a Word-based template (it is an optional argument).
 
-This function requires the package [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) to generate the Word-based report of the Clinical Scenario Evaluation. A customized template can be specified in the argument `report.template` (optional), which consists in a Word document to place in the working directory folder.
+The `GenerateReport` function requires the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) package to generate a Word-based simulation report. Optionally, a custom template can be selected by defining `report.template`, this argument specifies the name of a Word document located in the working directory.
 
-The Word-based report of the Clinical Scenario Evaluation is structured as follows:
+The Word-based simulation report is structured as follows:
 
 1. GENERAL INFORMATION
 	1. PROJECT INFORMATION
@@ -251,10 +254,11 @@ The Word-based report of the Clinical Scenario Evaluation is structured as follo
 	1. ...
 
 ### Examples
-Example of `GenerateReport` function: 
+
+This example illustrates the use of the `GenerateReport` function: 
 
 {% highlight R %}
-# Reporting
+# Define a presentation model
 case.study1.presentation.model = PresentationModel() +
   Section(by = "outcome.parameter") +
   Table(by = "sample.size") +
@@ -269,7 +273,7 @@ GenerateReport(presentation.model = case.study1.presentation.model,
                report.filename = "Case study 1 (normally distributed endpoint).docx")
 {% endhighlight %}
 
-An example of Clinical Scenario Evaluation Report can be dowloaded here:
+Click on the icon to download an example of the Clinical Scenario Evaluation report:
 
 <center>
   <div class="col-md-12">

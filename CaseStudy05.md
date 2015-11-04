@@ -7,9 +7,9 @@ group:
 
 {% include JB/setup %}
 
-## About
+## Summary
 
-This case study extends the straightforward setting presented in [Case study 1](CaseStudy01.html) to a more complex setting involving two trial endpoints and three treatment arms. Case study 5 illustrates the process of performing power calculations in clinical trials with multiple, hierarchically structured objectives and “multivariate” multiplicity adjustment strategies (gatekeeping procedures).
+This case study extends the straightforward setting presented in [Case study 1](CaseStudy01.html) to a more complex setting involving two trial endpoints and three treatment arms. Case study 5 illustrates the process of performing power calculations in clinical trials with multiple, hierarchically structured objectives and "multivariate" multiplicity adjustment strategies (gatekeeping procedures).
 
 Consider a three-arm Phase III clinical trial for the treatment of rheumatoid arthritis (RA). Two co-primary endpoints will be used to evaluate the effect of a novel treatment on clinical response and on physical function. The endpoints are defined as follows:
 
@@ -21,7 +21,7 @@ The two endpoints have different marginal distributions. The first endpoint is b
 
 The efficacy profile of two doses of a new treatment (Doses L and Dose H) will be compared to that of a placebo and a successful outcome will be defined as a significant treatment effect at either or both doses. A hierarchical structure has been established within each dose so that Endpoint 2 will be tested if and only if there is evidence of a significant effect on Endpoint 1.
 
-Three treatment effect scenarios for each endpoint are displayed in the Table below. The scenarios define three outcome parameter sets. The first set represents a rather conservative treatment effect scenario, the second set is a standard (most plausible) scenario and the third set represents an optimistic scenario. Note that a reduction in the HAQ-DI score indicates a beneficial effect and thus the mean changes are assumed to be negative for Endpoint 2.
+Three treatment effect scenarios for each endpoint are displayed in the table below. The scenarios define three outcome parameter sets. The first set represents a rather conservative treatment effect scenario, the second set is a standard (most plausible) scenario and the third set represents an optimistic scenario. Note that a reduction in the HAQ-DI score indicates a beneficial effect and thus the mean changes are assumed to be negative for Endpoint 2.
 
 <div class="table-responsive">
     <table class="table">
@@ -81,12 +81,11 @@ Three treatment effect scenarios for each endpoint are displayed in the Table be
     </table>
 </div>
 
-## Data Model
+## Define a Data Model
 
 As in [Case study 4](CaseStudy04.html), two endpoints are evaluated for each patient in this clinical trial example, which means that their joint distribution needs to be specified. The `MVMixedDist` method will be utilized for specifying a bivariate distribution with binomial and normal marginals (`var.type = list("BinomDist", "NormalDist")`). In general, this function is used for modeling correlated normal, binomial and exponential endpoints and relies on the copula method, i.e., random variables are generated from a multivariate normal distribution and converted into variables with pre-specified marginal distributions.
 
-Three parameters must be defined to specify the joint distribution of Endpoints 1
-and 2 in this clinical trial example:
+Three parameters must be defined to specify the joint distribution of Endpoints 1 and 2 in this clinical trial example:
 
 - Variable types (binomial and normal).
 
@@ -157,7 +156,7 @@ outcome3.dosel = parameters(type = var.type,
                             corr = corr.matrix)
 {% endhighlight %}
 
-These outcome parameter set are then combined within each `Sample` and the sample size per treatment arm ranges between 100 and 120 and is defined in the general set.
+These outcome parameter set are then combined within each `Sample` object and the common sample size per treatment arm ranges between 100 and 120:
 
 {% highlight R %}
 # Data model
@@ -172,18 +171,15 @@ case.study5.data.model = DataModel() +
          outcome.par = parameters(outcome1.doseh, outcome2.doseh, outcome3.doseh))
 {% endhighlight %}
 
+## Define an Analysis Model
 
-## Analysis Model
-
-To set up the analysis model in this clinical trial example, note that the treat-
-ment comparisons for Endpoints 1 and 2 will be carried out based on two different
-statistical tests:
+To set up the analysis model in this clinical trial example, note that the treatment comparisons for Endpoints 1 and 2 will be carried out based on two different statistical tests:
 
 - Endpoint 1: Two-sample test for comparing proportions (`method = "PropTest"`).
 
 - Endpoint 2: Two-sample t-test (`method = "TTest"`).
  
-It was pointed out earlier in this page that the two endpoints will be tested hierarchically within each dose. The Figure below provides a visual summary of the testing strategy used in this clinical trial. The circles in this figure denote the four null hypotheses of interest:
+It was pointed out earlier in this page that the two endpoints will be tested hierarchically within each dose. The figure below provides a visual summary of the testing strategy used in this clinical trial. The circles in this figure denote the four null hypotheses of interest:
 
 H1: Null hypothesis of no difference between Dose L and placebo with respect to
 Endpoint 1.
@@ -268,7 +264,8 @@ case.study5.analysis.model = AnalysisModel() +
 
 Recall that a numerically lower value indicates a beneficial effect for the HAQ-DI score and, as a result, the experimental treatment arm must be defined prior to the placebo arm in the test.samples parameters corresponding to the HAQ-DI tests, e.g., `samples = samples("DoseL HAQ-DI", "Placebo HAQ-DI")`.
 
-## Evaluation Model
+## Define an Evaluation Model
+
 In order to assess the probability of success in this clinical trial, a hybrid criterion based on the conjunctive criterion (both trial endpoints must be significant) and disjunctive criterion (at least one dose-placebo comparison must be significant) can be considered. 
 
 This criterion will be met if a significant effect is established at one or two doses on Endpoint 1 (ACR20) and also at one or two doses on Endpoint 2 (HAQ-DI). However, due to the hierarchical structure of the testing strategy (see Figure), this is equivalent to demonstrating a significant difference between Placebo and at least one dose with respect to Endpoint 2. The corresponding criterion is a subset disjunctive criterion based on the two Endpoint 2 tests (subset disjunctive power was briefly mentioned in [Case study 2](CaseStudy02)). 
@@ -306,7 +303,7 @@ case.study5.evaluation.model = EvaluationModel() +
 
 ## Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be dowloaded below.
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
   <div class="col-md-6">

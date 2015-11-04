@@ -7,11 +7,11 @@ group:
 
 {% include JB/setup %}
 
-## About
+## Summary
 
-This clinical trial example deals with settings where no analytical methods are available to support power calculations. However, as demonstrated below, simulation-based approaches are easily applied to perform comprehensive assessment of the relevant operating characteristics within the clinical scenario evaluation framework.
+This clinical trial example deals with settings where no analytical methods are available to support power calculations. However, as demonstrated below, simulation-based approaches are easily applied to perform а comprehensive assessment of the relevant operating characteristics within the clinical scenario evaluation framework.
 
-Case study 2 is based on a clinical trial example introduced in Dmitrienko and D’Agostino (2013, Section 10). This example deals with a Phase III clinical trial in a schizophrenia population. Three doses of a new treatment, labelled Dose L, Dose M and Dose H, will be tested versus placebo. The trial will be declared successful if a beneficial treatment effect is demonstrated in any of the three dosing groups compared to the placebo group.
+Case study 2 is based on a clinical trial example introduced in Dmitrienko and D'Agostino (2013, Section 10). This example deals with a Phase III clinical trial in a schizophrenia population. Three doses of a new treatment, labelled Dose L, Dose M and Dose H, will be tested versus placebo. The trial will be declared successful if a beneficial treatment effect is demonstrated in any of the three dosing groups compared to the placebo group.
 
 The primary endpoint is defined as the reduction in the Positive and Negative Syndrome Scale (PANSS) total score compared to baseline and a larger reduction in the PANSS total score indicates treatment benefit. This endpoint is normally distributed and the treatment effect assumptions in the four treatment arms are displayed in the next table.
 
@@ -49,9 +49,9 @@ The primary endpoint is defined as the reduction in the Positive and Negative Sy
     </table>
 </div>
 
-## Data Model
+## Define a Data Model
 
-The treatment effect assumptions presented in Table 1.8 define a single outcome parameter set and the common sample size is set to 260 patients. These parameters are specified in the following data model:
+The treatment effect assumptions presented in the table above define a single outcome parameter set and the common sample size is set to 260 patients. These parameters are specified in the following data model:
 
 {% highlight R %}
 # Outcome parameters
@@ -74,7 +74,7 @@ case.study2.data.model = DataModel() +
          outcome.par = parameters(outcome.doseh))
 {% endhighlight %}
 
-## Analysis Model
+## Define an Analysis Model
 
 The analysis model, shown below, defines the three individual tests that will be carried out in the schizophrenia clinical trial. Each test corresponds to a dose-placebo comparison such as:
 
@@ -88,7 +88,7 @@ Each comparison will be carried out based on a one-sided two-sample *t*-test (`T
 
 As indicated earlier, the overall success criterion in the trial is formulated in terms of demonstrating a beneficial effect at any of the three doses. Due to multiple opportunities to claim success, the overall Type I error rate will be inflated and the Hochberg procedure is introduced to protect the error rate at the nominal level.
 
-Since no procedure parameters are defined, the three tests (or, equivalently, three null hypotheses of no effect) are assumed to be equally weighted. The corresponding Analysis Model is defined below:
+Since no procedure parameters are defined, the three significance tests (or, equivalently, three null hypotheses of no effect) are assumed to be equally weighted. The corresponding analysis model is defined below:
 
 {% highlight R %}
 # Analysis model
@@ -105,22 +105,20 @@ case.study2.analysis.model = AnalysisModel() +
        method = "TTest")
 {% endhighlight %}
 
-To request the Hochberg procedure with unequally weighted  hypotheses, the user needs to assign a list of hypothesis weights to the `par` argument of the `MultAdjProc` object. The weights typically reflect the relative importance of the individual null hypotheses. Assume, for example, that 60% of the overall weight is assigned to H3 and the remainder is split between H1 and H2. In this case, the `MultAdjProc` object should be as follow:
+To request the Hochberg procedure with unequally weighted  hypotheses, the user needs to assign a list of hypothesis weights to the `par` argument of the `MultAdjProc` object. The weights typically reflect the relative importance of the individual null hypotheses. Assume, for example, that 60% of the overall weight is assigned to H3 and the remainder is split between H1 and H2. In this case, the `MultAdjProc` object should be defined as follow:
 
 {% highlight R %}
 MultAdjProc(proc = "HochbergAdj",
             par = parameters(weight = c(0.2, 0.2, 0.6)))
 {% endhighlight %}
 
-It should be noted that the order of the weight must be identical to the order of the `Test` objects defined in the Analysis Model.
+It should be noted that the order of the weights must be identical to the order of the `Test` objects defined in the analysis model.
 
-## Evaluation Model
+## Define an Evaluation Model
 
-As was illustrated in the [Evaluation Model page](EvaluationModel.html), an evaluation model specifies clinically relevant criteria for assessing the performance of the individual tests defined in the corresponding analysis model or composite measures of success. 
+An evaluation model specifies clinically relevant criteria for assessing the performance of the individual tests defined in the corresponding analysis model or composite measures of success. In virtually any setting, it is of interest to compute the probability of achieving a significant outcome in each individual test, e.g., the probability of a significant difference between placebo and each dose. This is accomplished by requesting a `Criterion` object with `method = "MarginalPower"`.
 
-In virtually any setting, it is of interest to compute the probability of achieving a significant outcome in each individual test, e.g., the probability of a significant difference between placebo and each dose. This is accomplished by requesting a `Criterion` object with `method = MarginalPower`.
-
-Since the trial will be declared successful if at least one dose-placebo comparison is significant, it is natural to compute the overall success probability, which is defined as the probability of demonstrating treatment benefit in one of more dosing groups. This is equivalent to evaluating disjunctive power in the trial (`method = DisjunctivePower`).
+Since the trial will be declared successful if at least one dose-placebo comparison is significant, it is natural to compute the overall success probability, which is defined as the probability of demonstrating treatment benefit in one of more dosing groups. This is equivalent to evaluating disjunctive power in the trial (`method = "DisjunctivePower"`).
 
 In addition, the user can easily define a custom evaluation criterion. Suppose that, based on the results of the previously conducted trials, the sponsor expects a much larger treatment treatment difference at Dose H compared to Doses L and M. Given this, the sponsor may be interested in evaluating the probability of observing a significant treatment effect at Dose H and at least one other dose. The associated evaluation criterion is implemented in the following function:
 
@@ -135,7 +133,7 @@ case.study2.criterion = function(test.result, statistic.result, parameter) {
 }
 {% endhighlight %}
 
-The function’s first argument (`test.result`) is a matrix of p-values produced by the `Test` objects defined in the Analysis Model and the second argument (`statistic.result`) is a matrix of results produced by the `Statistic` objects defined in the Analysis Model. In this example, the criteria will only use the `test.result` argument, which will contain the p-values produced by the tests associated with the three dose-placebo comparisons. The last argument (`parameter`) contains the optional parameter(s) defined by the user in the `Criterion` object. In this example, the `par` argument contains the overal alpha level.
+The function's first argument (`test.result`) is a matrix of p-values produced by the `Test` objects defined in the analysis model and the second argument (`statistic.result`) is a matrix of results produced by the `Statistic` objects defined in the analysis model. In this example, the criteria will only use the `test.result` argument, which will contain the p-values produced by the tests associated with the three dose-placebo comparisons. The last argument (`parameter`) contains the optional parameter(s) defined by the user in the `Criterion` object. In this example, the `par` argument contains the overall alpha level.
 
 The `case.study2.criterion` function computes the probability of a significant treatment effect at Dose H (`test.result[,3] <= alpha`) and a significant treatment difference at Dose L or Dose M (`(test.result[,1] <= alpha) | (test.result[,2]<= alpha)`). Since this criterion assumes that the third test is based on the comparison of Dose H versus Placebo, the order in which the tests are included in the evaluation model is important.
 
@@ -171,7 +169,7 @@ case.study2.evaluation.model = EvaluationModel() +
 
 Another potential option is to apply the conjunctive criterion which is met if a significant treatment difference is detected simultaneously in all three dosing groups (`method = "ConjunctivePower"`). This criterion helps characterize the likelihood of a consistent treatment effect across the doses.
 
-The user can also use the metric.tests parameter to choose the specific tests to which the disjunctive and conjunctive criteria are applied (the resulting criteria are known as subset disjunctive and conjunctive criteria). To illustrate, the following statement computes the probability of a significant treatment effect at Dose M or Dose H (Dose L is excluded from this calculation):
+The user can also use the `metric.tests` parameter to choose the specific tests to which the disjunctive and conjunctive criteria are applied (the resulting criteria are known as subset disjunctive and conjunctive criteria). To illustrate, the following statement computes the probability of a significant treatment effect at Dose M or Dose H (Dose L is excluded from this calculation):
 
 {% highlight R %}
 Criterion(id = "Disjunctive power",
@@ -184,7 +182,7 @@ Criterion(id = "Disjunctive power",
 
 ## Download
 
-The R code utilized and the Clinical Scenario Evaluation Report generated in this case study can be dowloaded below.
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
   <div class="col-md-6">

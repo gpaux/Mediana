@@ -6,23 +6,23 @@ group: navigation
 ---
 {% include JB/setup %}
 
-## About
+## Summary
 
-Clinical Scenario Evaluation (CSE) is performed according to the data, analysis and evaluation models. The simulation parameters are specified in a `SimParameter` object.
+Clinical Scenario Evaluation (CSE) is performed based on the data, analysis and evaluation models as well as simulation parameters specified by the user. The simulation parameters are defined using the `SimParameter` object.
 
-## Clinical Trial Simulations
+## Clinical Scenario Evaluation
 
 ### SimParameters
 
 #### Description
 
-Specify the simulation parameters. A `SimParameter` object is defined by three arguments:
+The `SimParameter` object is a required argument of the `CSE` function and has the following arguments:
 
-- `n.sims`, which defines the number of simulations.
-- `seed`, which defines the seed for the simulations.
-- `proc.load`, which defines the load of the processor (parallel computation).
+- `n.sims` defines the number of simulations.
+- `seed` defines the seed to be used in the simulations.
+- `proc.load` defines the processor load in parallel computations.
 
-The `proc.load` argument is used to define the number of clusters dedicated to the simulations. Numeric value can be defined as well as character value which automatically detect the number of cores:
+The `proc.load` argument is used to define the number of processor cores dedicated to the simulations. A numeric value can be defined as well as character value which automatically detects the number of cores:
 
 - `low`: 1 processor core.
 
@@ -34,9 +34,9 @@ The `proc.load` argument is used to define the number of clusters dedicated to t
 
 #### Examples
 
-Example of `SimParameter` objects:
+Examples of `SimParameter` object specification:
 
-- **10000 simulation runs using all available processor cores**
+Perform 10000 simulations using all available processor cores:
 
 {% highlight R %}
 SimParameters(n.sims = 10000, 
@@ -44,7 +44,7 @@ SimParameters(n.sims = 10000,
               seed = 42938001)
 {% endhighlight %}
 
-- **10000 simulation runs using 2 processor cores**
+Perform 10000 simulations using 2 processor cores:
 
 {% highlight R %}
 SimParameters(n.sims = 10000, 
@@ -57,21 +57,19 @@ SimParameters(n.sims = 10000,
 
 #### Description
 
-This `CSE` is used to perform the Clinical Scenario Evaluation according to the `DataModel`, `AnalysisModel` and `EvaluationModel` objects specified respectively in the arguments `data`, `analysis` and `evaluation` of the function.
+The `CSE` function is invoked to runs simulations under the Clinical Scenario Evaluation approach. This function uses four arguments:
 
-The `CSE` function uses four arguments:
+- `data` defines a `DataModel` object.
 
-- `data`, which defines a `DataModel` object
+- `analysis` defines an `AnalysisModel` object.
 
-- `analysis`, which defines an `AnalysisModel` object
+- `evaluation` defines an `EvaluationModel` object.
 
-- `evaluation`, which defines an `EvaluationModel` object
-
-- `simulation`, which defines a `SimParameters` object
+- `simulation` defines a `SimParameters` object.
 
 #### Examples
 
-Example of use of the `CSE` function:
+The following example illustrates the use of the `CSE` function:
 
 {% highlight R %}
 # Outcome parameter set 1
@@ -90,7 +88,6 @@ case.study1.data.model = DataModel() +
          outcome.par = parameters(outcome1.placebo, outcome2.placebo)) +
   Sample(id = "Treatment",
          outcome.par = parameters(outcome1.treatment, outcome2.treatment))
-
 
 # Analysis model
 case.study1.analysis.model = AnalysisModel() +
@@ -119,27 +116,27 @@ case.study1.results = CSE(case.study1.data.model,
 
 ### Summary of results
 
-Once the Clinical Scenario Evaluation has been performed, the `CSE`  object returned by the `CSE` function contains a list with:
+Once Clinical Scenario Evaluation-based simulations have been run, the `CSE` object returned by the `CSE` function contains a list with the following components:
 
-- `simulation.results`, a data frame containing the results of the simulations for each scenario.
+- `simulation.results`: a data frame containing the results of the simulations for each scenario.
 
-- `analysis.scenario.grid`, a data frame containing the grid of the combination of data and analysis scenarios.
+- `analysis.scenario.grid`: a data frame containing the grid of the combination of data and analysis scenarios.
 
-- `data.structure`, a list containing the data structure according to the `DataModel` object.
+- `data.structure`: a list containing the data structure according to the `DataModel` object.
 
-- `analysis.structure`, a list containing the analysis structure according to the `AnalysisModel` object.
+- `analysis.structure`: a list containing the analysis structure according to the `AnalysisModel` object.
 
-- `evaluation.structure`, a list containing the evaluation structure according to the `EvaluationModel` object.
+- `evaluation.structure`: a list containing the evaluation structure according to the `EvaluationModel` object.
 
-- `sim.parameters`, a list containing the simulation parameters according to SimParameters object.
+- `sim.parameters`: a list containing the simulation parameters according to `SimParameters` object.
 
-- `timestamp`, a list containing information about the start time, end time and duration of the simulation runs.
+- `timestamp`: a list containing information about the start time, end time and duration of the simulation runs.
 
-The simulation results can be summarized in the R console using the function `summary`:
+The simulation results can be summarized in the R console using the `summary` function:
 
 {% highlight R %}
 summary(case.study1.results)
 {% endhighlight %}
 
-A word-based simulation report can be generated using the function `GenerateReport`, presented in the page [Reporting](Reporting.html).
+A Microsoft Word-based simulation report can be generated from the simulation results produced by the `CSE` function using the `GenerateReport` function, see [Reporting](Reporting.html).
 

@@ -6,13 +6,13 @@ group: navigation
 ---
 {% include JB/setup %}
 
-## About
+## Introduction
 
-Several case studies have been created to help the user understand the feature of the Mediana package. Case studies go from the most simple case ([Case study 1](CaseStudy01.html)) to complex clinical setting ([Case study 6](CaseStudy06.html)).
+Several case studies have been created to facilitate the implementation of simulation-based Clinical Scenario Evaluation (CSE) approaches in multiple settings and help the user understand individual features of the Mediana package. Case studies are arranged in terms of increasing complexity of the underlying clinical trial setting (i.e., trial design and analysis methodology). For example, [Case study 1](CaseStudy01.html) deals with a number of basic settings and increasingly more complex settings are considered in the subsequent case studies.
 
 ## Case study 1
 
-This case studies will serve to introduce the implementation of very simple case studies, where in most of the case, a closed-form expression can be used to calculate the sample size. They will help the user to understand the specificity of the Mediana Package with simple examples.
+This case study serves a good starting point for users who are new to the Mediana package. It focuses on clinical trials with simple designs and analysis strategies where power and sample size calculations can be performed using analytical methods.
 
 1.  [Trial with two treatment arms and single endpoint (normally distributed endpoint).](CaseStudy01.html#Normallydistributedendpoint)
 2.  [Trial with two treatment arms and single endpoint (binary endpoint).](CaseStudy01.html#Binaryendpoint)
@@ -22,32 +22,32 @@ This case studies will serve to introduce the implementation of very simple case
 
 ## Case study 2
 
-This case study will serve to introduce a **clinical trial with three or more treatment arms**. In this settings, a multiplicity adjustment is required and no analytical methods are available to support power calculations.
+This case study is based on a **clinical trial with three or more treatment arms**. A multiplicity adjustment is required in this setting and no analytical methods are available to support power calculations.
 
-This example will also illustrate a key feature of the Mediana package, the possibility to define user-specified function, for example, to define a new criterion for the Evaluation Model.
+This example also illustrates a key feature of the Mediana package, namely, a useful option to define custom functions, for example, it shows how the user can define a new criterion in the Evaluation Model.
 
 [Clinical trial in patients with schizophrenia](CaseStudy02.html)
 
 ## Case study 3
 
-This case study will serve to introduce a **clinical trial with several patient populations** (marker-positive and marker-negative patients). It will help the user to understand how to define independant samples, and perform a test by merging samples, i.e. merging marker-positive and marker-negative  samples to perform a test on the overall population.
+This case study introduces a **clinical trial with several patient populations** (marker-positive and marker-negative patients). It demonstrates how the user can define independent samples in a data model and then specify statistical tests in an analysis model based on merging several samples, i.e., merging samples of marker-positive and marker-negative patients to carry out a test that evaluated the treatment effect in the overall population.
 
 [Clinical trial in patients with asthma](CaseStudy03.html)
 
 ## Case study 4
 
-This case study will serve to introduce a **clinical trial with several endpoints** and help showcase the package’s ability to model complex design and analysis strategies in trials with multivariate outcomes.
+This case study illustrates CSE simulations in a **clinical trial with several endpoints** and helps showcase the package's ability to model multivariate outcomes in clinical trials.
 
 [Clinical trial in patients with metastatic colorectal cancer](CaseStudy04.html)
 
 ## Case study 5
 
-This case study will serve to introduce a **clinical trial with several endpoints and multiple treatment arms** and help showcase the package’s ability to model complex design and analysis strategies in trials with multivariate outcomes.
+This case study is based on a **clinical trial with several endpoints and multiple treatment arms** and illustrates the process of performing complex multiplicity adjustments in trials with several clinical objectives.
 
 [Clinical trial in patients with rheumatoid arthritis](CaseStudy05.html)
 
 ## Case study 6
 
-This case study is an extenston of [Case study 2](CaseStudy02.html) and will serve to illustrate how the package can be used to compare the performance of several MTPs. Customized report generation will also be illustrated in this case study.
+This case study is an extension of [Case study 2](CaseStudy02.html) and illustrates how the package can be used to assess the performance of several multiplicity adjustments. The case study also walks the reader through the process of defining customized simulation reports.
 
 [Clinical trial in patients with schizophrenia](CaseStudy06.html)

@@ -6,39 +6,36 @@ group: navigation
 ---
 {% include JB/setup %}
 
-## About
+## Summary
 
 Data models define the process of generating patient data in clinical trials.
 
 ## Initialization
 
 A data model can be initialized using the following command
+
 {% highlight R %}
 # DataModel initialization
 data.model = DataModel()
 {% endhighlight %}
 
-Initialization with this command is higlhy recommended as it will simplify the add of related objects, such as `OutcomeDist`, `Sample`, `SampleSize`, `Event`, `Design` objects. 
+It is highly recommended to use this command as it will simplify the process of specifying components of the data model, e.g., `OutcomeDist`, `Sample`, `SampleSize`, `Event` and `Design` objects. 
 
-## Specific objects
+## Components of a data model
 
-Once a `DataModel` object has been initialized, specific objects can be added by using the '+' operator to add objects to it.
+Once the `DataModel` object has been initialized, components of the data model can be specified by adding objects to the model using the '+' operator as shown below.
 
-### OutcomeDist
+### `OutcomeDist` object
 
 #### Description
 
-Specify the outcome distribution of the generated data. An `OutcomeDist` object is defined by two arguments:
+This object specifies the distribution of patient outcomes in a data model. An `OutcomeDist` object is defined by two arguments:
 
-- `outcome.dist`, which defines the outcome distribution.
+- `outcome.dist` defines the outcome distribution.
 
-- `outcome.type`, which defines the outcome type (optional). This arguments only accepts:
+- `outcome.type` defines the outcome type (optional). There are two acceptable values of this argument: `standard` (fixed-design setting) and `event` (event-driven design setting).
 
-	- `standard`: for fixed design setting.
-
-	- `event`: for event-driven design setting.
-
-Several distributions are already implemented in the Mediana package (listed below, along with the required parameters to specify in the `outcome.par` argument of the `Sample` object) to be used in the `outcome.dist` argument:
+Several distributions that can be specified using the `outcome.dist` argument are already implemented in the Mediana package. These distributions are listed below along with the required parameters to be included in the `outcome.par` argument of the `Sample` object:
 
 - `UniformDist`: generate data following a **univariate distribution**. Required parameter: `max`.
 
@@ -60,27 +57,19 @@ Several distributions are already implemented in the Mediana package (listed bel
 
 - `MVExpoPFSOSDist`: generate data following a **multivariate exponential distribution to generate PFS and OS endpoints**. The PFS value is imputed to the OS value if the latter occurs earlier. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `rate`. The` corr` parameter specifies the correlation matrix for the endpoints.
 
-- `MVMixedDist`: generate data following a **multivariate mixed distribution**. Required parameters: `type`, `par` and `corr`. The type parameter can take the following values:
-
-	- `NormalDist`
-
-	- `BinomDist`
-
-	- `ExpoDist`
-
-  For each generated endpoint, the par parameter must contain the required parameters according to the type of distribution. The `corr` parameter specifies the correlation matrix for the endpoints.
+- `MVMixedDist`: generate data following a **multivariate mixed distribution**. Required parameters: `type`, `par` and `corr`. The `type` parameter assumes the following values: `NormalDist`, `BinomDist` and `ExpoDist`. For each generated endpoint, the `par` parameter must contain the required parameters according to the distribution type. The `corr` parameter specifies the correlation matrix for the endpoints.
 
 A single `OutcomeDist` object can be added to a `DataModel` object.
 
-For more information about the `OutcomeDist` object, see the R documentation [OutcomeDist](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `OutcomeDist` object, see the documentation for [OutcomeDist](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
 
-If a distribution is not implemented in the Mediana Package, the user can create his own function and use it within the Mediana Package (see [User-defined functions](#User-definedfunctions)).
+If a certain outcome distribution is not implemented in the Mediana package, the user can create a custom function and use it within the package (see [User-defined functions](#User-definedfunctions)).
 
 #### Example
 
-Example of `OutcomeDist` object:	
+Examples of `OutcomeDist` objects:	
 
-- **Univariate distributions**
+Specify popular univariate distributions:
 
 {% highlight R %}
 # Normal distribution
@@ -93,34 +82,36 @@ OutcomeDist(outcome.dist = "BinomDist")
 OutcomeDist(outcome.dist = "ExpoDist")
 {% endhighlight %}
 
-- **Mixed Multivariate distributions**
+Specify a mixed multivariate distribution:
+
 {% highlight R %}
 # Multivariate Mixed distribution
 OutcomeDist(outcome.dist = "MVMixedDist")
 {% endhighlight %}
-### Sample
+
+### `Sample` object
 
 #### Description
 
-Specify a sample (e.g. treatment group). A `Sample` object is defined by three arguments:
+This object specifies parameters of a sample (e.g., treatment arm in a trial) in a data model. A `Sample` object is defined by three arguments:
 
-- `id`, which defines the ID of the sample.
+- `id` defines the sample's unique ID (label).
 
-- `outcome.par`, which defines the parameters of the outcome distribution of the sample.
+- `outcome.par` defines the parameters of the outcome distribution for the sample.
 
-- `sample.size`, which defines the sample size of the sample (optional).
+- `sample.size` defines the sample's size (optional).
 
-The `sample.size` argument is optional but must be used to define the sample size if unbalance samples have to be defined. The sample size must be either defined in the `Sample` object or in the `SampleSize` object, but not in both. 
+The `sample.size` argument is optional but must be used to define the sample size only if an unbalanced design is considered (i.e., the sample size varies across the samples). The sample size must be either defined in the `Sample` object or in the `SampleSize` object, but not in both. 
 
 Several `Sample` objects can be added to a `DataModel` object.
 
-For more information about the `Sample` object, see the R documentation [Sample](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `Sample` object, see the documentation [Sample](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
 
 #### Example
 
-Example of `Sample` objects:
+Examples of `Sample` objects:
 
-- **Continuous endpoint following a Normal distribution**
+Specify two samples with a continuous endpoint following a normal distribution:
 
 {% highlight R %}
 # Outcome parameters set 1
@@ -142,7 +133,7 @@ Sample(id = "Treatment",
                                 outcome2.treatment))
 {% endhighlight %}
 
-- **Binary endpoint following a Binomial distribution**
+Specify two samples with a binary endpoint following a binomial distribution:
 
 {% highlight R %}
 # Outcome parameters set
@@ -158,7 +149,7 @@ Sample(id = "Treatment",
        outcome.par = parameters(outcome1.treatment))
 {% endhighlight %}
 
-- **Time-to-event endpoint following an Exponential distribution**
+Specify two samples with a time-to-event (survival) endpoint following an exponential distribution:
 
 {% highlight R %}
 # Outcome parameters
@@ -179,7 +170,7 @@ Sample(id = "Treatment",
        outcome.par = parameters(outcome.treatment))
 {% endhighlight %}
 
-- **Two key primary endpoints following a Binomial and a Normal distribution respectively**
+Specify three samples with two primary endpoints that follow a binomial and a normal distribution, respectively:
 
 {% highlight R %}
 # Variable types
@@ -225,24 +216,23 @@ Sample(id = list("DoseH ACR20", "DoseH HAQ-DI"),
        outcome.par = parameters(outcome.doseh))
 {% endhighlight %}
 
-
-### SampleSize
+### `SampleSize` object
 
 #### Description
 
-Specify the sample size in case of balanced design (all samples will have the same sample size). A `SampleSize` object is defined by one argument:
+This object specifies the sample size in a balanced trial design (all samples will have the same sample size). A `SampleSize` object is defined by one argument:
 
-- `sample.size`, which specifies a list or vector of sample size(s).
+- `sample.size` specifies a list or vector of sample size(s).
 
 A single `SampleSize` object can be added to a `DataModel` object.
 
-For more information about the `SampleSize` object, see the R documentation [SampleSize](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `SampleSize` object, see the package's documentation [SampleSize](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
-Example of `SampleSize` objects:
+Examples of `SampleSize` objects:
 
-- **Equivalent specifications of SampleSize object**
+Several equivalent specifications of the `SampleSize` object:
 
 {% highlight R %}
 SampleSize(c(50, 55, 60, 65, 70))
@@ -250,25 +240,25 @@ SampleSize(list(50, 55, 60, 65, 70))
 SampleSize(seq(50, 70, 5))
 {% endhighlight %}
 
-### Event
+### `Event` object
 
 #### Description
 
-Specify the total number of events among all samples in an event-driven clinical trial. A `Event` object is defined by two arguments:
+This object specifies the total number of events (total event count) among all samples in an event-driven clinical trial. An `Event` object is defined by two arguments:
 
-- `n.events`, which defines a vector of number of events required.
+- `n.events` defines a vector of the required event counts.
 
-- `rando.ratio`, which defines a vector of randomization ratios for each `Sample` object defined in the `DataModel` object.
+- `rando.ratio` defines a vector of randomization ratios for each `Sample` object defined in the `DataModel` object.
 
 A single `Event` object can be added to a `DataModel` object.
 
-For more information about the `Event` object, see the R documentation [Event](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `Event` object, see the package's documentation [Event](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
-Example of `Event` object:
+Examples of `Event` objects:
 
-- **Specify the number of events with a 2:1 randomization ratio (Treatment:Placebo)**
+Specify the required number of events in a trial with a 2:1 randomization ratio (Treatment:Placebo):
 
 {% highlight R %}
 # Event parameters
@@ -280,35 +270,35 @@ Event(n.events = event.count.total,
       rando.ratio = randomization.ratio)
 {% endhighlight %}
 
-### Design
+### `Design` object
 
 #### Description
 
-Specify the design parameters used in event-driven designs if the user is interested in modeling the enrollment (or accrual) and dropout (or loss to follow up) processes that will be applied to the Clinical Scenario. A `Design` object is defined by seven arguments:
+This object specifies the design parameters used in event-driven designs if the user is interested in modeling the enrollment (or accrual) and dropout (or loss to follow up) processes. A `Design` object is defined by seven arguments:
 
-- `enroll.period`, which defines the length of the enrollment period.
+- `enroll.period` defines the length of the enrollment period.
 
-- `enroll.dist`, which defines the enrollment distribution.
+- `enroll.dist` defines the enrollment distribution.
 
-- `enroll.dist.par`, which defines the parameters of the enrollment distribution (optional).
+- `enroll.dist.par` defines the parameters of the enrollment distribution (optional).
 
-- `followup.period`, which defines the length of the follow-up period for each patient in study designs with a fixed follow-up period, i.e., the length of time from the enrollment to planned discontinuation is constant across patients. The user must specify either followup.period or study.duration.
+- `followup.period` defines the length of the follow-up period for each patient in study designs with a fixed follow-up period, i.e., the length of time from the enrollment to planned discontinuation is constant across patients. The user must specify either `followup.period` or `study.duration`.
 
-- `study.duration`, which defines the total study duration in study designs with a variable follow-up period. The total study duration is defined as the length of time from the enrollment of the first patient to the discontinuation of the last patient.
+- `study.duration` defines the total study duration in study designs with a variable follow-up period. The total study duration is defined as the length of time from the enrollment of the first patient to the discontinuation of the last patient.
 
-- `dropout.dist`, which defines the dropout distribution.
+- `dropout.dist` defines the dropout distribution.
 
-- `dropout.dist.par`, which defines the parameters of the dropout distribution.
+- `dropout.dist.par` defines the parameters of the dropout distribution.
 
 Several `Design` objects can be added to a `DataModel` object.
 
-For more information about the `Design` object, see the R documentation [Design](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `Design` object, see the package's documentation [Design](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
 #### Example
 
-Example of `Design` object: 
+Examples of `Design` objects: 
 
-- **Modelling the inclusion and dropout of patients**
+Specify parameters of the enrollment and dropout processes with a uniform enrollment distribution and exponential dropout distribution:
 
 {% highlight R %}
 # Design parameters (in months)
@@ -321,29 +311,29 @@ Design(enroll.period = 9,
 
 ## User-defined functions
 
-If a distribution is not implemented by default in the Mediana package, the user can defined his own function. In order to be used within the package, the user must respect the following templates.
+If a certain distribution is not implemented in the Mediana package, the user can defined a custom distribution function. The user must follow the guidelines presented below to create valid custom functions.
 
-### Template for outcome distributions
+### Custom functions for defining distributions
 
-The following template can be used by the user to create his own function to generate data. The parts of the function that has to be modified are identified within a block.
+The following template must be used by the user to define a custom distribution function that can be used to specify an outcome, enrollment or dropout distribution in a data model. The distribution-specific components that should be modified if a different distribution needs to be implemented are identified in the comments.
 
-As an example, this function is used to generate data following a `Template` distribution and has two parameters, `parameter1` and `parameter2`.
+As an example, the following function is used to generate observations following the `Template` distribution that has two parameters, `parameter1` and `parameter2`.
 
 {% highlight R %}
-# Template of a function to generate data
+# Template of a function to generate observations
 TemplateDist = function(parameter) {
 
-  # Determine the function call, either to generate distribution or to return description
+  # Determine the function call, either to generate distribution or to return the distribution's description
   call = (parameter[[1]] == "description")
 
   # Generate random variables
   if (call == FALSE) {
-    # The number of patients to generate
+    # The number of observations to generate
     n = parameter[[1]]
 
     ##############################################################
-    # To modify according to the function
-    # Get the other parameter (kept in the parameter[[2]] list)
+    # Distribution-specific component
+    # Get the distribution's parameters (stored in the parameter[[2]] list)
     parameter1 = parameter[[2]]$parameter1
     parameter2 = parameter[[2]]$parameter2
     ##############################################################
@@ -355,8 +345,8 @@ TemplateDist = function(parameter) {
       stop("Data model: TemplateDist distribution: Number of observations must be positive.")
 
     ##############################################################
-    # To modify according to the function
-    # Data are generated using the function "fundist" and assign to the object result
+    # Distribution-specific component
+    # Observations are generated using the "fundist" function and assigned to the "result" object
     result = fundist(n = n, parameter1 = parameter1, parameter2 = parameter2)
     ##############################################################
 
@@ -365,8 +355,8 @@ TemplateDist = function(parameter) {
     if (call == TRUE) {
 
       ##############################################################
-      # To modify according to the function
-      # The labels of the distributional parameters and the label of the distribution must be put in the list
+      # Distribution-specific component
+      # The labels of the distributional parameters and the distribution's label must be stored in the "result" list
       result = list(list(parameter1 = "parameter1", parameter2 = "parameter2"),
                     list("Template"))
       ##############################################################
@@ -378,7 +368,9 @@ TemplateDist = function(parameter) {
 }
 {% endhighlight %}
 
-The R template code can be downloaded below.
+### Download 
+
+Click on the icon to download this template:
 
 <center>
   <div class="col-md-12">
