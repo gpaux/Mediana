@@ -10,7 +10,7 @@ group: navigation
 
 If a certain feature (e.g. distribution, significance test, descriptive statistic or multiplicity adjustment procedure) is not implemented in the Mediana package, the user can defined a custom function and use it within the package. The user must follow the guidelines presented below to create valid custom functions.
 
-## User-defined functions for Data Model
+## User-defined functions for a data model
 
 If a certain distribution is not implemented in the Mediana package, the user can defined a custom distribution function. The user must follow the guidelines presented below to create valid custom functions.
 
@@ -79,7 +79,7 @@ Click on the icon to download this template:
   </div>
 </center>
 
-## User-defined functions for Analysis Model
+## User-defined functions for an analysis model
 
 If a significance test, descriptive statistic or multiplicity adjustment procedure is not included in the Mediana package, the user can easily define a custom function that implements a test, computes a descriptive statistic or performs a multiplicity adjustment. The user must follow the guidelines presented below to create valid custom functions.
 
@@ -209,7 +209,7 @@ Click on the icon to download this template:
   </div>
 </center>
 
-## User-defined functions for Evaluation Model
+## User-defined functions for an evaluation model
 
 If the user wishes to apply a custom success criterion that is not included in the Mediana package, the guidelines presented below must be followed to create a valid custom function that implements this criterion.
 
