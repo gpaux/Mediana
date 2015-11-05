@@ -57,6 +57,8 @@ Several `Criterion` objects can be added to an `EvaluationModel` object.
 
 For more information about the `Criterion` object, see the package's documentation [Criterion](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
+If a certain success criterion is not implemented in the Mediana package, the user can create a custom function and use it within the package (see [User-defined functions](CustomFunctions.html#User-definedfunctionsforEvaluationModel)).
+
 #### Examples
 
 Examples of `Criterion` objects:
@@ -98,55 +100,3 @@ Criterion(id = "Disjunctive power",
           par = parameters(alpha = 0.025))
 {% endhighlight %}
 
-## User-defined functions
-
-If the user wishes to apply a custom success criterion that is not included in the Mediana package, the guidelines presented below must be followed to create a valid custom function that implements this criterion.
-
-### Custom functions for implementing a success criterion
-
-The following template must be used by the user to define a function that implements a success criterion in an evaluation model. The components that need to be modified if the user wishes to implement a different criterion are identified in the comments.
-
-As an illustration, the function defined below implements a criterion named `TemplateCriterion` based on two significance tests and one descriptive statistic with two required parameters. The first parameter, labeled `parameter1`, is applied to the significance tests and the second parameter, labeled `parameter2`, is applied to the statistic. Success is achieved if at least one of the two tests is less than `parameter1` and the statistic is greater than `parameter2`.
-
-{% highlight R %}
-# Template of a function to implement a success criterion
-TemplateCriterion = function(test.result, statistic.result, parameter)  {
-  
-  ##############################################################
-  # Criterion-specific component
-  # Get the criterion's parameter (stored in the parameter list)
-  parameter1 = parameter[[1]]
-  parameter2 = parameter[[2]]
-  ##############################################################
-  
-  ##############################################################
-  # Criterion-specific component
-  # Binary variable (success/failure of the criterion)
-  # If the criterion is based on a p-value returned by a Test object, the test.result 
-  # matrix must be used. The test.result matrix has as many rows as the number of simulations, 
-  # and as many columns as the number of tests specified in the tests argument of this criterion.
-  # If the criterion is based on a descriptive statistic returned by a Statistic object, 
-  # the statistic.result matrix must be used. This matrix has as many rows as the number 
-  # of simulations, and as many columns as the number of statistics specified in the 
-  # the statistics argument of this criterion.
-  # Two tests and one statistic are used in this example. At least one test value must 
-  # be less than parameter1 and the statistic must be greater than parameter2.
-  significant = ((test.result[,1] <= parameter1) | ((test.result[,2] <= parameter1) | (statistic.result[,2] > parameter2)))
-  ##############################################################
-
-  power = mean(significant)
-  return(power)
-}
-{% endhighlight %}
-
-### Download 
-
-Click on the icon to download this template:
-
-<center>
-  <div class="col-md-12">
-    <a href="TemplateCriterion.R" class="img-responsive">
-      <img src="Logo_R.png" class="img-responsive" height="100">
-    </a>
-  </div>
-</center>

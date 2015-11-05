@@ -63,7 +63,7 @@ A single `OutcomeDist` object can be added to a `DataModel` object.
 
 For more information about the `OutcomeDist` object, see the documentation for [OutcomeDist](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
 
-If a certain outcome distribution is not implemented in the Mediana package, the user can create a custom function and use it within the package (see [User-defined functions](#User-definedfunctions)).
+If a certain outcome distribution is not implemented in the Mediana package, the user can create a custom function and use it within the package (see [User-defined functions](CustomFunctions.html#User-definedfunctionsforDataModel)).
 
 #### Example
 
@@ -308,74 +308,3 @@ Design(enroll.period = 9,
        dropout.dist = "ExpoDist",
        dropout.dist.par = parameters(rate = 0.0115)) 
 {% endhighlight %}
-
-## User-defined functions
-
-If a certain distribution is not implemented in the Mediana package, the user can defined a custom distribution function. The user must follow the guidelines presented below to create valid custom functions.
-
-### Custom functions for defining distributions
-
-The following template must be used by the user to define a custom distribution function that can be used to specify an outcome, enrollment or dropout distribution in a data model. The distribution-specific components that should be modified if a different distribution needs to be implemented are identified in the comments.
-
-As an example, the following function is used to generate observations following the `Template` distribution that has two parameters, `parameter1` and `parameter2`.
-
-{% highlight R %}
-# Template of a function to generate observations
-TemplateDist = function(parameter) {
-
-  # Determine the function call, either to generate distribution or to return the distribution's description
-  call = (parameter[[1]] == "description")
-
-  # Generate random variables
-  if (call == FALSE) {
-    # The number of observations to generate
-    n = parameter[[1]]
-
-    ##############################################################
-    # Distribution-specific component
-    # Get the distribution's parameters (stored in the parameter[[2]] list)
-    parameter1 = parameter[[2]]$parameter1
-    parameter2 = parameter[[2]]$parameter2
-    ##############################################################
-
-    # Error checks (other checks could be added by the user if needed)
-    if (n%%1 != 0)
-      stop("Data model: TemplateDist distribution: Number of observations must be an integer.")
-    if (n <= 0)
-      stop("Data model: TemplateDist distribution: Number of observations must be positive.")
-
-    ##############################################################
-    # Distribution-specific component
-    # Observations are generated using the "fundist" function and assigned to the "result" object
-    result = fundist(n = n, parameter1 = parameter1, parameter2 = parameter2)
-    ##############################################################
-
-  } else {
-    # Provide information about the distribution function
-    if (call == TRUE) {
-
-      ##############################################################
-      # Distribution-specific component
-      # The labels of the distributional parameters and the distribution's label must be stored in the "result" list
-      result = list(list(parameter1 = "parameter1", parameter2 = "parameter2"),
-                    list("Template"))
-      ##############################################################
-
-    }
-  }
-  return(result)
-
-}
-{% endhighlight %}
-
-### Download 
-
-Click on the icon to download this template:
-
-<center>
-  <div class="col-md-12">
-    <a href="TemplateDist.R" class="img-responsive">
-      <img src="Logo_R.png" class="img-responsive" height="100">
-    </a>
-  </div>
-</center>

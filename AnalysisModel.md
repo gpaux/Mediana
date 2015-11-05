@@ -39,7 +39,7 @@ This object specifies a significance test that will be applied to one or more sa
 
 - `par` defines the parameter(s) of the statistical test.
 
-Several commonly used significance tests are already implemented in the Mediana package. In addition, the user can easily define custom significance tests. The built-in tests are listed below along with the required parameters that need to be included in the `par` argument:
+Several commonly used significance tests are already implemented in the Mediana package. In addition, the user can easily define custom significance tests (see [User-defined functions](CustomFunctions.html#User-definedfunctionsforAnalysisModel)). The built-in tests are listed below along with the required parameters that need to be included in the `par` argument:
 
 - `TTest`: perform the **two-sample t-test** between the two samples defined in the `samples` argument.
 
@@ -101,7 +101,7 @@ This object specifies a descriptive statistic that will be computed based on one
 
 - `par` defines the parameter(s) of the statistic.
 
-Several methods for computing descriptive statistics are already implemented in the Mediana package and the user can also define custom functions for computing descriptive statistics. These methods are shown below along with the required parameters that need to be defined in the `par` argument:
+Several methods for computing descriptive statistics are already implemented in the Mediana package and the user can also define custom functions for computing descriptive statistics (see [User-defined functions](CustomFunctions.html#User-definedfunctionsforAnalysisModel)). These methods are shown below along with the required parameters that need to be defined in the `par` argument:
 
 - `MedianStat`: compute the **median** of the sample defined in the `samples` argument.
 
@@ -309,11 +309,11 @@ analysis.model = AnalysisModel() +
 {% endhighlight %}
 
 
-### `MultAdj` function
+### `MultAdj` object
 
 #### Description
 
-This function can be used to combine several `MultAdjProc` or  `MultAdjStrategy` objects and add them as a single object to an `AnalysisModel` object . This function is provided mainly for convenience and its use is optional.  Alternatively, `MultAdjProc` or `MultAdjStrategy` objects can be added to an `AnalysisModel` object incrementally using the '+' operator.
+This object can be used to combine several `MultAdjProc` or  `MultAdjStrategy` objects and add them as a single object to an `AnalysisModel` object . This object is provided mainly for convenience and its use is optional.  Alternatively, `MultAdjProc` or `MultAdjStrategy` objects can be added to an `AnalysisModel` object incrementally using the '+' operator.
 
 For more information about the `MultAdj` object, see the package's documentation [MultAdj](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
 
@@ -358,72 +358,3 @@ analysis.model = AnalysisModel() +
                       method = "TTest")
 
 {% endhighlight %}
-
-## User-defined functions 
-
-If a significance test, descriptive statistic or multiplicity adjustment procedure is not included in the Mediana package, the user can easily define a custom function that implements a test, computes a descriptive statistic or performs a multiplicity adjustment. The user must follow the guidelines presented below to create valid custom functions.
-
-### Custom functions for implementing a significance test
-
-The following template must be used by the user to define a function that implements a significance test in an analysis model. The test-specific components that need to be modified if the user wishes to implement a different test are identified in the comments.
-
-As an example, the function defined below carries out a test named `TemplateTest` with a single required parameter labeled `parameter1`.
-
-{% highlight R %}
-# Template of a function to perform a significance test
-TemplateTest = function(sample.list, parameter) {
-
-  # Determine the function call, either to generate the p-value or to return description
-  call = (parameter[[1]] == "Description")
-
-  # Perform the test
-  if (call == FALSE | is.na(call)) {
-
-    ##############################################################
-    # Test-specific component
-    # Get the test's parameter (stored in the parameter[[2]] list)
-    if (is.na(parameter[[2]]$parameter1))
-      stop("Analysis model: TemplateTest test: parameter1 must be specified.")
-
-    parameter1 = parameter[[2]]$parameter1
-    ##############################################################
-
-
-    # Sample list is assumed to include two data frames that represent two analysis samples
-
-    # Outcomes in Sample 1
-    outcome1 = sample.list[[1]][, "outcome"]
-    # Remove the missing values due to dropouts/incomplete observations
-    outcome1.complete = outcome1[stats::complete.cases(outcome1)]
-
-    # Outcomes in Sample 2
-    outcome2 = sample.list[[2]][, "outcome"]
-    # Remove the missing values due to dropouts/incomplete observations
-    outcome2.complete = outcome2[stats::complete.cases(outcome2)]
-
-    ##############################################################
-    # Test-specific component
-    # The function must return a one-sided p-value (the treatment effect in sample 2 is expected to be numerically larger than the treatment effect in sample 1)
-    # The one-sided p-value is computed by calling the "funtest" function and saved in the "result" object
-    result = funtest(outcome2.complete, outcome1.complete, parameter1)$p.value
-    ##############################################################
-  }
-  else if (call == TRUE) {
-    result = list("TemplateTest", "Parameter1 = ")
-  }
-
-  return(result)
-}
-{% endhighlight %}
-
-### Download 
-
-Click on the icon to download this template:
-
-<center>
-  <div class="col-md-12">
-    <a href="TemplateTest.R" class="img-responsive">
-      <img src="Logo_R.png" class="img-responsive" height="100">
-    </a>
-  </div>
-</center>

@@ -1,17 +1,17 @@
-# Template of a function to perform a significance test
-TemplateTest = function(sample.list, parameter) {
+# Template of a function to perform a descriptive statistic
+TemplateStatistic = function(sample.list, parameter) {
 
-  # Determine the function call, either to generate the p-value or to return description
+  # Determine the function call, either to generate the statistic or to return description
   call = (parameter[[1]] == "Description")
 
   # Perform the test
   if (call == FALSE | is.na(call)) {
 
     ##############################################################
-    # Test-specific component
-    # Get the test's parameter (stored in the parameter[[2]] list)
+    # Statistic-specific component
+    # Get the statistic's parameter (stored in the parameter[[2]] list)
     if (is.na(parameter[[2]]$parameter1))
-      stop("Analysis model: TemplateTest test: parameter1 must be specified.")
+      stop("Analysis model: TemplateStatistic statistic: parameter1 must be specified.")
 
     parameter1 = parameter[[2]]$parameter1
     ##############################################################
@@ -30,14 +30,14 @@ TemplateTest = function(sample.list, parameter) {
     outcome2.complete = outcome2[stats::complete.cases(outcome2)]
 
     ##############################################################
-    # Test-specific component
-    # The function must return a one-sided p-value (the treatment effect in sample 2 is expected to be numerically larger than the treatment effect in sample 1)
-    # The one-sided p-value is computed by calling the "funtest" function and saved in the "result" object
-    result = funtest(outcome2.complete, outcome1.complete, parameter1)$p.value
+    # Statistic-specific component
+    # The function must return a single value
+    # The statistic is computed by calling the "funstat" function and saved in the "result" object
+    result = funstat(outcome1.complete, outcome2.complete, parameter1)$statistic
     ##############################################################
   }
   else if (call == TRUE) {
-    result = list("TemplateTest", "Parameter1 = ")
+    result = list("TemplateStatistic", "Parameter1 = ")
   }
 
   return(result)
