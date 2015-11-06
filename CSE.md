@@ -1,22 +1,22 @@
 ---
 layout: page
-title: CSE
-header: CSE
+title: Clinical Scenario Evaluation
+header: Clinical Scenario Evaluation
 group: navigation
 ---
 {% include JB/setup %}
 
 ## Summary
 
-Clinical Scenario Evaluation (CSE) is performed based on the data, analysis and evaluation models as well as simulation parameters specified by the user. The simulation parameters are defined using the `SimParameter` object.
+Clinical Scenario Evaluation (CSE) is performed based on the data, analysis and evaluation models as well as simulation parameters specified by the user. The simulation parameters are defined using the `SimParameters` object.
 
 ## Clinical Scenario Evaluation
 
-### SimParameters
+### `SimParameters` object
 
 #### Description
 
-The `SimParameter` object is a required argument of the `CSE` function and has the following arguments:
+The `SimParameters` object is a required argument of the `CSE` function and has the following arguments:
 
 - `n.sims` defines the number of simulations.
 - `seed` defines the seed to be used in the simulations.
@@ -34,7 +34,7 @@ The `proc.load` argument is used to define the number of processor cores dedicat
 
 #### Examples
 
-Examples of `SimParameter` object specification:
+Examples of `SimParameters` object specification:
 
 Perform 10000 simulations using all available processor cores:
 
@@ -53,7 +53,7 @@ SimParameters(n.sims = 10000,
 {% endhighlight %}
 
 
-### CSE
+### `CSE` function
 
 #### Description
 
@@ -138,5 +138,5 @@ The simulation results can be summarized in the R console using the `summary` fu
 summary(case.study1.results)
 {% endhighlight %}
 
-A Microsoft Word-based simulation report can be generated from the simulation results produced by the `CSE` function using the `GenerateReport` function, see [Reporting](Reporting.html).
+A Microsoft Word-based simulation report can be generated from the simulation results produced by the `CSE` function using the `GenerateReport` function, see [Simulation report](Reporting.html).
 
