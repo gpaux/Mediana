@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Reporting
-header: Reporting
+title: Simulation report
+header: Simulation report
 group: navigation
 ---
 {% include JB/setup %}
