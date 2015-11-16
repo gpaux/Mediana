@@ -21,7 +21,7 @@ Data models define the process of generating patients data in a clinical trial.
 
 \code{DataModel()} is used to create an object of class \code{DataModel} incrementally, using the '+' operator to add objects to the existing \code{DataModel} object. The advantage is to explicitely define which objects are added to the \code{DataModel} object. Initialization with \code{DataModel()} is highly recommended.
 
-Objects of class \code{OutcomeDist}, \code{SampleSize}, \code{Sample} and \code{Design} can be added to an object of class \code{DataModel}.
+Objects of class \code{OutcomeDist}, \code{SampleSize}, \code{Sample}, \code{Event} and \code{Design} can be added to an object of class \code{DataModel}.
 }
 
 \references{
