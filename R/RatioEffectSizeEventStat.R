@@ -1,10 +1,10 @@
 ######################################################################################################################
 
-# Compute the ratio of effect sizes for continuous based on non-missing values in the combined sample
+# Compute the ratio of effect sizes for HR (time-to-event) based on non-missing values in the combined sample
 
 RatioEffectSizeEventStat = function(sample.list, parameter) {
 
-  # Determine the function call, either to generate the p-value or to return description
+  # Determine the function call, either to generate the statistic or to return description
   call = (parameter[[1]] == "Description")
 
   if (call == FALSE | is.na(call)) {

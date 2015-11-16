@@ -4,7 +4,7 @@
 
 MinStat = function(sample.list, parameter) {
 
-  # Determine the function call, either to generate the p-value or to return description
+  # Determine the function call, either to generate the statistic or to return description
   call = (parameter[[1]] == "Description")
 
   if (call == FALSE | is.na(call)) {

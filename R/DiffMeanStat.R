@@ -1,6 +1,6 @@
 ######################################################################################################################
 
-# Compute the difference of means between two samples for continuous based on non-missing values in the combined sample
+# Compute the difference of means between two samples for continuous variable based on non-missing values in the combined sample
 
 DiffMeanStat = function(sample.list, parameter) {
 
