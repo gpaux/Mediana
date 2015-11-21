@@ -25,6 +25,17 @@ It is highly recommended to use this command as it will simplify the process of 
 
 Once the `DataModel` object has been initialized, components of the data model can be specified by adding objects to the model using the '+' operator as shown below.
 
+{% highlight R %}
+case.study1.data.model =  DataModel() +
+  OutcomeDist(outcome.dist = "NormalDist") +
+  SampleSize(c(50, 55, 60, 65, 70)) +
+  Sample(id = "Placebo",
+         outcome.par = parameters(outcome1.placebo, outcome2.placebo)) +
+  Sample(id = "Treatment",
+         outcome.par = parameters(outcome1.treatment, outcome2.treatment))
+{% endhighlight %}
+
+
 ### `OutcomeDist` object
 
 #### Description
@@ -58,6 +69,15 @@ Several distributions that can be specified using the `outcome.dist` argument ar
 - `MVExpoPFSOSDist`: generate data following a **multivariate exponential distribution to generate PFS and OS endpoints**. The PFS value is imputed to the OS value if the latter occurs earlier. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `rate`. The` corr` parameter specifies the correlation matrix for the endpoints.
 
 - `MVMixedDist`: generate data following a **multivariate mixed distribution**. Required parameters: `type`, `par` and `corr`. The `type` parameter assumes the following values: `NormalDist`, `BinomDist` and `ExpoDist`. For each generated endpoint, the `par` parameter must contain the required parameters according to the distribution type. The `corr` parameter specifies the correlation matrix for the endpoints.
+
+
+The `outcome.type` argument defines the outcome's type. This argument accepts only two values:
+
+- `standard`: for fixed design setting.
+
+- `event`: for event-driven design setting.
+
+The outcome's type must be defined for each endpoint in case of multivariate disribution, e.g. `c("event","event")` in case of multivariate exponential distribution. The `outcome.type` argument is essential to get censored events for time-to-event endpoints if the `SampleSize` object is used to specify the number of patients to generate.
 
 A single `OutcomeDist` object can be added to a `DataModel` object.
 
@@ -93,7 +113,7 @@ OutcomeDist(outcome.dist = "MVMixedDist")
 
 #### Description
 
-This object specifies parameters of a sample (e.g., treatment arm in a trial) in a data model. A `Sample` object is defined by three arguments:
+This object specifies parameters of a sample (e.g., treatment arm in a trial) in a data model. Samples are defined as mutually exclusive groups of patients, for example, treatment arms. A `Sample` object is defined by three arguments:
 
 - `id` defines the sample's unique ID (label).
 
