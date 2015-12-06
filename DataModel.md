@@ -26,6 +26,15 @@ It is highly recommended to use this command as it will simplify the process of 
 Once the `DataModel` object has been initialized, components of the data model can be specified by adding objects to the model using the '+' operator as shown below.
 
 {% highlight R %}
+# Outcome parameter set 1
+outcome1.placebo = parameters(mean = 0, sd = 70)
+outcome1.treatment = parameters(mean = 40, sd = 70)
+
+# Outcome parameter set 2
+outcome2.placebo = parameters(mean = 0, sd = 70)
+outcome2.treatment = parameters(mean = 50, sd = 70)
+
+# Data model
 case.study1.data.model =  DataModel() +
   OutcomeDist(outcome.dist = "NormalDist") +
   SampleSize(c(50, 55, 60, 65, 70)) +

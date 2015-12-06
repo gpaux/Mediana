@@ -25,6 +25,17 @@ It is highly recommended to use this command to initialize an analysis model as 
 
 After an `AnalysisModel` object has been initialized, components of the analysis model can be specified by adding objects to the model using the '+' operator as shown below.
 
+{% highlight R %}
+# Analysis model
+case.study1.analysis.model = AnalysisModel() +
+  Test(id = "Placebo vs treatment",
+       samples = samples("Placebo", "Treatment"),
+       method = "TTest") +
+  Statistic(id = "Mean Treatment",
+            method = "MeanStat",
+            samples = samples("Treatment"))
+{% endhighlight %}
+
 ### `Test` object
 
 #### Description
