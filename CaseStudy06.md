@@ -284,12 +284,28 @@ GenerateReport(presentation.model = case.study6.presentation.model3,
 Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
-  <div class="col-md-6">
-    <a href="Case study 6.docx" class="img-responsive">
+  <div class="col-md-3">
+    <a href="Case study 6 - Combined Sections.docx" class="img-responsive">
       <img src="Logo_Microsoft_Word.png" class="img-responsive" height="100">
     </a>
+	<br>
+	Report without subsections
   </div>
-  <div class="col-md-6">
+  <div class="col-md-3">
+    <a href="Case study 6 - With subsections.docx" class="img-responsive">
+      <img src="Logo_Microsoft_Word.png" class="img-responsive" height="100">
+    </a>
+	<br>
+	Report with subsections
+  </div>
+  <div class="col-md-3">
+    <a href="Case study 6 - Combined Sections.docx" class="img-responsive">
+      <img src="Logo_Microsoft_Word.png" class="img-responsive" height="100">
+    </a>
+	<br>
+	Report with combined subsections
+  </div>
+  <div class="col-md-3">
     <a href="Case study 6.R" class="img-responsive">
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
