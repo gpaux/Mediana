@@ -13,7 +13,7 @@ Mediana is an R package which provides a general framework for clinical trial si
 
 **Package design**: Alex Dmitrienko (Quintiles).
 
-**Core development team**: [Gautier Paux (Servier)](mailto: gautier@paux.fr), Alex Dmitrienko (Quintiles).
+**Core development team**: [Gautier Paux (Servier)](http://www.linkedin.com/in/pauxgautier), Alex Dmitrienko (Quintiles).
 
 **Extended development team**: Thomas Brechenmacher (Novartis), Fei Chen (Johnson and Johnson), Ilya Lipkovich (Quintiles), Ming-Dauh Wang (Lilly), Jay Zhang (MedImmune), Haiyan Zheng (Osaka University).
 
