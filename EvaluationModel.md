@@ -25,6 +25,7 @@ It is highly recommended to use this command to initialize an evaluation model b
 
 After an `EvaluationModel` object has been initialized, components of the evaluation model can be specified by adding objects to the model using the '+' operator as shown below.
 
+{% highlight R %}
 # Evaluation model
 case.study1.evaluation.model = EvaluationModel() +
   Criterion(id = "Marginal power",
@@ -36,6 +37,7 @@ case.study1.evaluation.model = EvaluationModel() +
             method = "MeanSumm",
             statistics = statistics("Mean Treatment"),
             labels = c("Average Mean Treatment"))
+{% endhighlight %}
 
 ### `Criterion` object
 
