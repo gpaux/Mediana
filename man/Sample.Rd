@@ -30,7 +30,7 @@ Mandatory arguments are \code{id} and \code{outcome.par}. The \code{sample.size}
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

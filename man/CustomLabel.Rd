@@ -33,7 +33,7 @@ The argument \code{param} only accepts the following values:
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

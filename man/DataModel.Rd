@@ -25,7 +25,7 @@ Objects of class \code{OutcomeDist}, \code{SampleSize}, \code{Sample}, \code{Eve
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

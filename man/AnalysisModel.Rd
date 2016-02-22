@@ -23,7 +23,7 @@ Analysis models define statistical methods that are applied to the study data in
 Objects of class \code{Test}, \code{MultAdjProc}, \code{MultAdjStrategy}, \code{MultAdj} and \code{Statistic} can be added to an object of class \code{AnalysisModel}.
 }
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 \seealso{
 See Also \code{\link{Test}}, \code{\link{MultAdjProc}}, \code{\link{MultAdjStrategy}}, \code{\link{MultAdj}} and \code{\link{Statistic}}.

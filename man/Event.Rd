@@ -23,7 +23,7 @@ This function can be used if the number of events needs to be fixed in an event-
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

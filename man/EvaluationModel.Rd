@@ -25,7 +25,7 @@ Object of Class \code{Criterion} can be added to an object of class \code{Evalua
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

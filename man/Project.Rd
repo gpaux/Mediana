@@ -28,7 +28,7 @@ Objects of class \code{Project} are used in objects of class \code{PresentationM
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

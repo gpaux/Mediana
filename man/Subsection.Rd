@@ -31,7 +31,7 @@ A object of class \code{Subsection} must be added to an object of class \code{Pr
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

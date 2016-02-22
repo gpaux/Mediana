@@ -34,13 +34,14 @@ Objects of class \code{MultAdjProc} are used in objects of class \code{AnalysisM
 \item \code{NormalParamAdj}: Parametric multiple testing procedure derived from a multivariate normal distribution. Required parameter: \code{corr}. Optional parameter: \code{weight}.
 \item \code{ParallelGatekeepingAdj}: Family of parallel gatekeeping procedures. Required parameters: \code{family}, \code{proc}, \code{gamma}.
 \item \code{MultipleSequenceGatekeepingAdj}: Family of multiple-sequence gatekeeping procedures. Required parameters: \code{family}, \code{proc}, \code{gamma}.
+\item \code{MixtureGatekeepingAdj}: Family of mixture-based gatekeeping procedures. Required parameters: \code{family}, \code{proc}, \code{gamma}, \code{serial}, \code{parallel}.
 }
 
 If no \code{tests} are defined, the multiplicity adjustment procedure will be applied to all tests defined in the AnalysisModel.
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

@@ -35,7 +35,7 @@ The \code{proc.load} argument is used to define the number of clusters dedicated
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

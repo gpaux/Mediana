@@ -25,7 +25,7 @@ Objects of class \code{Project}, \code{Section}, \code{Subsection}, \code{Table}
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

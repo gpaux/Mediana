@@ -53,7 +53,7 @@ The outcome's type must be defined for each endpoint in case of multivariate dis
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

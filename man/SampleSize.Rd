@@ -22,7 +22,7 @@ Either objects of class \code{Event} or \code{SampleSize} can be added to an obj
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

@@ -23,7 +23,7 @@ Objects of class \code{MultAdjProc} or \code{MultAdjStrategy} can be added to an
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

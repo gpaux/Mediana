@@ -49,7 +49,7 @@ Objects of class \code{Statistic} are used in objects of class \code{AnalysisMod
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

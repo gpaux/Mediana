@@ -25,5 +25,5 @@ defines character strings to be passed into the function.
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }

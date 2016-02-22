@@ -44,7 +44,7 @@ Note that the length of the enrollment period, total study duration and follow-u
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

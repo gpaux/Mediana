@@ -43,7 +43,7 @@ It is to be noted that the statistical tests implemented are one-sided.
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

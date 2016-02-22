@@ -21,7 +21,7 @@ Objects of class \code{MultAdjStrategy} are used in objects of class \code{Analy
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

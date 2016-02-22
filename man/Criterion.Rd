@@ -46,7 +46,7 @@ Mandatory arguments are \code{id}, \code{method}, \code{labels} and \code{tests}
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{

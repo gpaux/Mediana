@@ -29,7 +29,7 @@ This function requires the package \code{ReporteRs}. A customized template can b
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+http://gpaux.github.io/Mediana/
 }
 
 \seealso{

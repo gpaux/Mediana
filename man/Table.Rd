@@ -29,7 +29,7 @@ One or several parameters can be defined in the \code{by} argument:
 }
 
 \references{
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 }
 
 \seealso{
