@@ -197,7 +197,7 @@ Several commonly used multiplicity adjustment procedures are included in the Med
 - `MultipleSequenceGatekeepingAdj`: Family of **multiple-sequence gatekeeping procedures**. Required parameters: `family` (vectors of hypotheses included in each family), `proc` (vector of procedure names applied to each family), `gamma` (vector of truncation parameters).
 
 - `MixtureGatekeepingAdj`: Family of **mixture-based gatekeeping procedures**. Required parameters: `family` (vectors of hypotheses included in each family), `proc` (vector of procedure names applied to each family), `gamma` (vector of truncation parameters), `serial` (matrix of indicators), `parallel` (matrix of indicators).
-- 
+
 Several `MultAdjProc` objects can be added to an `AnalysisModel`object using the '+' operator or by grouping them into a MultAdj object.
 
 For more information about the `MultAdjProc` object, see the package's documentation [MultAdjProc](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
