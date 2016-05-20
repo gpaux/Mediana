@@ -25,7 +25,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
   }
 
   # Create a DOCX object
-  if (!missing(report.template)) {
+  if (!is.null(report.template)) {
     doc = docx(title = report.structure$title, template = report.template)
   } else {
     # Use standard template
@@ -42,8 +42,8 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
   header.cellProperties = cellProperties(border.left.width = 0, border.right.width = 0, border.bottom.width = 2, border.top.width = 2, padding = 5, background.color = "#eeeeee")
   data.cellProperties = cellProperties(border.left.width = 0, border.right.width = 0, border.bottom.width = 1, border.top.width = 0, padding = 3)
 
-  header.textProperties = textProperties(font.size = 10, font.weight = "bold")
-  data.textProperties = textProperties(font.size = 10)
+  header.textProperties = textProperties(font.size = 11, font.weight = "bold", font.family = "Calibri")
+  data.textProperties = textProperties(font.size = 11, font.family = "Calibri")
 
   leftPar = parProperties(text.align = "left")
   rightPar = parProperties(text.align = "right")
@@ -112,7 +112,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
                         },
                         table = {
                           header.columns = (is.null(param$groupedheader.row))
-                          summary_table = FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns )
+                          summary_table = FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns, body.text.props =  data.textProperties, header.text.props = header.textProperties)
                           if (!is.null(param$span.columns)) {
                             for (ind.span in 1:length(param$span.columns)){
                               summary_table = spanFlexTableRows(summary_table, j = param$span.columns[ind.span], runs = as.character(value[,ind.span]) )
@@ -161,7 +161,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
                       },
                       table = {
                         header.columns = (is.null(param$groupedheader.row))
-                        summary_table = FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns )
+                        summary_table = FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns, body.text.props =  data.textProperties, header.text.props = header.textProperties)
                         if (!is.null(param$span.columns)) {
                           for (ind.span in 1:length(param$span.columns)){
                             summary_table = spanFlexTableRows(summary_table, j = param$span.columns[ind.span], runs = as.character(value[,ind.span]) )
@@ -212,7 +212,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
                   },
                   table = {
                     header.columns = (is.null(param$groupedheader.row))
-                    summary_table = FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns )
+                    summary_table = FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns, body.text.props =  data.textProperties, header.text.props = header.textProperties)
                     if (!is.null(param$span.columns)) {
                       for (ind.span in 1:length(param$span.columns)){
                         summary_table = spanFlexTableRows(summary_table, j = param$span.columns[ind.span], runs = as.character(value[,ind.span]) )

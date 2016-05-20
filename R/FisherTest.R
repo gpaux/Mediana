@@ -12,7 +12,6 @@ FisherTest = function(sample.list, parameter) {
   if (call == FALSE | is.na(call)) {
 
     # Sample list is assumed to include two data frames that represent two analysis samples
-
     # Outcomes in Sample 1
     outcome1 = sample.list[[1]][, "outcome"]
     # Remove the missing values due to dropouts/incomplete observations
@@ -22,14 +21,13 @@ FisherTest = function(sample.list, parameter) {
     outcome2 = sample.list[[2]][, "outcome"]
     # Remove the missing values due to dropouts/incomplete observations
     outcome2.complete = outcome2[stats::complete.cases(outcome2)]
-
+    
     # Contingency table
     contingency.data = rbind(cbind(2, outcome2.complete), cbind(1, outcome1.complete))
-    contingency.table = table(utils::data[, 1], utils::data[, 2])
-
-
+    contingency.table = table(contingency.data[, 1], contingency.data[, 2])
     # One-sided p-value (treatment effect in sample 2 is expected to be greater than in sample 1)
     result = stats::fisher.test(contingency.table, alternative = "greater")$p.value
+    
   }
   else if (call == TRUE) {
 

@@ -11,10 +11,10 @@ TTestNI = function(sample.list, parameter) {
 
   if (call == FALSE | is.na(call)) {
 
-    if (is.na(parameter[[2]]))
+    if (is.null(parameter[[2]]$margin))
       stop("Analysis model: TTestNI test: Non-inferiority margin must be specified.")
 
-    margin = as.numeric(parameter[[2]])
+    margin = as.numeric(parameter[[2]]$margin)
 
 
     # Sample list is assumed to include two data frames that represent two analysis samples

@@ -11,22 +11,17 @@ NormalParamAdj = function(p, par) {
   # Determine the function call, either to generate the p-value or to return description
   call = (par[[1]] == "Description")
 
-
   if (any(call == FALSE) | any(is.na(call))) {
-    # Number of p-values
-    p = unlist(p)
-    m = length(p)
-
-
     # Extract the vector of hypothesis weights (1 x m) and correlation matrix (m x m)
     # If the first parameter is a matrix and no weights are provided, the hypotheses are assumed to be equally weighted
     if (is.null(par[[2]]$weight)) {
       w = rep(1/m, m)
     } else {
       w = unlist(par[[2]]$weight)
-      if (is.null(par[[2]]$corr)) stop("Analysis model: Parametric multiple testing procedure: Correlation matrix must be specified.")
-      corr = par[[2]]$corr
     }
+    
+    if (is.null(par[[2]]$corr)) stop("Analysis model: Parametric multiple testing procedure: Correlation matrix must be specified.")
+    corr = par[[2]]$corr
 
     # Error checks
     if (length(w) != m) stop("Analysis model: Parametric multiple testing procedure: Length of the weight vector must be equal to the number of hypotheses.")
@@ -47,13 +42,18 @@ NormalParamAdj = function(p, par) {
     result = adjpvalue
   }
   else if (call == TRUE) {
+    # Number of p-values
+    p = unlist(p)
+    m = length(p)
+    
     if (is.null(par[[2]]$weight)) {
       w = rep(1/m, m)
     } else {
       w = unlist(par[[2]]$weight)
-      if (is.null(par[[2]]$corr)) stop("Analysis model: Parametric multiple testing procedure: Correlation matrix must be specified.")
-      corr = par[[2]]$corr
     }
+    if (is.null(par[[2]]$corr)) stop("Analysis model: Parametric multiple testing procedure: Correlation matrix must be specified.")
+    corr = par[[2]]$corr
+    
     weight = paste0("Hypothesis weights={", paste(round(w, 3), collapse = ","),"}")
     corr = paste0("Correlation matrix={", paste(as.vector(t(corr)), collapse = ","),"}")
     result=list(list("Normal parametric multiple testing procedure"), list(weight,corr))
