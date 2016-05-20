@@ -12,6 +12,10 @@ NormalParamAdj = function(p, par) {
   call = (par[[1]] == "Description")
 
   if (any(call == FALSE) | any(is.na(call))) {
+    # Number of p-values
+    p = unlist(p)
+    m = length(p)
+    
     # Extract the vector of hypothesis weights (1 x m) and correlation matrix (m x m)
     # If the first parameter is a matrix and no weights are provided, the hypotheses are assumed to be equally weighted
     if (is.null(par[[2]]$weight)) {
