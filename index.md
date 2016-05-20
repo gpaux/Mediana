@@ -40,6 +40,13 @@ The up-to-date development version can be found and installed directly from the 
 devtools::install_github("gpaux/Mediana")
 {% endhighlight %}
 
+### Potential installation's issue
+
+When installing Mediana package, an error could occur if the latest version of Java is not installed. 
+
+Java is used in the ReporteRs R package. This package is required in the Mediana R package to [generate Word report](Reporting.html). In order to ensure a proper installation, it is highly recommended to install the latest version of Java in the same architecture of R (32-bit or 64-bit). 
+
+The latest version can be found at [https://www.java.com/en/download/manual.jsp](https://www.java.com/en/download/manual.jsp).
 
 ## Clinical Scenario Evaluation Framework
 

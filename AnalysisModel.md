@@ -54,11 +54,13 @@ Several commonly used significance tests are already implemented in the Mediana 
 
 - `TTest`: perform the **two-sample t-test** between the two samples defined in the `samples` argument.
 
-- `TTestNI`: perform the **non-inferiority two-sample t-test** between the two samples defined in the `samples` argument. Required parameter: `delta` (positive non-inferiority margin).
+- `TTestNI`: perform the **non-inferiority two-sample t-test** between the two samples defined in the `samples` argument. Required parameter: `margin` (positive non-inferiority margin).
 
 - `WilcoxTest`: perform the **Wilcoxon-Mann-Whitney test** between the two samples defined in the `samples` argument.
 
 - `PropTest`: perform the **two-sample test for proportions** between the two samples defined in the `samples` argument. Optional parameter: `yates` (Yates' continuity correction flag that is set to `TRUE` or `FALSE`).
+
+- `PropTestNI`: perform the **non-inferiority two-sample test for proportions** between the two samples defined in the `samples` argument. Required parameter: `margin` (positive non-inferiority margin). Optional parameter: `yates` (Yates' continuity correction flag that is set to `TRUE` or `FALSE`).
 
 - `FisherTest`: perform the **Fisher exact test** between the two samples defined in the `samples` argument.
 
