@@ -247,6 +247,7 @@ CreateDataStructure = function(data.model) {
 
       if (is.null(data.model$general$design[[i]]$dropout.dist)) {
         dropout.dist = NA
+        dropout.dist.par = NA
       } else {
         dropout.dist = data.model$general$design[[i]]$dropout.dist
         if (!exists(dropout.dist)) {
@@ -255,12 +256,21 @@ CreateDataStructure = function(data.model) {
           if (!is.function(get(as.character(dropout.dist), mode = "any")))
             stop(paste0("Data model: Dropout distribution function '", dropout.dist, "' does not exist."))
         }
-      }
-
-      if (is.null(data.model$general$design[[i]]$dropout.dist.par)) {
-        dropout.dist.par = NA
-      } else {
-        dropout.dist.par = data.model$general$design[[i]]$dropout.dist.par
+        
+        if (is.null(data.model$general$design[[i]]$dropout.dist.par)) {
+          stop(paste0("Data model: Dropout distribution parameter must be defined"))
+        } else{
+          dropout.dist.par = data.model$general$design[[i]]$dropout.dist.par
+          if (dropout.dist == "UniformDist") {
+            if (is.null(dropout.dist.par$prop)) {
+              stop(paste0("Data model: the proportion of dropout must be defined in the prop argument"))
+            } else{
+              if (dropout.dist.par$prop < 0 | dropout.dist.par$prop > 1) 
+                stop(paste0("Data model: the proportion of dropout must be between 0 and 1"))
+              
+            }
+          }
+        }
       }
 
       design.parameter.set[[i]] = list(enroll.period = enroll.period,

@@ -47,8 +47,9 @@ GeneratePatients = function(current.design.parameter, current.outcome, current.s
     if (!is.na(current.design.parameter$dropout.dist)) {
       # Uniform patient dropout times
       if (current.design.parameter$dropout.dist == "UniformDist") {
-        # Uniform distribution over [0, 1]
-        dropout.par = list(number, 1/current.design.parameter$dropout.dist.par)
+        # The parameter corresponds to the proportion of dropout
+        # Generate Uniform distribution between 0 and 1/proportion
+        dropout.par = list(number, list(max = 1/current.design.parameter$dropout.dist.par$prop))
         # Uniform distribution is expanded over the patient-specific periods
         patient.dropout.time = patient.start.time + (patient.end.time - patient.start.time) *
           unlist(lapply(list(dropout.par), "UniformDist"))

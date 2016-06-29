@@ -47,7 +47,12 @@ CreateTableDesign = function(data.structure, label = NULL) {
     design.table[i, 6] = design.parameter.set[[i]]$followup.period
     design.table[i, 7] = design.parameter.set[[i]]$study.duration
     if (!is.na(design.parameter.set[[i]]$dropout.dist)){
-      dropout.dist.desc = do.call(design.parameter.set[[i]]$dropout.dist,list(list("description",design.parameter.set[[i]]$dropout.dist.par)))
+      if (design.parameter.set[[i]]$dropout.dist != "UniformDist"){
+        dropout.dist.desc = do.call(design.parameter.set[[i]]$dropout.dist,list(list("description",design.parameter.set[[i]]$dropout.dist.par)))
+      } else {
+        dropout.dist.desc = do.call(design.parameter.set[[i]]$dropout.dist,list(list("description",list(max = 1/design.parameter.set[[i]]$dropout.dist.par$prop))))
+        dropout.dist.desc[[1]][[1]] = "prop"
+      }
       design.table[i, 8] = unlist(dropout.dist.desc[[2]])
       if (!is.na(design.parameter.set[[i]]$dropout.dist.par)){
         dropout.dist.npar = length(dropout.dist.desc[[1]][[1]])
