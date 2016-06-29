@@ -34,13 +34,15 @@ defines the total study duration in study designs with a variable follow-up peri
 }
   \item{dropout.dist}{defines the dropout distribution.
 }
-  \item{dropout.dist.par}{defines the parameters of the dropout distribution.
+  \item{dropout.dist.par}{defines the parameters of the dropout distribution. 
 }
 }
 \details{
 Objects of class \code{Design} are used in objects of class \code{DataModel} to specify the design parameters used in event-driven designs if the user is interested in modeling the enrollment (or accrual) and dropout (or loss to follow up) processes that will be applied to the Clinical Scenario. Several objects of class \code{Design} can be added to an object of class \code{DataModel}.
 
 Note that the length of the enrollment period, total study duration and follow-up periods are measured using the same time units.
+
+If \code{dropout.dist = "UniformDist"}, the \code{dropout.dist.par} should contains the dropout rate. This parameter must be specified using the \code{prop} parameter, such as \code{dropout.dist.par = parameters(prop = 0.1)} for a 10\% dropout rate. 
 }
 
 \references{
