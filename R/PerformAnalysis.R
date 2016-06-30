@@ -522,7 +522,7 @@ PerformAnalysis = function(data, analysis.model, sim.parameters) {
 
   # Stop the cluster
   parallel::stopCluster(cluster.mediana)
-  closeAllConnections()
+  #closeAllConnections()
 
   # Define the analysis scenario grid (unique combinations of the data and analysis scenario factors)
   analysis.scenario.grid = as.data.frame(matrix(0, n.data.scenarios * n.mult.adjust, 4))
