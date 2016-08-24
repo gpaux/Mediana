@@ -34,7 +34,7 @@ defines the total study duration in study designs with a variable follow-up peri
 }
   \item{dropout.dist}{defines the dropout distribution.
 }
-  \item{dropout.dist.par}{defines the parameters of the dropout distribution. 
+  \item{dropout.dist.par}{defines the parameters of the dropout distribution.
 }
 }
 \details{
@@ -42,7 +42,16 @@ Objects of class \code{Design} are used in objects of class \code{DataModel} to 
 
 Note that the length of the enrollment period, total study duration and follow-up periods are measured using the same time units.
 
-If \code{dropout.dist = "UniformDist"}, the \code{dropout.dist.par} should contains the dropout rate. This parameter must be specified using the \code{prop} parameter, such as \code{dropout.dist.par = parameters(prop = 0.1)} for a 10\% dropout rate. 
+If \code{enroll.dist = "UniformDist"}, the \code{enroll.dist.par} should be let to \code{NULL} (then enrollment distribution will be uniform during the enrollment period).
+
+If \code{enroll.dist = "BetaDist"}, the \code{enroll.dist.par} should contain the parameter of the beta distribution (\code{a} and \code{b}). These parameters must be derived according to the expected enrollment at a specific timepoint. For example, if half the patients are expected to be enrolled at 75\% of the enrollment period, the beta distribution is a \code{Beta(log(0.5)/log(0.75), 1)}. Generally, let \code{q} be the proportion of enrolled patients at \code{p}\% of the enrollment period, the Beta distribution can be derived as follows:
+\itemize{
+\item If \code{q} >  \code{p}, the Beta distribution is \code{Beta(a,1)} with \code{a = log(p) / log(q)}
+\item If \code{q} <  \code{p}, the Beta distribution is \code{Beta (1,b)} with \code{b = log(1-p) / log(1-q)}
+\item Otherwise the Beta distribution is \code{Beta(1,1)}
+}
+
+If \code{dropout.dist = "UniformDist"}, the \code{dropout.dist.par} should contain the dropout rate. This parameter must be specified using the \code{prop} parameter, such as \code{dropout.dist.par = parameters(prop = 0.1)} for a 10\% dropout rate.
 }
 
 \references{

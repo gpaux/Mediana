@@ -40,10 +40,14 @@ LogrankTest = function(sample.list, parameter) {
 
     # Apply log-rank test
     surv.test = survival::survdiff(survival::Surv(outcome, event) ~ treatment)
+    surv.fit = survival::survfit(survival::Surv(outcome, event) ~ treatment)
 
     # Compute one-sided p-value
     result = stats::pchisq(surv.test$chisq, df = 1, lower.tail = FALSE)/2
 
+    # Impute the p-value to 1 if the median of the sample 2 is lower than the median in sample 1
+    median = as.numeric(stats::quantile(surv.fit)$quantile[,'50'])
+    if (median[1] > median[2]) result = 1
   }
 
   else if (call == TRUE) {

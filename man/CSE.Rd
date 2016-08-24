@@ -13,7 +13,7 @@ CSE(data, analysis, evaluation, simulation)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{
-defines a \code{DataModel} object
+defines a \code{DataModel} or a \code{DataStack} object
 }
   \item{analysis}{
 defines an \code{AnalysisModel} object
@@ -42,7 +42,7 @@ Benda, N., Branson, M., Maurer, W., Friede, T. (2010). Aspects of modernizing dr
 }
 
 \seealso{
-See Also \code{\link{DataModel}}, \code{\link{AnalysisModel}}, \code{\link{EvaluationModel}}, \code{\link{SimParameters}}.
+See Also \code{\link{DataModel}}, \code{\link{DataStack}}, \code{\link{AnalysisModel}}, \code{\link{EvaluationModel}}, \code{\link{SimParameters}}.
 }
 \examples{
 \dontrun{
@@ -89,5 +89,26 @@ case.study1.results = CSE(case.study1.data.model,
 
 # Summary of the simulation results
 summary(case.study1.results)
+
+# Get the data generated for the simulation
+case.study1.data.stack = DataStack(data.model = case.study1.data.model,
+                                   sim.parameters = case.study1.sim.parameters)
+
+}
+
+
+\dontrun{
+#Alternatively, a DataStack object can be used in the CSE function
+# (not recommanded as the computational time is increased)
+
+# Generate data
+case.study1.data.stack = DataStack(data.model = case.study1.data.model,
+                                   sim.parameters = case.study1.sim.parameters)
+
+# Perform clinical scenario evaluation with data stack
+case.study1.results = CSE(case.study1.data.stack,
+                          case.study1.analysis.model,
+                          case.study1.evaluation.model,
+                          case.study1.sim.parameters)
 }
 }

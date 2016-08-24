@@ -21,6 +21,12 @@ GeneratePatients = function(current.design.parameter, current.outcome, current.s
       enroll.par = list(number, list(max = 1))
       # Uniform distribution is expanded over the enrollment period
       patient.start.time = current.design.parameter$enroll.period * sort(unlist(lapply(list(enroll.par), "UniformDist")))
+    } else if (current.design.parameter$enroll.dist == "BetaDist") {
+      # Beta patient start times
+      # Beta distribution parameters
+      enroll.par = list(number, current.design.parameter$enroll.dist.par)
+      # Beta distribution is expanded over the enrollment period
+      patient.start.time = current.design.parameter$enroll.period * sort(unlist(lapply(list(enroll.par), "BetaDist")))
     } else {
       # Non-uniform patient start times
       # List of enrollment parameters
@@ -158,11 +164,11 @@ GeneratePatients = function(current.design.parameter, current.outcome, current.s
     }
 
     # Create a data frame for the current sample and outcome
-    df = t(rbind(outcome,
-                 patient.start.time,
-                 patient.end.time,
-                 patient.dropout.time,
-                 patient.censor.indicator))
+    df = as.data.frame(t(rbind(outcome,
+                               patient.start.time,
+                               patient.end.time,
+                               patient.dropout.time,
+                               patient.censor.indicator)))
 
     colnames(df) = c("outcome",
                      "patient.start.time",

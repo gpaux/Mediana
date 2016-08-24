@@ -123,6 +123,9 @@ CreateReportStructure = function(evaluation, presentation.model){
   } else {
     mult.adj.desc = NA
   }
+  
+  # Create a summary table for the criterion
+  table.criterion = CreateTableCriterion(evaluation$evaluation.structure)
 
   # Section 1: General information
   ##################################
@@ -137,7 +140,7 @@ CreateReportStructure = function(evaluation, presentation.model){
   item6 = list(label = "Number of cores:", value = evaluation$sim.parameters$proc.load)
   item7 = list(label = "Start time:", value = evaluation$timestamp$start.time)
   item8 = list(label = "End time:", value = evaluation$timestamp$end.time)
-  item9 = list(label = "Duration (mins):", value = format(round(evaluation$timestamp$duration, digits = 2), digits = 2, nsmall = 2))
+  item9 = list(label = "Duration:", value = format(round(evaluation$timestamp$duration, digits = 2), digits = 2, nsmall = 2))
 
   # Create a subsection (set the title to NA to suppress the title)
   subsection[[1]] = list(title = "Project information", item = list(item1, item2, item3))
@@ -364,6 +367,38 @@ CreateReportStructure = function(evaluation, presentation.model){
 
   section[[3]] = list(title = "Analysis model", subsection = subsection)
 
+  # Section : Evaluation Model
+  ##############################
+  n.subsection = 0
+  
+  # Empty subsection list
+  subsection = list()
+  
+  # Empty subsubsection list
+  subsubsection = list()
+  
+  # Empty subsubsubsection list
+  subusbsubsection = list()
+  
+  # Criterion
+  if (!is.null(evaluation$evaluation.structure$criterion)){
+    n.subsection = n.subsection + 1
+    item1 = list(label = "Number of criteria: ",
+                 value = length(evaluation$evaluation.structure$criterion)
+    )
+    item2 = list(label = "Criteria",
+                 value =  table.criterion,
+                 type = "table"
+    )
+    
+    # Create a subsection
+    subsection[[n.subsection]] = list(title = "Criteria", item = list(item1, item2))
+    
+  }
+  
+  section[[4]] = list(title = "Evaluation model", subsection = subsection)
+  
+  
   # Section : Simulation results
   ##############################
 
@@ -376,44 +411,47 @@ CreateReportStructure = function(evaluation, presentation.model){
   # Empty subsubsubsection list
   subusbsubsection = list()
 
-  n.section = nrow(result.structure$section)
-  if (!is.null(result.structure$subsection)) n.subsection = nrow(result.structure$subsection)
-  else n.subsection = 0
+  n.subsection = nrow(result.structure$section)
+  if (!is.null(result.structure$subsection)) n.subsubsection = nrow(result.structure$subsection)
+  else n.subsubsection = 0
 
   # Get the names of the columns to span
   span = colnames(result.structure$table.structure[[1]]$results)[which(!(colnames(result.structure$table.structure[[1]]$results) %in% c("Criterion","Test/Statistic","Result")))]
 
   # Create each section
-  for (section.ind in 1:n.section){
-    table.result.section = result.structure$table.structure[unlist(lapply(result.structure$table.structure, function(x,ind.section=section.ind) {(x$section$number == ind.section) } ))]
-    # Empty subsection list
-    subsection = list()
-    if (n.subsection >0) {
-      for (subsection.ind in 1:n.subsection){
+  for (subsection.ind in 1:n.subsection){
+    table.result.subsection = result.structure$table.structure[unlist(lapply(result.structure$table.structure, function(x,ind.section=subsection.ind) {(x$section$number == ind.section) } ))]
+    # Empty subsubsection list
+    subsubsection = list()
+    if (n.subsubsection >0) {
+      for (subsubsection.ind in 1:n.subsubsection){
         # Result
         item1 = list(label = "Results summary",
-                     value =  table.result.section[[subsection.ind]]$results,
+                     value =  table.result.subsection[[subsubsection.ind]]$results,
                      type = "table",
                      param = list(span.columns = span)
         )
 
-        # Create a subsection
-        subsection[[subsection.ind]] = list(title = table.result.section[[subsection.ind]]$subsection$title, item = list(item1))
+        # Create a suv=bsubsection
+        subsubsection[[subsubsection.ind]] = list(title = table.result.subsection[[subsubsection.ind]]$subsection$title, item = list(item1))
       }
-      section[[3+section.ind]] = list(title = table.result.section[[subsection.ind]]$section$title, subsection = subsection)
+      subsection[[subsection.ind]] = list(title = table.result.subsection[[subsubsection.ind]]$section$title, subsubsection = subsubsection)
     }
     else {
       # Result
       item1 = list(label = "Results summary",
-                   value =  table.result.section[[1]]$results,
+                   value =  table.result.subsection[[1]]$results,
                    type = "table",
                    param = list(span.columns = span)
       )
-      subsection[[1]] = list(title = NA, item = list(item1))
-      section[[3+section.ind]] = list(title = table.result.section[[1]]$section$title, subsection = subsection)
+      subsubsection[[1]] = list(title = NA, item = list(item1))
+      subsection[[subsection.ind]] = list(title = table.result.subsection[[1]]$section$title, subsubsection = subsubsection)
     }
   }
 
+  section[[5]] = list(title = "Simulation results", subsection = subsection)
+  
+  
   # Include all sections in the report -- the report object is finalized
   report = list(title = "Clinical Scenario Evaluation", section = section)
 

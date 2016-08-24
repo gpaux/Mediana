@@ -211,7 +211,8 @@ CreateDataStack = function(data.model, n.sims, seed=NULL) {
             # Merge the previous generated data with the temporary data
             if (!is.null(df[[data.sample.index]])) {
               data.temp = lapply(mapply(rbind, lapply(df[[data.sample.index]], function(x) as.data.frame(x$data)), lapply(df.temp[[data.sample.index]], function(x) as.data.frame(x$data)), SIMPLIFY=FALSE), function(x) as.matrix(x))
-              df[[data.sample.index]] = mapply(function(x,y) {return(list(id=x$id, outcome.type = x$outcome.type, data = as.matrix(y, row.names = NULL)))}, x=df[[data.sample.index]], y=data.temp, SIMPLIFY=FALSE)
+              #df[[data.sample.index]] = mapply(function(x,y) {return(list(id=x$id, outcome.type = x$outcome.type, data = as.matrix(y, row.names = NULL)))}, x=df[[data.sample.index]], y=data.temp, SIMPLIFY=FALSE)
+              df[[data.sample.index]] = mapply(function(x,y) {return(list(id=x$id, outcome.type = x$outcome.type, data = as.data.frame(y)))}, x=df[[data.sample.index]], y=data.temp, SIMPLIFY=FALSE)
             } else {
               df[[data.sample.index]] = df.temp[[data.sample.index]]
             }
@@ -259,9 +260,11 @@ CreateDataStack = function(data.model, n.sims, seed=NULL) {
   data.stack = list(description = "data.stack",
                     data.set = data.set,
                     data.scenario.grid = data.scenario.grid,
-                    data.structure = data.structure,
-                    n.sims = n.sims,
-                    seed = seed)
+                    data.structure = data.structure
+                    #,
+                    #n.sims = n.sims,
+                    #seed = seed
+                    )
 
   class(data.stack) = "DataStack"
   return(data.stack)

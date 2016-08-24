@@ -8,10 +8,10 @@
 CSE.default = function(data, analysis, evaluation, simulation) {
 
   # Error check
-  if (!(class(data) %in% c("DataModel", "DataStack"))) stop("CSE: a DataModel object must be specified in the data parameter")
-  if (!(class(analysis) %in% c("AnalysisModel", "AnalysisStack"))) stop("CSE: an AnalysisModel object must be specified in the analysis parameter")
-  if (!(class(evaluation) %in% c("EvaluationModel"))) stop("CSE: an EvaluationModel object must be specified in the evaluation parameter")
-  if (!(class(simulation) %in% c("SimParameters"))) stop("CSE: a SimParameters object must be specified in the simulation parameter")
+  if (!(class(data) %in% c("DataModel", "DataStack"))) stop("CSE: a DataModel object must be specified in the data argument")
+  if (!(class(analysis) %in% c("AnalysisModel", "AnalysisStack"))) stop("CSE: an AnalysisModel object must be specified in the analysis argument")
+  if (!(class(evaluation) %in% c("EvaluationModel"))) stop("CSE: an EvaluationModel object must be specified in the evaluation argument")
+  if (!(class(simulation) %in% c("SimParameters"))) stop("CSE: a SimParameters object must be specified in the simulation argument")
 
   # Start time
   start.time = Sys.time()
@@ -346,7 +346,7 @@ CSE.default = function(data, analysis, evaluation, simulation) {
   end.time = Sys.time()
   timestamp  = list(start.time = start.time,
                     end.time = end.time,
-                    duration = difftime(end.time,start.time, units = "mins"))
+                    duration = difftime(end.time,start.time, units = "auto"))
 
   # Create the evaluation stack
   evaluation.stack = list(#description = "CSE",

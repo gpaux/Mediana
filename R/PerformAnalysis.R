@@ -16,8 +16,8 @@ PerformAnalysis = function(data, analysis.model, sim.parameters) {
     if (data$description == "data.stack") {
       call.CreateDataStructure  = FALSE
       data.stack = data
-      n.sims = data.stack$n.sims
-      seed = data.stack$seed
+      n.sims = data.stack$sim.parameters$n.sims
+      seed = data.stack$sim.parameters$seed
       data.structure = data.stack$data.structure
     } else {
       stop("The data object is not recognized.")
@@ -46,11 +46,11 @@ PerformAnalysis = function(data, analysis.model, sim.parameters) {
   if (!is.numeric(n.sims))
     stop("Number of simulation runs must be an integer.")
   if (length(n.sims) > 1)
-    stop("Number of simulations runs: Only one value must be specified.")
+    stop("Number of simulation runs: Only one value must be specified.")
   if (n.sims%%1 != 0)
-    stop("Number of simulations runs must be an integer.")
+    stop("Number of simulation runs must be an integer.")
   if (n.sims <= 0)
-    stop("Number of simulations runs must be positive.")
+    stop("Number of simulation runs must be positive.")
 
   # Seed
   if (is.null(sim.parameters$seed))

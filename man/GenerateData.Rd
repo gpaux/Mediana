@@ -1,0 +1,129 @@
+\name{GenerateData}
+\alias{GenerateData}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{Generate data
+}
+\description{
+This function generates data according to the specified data model.
+}
+\usage{
+GenerateData(data.model, sim.parameters)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{data.model}{
+defines a \code{DataModel} object.
+}
+  \item{sim.parameters}{
+defines a \code{SimParameters} object.
+}
+}
+\value{
+This function generates a data stack according to the data model and the simulation parameters objetcs. The object returned by the function is a DataStack object containing:
+  \item{description }{a description of the object.}
+  \item{data.set }{a list of size \code{n.sims} defined in the \code{sim.parameters} object.}
+  \item{data.data.scenario.grid }{a data frame indicating all data scenario according to the \code{DataModel} object.}
+  \item{data.structure }{a list containing the data structure according to the \code{DataModel} object.}
+  \item{sim.parameters }{a list containing the simulation parameters according to \code{SimParameters} object.}
+
+}
+
+\references{
+http://gpaux.github.io/Mediana/
+}
+
+\seealso{
+See Also \code{\link{DataModel}} and \code{\link{SimParameters}}.
+}
+\examples{
+\dontrun{
+# Generation of a DataStack object
+##################################
+
+# Outcome parameter set 1
+outcome1.placebo = parameters(mean = 0, sd = 70)
+outcome1.treatment = parameters(mean = 40, sd = 70)
+
+# Outcome parameter set 2
+outcome2.placebo = parameters(mean = 0, sd = 70)
+outcome2.treatment = parameters(mean = 50, sd = 70)
+
+# Data model
+case.study1.data.model = DataModel() +
+  OutcomeDist(outcome.dist = "NormalDist") +
+  SampleSize(c(50, 55, 60, 65, 70)) +
+  Sample(id = "Placebo",
+         outcome.par = parameters(outcome1.placebo, outcome2.placebo)) +
+  Sample(id = "Treatment",
+         outcome.par = parameters(outcome1.treatment, outcome2.treatment))
+
+
+# Simulation Parameters
+case.study1.sim.parameters = SimParameters(n.sims = 1000,
+                                           proc.load = 2,
+                                           seed = 42938001)
+
+# Generate data
+case.study1.data.stack = GenerateData(data.model = case.study1.data.model,
+                                      sim.parameters = case.study1.sim.parameters)
+
+# Print the data set generated in the 100th simulation run for the 2nd data scenario
+case.study1.data.stack$data.set[[100]]$data.scenario[[2]]
+}
+
+
+\dontrun{
+#Use of a DataStack object in the CSE function
+##############################################
+
+# Outcome parameter set 1
+outcome1.placebo = parameters(mean = 0, sd = 70)
+outcome1.treatment = parameters(mean = 40, sd = 70)
+
+# Outcome parameter set 2
+outcome2.placebo = parameters(mean = 0, sd = 70)
+outcome2.treatment = parameters(mean = 50, sd = 70)
+
+# Data model
+case.study1.data.model = DataModel() +
+  OutcomeDist(outcome.dist = "NormalDist") +
+  SampleSize(c(50, 55, 60, 65, 70)) +
+  Sample(id = "Placebo",
+         outcome.par = parameters(outcome1.placebo, outcome2.placebo)) +
+  Sample(id = "Treatment",
+         outcome.par = parameters(outcome1.treatment, outcome2.treatment))
+
+
+# Simulation Parameters
+case.study1.sim.parameters = SimParameters(n.sims = 1000,
+                                           proc.load = 2,
+                                           seed = 42938001)
+
+# Generate data
+case.study1.data.stack = GenerateData(data.model = case.study1.data.model,
+                                      sim.parameters = case.study1.sim.parameters)
+
+# Analysis model
+case.study1.analysis.model = AnalysisModel() +
+                             Test(id = "Placebo vs treatment",
+                                  samples = samples("Placebo", "Treatment"),
+                                  method = "TTest")
+
+# Evaluation model
+case.study1.evaluation.model = EvaluationModel() +
+                               Criterion(id = "Marginal power",
+                                         method = "MarginalPower",
+                                         tests = tests("Placebo vs treatment"),
+                                         labels = c("Placebo vs treatment"),
+                                         par = parameters(alpha = 0.025))
+
+# Simulation Parameters
+case.study1.sim.parameters = SimParameters(n.sims = 1000, proc.load = 2, seed = 42938001)
+
+# Perform clinical scenario evaluation
+case.study1.results = CSE(case.study1.data.stack,
+                          case.study1.analysis.model,
+                          case.study1.evaluation.model,
+                          case.study1.sim.parameters)
+}
+}

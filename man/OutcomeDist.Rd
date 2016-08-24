@@ -27,7 +27,9 @@ Several distribution are already implemented in the Mediana package (listed belo
 \item \code{UniformDist}: generate data following a univariate distribution. Required parameter: \code{max}.
 \item \code{NormalDist}: generate data following a normal distribution. Required parameters: \code{mean} and \code{sd}.
 \item \code{BinomDist}: generate data following a binomial distribution. Required parameter: \code{prop}.
+\item \code{BetaDist}: generate data following a beta distribution. Required parameter: \code{a}. and \code{b}.
 \item \code{ExpoDist}: generate data following an exponential distribution. Required parameter: \code{rate}.
+\item \code{TruncatedExpoDist}: generate data following a truncated exponential distribution. Required parameter: \code{rate} and \code{trunc}.
 \item \code{PoissonDist}: generate data following a Poisson distribution. Required parameter: \code{lambda}.
 \item \code{NegBinomDist}: generate data following a negative binomial distribution. Required parameters: \code{dispersion} and \code{mean}.
 \item \code{MVNormalDist}: generate data following a multivariate normal distribution. Required parameters: \code{par} and \code{corr}. For each generated endpoint, the \code{par} parameter must contain the required parameters \code{mean} and \code{sd}. The \code{corr} parameter specifies the correlation matrix for the endpoints.
