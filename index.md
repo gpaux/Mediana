@@ -9,7 +9,7 @@ tagline:
 
 ## New release !
 
-The version 1.0.3 of the Mediana R package has been released on xx August 2016. This latest stable version can be dowloade from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
+The version 1.0.3 of the Mediana R package has been released on 24 August 2016. This latest stable version can be dowloade from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
 
 - Addition of the Beta distribution (`BetaDist`, see [Data model](DataModel.html#OutcomeDistobject)).
 
