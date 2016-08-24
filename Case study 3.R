@@ -68,8 +68,8 @@ case.study3.evaluation.model = EvaluationModel() +
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters
-case.study3.sim.parameters =  SimParameters(n.sims = 1000, 
-                                            proc.load = "full", 
+case.study3.sim.parameters =  SimParameters(n.sims = 1000,
+                                            proc.load = "full",
                                             seed = 42938001)
 
 # Perform clinical scenario evaluation
@@ -85,9 +85,9 @@ case.study3.presentation.model = PresentationModel() +
           description = "Clinical trial in patients with asthma") +
   Section(by = c("outcome.parameter")) +
   Table(by = c("multiplicity.adjustment")) +
-  CustomLabel(param = "sample.size", 
+  CustomLabel(param = "sample.size",
               label= paste0("N = ",c(330, 340, 350))) +
-  CustomLabel(param = "multiplicity.adjustment", 
+  CustomLabel(param = "multiplicity.adjustment",
               label= "Hochberg adjustment")
 
 # Report Generation
@@ -95,3 +95,6 @@ GenerateReport(presentation.model = case.study3.presentation.model,
                cse.results = case.study3.results,
                report.filename = "Case study 3.docx")
 
+# Get the data generated in the CSE
+case.study3.data.stack = DataStack(data.model = case.study3.data.model,
+                                   sim.parameters = case.study3.sim.parameters)

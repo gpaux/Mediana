@@ -22,7 +22,7 @@ dropout.par = parameters(rate = 0.0115)
 
 # Data model
 case.study1.data.model = DataModel() +
-  OutcomeDist(outcome.dist = "ExpoDist", 
+  OutcomeDist(outcome.dist = "ExpoDist",
               outcome.type = "event") +
   Event(n.events = event.count.total, rando.ratio = randomization.ratio) +
   Design(enroll.period = 9,
@@ -70,8 +70,8 @@ case.study1.evaluation.model = EvaluationModel() +
             labels = c("Mean Patients Placebo", "Mean Patients Treatment"))
 
 # Simulation Parameters
-case.study1.sim.parameters =  SimParameters(n.sims = 1000, 
-                                            proc.load = "full", 
+case.study1.sim.parameters =  SimParameters(n.sims = 1000,
+                                            proc.load = "full",
                                             seed = 42938001)
 
 # Perform clinical scenario evaluation
@@ -93,3 +93,6 @@ GenerateReport(presentation.model = case.study1.presentation.model,
                cse.results = case.study1.results,
                report.filename = "Case study 1 (survival-type endpoint with censoring).docx")
 
+# Get the data generated in the CSE
+case.study1.data.stack = DataStack(data.model = case.study1.data.model,
+                                   sim.parameters = case.study1.sim.parameters)

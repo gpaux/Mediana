@@ -247,6 +247,8 @@ The Word-based simulation report is structured as follows:
 1. ANALYSIS MODEL
 	1. TESTS
 	2. MULTIPLICITY ADJUSTMENT
+1. EVALUATION MODEL
+	1. CRITERIA
 1. RESULTS
 	1. SECTION (if a `Section` object has been defined)
 		1. SUBSECTION (if a `Subsection` object has been defined)

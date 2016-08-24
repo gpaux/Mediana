@@ -63,7 +63,11 @@ Several distributions that can be specified using the `outcome.dist` argument ar
 
 - `BinomDist`: generate data following a **binomial distribution**. Required parameter: `prop`.
 
+- `BetaDist`: generate data following a **beta distribution**. Required parameter: `a` and `b`.
+
 - `ExpoDist`: generate data following an **exponential distribution**. Required parameter: `rate`.
+
+- `TruncatedExpoDist`: generate data following a **truncated exponential distribution**. Required parameter: `rate` an `trunc`.
 
 - `PoissonDist`: generate data following a **Poisson distribution**. Required parameter: `lambda`.
 
@@ -322,6 +326,16 @@ This object specifies the design parameters used in event-driven designs if the 
 Several `Design` objects can be added to a `DataModel` object.
 
 For more information about the `Design` object, see the package's documentation [Design](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+
+A convienient way to model non-uniform enrollment is to use a beta distribution (`BetaDist`). If `enroll.dist = "BetaDist"`, the `enroll.dist.par` should contain the parameter of the beta distribution (`a` and `b`). These parameters must be derived according to the expected enrollment at a specific timepoint. For example, if half the patients are expected to be enrolled at 75% of the enrollment period, the beta distribution is a `Beta(log(0.5)/log(0.75), 1)`. Generally, let `q` be the proportion of enrolled patients at `p`% of the enrollment period, the Beta distribution can be derived as follows:
+
+- If `q > p`, the Beta distribution is `Beta(a,1)` with `a = log(p) / log(q)`
+
+- If `q < p`, the Beta distribution is `Beta (1,b)` with `b = log(1-p) / log(1-q)`
+
+- Otherwise the Beta distribution is `Beta(1,1)`
+
+
 
 #### Example
 

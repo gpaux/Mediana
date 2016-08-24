@@ -33,8 +33,8 @@ case.study1.evaluation.model = EvaluationModel() +
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters
-case.study1.sim.parameters =  SimParameters(n.sims = 1000, 
-                                            proc.load = "full", 
+case.study1.sim.parameters =  SimParameters(n.sims = 1000,
+                                            proc.load = "full",
                                             seed = 42938001)
 
 # Perform clinical scenario evaluation
@@ -49,10 +49,15 @@ case.study1.presentation.model = PresentationModel() +
           description = "Clinical trial in patients with relapsing-remitting multiple sclerosis") +
   Section(by = c("outcome.parameter")) +
   Table(by = c("sample.size")) +
-  CustomLabel(param = "sample.size", 
+  CustomLabel(param = "sample.size",
               label= paste0("N = ", seq(100,150,10)))
 
 # Report Generation
 GenerateReport(presentation.model = case.study1.presentation.model,
                cse.results = case.study1.results,
                report.filename = "Case study 1 (count-type endpoint).docx")
+
+# Get the data generated in the CSE
+case.study1.data.stack = DataStack(data.model = case.study1.data.model,
+                                   sim.parameters = case.study1.sim.parameters)
+

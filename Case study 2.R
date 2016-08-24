@@ -39,7 +39,7 @@ case.study2.analysis.model = AnalysisModel() +
 
 # Custom evaluation criterion (Dose H and at least one of the two other doses are significant)
 case.study2.criterion = function(test.result, statistic.result, parameter) {
-  
+
   alpha = parameter
   significant = ((test.result[,3] <= alpha) & ((test.result[,1] <= alpha) | (test.result[,2] <= alpha)))
   power = mean(significant)
@@ -73,8 +73,8 @@ case.study2.evaluation.model = EvaluationModel() +
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters
-case.study2.sim.parameters =  SimParameters(n.sims = 1000, 
-                                            proc.load = "full", 
+case.study2.sim.parameters =  SimParameters(n.sims = 1000,
+                                            proc.load = "full",
                                             seed = 42938001)
 
 # Perform clinical scenario evaluation
@@ -89,10 +89,15 @@ case.study2.presentation.model = PresentationModel() +
           description = "Clinical trial in patients with schizophrenia") +
   Section(by = "outcome.parameter") +
   Table(by = "sample.size") +
-  CustomLabel(param = "sample.size", 
+  CustomLabel(param = "sample.size",
               label= paste0("N = ", seq(220, 260, 20)))
 
 # Report Generation
 GenerateReport(presentation.model = case.study2.presentation.model,
                cse.results = case.study2.results,
                report.filename = "Case study 2.docx")
+
+# Get the data generated in the CSE
+case.study2.data.stack = DataStack(data.model = case.study2.data.model,
+                                   sim.parameters = case.study2.sim.parameters)
+

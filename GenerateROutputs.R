@@ -1,16 +1,24 @@
 
 library(Mediana)
-setwd("C:/Users/Gautier/CloudStation/Mediana Package/R/Package_v1.0.2/Mediana-gh-pages")
+setwd("C:/Users/gauti/CloudStation/Mediana Package/R/Package_v1.0.3/Mediana-gh-pages")
 
-
+rm(list = ls())
 source("Case study 1 (normally distributed endpoint).R")
+rm(list = ls())
 source("Case study 1 (binary endpoint).R")
+rm(list = ls())
 source("Case study 1 (survival-type endpoint).R")
+rm(list = ls())
 source("Case study 1 (survival-type endpoint with censoring).R")
+rm(list = ls())
 source("Case study 1 (count-type endpoint).R")
-
+rm(list = ls())
 source("Case study 2.R")
+rm(list = ls())
 source("Case study 3.R")
+rm(list = ls())
 source("Case study 4.R")
+rm(list = ls())
 source("Case study 5.R")
+rm(list = ls())
 source("Case study 6.R")

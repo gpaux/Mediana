@@ -40,11 +40,11 @@ mult.adj2 = MultAdjProc(proc = "BonferroniAdj",
                         par = parameters(weight = c(1/4,1/4,1/2)))
 
 # Holm adjustment (with unequal weights)
-mult.adj3 = MultAdjProc(proc = "HolmAdj", 
+mult.adj3 = MultAdjProc(proc = "HolmAdj",
                         par = parameters(weight = c(1/4,1/4,1/2)))
 
 # Hochberg adjustment (with unequal weights)
-mult.adj4 = MultAdjProc(proc = "HochbergAdj", 
+mult.adj4 = MultAdjProc(proc = "HochbergAdj",
                         par = parameters(weight = c(1/4,1/4,1/2)))
 
 # Analysis model
@@ -62,7 +62,7 @@ case.study6.analysis.model = AnalysisModel() +
 
 # Custom evaluation criterion (Dose H and at least one of the two other doses are significant)
 case.study6.criterion = function(test.result, statistic.result, parameter) {
-  
+
   alpha = parameter
   significant = ((test.result[,3] <= alpha) & ((test.result[,1] <= alpha) | (test.result[,2] <= alpha)))
   power = mean(significant)
@@ -96,8 +96,8 @@ case.study6.evaluation.model = EvaluationModel() +
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters
-case.study6.sim.parameters =  SimParameters(n.sims = 1000, 
-                                            proc.load = "full", 
+case.study6.sim.parameters =  SimParameters(n.sims = 1000,
+                                            proc.load = "full",
                                             seed = 42938001)
 
 # Perform clinical scenario evaluation
@@ -112,11 +112,11 @@ case.study6.presentation.model.default = PresentationModel() +
           title = "Case study 6",
           description = "Clinical trial in patients with schizophrenia - Several MTPs") +
   Table(by = "sample.size") +
-  CustomLabel(param = "outcome.parameter", 
+  CustomLabel(param = "outcome.parameter",
               label = c("Standard", "Optimistic")) +
-  CustomLabel(param = "sample.size", 
+  CustomLabel(param = "sample.size",
               label = paste0("N = ", seq(220, 260, 20))) +
-  CustomLabel(param = "multiplicity.adjustment", 
+  CustomLabel(param = "multiplicity.adjustment",
               label = c("No adjustment", "Bonferroni adjustment", "Holm adjustment", "Hochberg adjustment"))
 
 # Reporting 1 - Without subsections
@@ -131,7 +131,7 @@ GenerateReport(presentation.model = case.study6.presentation.model1,
 # Reporting 2 - With subsections
 case.study6.presentation.model2 = case.study6.presentation.model.default +
   Section(by = "outcome.parameter") +
-  Subsection(by = "multiplicity.adjustment") 
+  Subsection(by = "multiplicity.adjustment")
 
 # Report Generation
 GenerateReport(presentation.model = case.study6.presentation.model2,
@@ -148,5 +148,7 @@ GenerateReport(presentation.model = case.study6.presentation.model3,
                cse.results = case.study6.results,
                report.filename = "Case study 6 - Combined Sections.docx")
 
-
+# Get the data generated in the CSE
+case.study6.data.stack = DataStack(data.model = case.study6.data.model,
+                                   sim.parameters = case.study6.sim.parameters)
 

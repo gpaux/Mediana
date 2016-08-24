@@ -5,6 +5,26 @@ tagline:
 ---
 {% include JB/setup %}
 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](http://cran.r-project.org/package=Mediana)
+
+## New release !
+
+The version 1.0.3 of the Mediana R package has been released on xx August 2016. This latest stable version can be dowloade from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
+
+- Addition of the Beta distribution (`BetaDist`, see [Data model](DataModel.html#OutcomeDistobject)).
+
+- Addition of the Truncated exponential distribution, which could be used as enrollment distribution (`TruncatedExpoDist`, see [Data model](DataModel.html#OutcomeDistobject)).
+
+- Addition of the Non-inferiority test for proportion (`PropTestNI`, see [Analysis model](AnalysisModel.html#Testobject)).
+
+- Addition of a function to get the data generated in the CSE using the `DataStack` function (see [Data stack](DataStack.html)).
+
+- Addition of a function to extract a specific set of data in a `DataStack` object (see [Data stack](DataStack.html#ExtractDataStack)).
+
+- Addition of the "Evaluation Model" section in the generated report describing the criteria and their parameters (see [Simulation report](Reporting.html#Description18)).
+
+- Some bug fixes.
+
 ## About
 
 Mediana is an R package which provides a general framework for clinical trial simulations based on the Clinical Scenario Evaluation approach. The package supports a broad class of data models (including clinical trials with continuous, binary, survival-type and count-type endpoints as well as multivariate outcomes that are based on combinations of different endpoints), analysis strategies and commonly used evaluation criteria.
@@ -42,9 +62,11 @@ devtools::install_github("gpaux/Mediana")
 
 ### Potential installation's issue
 
-When installing Mediana package, an error could occur if the latest version of Java is not installed. 
+When installing Mediana package, an error could occur if a java version >= 1.6 is not installed. Java is used in the ReporteRs R package which is required in the Mediana R package to [generate Word report](Reporting.html). 
 
-Java is used in the ReporteRs R package. This package is required in the Mediana R package to [generate Word report](Reporting.html). In order to ensure a proper installation, it is highly recommended to install the latest version of Java in the same architecture of R (32-bit or 64-bit). 
+`system("java -version")` should return java version ‘1.6.0’ or greater.
+
+In order to ensure a proper installation, it is highly recommended to install the latest version of Java in the same architecture of R (32-bit or 64-bit). 
 
 The latest version can be found at [https://www.java.com/en/download/manual.jsp](https://www.java.com/en/download/manual.jsp).
 
@@ -65,5 +87,5 @@ Multiple [case studies](CaseStudies.html) are provided on this web site to facil
 The Mediana package has been successfully used in multiple clinical trials to perform power calculations as well as optimally select trial designs and analysis strategies (clinical trial optimization). For more information on applications of the Mediana package, download the following papers:
 
 - Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.
-- Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics. 26, 120-140.
+- [Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics. 26, 120-140.](http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1092032?journalCode=lbps20)
 

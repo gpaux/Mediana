@@ -4,6 +4,8 @@
   <head>
     <meta charset="utf-8">
 
+    <link rel="shortcut icon" href="favicon.ico" >
+
     {% include JB/analytics %}
 
     <link href="{{ ASSET_PATH }}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +56,13 @@
               </ul>
             </li>
             <li><a href="Reporting.html">Simulation report</a></li>
-            <li><a href="CustomFunctions.html">Customization</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Advanced features<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="CustomFunctions.html">User-defined functions</a></li>
+                <li><a href="DataStack.html">Data stack</a></li> 
+              </ul>
+            </li>  
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Case studies<span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -99,7 +107,7 @@
     <p>Maintained by <a href="http://www.linkedin.com/in/pauxgautier">Gautier Paux</a> and <a href="http://www.medianainc.com/">Alex Dmitrienko</a></p>
     <p>Code licensed under <a href="https://gnu.org/licenses/gpl.html"> GPL-3 </a></p>
     <ul class="bs-docs-footer-links text-muted">
-      <li><a href="https://cran.r-project.org/web/packages/Mediana/index.html">Currently v1.0.2</a></li>
+      <li><a href="https://cran.r-project.org/web/packages/Mediana/index.html">Currently v1.0.3</a></li>
       <li>&middot;</li>
       <li><a href="https://github.com/gpaux/Mediana">GitHub</a></li>
       <li>&middot;</li>

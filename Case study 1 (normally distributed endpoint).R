@@ -44,8 +44,8 @@ case.study1.evaluation.model = EvaluationModel() +
             labels = c("Average Mean Treatment"))
 
 # Simulation Parameters
-case.study1.sim.parameters = SimParameters(n.sims = 1000, 
-                                           proc.load = "full", 
+case.study1.sim.parameters = SimParameters(n.sims = 1000,
+                                           proc.load = "full",
                                            seed = 42938001)
 
 # Perform clinical scenario evaluation
@@ -65,12 +65,16 @@ case.study1.presentation.model =   PresentationModel() +
           description = "Clinical trial in patients with pulmonary arterial hypertension") +
   Section(by = "outcome.parameter") +
   Table(by = "sample.size") +
-  CustomLabel(param = "sample.size", 
+  CustomLabel(param = "sample.size",
               label= paste0("N = ",c(50, 55, 60, 65, 70))) +
-  CustomLabel(param = "outcome.parameter", 
+  CustomLabel(param = "outcome.parameter",
               label=c("Standard", "Optimistic"))
 
 # Report Generation
 GenerateReport(presentation.model = case.study1.presentation.model,
                cse.results = case.study1.results,
                report.filename = "Case study 1 (normally distributed endpoint).docx")
+
+# Get the data generated in the CSE
+case.study1.data.stack = DataStack(data.model = case.study1.data.model,
+                                   sim.parameters = case.study1.sim.parameters)

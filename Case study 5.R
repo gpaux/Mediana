@@ -9,21 +9,21 @@ library(Mediana)
 var.type = list("BinomDist", "NormalDist")
 
 # Outcome distribution parameters
-placebo.par = parameters(parameters(prop = 0.3), 
+placebo.par = parameters(parameters(prop = 0.3),
                          parameters(mean = -0.10, sd = 0.5))
 
-dosel.par1 = parameters(parameters(prop = 0.40), 
+dosel.par1 = parameters(parameters(prop = 0.40),
                         parameters(mean = -0.20, sd = 0.5))
-dosel.par2 = parameters(parameters(prop = 0.45), 
+dosel.par2 = parameters(parameters(prop = 0.45),
                         parameters(mean = -0.25, sd = 0.5))
-dosel.par3 = parameters(parameters(prop = 0.50), 
+dosel.par3 = parameters(parameters(prop = 0.50),
                         parameters(mean = -0.30, sd = 0.5))
 
-doseh.par1 = parameters(parameters(prop = 0.50), 
+doseh.par1 = parameters(parameters(prop = 0.50),
                         parameters(mean = -0.30, sd = 0.5))
-doseh.par2 = parameters(parameters(prop = 0.55), 
+doseh.par2 = parameters(parameters(prop = 0.55),
                         parameters(mean = -0.35, sd = 0.5))
-doseh.par3 = parameters(parameters(prop = 0.60), 
+doseh.par3 = parameters(parameters(prop = 0.60),
                         parameters(mean = -0.40, sd = 0.5))
 
 # Correlation between two endpoints
@@ -31,36 +31,36 @@ corr.matrix = matrix(c(1.0, 0.5,
                        0.5, 1.0), 2, 2)
 
 # Outcome parameter set 1
-outcome1.placebo = parameters(type = var.type, 
-                              par = placebo.par, 
+outcome1.placebo = parameters(type = var.type,
+                              par = placebo.par,
                               corr = corr.matrix)
-outcome1.dosel = parameters(type = var.type, 
-                            par = dosel.par1, 
+outcome1.dosel = parameters(type = var.type,
+                            par = dosel.par1,
                             corr = corr.matrix)
-outcome1.doseh = parameters(type = var.type, 
-                            par = doseh.par1, 
+outcome1.doseh = parameters(type = var.type,
+                            par = doseh.par1,
                             corr = corr.matrix)
 
 # Outcome parameter set 2
-outcome2.placebo = parameters(type = var.type, 
-                              par = placebo.par, 
+outcome2.placebo = parameters(type = var.type,
+                              par = placebo.par,
                               corr = corr.matrix)
-outcome2.dosel = parameters(type = var.type, 
-                            par = dosel.par2, 
+outcome2.dosel = parameters(type = var.type,
+                            par = dosel.par2,
                             corr = corr.matrix)
-outcome2.doseh = parameters(type = var.type, 
-                            par = doseh.par2, 
+outcome2.doseh = parameters(type = var.type,
+                            par = doseh.par2,
                             corr = corr.matrix)
 
 # Outcome parameter set 3
-outcome3.placebo = parameters(type = var.type, 
-                              par = placebo.par, 
+outcome3.placebo = parameters(type = var.type,
+                              par = placebo.par,
                               corr = corr.matrix)
-outcome3.doseh = parameters(type = var.type, 
-                            par = doseh.par3, 
+outcome3.doseh = parameters(type = var.type,
+                            par = doseh.par3,
                             corr = corr.matrix)
-outcome3.dosel = parameters(type = var.type, 
-                            par = dosel.par3, 
+outcome3.dosel = parameters(type = var.type,
+                            par = dosel.par3,
                             corr = corr.matrix)
 
 # Data model
@@ -76,29 +76,29 @@ case.study5.data.model = DataModel() +
 
 # Parameters of the gatekeeping procedure procedure (multiple-sequence gatekeeping procedure)
 # Tests to which the multiplicity adjustment will be applied
-test.list = tests("Placebo vs DoseH - ACR20", 
-                  "Placebo vs DoseL - ACR20", 
-                  "Placebo vs DoseH - HAQ-DI", 
+test.list = tests("Placebo vs DoseH - ACR20",
+                  "Placebo vs DoseL - ACR20",
+                  "Placebo vs DoseH - HAQ-DI",
                   "Placebo vs DoseL - HAQ-DI")
 
 # Families of hypotheses
-family = families(family1 = c(1, 2), 
+family = families(family1 = c(1, 2),
                   family2 = c(3, 4))
 
 # Component procedures for each family
-component.procedure = families(family1 ="HolmAdj", 
+component.procedure = families(family1 ="HolmAdj",
                                family2 = "HolmAdj")
 
 # Truncation parameter for each family
-gamma = families(family1 = 0.8, 
+gamma = families(family1 = 0.8,
                  family2 = 1)
 
 
 # Analysis model
 case.study5.analysis.model = AnalysisModel() +
   MultAdjProc(proc = "MultipleSequenceGatekeepingAdj",
-              par = parameters(family = family, 
-                               proc = component.procedure, 
+              par = parameters(family = family,
+                               proc = component.procedure,
                                gamma = gamma),
               tests = test.list) +
   Test(id = "Placebo vs DoseL - ACR20",
@@ -141,8 +141,8 @@ case.study5.evaluation.model = EvaluationModel() +
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters
-case.study5.sim.parameters =  SimParameters(n.sims = 1000, 
-                                            proc.load = "full", 
+case.study5.sim.parameters =  SimParameters(n.sims = 100,
+                                            proc.load = "full",
                                             seed = 42938001)
 
 # Perform clinical scenario evaluation
@@ -158,14 +158,18 @@ case.study5.presentation.model = PresentationModel() +
           description = "Clinical trial in patients with rheumatoid arthritis") +
   Section(by = "outcome.parameter") +
   Table(by = "multiplicity.adjustment") +
-  CustomLabel(param = "outcome.parameter", 
+  CustomLabel(param = "outcome.parameter",
               label = c("Conservative", "Standard", "Optimistic")) +
-  CustomLabel(param = "sample.size", 
+  CustomLabel(param = "sample.size",
               label = paste0("N = ", c(100, 120))) +
-  CustomLabel(param = "multiplicity.adjustment", 
+  CustomLabel(param = "multiplicity.adjustment",
               label = "Multiple-sequence gatekeeping procedure")
 
 # Report Generation
 GenerateReport(presentation.model = case.study5.presentation.model,
                cse.results = case.study5.results,
                report.filename = "Case study 5.docx")
+
+# Get the data generated in the CSE
+case.study5.data.stack = DataStack(data.model = case.study5.data.model,
+                                   sim.parameters = case.study5.sim.parameters)

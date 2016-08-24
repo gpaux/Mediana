@@ -26,10 +26,10 @@ outcome.os.treatment = parameters(rate = rate.os.treatment)
 hazard.os.ratio = rate.os.treatment/rate.os.placebo
 
 # Parameter lists
-placebo.par = parameters(parameters(rate = rate.pfs.placebo), 
+placebo.par = parameters(parameters(rate = rate.pfs.placebo),
                          parameters(rate = rate.os.placebo))
 
-treatment.par = parameters(parameters(rate = rate.pfs.treatment), 
+treatment.par = parameters(parameters(rate = rate.pfs.treatment),
                            parameters(rate = rate.os.treatment))
 
 # Correlation between two endpoints
@@ -47,7 +47,7 @@ randomization.ratio = c(1, 2)
 # Data model
 case.study4.data.model = DataModel() +
   OutcomeDist(outcome.dist = "MVExpoPFSOSDist") +
-  Event(n.events = event.count.total, 
+  Event(n.events = event.count.total,
         rando.ratio = randomization.ratio) +
   Sample(id = list("Placebo PFS", "Placebo OS"),
          outcome.par = parameters(outcome.placebo)) +
@@ -83,8 +83,8 @@ case.study4.evaluation.model = EvaluationModel() +
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters
-case.study4.sim.parameters =  SimParameters(n.sims = 1000, 
-                                            proc.load = "full", 
+case.study4.sim.parameters =  SimParameters(n.sims = 1000,
+                                            proc.load = "full",
                                             seed = 42938001)
 
 # Perform clinical scenario evaluation
@@ -100,12 +100,16 @@ case.study4.presentation.model = PresentationModel() +
           description = "Clinical trial in patients with metastatic colorectal cancer") +
   Section(by = "outcome.parameter") +
   Table(by = "multiplicity.adjustment") +
-  CustomLabel(param = "event", 
+  CustomLabel(param = "event",
               label= paste0("Total number of events = ",c(270, 300))) +
-  CustomLabel(param = "multiplicity.adjustment", 
+  CustomLabel(param = "multiplicity.adjustment",
               label= "Fixed-sequence procedure")
 
 # Report Generation
 GenerateReport(presentation.model = case.study4.presentation.model,
                cse.results = case.study4.results,
                report.filename = "Case study 4.docx")
+
+# Get the data generated in the CSE
+case.study4.data.stack = DataStack(data.model = case.study4.data.model,
+                                   sim.parameters = case.study4.sim.parameters)

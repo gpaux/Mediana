@@ -42,8 +42,8 @@ case.study1.evaluation.model = EvaluationModel() +
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters
-case.study1.sim.parameters =  SimParameters(n.sims = 1000, 
-                                            proc.load = "full", 
+case.study1.sim.parameters =  SimParameters(n.sims = 1000,
+                                            proc.load = "full",
                                             seed = 42938001)
 
 # Perform clinical scenario evaluation
@@ -64,3 +64,8 @@ case.study1.presentation.model = PresentationModel() +
 GenerateReport(presentation.model = case.study1.presentation.model,
                cse.results = case.study1.results,
                report.filename = "Case study 1 (survival-type endpoint).docx")
+
+# Get the data generated in the CSE
+case.study1.data.stack = DataStack(data.model = case.study1.data.model,
+                                   sim.parameters = case.study1.sim.parameters)
+
