@@ -11,11 +11,11 @@ The version 1.0.3 of the Mediana R package has been released on 25 August 2016. 
 
 - Addition of the Beta distribution (`BetaDist`, see [Data model](DataModel.html#OutcomeDistobject)).
 
-- Addition of the mixture-based gatekeeping procedure (`MixtureGatekeepingAdj` see [Analysis model](AnalysisModel.html#MultAdjProcobject)).
-
 - Addition of the Truncated exponential distribution, which could be used as enrollment distribution (`TruncatedExpoDist`, see [Data model](DataModel.html#OutcomeDistobject)).
 
 - Addition of the Non-inferiority test for proportion (`PropTestNI`, see [Analysis model](AnalysisModel.html#Testobject)).
+
+- Addition of the mixture-based gatekeeping procedure (`MixtureGatekeepingAdj` see [Analysis model](AnalysisModel.html#MultAdjProcobject)).
 
 - Addition of a function to get the data generated in the CSE using the `DataStack` function (see [Data stack](DataStack.html)).
 
