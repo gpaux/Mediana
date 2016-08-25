@@ -7,9 +7,11 @@ tagline:
 
 ## New release ! [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](http://cran.r-project.org/package=Mediana)
 
-The version 1.0.3 of the Mediana R package has been released on 24 August 2016. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
+The version 1.0.3 of the Mediana R package has been released on 25 August 2016. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
 
 - Addition of the Beta distribution (`BetaDist`, see [Data model](DataModel.html#OutcomeDistobject)).
+
+- Addition of the mixture-based gatekeeping procedure (`MixtureGatekeepingAdj` see [Analysis model](AnalysisModel.html#MultAdjProcobject)).
 
 - Addition of the Truncated exponential distribution, which could be used as enrollment distribution (`TruncatedExpoDist`, see [Data model](DataModel.html#OutcomeDistobject)).
 
