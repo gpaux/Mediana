@@ -18,7 +18,7 @@ The `DataStack` function requires the input of two pre-specified objects defined
 
 - `data.model` defines a `DataModel` object, as described in this [page](DataModel).
 
-- `sim.parameters` defines a `SimParameters` object, as described in this [page](CSE).
+- `sim.parameters` defines a `SimParameters` object, as described in this [page](CSE.html#SimParametersobject).
 
 #### Outputs
 
