@@ -4,6 +4,8 @@
 
 ## Bug fixes
 
+* Revision of one-sided p-value computation for Log-Rank test is median TTE is NA
+
 
 # Mediana 1.0.3
 
