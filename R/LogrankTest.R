@@ -45,9 +45,14 @@ LogrankTest = function(sample.list, parameter) {
     # Compute one-sided p-value
     result = stats::pchisq(surv.test$chisq, df = 1, lower.tail = FALSE)/2
 
-    # Impute the p-value to 1 if the median of the sample 2 is lower than the median in sample 1
+    # Impute the p-value to 1 if:
+    # the median of the sample 2 is lower than the median in sample 1
+    # the median of sample 1 is NA (median not reached) and the median of sample 2 is not NA (median reached)
     median = as.numeric(stats::quantile(surv.fit)$quantile[,'50'])
-    if (median[1] > median[2]) result = 1
+    if (!is.na(median[1]) & !is.na(median[2]) & (median[1] > median[2])) result = 1
+    if (is.na(median[1]) & !is.na(median[2])) result = 1
+    
+    
   }
 
   else if (call == TRUE) {
