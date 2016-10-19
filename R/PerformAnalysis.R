@@ -389,7 +389,7 @@ PerformAnalysis = function(data, analysis.model, sim.parameters) {
 
             # Compute the statistic results by calling the function for the current statistic with the statistic parameters
             statistic.results[statistic.index, analysis.point.index] = do.call(current.statistic$method,
-                                                                               list(sample.list, current.statistic$par))
+                                                                               list(sample.list, list("PerformAnalysis",current.statistic$par)))
 
           } # End of the loop over the statistics
 

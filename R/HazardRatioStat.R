@@ -38,9 +38,9 @@ HazardRatioStat = function(sample.list, parameter) {
     event = c(event1.complete, event2.complete)
     treatment = c(rep(0, n1), rep(1, n2))
 
-    # Get the HR from the Cox-test
-    result = 1 / summary(survival::coxph(survival::Surv(outcome, event) ~ treatment))$coef[,"exp(coef)"]
-
+    # Get the HR
+    surv.test = survival::survdiff(survival::Surv(outcome, event) ~ treatment)
+    result = (surv.test$obs[2]/surv.test$exp[2])/(surv.test$obs[1]/surv.test$exp[1])
   }
 
   else if (call == TRUE) {

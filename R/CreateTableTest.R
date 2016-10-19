@@ -16,7 +16,7 @@ CreateTableTest = function(analysis.structure, label = NULL) {
     test.desc = do.call(analysis.structure$test[[i]]$method,list(c(),list("Description",analysis.structure$test[[i]]$par)))
     test.table[i, 2] = test.desc[[1]]
     if (length(test.desc)>1) {
-      test.table[i, 3] = paste0(test.desc[[2]],analysis.structure$test[[i]]$par)
+      test.table[i, 3] = paste0(test.desc[[2]],analysis.structure$test[[i]]$par, collapse = "\n")
     } else {
       test.table[i, 3] = analysis.structure$test[[i]]$par
     }

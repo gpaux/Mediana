@@ -29,13 +29,8 @@ CreateTableDesign = function(data.structure, label = NULL) {
       else enroll.dist.par.dummy = design.parameter.set[[i]]$enroll.dist.par
       enroll.dist.desc = do.call(design.parameter.set[[i]]$enroll.dist,list(list("description",enroll.dist.par.dummy)))
       design.table[i, 4] = unlist(enroll.dist.desc[[2]])
-      if (!is.na(design.parameter.set[[i]]$enroll.dist.par)){
-        enroll.dist.npar = length(enroll.dist.desc[[1]][[1]])
-        enroll.dist.par = ""
-        for (j in 1: enroll.dist.npar){
-          enroll.dist.par = paste0(", ",enroll.dist.desc[[1]][[1]][j],"=",design.parameter.set[[i]]$enroll.dist.par[j])
-        }
-        enroll.dist.par = sub(", ","",enroll.dist.par)
+      if (!any(is.na(design.parameter.set[[i]]$enroll.dist.par))){
+        enroll.dist.par = paste0(paste0(enroll.dist.desc[[1]]," = "), round(unlist(design.parameter.set[[i]]$enroll.dist.par),4), collapse = "\n")
         design.table[i, 5] = enroll.dist.par
       }
       else design.table[i, 5] = design.parameter.set[[i]]$enroll.dist.par
@@ -54,13 +49,8 @@ CreateTableDesign = function(data.structure, label = NULL) {
         dropout.dist.desc[[1]][[1]] = "prop"
       }
       design.table[i, 8] = unlist(dropout.dist.desc[[2]])
-      if (!is.na(design.parameter.set[[i]]$dropout.dist.par)){
-        dropout.dist.npar = length(dropout.dist.desc[[1]][[1]])
-        dropout.dist.par = ""
-        for (j in 1: dropout.dist.npar){
-          dropout.dist.par = paste0(", ",dropout.dist.desc[[1]][[1]][j],"=",design.parameter.set[[i]]$dropout.dist.par[j])
-        }
-        dropout.dist.par = sub(", ","",dropout.dist.par)
+      if (!any(is.na(design.parameter.set[[i]]$dropout.dist.par))){
+        dropout.dist.par = paste0(paste0(dropout.dist.desc[[1]]," = "), round(unlist(design.parameter.set[[i]]$dropout.dist.par),4), collapse = "\n")
         design.table[i, 9] = dropout.dist.par
       }
       else design.table[i, 9] = design.parameter.set[[i]]$enroll.dist.par

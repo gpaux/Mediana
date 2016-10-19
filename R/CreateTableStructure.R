@@ -166,7 +166,7 @@ CreateTableStructure = function(results = NULL, presentation.model = NULL, custo
     table.by.label = sapply(gsub("."," ",table.by,fixed = TRUE),capwords)
     data.order = as.data.frame(report.structure.scenario.summary.table[[1]][,table.by.label])
     colnames(data.order) = table.by
-    order.table = order(apply(data.order, 1, paste, collapse = ""))
+    order.table = order(as.numeric(apply(data.order, 1, paste, collapse = "")))
     report.structure.scenario.summary.table.order = lapply(report.structure.scenario.summary.table,function(x) x[order.table,])
   } else report.structure.scenario.summary.table.order = report.structure.scenario.summary.table
 

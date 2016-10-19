@@ -16,7 +16,7 @@ CreateTableStatistic = function(analysis.structure, label = NULL) {
     statistic.desc = do.call(analysis.structure$statistic[[i]]$method,list(c(),list("Description",analysis.structure$statistic[[i]]$par)))
     statistic.table[i, 2] = statistic.desc[[1]]
     if (length(statistic.desc)>1) {
-      statistic.table[i, 3] = paste0(statistic.desc[[2]],analysis.structure$statistic[[i]]$par)
+      statistic.table[i, 3] = paste0(statistic.desc[[2]],analysis.structure$statistic[[i]]$par, collapse = "\n")
     } else {
       statistic.table[i, 3] = analysis.structure$statistic[[i]]$par
     }
