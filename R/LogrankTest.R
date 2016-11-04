@@ -38,21 +38,28 @@ LogrankTest = function(sample.list, parameter) {
     event = c(event1.complete, event2.complete)
     treatment = c(rep(0, n1), rep(1, n2))
 
-    # Apply log-rank test
-    surv.test = survival::survdiff(survival::Surv(outcome, event) ~ treatment)
-    surv.fit = survival::survfit(survival::Surv(outcome, event) ~ treatment)
+    data = data.frame(time = outcome,
+                      event = event,
+                      treatment = treatment)
+    data = data[order(data$time),]
+    data$event1 = data$event*(data$treatment==0)
+    data$event2 = data$event*(data$treatment==1)
+    data$eventtot = data$event1 + data$event2
+    data$n.risk1.prior = length(outcome1) - cumsum(data$treatment==0) + (data$treatment==0)
+    data$n.risk2.prior = length(outcome2) - cumsum(data$treatment==1) + (data$treatment==1)
+    data$n.risk.prior = data$n.risk1.prior + data$n.risk2.prior
+
+    data$e1 = data$n.risk1.prior*data$eventtot/data$n.risk.prior
+    data$u1 = data$event1 - data$e1
+    data$v1 = ifelse(data$n.risk.prior > 1,
+                     (data$n.risk1.prior*data$n.risk2.prior*data$eventtot*(data$n.risk.prior - data$eventtot))/(data$n.risk.prior**2*(data$n.risk.prior-1)),
+                     0)
+
+    stat.test = sum(data$u1)/sqrt(sum(data$v1))
 
     # Compute one-sided p-value
-    result = stats::pchisq(surv.test$chisq, df = 1, lower.tail = FALSE)/2
+    result = stats::pnorm(stat.test, lower.tail = FALSE)
 
-    # Impute the p-value to 1 if:
-    # the median of the sample 2 is lower than the median in sample 1
-    # the median of sample 1 is NA (median not reached) and the median of sample 2 is not NA (median reached)
-    median = as.numeric(stats::quantile(surv.fit)$quantile[,'50'])
-    if (!is.na(median[1]) & !is.na(median[2]) & (median[1] > median[2])) result = 1
-    if (is.na(median[1]) & !is.na(median[2])) result = 1
-    
-    
   }
 
   else if (call == TRUE) {
