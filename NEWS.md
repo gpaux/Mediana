@@ -2,15 +2,21 @@
 
 ## New features
 
+* Addition of the Fixed-sequence procedure (`FixedSeqAdj`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#MultAdjProcobject)).
+
 ## Bug fixes
 
-* Revision of one-sided p-value computation for Log-Rank test
+* Revision of one-sided p-value computation for Log-Rank test.
 
-* Revision of the call for Statistic in the core function (not visible)
+* Revision of the call for Statistic in the core function (not visible).
 
 * Revision of the function to calculate the Hazard Ratio Statistic (HazardRatioStat method). This calculation is now based on the log-rank test ((O2/E2)/(O1/E1) where O and E are Observed and Expected event in sample 2 and sample 1.
 
-* Revision of the function to generate the Test, Statistic, Design and result tables in the report
+* Revision of the function to calculate the effect size for time-to-event endpoint (EffectSizeEventStat method, based on the HazardRatioStat method)
+
+* Revision of the functions to calculate the ratio of effect size for continuous (RatioEffectSizeContStat method), binary (RatioEffectSizePropStat method)and event (RatioEffectSizeEventStat method) endpoint.
+
+* Revision of the function to generate the Test, Statistic, Design and result tables in the report.
 
 # Mediana 1.0.3
 
