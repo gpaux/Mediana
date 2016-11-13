@@ -141,7 +141,7 @@ case.study5.evaluation.model = EvaluationModel() +
             par = parameters(alpha = 0.025))
 
 # Simulation Parameters
-case.study5.sim.parameters =  SimParameters(n.sims = 100,
+case.study5.sim.parameters =  SimParameters(n.sims = 1000,
                                             proc.load = "full",
                                             seed = 42938001)
 

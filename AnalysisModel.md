@@ -190,6 +190,8 @@ Several commonly used multiplicity adjustment procedures are included in the Med
 
 - `HommelAdj`: **Hommel** procedure. Optional parameter: `weight` (vector of hypothesis weights).
 
+- `FixedSeqAdj`: **Fixed-sequence procedures**.
+
 - `ChainAdj`: Family of **chain procedures**. Required parameters: `weight` (vector of hypothesis weights) and `transition` (matrix of transition parameters).
 
 - `NormalParamAdj`: **Parametric multiple testing procedure** derived from a multivariate normal distribution. Required parameter: `corr` (correlation matrix of the multivariate normal distribution). Optional parameter: `weight` (vector of hypothesis weights).
@@ -211,7 +213,7 @@ Examples of `MultAdjProc` objects:
 Apply a multiplicity adjustment based on the chain procedure:
 
 {% highlight R %}
-# Parameters of the chain procedure (fixed-sequence procedure)
+# Parameters of the chain procedure (equivalent to a fixed-sequence procedure)
 # Vector of hypothesis weights
 chain.weight = c(1, 0)
 # Matrix of transition parameters
@@ -222,6 +224,13 @@ chain.transition = matrix(c(0, 1,
 MultAdjProc(proc = "ChainAdj",
             par = parameters(weight = chain.weight,
                              transition = chain.transition))
+{% endhighlight %}
+
+This procedure implementation is facilicated by the use of the `FixedSeqAdj` method intoduced in version 1.0.4.
+
+{% highlight R %}
+# MultAdjProc
+MultAdjProc(proc = "FixedSeqAdj")
 {% endhighlight %}
 
 Apply a multiple-sequence gatekeeping procedure:

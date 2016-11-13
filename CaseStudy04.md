@@ -153,8 +153,7 @@ The value displayed above a circle defines the initial weight of each null hypot
 All of the overall &alpha; is allocated to H1 to ensure that the OS test will be carried out only after the PFS test is significant and the arrow indicates that H2 will be tested
 after H1 is rejected.
 
-More formally, a chain procedure is uniquely defined by specifying a vector of hypothesis weights (W) and matrix of transition parameters (G). Based on the figure,
-these parameters are given by
+More formally, a chain procedure is uniquely defined by specifying a vector of hypothesis weights (W) and matrix of transition parameters (G). Based on the figure, these parameters are given by
 
 <center>
   <div class="col-md-12">
@@ -185,6 +184,20 @@ case.study4.analysis.model = AnalysisModel() +
 {% endhighlight %}
 
 As shown above, the two significance tests included in the analysis model reflect the two-fold objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (`id = "PFS test"`) whereas the other test is carried out to assess the treatment effect on OS (`test.id = "OS test"`).
+
+Alternatively, the fixed-sequence procedure can be implemented using the method `FixedSeqAdj` introduced from version 1.0.4. This implementation is facilitated as no parametes have to be specified.
+
+{% highlight R %}
+# Analysis model
+case.study4.analysis.model = AnalysisModel() +
+  MultAdjProc(proc = "FixedSeqAdj") +
+  Test(id = "PFS test",
+       samples = samples("Placebo PFS", "Treatment PFS"),
+       method = "LogrankTest") +
+  Test(id = "OS test",
+       samples = samples("Placebo OS", "Treatment OS"),
+       method = "LogrankTest")
+{% endhighlight %}
 
 ## Define an Evaluation Model
 

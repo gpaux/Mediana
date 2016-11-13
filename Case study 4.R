@@ -54,17 +54,9 @@ case.study4.data.model = DataModel() +
   Sample(id = list("Treatment PFS", "Treatment OS"),
          outcome.par = parameters(outcome.treatment))
 
-# Parameters of the chain procedure (fixed-sequence procedure)
-# Vector of hypothesis weights
-chain.weight = c(1, 0)
-# Matrix of transition parameters
-chain.transition = matrix(c(0, 1,
-                            0, 0), 2, 2, byrow = TRUE)
-
 # Analysis model
 case.study4.analysis.model = AnalysisModel() +
-  MultAdjProc(proc = "ChainAdj",
-              par = parameters(weight = chain.weight, transition = chain.transition)) +
+  MultAdjProc(proc = "FixedSeqAdj") +
   Test(id = "PFS test",
        samples = samples("Placebo PFS", "Treatment PFS"),
        method = "LogrankTest") +

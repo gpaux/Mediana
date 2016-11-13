@@ -1,6 +1,6 @@
 
 library(Mediana)
-setwd("C:/Users/gauti/CloudStation/Mediana Package/R/Package_v1.0.3/Mediana-gh-pages")
+setwd("C:/Users/gauti/CloudStation/Mediana Package/R/Package_v1.0.4/Mediana-gh-pages")
 
 rm(list = ls())
 source("Case study 1 (normally distributed endpoint).R")
