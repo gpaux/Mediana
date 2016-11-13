@@ -190,7 +190,7 @@ Several commonly used multiplicity adjustment procedures are included in the Med
 
 - `HommelAdj`: **Hommel** procedure. Optional parameter: `weight` (vector of hypothesis weights).
 
-- `FixedSeqAdj`: **Fixed-sequence procedures**.
+- `FixedSeqAdj`: **Fixed-sequence procedure**.
 
 - `ChainAdj`: Family of **chain procedures**. Required parameters: `weight` (vector of hypothesis weights) and `transition` (matrix of transition parameters).
 
