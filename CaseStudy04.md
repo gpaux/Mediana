@@ -185,7 +185,7 @@ case.study4.analysis.model = AnalysisModel() +
 
 As shown above, the two significance tests included in the analysis model reflect the two-fold objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (`id = "PFS test"`) whereas the other test is carried out to assess the treatment effect on OS (`test.id = "OS test"`).
 
-Alternatively, the fixed-sequence procedure can be implemented using the method `FixedSeqAdj` introduced from version 1.0.4. This implementation is facilitated as no parametes have to be specified.
+Alternatively, the fixed-sequence procedure can be implemented using the method `FixedSeqAdj` introduced from version 1.0.4. This implementation is facilitated as no parameters have to be specified.
 
 {% highlight R %}
 # Analysis model
