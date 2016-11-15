@@ -96,8 +96,7 @@ Criterion(id = "Weighted power",
           method = "WeightedPower",
           tests = tests("Placebo vs treatment - Endpoint 1",
                         "Placebo vs treatment - Endpoint 2"),
-          labels = c("Placebo vs treatment - Endpoint 1",
-                     "Placebo vs treatment - Endpoint 2"),
+          labels = c("Weighted power"),
           par = parameters(alpha = 0.025,
                            weight = c(2/3, 1/3)))
 {% endhighlight %}
@@ -110,9 +109,7 @@ Criterion(id = "Disjunctive power",
           tests = tests("Placebo vs Dose H",
                         "Placebo vs Dose M",
                         "Placebo vs Dose L"),
-          labels = c("Placebo vs Dose H",
-                     "Placebo vs Dose M",
-                     "Placebo vs Dose L"),
+          labels = c("Disjunctive power"),
           par = parameters(alpha = 0.025))
 {% endhighlight %}
 

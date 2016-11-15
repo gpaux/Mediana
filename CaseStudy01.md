@@ -96,7 +96,7 @@ outcome2.placebo = parameters(mean = 0, sd = 70)
 outcome2.treatment = parameters(mean = 50, sd = 70)
 {% endhighlight %}
 
-Note that the mean and standard deviation are explicitly identified in each list. This is done mainly for the user's convenience. The use of named items such as `mean` and `sd` is not mandatory.
+Note that the mean and standard deviation are explicitly identified in each list. This is done mainly for the user's convenience. 
 
 After having defined the outcome parameters for each sample, two `Sample` objects that define the two treatment arms in this trial can be created and added to the `DataModel` object:
 
