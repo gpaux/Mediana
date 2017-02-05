@@ -40,9 +40,9 @@ Objects of class \code{Statistic} are used in objects of class \code{AnalysisMod
 \item \code{DiffPropStat}: generate the difference of the proportions between the two samples defined in the \code{samples} argument. Two samples must be defined.
 \item \code{EffectSizePropStat}: generate the effect size for a binary endpoint. Two samples must be defined.
 \item \code{RatioEffectSizePropStat}: generate the ratio of two effect sizes for a binary endpoint. Four samples must be defined.
-\item \code{HazardRatioStat}: generate the hazard ratio of the two samples defined in the \code{samples} argument. Two samples must be defined.
-\item \code{EffectSizeEventStat}: generate the effect size for a survival endpoint (log of the HR). Two samples must be defined. Two samples must be defined.
-\item \code{RatioEffectSizeEventStat}: generate the ratio of two effect sizes for a survival endpoint. Four samples must be defined.
+\item \code{HazardRatioStat}: generate the hazard ratio of the two samples defined in the \code{samples} argument. Two samples must be defined. By default the Log-Rank method is used. Optional argument: \code{method} taking as value \code{Log-Rank} or \code{Cox}.
+\item \code{EffectSizeEventStat}: generate the effect size for a survival endpoint (log of the HR). Two samples must be defined. Two samples must be defined. By default the Log-Rank method is used. Optional argument: \code{method} taking as value \code{Log-Rank} or \code{Cox}.
+\item \code{RatioEffectSizeEventStat}: generate the ratio of two effect sizes for a survival endpoint. Four samples must be defined. By default the Log-Rank method is used. Optional argument: \code{method} taking as value \code{Log-Rank} or \code{Cox}.
 \item \code{EventCountStat}: generate the number of events observed in the sample(s) defined in the \code{samples} argument.
 \item \code{PatientCountStat}: generate the number of patients observed in the sample(s) defined in the \code{samples} argument.
 }

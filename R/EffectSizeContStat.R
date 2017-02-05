@@ -30,7 +30,7 @@ EffectSizeContStat = function(sample.list, parameter) {
   }
 
   else if (call == TRUE) {
-    result = list("Effect size")
+    result = list("Effect size (continuous)")
   }
 
   return(result)

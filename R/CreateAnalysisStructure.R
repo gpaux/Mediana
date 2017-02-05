@@ -98,6 +98,10 @@ CreateAnalysisStructure = function(analysis.model) {
           statistic[[i]] = list(id = id, method = method, samples = samples, par = par)
     }
 
+    # Check if id is uniquely defined
+    if (any(table(unlist(lapply(statistic,function(list) list$id)))>1))
+      stop("Analysis model: Statistic IDs must be uniquely defined.")
+
   } else {
     # No statistics are specified
     statistic = NULL

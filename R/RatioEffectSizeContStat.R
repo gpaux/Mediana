@@ -47,7 +47,7 @@ RatioEffectSizeContStat = function(sample.list, parameter) {
   }
 
   else if (call == TRUE) {
-    result = list("Ratio of effect size")
+    result = list("Ratio of effect size (continuous)")
   }
 
   return(result)

@@ -4,17 +4,19 @@
 
 * Addition of the Fixed-sequence procedure (`FixedSeqAdj`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#MultAdjProcobject)).
 
+* Addition of the Cox method to calculate the HR, effect size and ratio of effect size for time-to-event endpoint. This can be accomplished by setting the  `method` argument in the parameter list to set-up the calculation based on the Cox method. (`par = parameters(method = "Cox"`), see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
+
 ## Bug fixes
 
 * Revision of one-sided p-value computation for Log-Rank test.
 
 * Revision of the call for Statistic in the core function (not visible).
 
-* Revision of the function to calculate the Hazard Ratio Statistic (HazardRatioStat method). This calculation is now based on the log-rank test ((O2/E2)/(O1/E1) where O and E are Observed and Expected event in sample 2 and sample 1.
+* Revision of the function to calculate the Hazard Ratio Statistic (HazardRatioStat method). By default, this calculation is now based on the log-rank statistic ((O2/E2)/(O1/E1) where O and E are Observed and Expected event in sample 2 and sample 1. A parameter can be added using the `method` argument in the parameter list to set-up the calculation based on the Cox method (`par = parameters(method = "Cox"`), see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
 
-* Revision of the function to calculate the effect size for time-to-event endpoint (EffectSizeEventStat method, based on the HazardRatioStat method)
+* Revision of the function to calculate the effect size for time-to-event endpoint (`EffectSizeEventStat` method, based on the `HazardRatioStat` method)
 
-* Revision of the functions to calculate the ratio of effect size for continuous (RatioEffectSizeContStat method), binary (RatioEffectSizePropStat method)and event (RatioEffectSizeEventStat method) endpoint.
+* Revision of the functions to calculate the ratio of effect size for continuous (`RatioEffectSizeContStat` method), binary (`RatioEffectSizePropStat` method)and event (`RatioEffectSizeEventStat method`) endpoint.
 
 * Revision of the function to generate the Test, Statistic, Design and result tables in the report.
 

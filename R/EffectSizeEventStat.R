@@ -13,6 +13,14 @@ EffectSizeEventStat = function(sample.list, parameter) {
     if (length(sample.list)!=2)
       stop("Analysis model: Two samples must be specified in the EffectSizeEventStat statistic.")
 
+    if (is.na(parameter[[2]])) method = "Log-Rank"
+    else {
+      if (!(parameter[[2]]$method %in% c("Log-Rank", "Cox")))
+        stop("Analysis model: HazardRatioStat statistic : the method must be Log-Rank or Cox.")
+
+      method = parameter[[2]]$method
+    }
+
     # Outcomes in Sample 1
     outcome1 = sample.list[[1]][, "outcome"]
     # Remove the missing values due to dropouts/incomplete observations
@@ -38,13 +46,21 @@ EffectSizeEventStat = function(sample.list, parameter) {
     event = c(event1.complete, event2.complete)
     treatment = c(rep(0, n1), rep(1, n2))
 
-    # Get the HR from the Cox-test
-    result = log(1 / summary(survival::coxph(survival::Surv(outcome, event) ~ treatment))$coef[,"exp(coef)"])
+    # Get the HR
+    if (method == "Log-Rank"){
+      surv.test = survival::survdiff(survival::Surv(outcome, event) ~ treatment)
+      result = -log((surv.test$obs[2]/surv.test$exp[2])/(surv.test$obs[1]/surv.test$exp[1]))
+    } else if (method == "Cox"){
+      result = -log(summary(survival::coxph(survival::Surv(outcome, event) ~ treatment))$coef[,"exp(coef)"])
+    }
 
   }
 
   else if (call == TRUE) {
-    result = list("Effect size")
+    if (is.na(parameter[[2]])) result = list("Effect size (event)")
+    else {
+      result = list("Effect size (event)", "method = ")
+    }
   }
 
   return(result)
