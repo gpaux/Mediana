@@ -31,7 +31,11 @@ case.study1.data.model = DataModel() +
 case.study1.analysis.model = AnalysisModel() +
   Test(id = "Placebo vs treatment",
        samples = samples("Placebo", "Treatment"),
-       method = "LogrankTest")
+       method = "LogrankTest") +
+  Statistic(id = "Hazard Ratio",
+       samples = samples("Placebo", "Treatment"),
+       method = "HazardRatioStat",
+       par = parameters(method = "Cox")) 
 
 # Evaluation model
 case.study1.evaluation.model = EvaluationModel() +
@@ -39,7 +43,11 @@ case.study1.evaluation.model = EvaluationModel() +
             method = "MarginalPower",
             tests = tests("Placebo vs treatment"),
             labels = c("Placebo vs treatment"),
-            par = parameters(alpha = 0.025))
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Hazard Ratio",
+            method = "MeanSumm",
+            statistics = tests("Hazard Ratio"),
+            labels = c("Average Hazard Ratio")) 
 
 # Simulation Parameters
 case.study1.sim.parameters =  SimParameters(n.sims = 1000,

@@ -449,9 +449,20 @@ case.study1.analysis.model = AnalysisModel() +
        method = "LogrankTest")
 {% endhighlight %}
 
+To illustrate the specification of a `Statistic` object, the hazard ratio will be computed using the Cox method. This can be accomplished by adding a `Statistic` object to the `AnalysisModel` such presented below.
+
+{% highlight R %}
+# Analysis model
+case.study1.analysis.model = case.study1.analysis.model +
+  Statistic(id = "Hazard Ratio",
+       samples = samples("Placebo", "Treatment"),
+       method = "HazardRatioStat",
+       par = parameters(method = "Cox")) 
+{% endhighlight %}
+
 ### Define an Evaluation Model
 
-An evaluation model identical to that used earlier in the case studies with normal and binomial distribution can be applied to compute the power function at the selected event counts:
+An evaluation model identical to that used earlier in the case studies with normal and binomial distribution can be applied to compute the power function at the selected event counts. Moreover, the average hazard ratio accross the simulations will be computed.
 
 {% highlight R %}
 # Evaluation model
@@ -460,7 +471,11 @@ case.study1.evaluation.model = EvaluationModel() +
             method = "MarginalPower",
             tests = tests("Placebo vs treatment"),
             labels = c("Placebo vs treatment"),
-            par = parameters(alpha = 0.025))
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Hazard Ratio",
+            method = "MeanSumm",
+            statistics = tests("Hazard Ratio"),
+            labels = c("Average Hazard Ratio")) 
 {% endhighlight %}
 
 ### Download
@@ -623,7 +638,7 @@ The table below gives the expected treatment effect in the experimental treatmen
             <tr>
                 <td>Placebo</td>
                 <td>13</td>
-                <td>7.8</td>
+                <td>0.5</td>
             </tr>
             <tr>
                 <td>Treatment</td>

@@ -316,5 +316,4 @@ Click on the icons below to download the R code used in this case study and repo
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
-</div>
 </center>

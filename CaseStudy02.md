@@ -94,13 +94,13 @@ Since no procedure parameters are defined, the three significance tests (or, equ
 # Analysis model
 case.study2.analysis.model = AnalysisModel() +
   MultAdjProc(proc = "HochbergAdj") +
-  Test(id = "Pl vs Dose L",
+  Test(id = "Placebo vs Dose L",
        samples = samples("Placebo", "Dose L"),
        method = "TTest") +
-  Test(id = "Pl vs Dose M",
+  Test(id = "Placebo vs Dose M",
        samples = samples ("Placebo", "Dose M"),
        method = "TTest") +
-  Test(id = "Pl vs Dose H",
+  Test(id = "Placebo vs Dose H",
        samples = samples("Placebo", "Dose H"),
        method = "TTest")
 {% endhighlight %}
@@ -144,25 +144,25 @@ The following evaluation model specifies marginal and disjunctive power as well 
 case.study2.evaluation.model = EvaluationModel() +
   Criterion(id = "Marginal power",
             method = "MarginalPower",
-            tests = tests("Pl vs Dose L",
-                          "Pl vs Dose M",
-                          "Pl vs Dose H"),
-            labels = c("Pl vs Dose L",
-                       "Pl vs Dose M",
-                       "Pl vs Dose H"),
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
+            labels = c("Placebo vs Dose L",
+                       "Placebo vs Dose M",
+                       "Placebo vs Dose H"),
             par = parameters(alpha = 0.025)) +
   Criterion(id = "Disjunctive power",
             method = "DisjunctivePower",
-            tests = tests("Pl vs Dose L",
-                          "Pl vs Dose M",
-                          "Pl vs Dose H"),
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
             labels = "Disjunctive power",
             par = parameters(alpha = 0.025)) +
   Criterion(id = "Dose H and at least one dose",
             method = "case.study2.criterion",
-            tests = tests("Pl vs Dose L",
-                          "Pl vs Dose M",
-                          "Pl vs Dose H"),
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
             labels = "Dose H and at least one of the two other doses are significant",
             par = parameters(alpha = 0.025))
 {% endhighlight %}
@@ -195,5 +195,4 @@ Click on the icons below to download the R code used in this case study and repo
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
-</div>
 </center>

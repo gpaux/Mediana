@@ -229,7 +229,7 @@ It is to be noted that the order corresponds to the order of the tests defined i
 
 The families will be tested sequentially and a truncated Holm procedure will be applied within each family (`component.procedure`). Lastly, the truncation parameter will be set to 0.8 in Family 1, 2 and 3 and to 1 in Family 4 (`gamma`). The serial and parallel rejection sets are used to define the logical relationship among the null hypotheses. For example, the parallel set states that H6 will be tested if either (or both) H2 and H4 are rejected.
 
-The resulting parameters are included in the `par` argument of the `MultAdjProc` object and, as before, the `proc` argument is used to specify the multiple testing procedure (`MixtureGatekeepingAdj`).
+The resulting parameters are included in the `par` argument of the `MultAdjProc` object and, as before, the `proc` argument is used to specify the multiple testing procedure (`MultipleSequenceGatekeepingAdj`).
 
 The test are then specified in the analysis model and the overall analysis model is defined as follows:
 
