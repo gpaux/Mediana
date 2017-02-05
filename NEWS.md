@@ -16,7 +16,7 @@
 
 * Revision of the function to calculate the effect size for time-to-event endpoint (`EffectSizeEventStat` method, based on the `HazardRatioStat` method)
 
-* Revision of the functions to calculate the ratio of effect size for continuous (`RatioEffectSizeContStat` method), binary (`RatioEffectSizePropStat` method)and event (`RatioEffectSizeEventStat method`) endpoint.
+* Revision of the functions to calculate the ratio of effect size for continuous (`RatioEffectSizeContStat` method), binary (`RatioEffectSizePropStat` method) and event (`RatioEffectSizeEventStat method`) endpoint.
 
 * Revision of the function to generate the Test, Statistic, Design and result tables in the report.
 
