@@ -138,11 +138,11 @@ Several methods for computing descriptive statistics are already implemented in 
 
 - `RatioEffectSizePropStat`: compute the **ratio of two effect sizes** for a binary endpoint. Four samples must be defined.
 
-- `HazardRatioStat`: compute the **hazard ratio** of the two samples defined in the samples argument. Two samples must be defined.
+- `HazardRatioStat`: compute the **hazard ratio** of the two samples defined in the samples argument. Two samples must be defined. By default the Log-Rank method is used. Optional argument: `method` taking as value `Log-Rank` or `Cox`.
 
-- `EffectSizeEventStat`: compute the **effect size** for a survival endpoint (log of the HR). Two samples must be defined. Two samples must be defined.
+- `EffectSizeEventStat`: compute the **effect size** for a survival endpoint (log of the HR. Two samples must be defined. Two samples must be defined. By default the Log-Rank method is used. Optional argument: `method` taking as value `Log-Rank` or `Cox`.
 
-- `RatioEffectSizeEventStat`: compute the **ratio of two effect sizes** for a survival endpoint. Four samples must be defined.
+- `RatioEffectSizeEventStat`: compute the **ratio of two effect sizes** for a survival endpoint based on the Log-Rank method. Four samples must be defined. By default the Log-Rank method is used. Optional argument: `method` taking as value `Log-Rank` or `Cox`.
 
 - `EventCountStat`: compute the **number of events** observed in the sample(s) defined in the `samples` argument.
 

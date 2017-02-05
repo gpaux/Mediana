@@ -51,6 +51,7 @@ case.study1.results = CSE(case.study1.data.model,
                           case.study1.analysis.model,
                           case.study1.evaluation.model,
                           case.study1.sim.parameters)
+summary(case.study1.results)
 
 # Reporting
 case.study1.presentation.model = PresentationModel() +
@@ -68,4 +69,3 @@ GenerateReport(presentation.model = case.study1.presentation.model,
 # Get the data generated in the CSE
 case.study1.data.stack = DataStack(data.model = case.study1.data.model,
                                    sim.parameters = case.study1.sim.parameters)
-
