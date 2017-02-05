@@ -1,26 +1,25 @@
-######################################################################################################################
 
 # Compute the hazard ratio based on non-missing values in the combined sample
 
 HazardRatioStat = function(sample.list, parameter) {
-
+  
   # Determine the function call, either to generate the statistic or to return description
   call = (parameter[[1]] == "Description")
-  save(parameter, file = "parameter.RData")
+  
   if (call == FALSE | is.na(call)) {
-
+    
     # Error checks
     if (length(sample.list)!=2)
       stop("Analysis model: Two samples must be specified in the HazardRatioStat statistic.")
-
+    
     if (is.na(parameter[[2]])) method = "Log-Rank"
     else {
       if (!(parameter[[2]]$method %in% c("Log-Rank", "Cox")))
         stop("Analysis model: HazardRatioStat statistic : the method must be Log-Rank or Cox.")
-
+      
       method = parameter[[2]]$method
     }
-
+    
     # Outcomes in Sample 1
     outcome1 = sample.list[[1]][, "outcome"]
     # Remove the missing values due to dropouts/incomplete observations
@@ -30,7 +29,7 @@ HazardRatioStat = function(sample.list, parameter) {
     event1.complete = event1[stats::complete.cases(outcome1)]
     # Sample size in Sample 1
     n1 = length(outcome1.complete)
-
+    
     # Outcomes in Sample 2
     outcome2 = sample.list[[2]][, "outcome"]
     # Remove the missing values due to dropouts/incomplete observations
@@ -40,12 +39,12 @@ HazardRatioStat = function(sample.list, parameter) {
     event2.complete = event2[stats::complete.cases(outcome2)]
     # Sample size in Sample 2
     n2 = length(outcome2.complete)
-
+    
     # Create combined samples of outcomes, censoring indicators (all events are observed) and treatment indicators
     outcome = c(outcome1.complete, outcome2.complete)
     event = c(event1.complete, event2.complete)
     treatment = c(rep(0, n1), rep(1, n2))
-
+    
     # Get the HR
     if (method == "Log-Rank"){
       surv.test = survival::survdiff(survival::Surv(outcome, event) ~ treatment)
@@ -53,16 +52,16 @@ HazardRatioStat = function(sample.list, parameter) {
     } else if (method == "Cox"){
       result = summary(survival::coxph(survival::Surv(outcome, event) ~ treatment))$coef[,"exp(coef)"]
     }
-
+    
   }
-
+  
   else if (call == TRUE) {
     if (is.na(parameter[[2]])) result = list("Hazard Ratio")
     else {
       result = list("Hazard Ratio", "method = ")
     }
   }
-
+  
   return(result)
 }
 # End of HazardRatioStat
