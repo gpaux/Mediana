@@ -17,15 +17,7 @@ The version 1.0.4 of the Mediana R package has been released on 07 February 2017
 
 - Revision of one-sided p-value computation for Log-Rank test.
 
-- Revision of the call for Statistic in the core function (not visible).
-
 - Revision of the function to calculate the Hazard Ratio Statistic (HazardRatioStat method). By default, this calculation is now based on the log-rank statistic ((O2/E2)/(O1/E1) where O and E are Observed and Expected event in sample 2 and sample 1. A parameter can be added using the `method` argument in the parameter list to set-up the calculation based on the Cox method (`par = parameters(method = "Cox"`), see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
-
-- Revision of the function to calculate the effect size for time-to-event endpoint (`EffectSizeEventStat` method, based on the `HazardRatioStat` method)
-
-- Revision of the functions to calculate the ratio of effect size for continuous (`RatioEffectSizeContStat` method), binary (`RatioEffectSizePropStat` method) and event (`RatioEffectSizeEventStat method`) endpoint.
-
-- Revision of the function to generate the Test, Statistic, Design and result tables in the report.
 
 - Some bug fixes.
 
@@ -90,6 +82,6 @@ Multiple [case studies](CaseStudies.html) are provided on this web site to facil
 
 The Mediana package has been successfully used in multiple clinical trials to perform power calculations as well as optimally select trial designs and analysis strategies (clinical trial optimization). For more information on applications of the Mediana package, download the following papers:
 
-- Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.
+- [Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.](https://www.jstage.jst.go.jp/article/jjscs/28/1/28_1411001_213/_article)
 - [Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics. 26, 120-140.](http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1092032?journalCode=lbps20)
 
