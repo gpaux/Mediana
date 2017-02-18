@@ -1,3 +1,13 @@
+# Mediana 1.0.5
+
+## New features
+
+*
+ 
+## Bug fixes
+
+* 
+
 # Mediana 1.0.4
 
 ## New features
@@ -7,7 +17,7 @@
 * Addition of the Cox method to calculate the HR, effect size and ratio of effect size for time-to-event endpoint. This can be accomplished by setting the  `method` argument in the parameter list to set-up the calculation based on the Cox method. (`par = parameters(method = "Cox"`), see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
 
 * Addition of the package version information in the report.
-* 
+ 
 ## Bug fixes
 
 * Revision of one-sided p-value computation for Log-Rank test.
