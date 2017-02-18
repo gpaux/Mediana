@@ -90,6 +90,16 @@ Test(id = "Placebo vs treatment",
      method = "TTest")
 {% endhighlight %}
 
+Carry out the two-sample t-test for non-inferiority:
+
+{% highlight R %}
+# Placebo and Treatment samples were defined in the data model
+Test(id = "Placebo vs treatment",
+     samples = samples("Placebo", "Treatment"),
+     method = "TTestNI",
+     par = parameters(margin = 0.2))
+{% endhighlight %}
+
 Carry out the two-sample t-test with pooled samples:
 
 {% highlight R %}
@@ -97,7 +107,7 @@ Carry out the two-sample t-test with pooled samples:
 Test(id = "OP test",
      samples = samples(c("Placebo M-", "Placebo M+"),
                        c("Treatment M-", "Treatment M+")),
-     method = "TTest") +
+     method = "TTest")
 {% endhighlight %}
 
 ### `Statistic` object
