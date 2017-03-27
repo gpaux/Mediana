@@ -2,7 +2,7 @@
 
 ## New features
 
-*
+* Addition of the `AdjustPvalues` function which can be used to get adjusted p-values from a Multiple Testing Procedure. This function cannot be used within the CSE framework but it is an add-on function to compute adjusted p-values.
  
 ## Bug fixes
 
