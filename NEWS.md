@@ -6,7 +6,7 @@
  
 ## Bug fixes
 
-* 
+* Revision of the dropout generation mechanism for time-to-event endpoints.
 
 # Mediana 1.0.4
 
