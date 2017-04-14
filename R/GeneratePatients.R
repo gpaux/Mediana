@@ -130,14 +130,13 @@ GeneratePatients = function(current.design.parameter, current.outcome, current.s
 
         # Outcome variable is truncated and the patient censor indicator is set to TRUE
         # if the outcome variable is greater than the patient dropout time (relative to the patient start time)
+        patient.censor.indicator = patient.censor.indicator | (outcome >= patient.dropout.time - patient.start.time)
         outcome = pmin(outcome, patient.dropout.time - patient.start.time)
 
       }
 
       # Enrollment distribution is specified
       if (!all(is.na(patient.start.time))) {
-
-        patient.censor.indicator = patient.dropout.indicator
 
         # Outcome variable is truncated and the patient censor indicator is set to TRUE
         # if the outcome variable is greater than the patient end time (relative to the patient start time)
