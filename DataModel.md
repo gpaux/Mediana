@@ -67,6 +67,8 @@ Several distributions that can be specified using the `outcome.dist` argument ar
 
 - `ExpoDist`: generate data following an **exponential distribution**. Required parameter: `rate`.
 
+- `WeibullDist`: generate data following a **weibull distribution**. Required parameter: `shape` and `scale`.
+
 - `TruncatedExpoDist`: generate data following a **truncated exponential distribution**. Required parameter: `rate` an `trunc`.
 
 - `PoissonDist`: generate data following a **Poisson distribution**. Required parameter: `lambda`.
