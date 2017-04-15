@@ -29,6 +29,7 @@ Several distribution are already implemented in the Mediana package (listed belo
 \item \code{BinomDist}: generate data following a binomial distribution. Required parameter: \code{prop}.
 \item \code{BetaDist}: generate data following a beta distribution. Required parameter: \code{a}. and \code{b}.
 \item \code{ExpoDist}: generate data following an exponential distribution. Required parameter: \code{rate}.
+\item \code{WeibullDist}: generate data following a weibull distribution. Required parameter: \code{shape} and \code{scale}.
 \item \code{TruncatedExpoDist}: generate data following a truncated exponential distribution. Required parameter: \code{rate} and \code{trunc}.
 \item \code{PoissonDist}: generate data following a Poisson distribution. Required parameter: \code{lambda}.
 \item \code{NegBinomDist}: generate data following a negative binomial distribution. Required parameters: \code{dispersion} and \code{mean}.
