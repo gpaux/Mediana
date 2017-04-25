@@ -25,3 +25,6 @@ Imports:
 License: GPL-2
 URL: http://gpaux.github.io/Mediana/
 RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

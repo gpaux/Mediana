@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Gautier Paux and Alex Dmitrienko" />
+
+<meta name="date" content="2017-04-25" />
+
+<title>Case studies</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Case studies</h1>
+<h4 class="author"><em>Gautier Paux and Alex Dmitrienko</em></h4>
+<h4 class="date"><em>2017-04-25</em></h4>
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Several case studies have been created to facilitate the implementation of simulation-based Clinical Scenario Evaluation (CSE) approaches in multiple settings and help the user understand individual features of the Mediana package. Case studies are arranged in terms of increasing complexity of the underlying clinical trial setting (i.e., trial design and analysis methodology). For example, <a href="#case-study-1-1">Case study 1</a> deals with a number of basic settings and increasingly more complex settings are considered in the subsequent case studies.</p>
+<div id="case-study-1" class="section level2">
+<h2>Case study 1</h2>
+<p>This case study serves a good starting point for users who are new to the Mediana package. It focuses on clinical trials with simple designs and analysis strategies where power and sample size calculations can be performed using analytical methods.</p>
+<ol style="list-style-type: decimal">
+<li><a href="#normally-distributed-endpoint">Trial with two treatment arms and single endpoint (normally distributed endpoint).</a></li>
+<li><a href="#binary-endpoint">Trial with two treatment arms and single endpoint (binary endpoint).</a></li>
+<li><a href="#survival-type-endpoint">Trial with two treatment arms and single endpoint (survival-type endpoint).</a></li>
+<li><a href="#survival-type-endpoint-with-censoring">Trial with two treatment arms and single endpoint (survival-type endpoint with censoring).</a></li>
+<li><a href="#count-type-endpoint">Trial with two treatment arms and single endpoint (count-type endpoint).</a></li>
+</ol>
+</div>
+<div id="case-study-2" class="section level2">
+<h2>Case study 2</h2>
+<p>This case study is based on a <strong>clinical trial with three or more treatment arms</strong>. A multiplicity adjustment is required in this setting and no analytical methods are available to support power calculations.</p>
+<p>This example also illustrates a key feature of the Mediana package, namely, a useful option to define custom functions, for example, it shows how the user can define a new criterion in the Evaluation Model.</p>
+<p><a href="#case-study-2-1">Clinical trial in patients with schizophrenia</a></p>
+</div>
+<div id="case-study-3" class="section level2">
+<h2>Case study 3</h2>
+<p>This case study introduces a <strong>clinical trial with several patient populations</strong> (marker-positive and marker-negative patients). It demonstrates how the user can define independent samples in a data model and then specify statistical tests in an analysis model based on merging several samples, i.e., merging samples of marker-positive and marker-negative patients to carry out a test that evaluated the treatment effect in the overall population.</p>
+<p><a href="#case-study-3-1">Clinical trial in patients with asthma</a></p>
+</div>
+<div id="case-study-4" class="section level2">
+<h2>Case study 4</h2>
+<p>This case study illustrates CSE simulations in a <strong>clinical trial with several endpoints</strong> and helps showcase the package’s ability to model multivariate outcomes in clinical trials.</p>
+<p><a href="#case-study-4-1">Clinical trial in patients with metastatic colorectal cancer</a></p>
+</div>
+<div id="case-study-5" class="section level2">
+<h2>Case study 5</h2>
+<p>This case study is based on a <strong>clinical trial with several endpoints and multiple treatment arms</strong> and illustrates the process of performing complex multiplicity adjustments in trials with several clinical objectives.</p>
+<p><a href="#case-study-5-1">Clinical trial in patients with rheumatoid arthritis</a></p>
+</div>
+<div id="case-study-6" class="section level2">
+<h2>Case study 6</h2>
+<p>This case study is an extension of <a href="#case-study-2-1">Case study 2</a> and illustrates how the package can be used to assess the performance of several multiplicity adjustments. The case study also walks the reader through the process of defining customized simulation reports.</p>
+<p><a href="#case-study-6-1">Clinical trial in patients with schizophrenia</a></p>
+</div>
+</div>
+<div id="case-study-1-1" class="section level1">
+<h1>Case study 1</h1>
+<p>Case study 1 deals with a simple setting, namely, a clinical trial with two treatment arms (experimental treatment versus placebo) and a single endpoint. Power calculations can be performed analytically in this setting. Specifically, closed-form expressions for the power function can be derived using the central limit theorem or other approximations.</p>
+<p>Several distribution will be illustrated in this case study:</p>
+<ul>
+<li><p><a href="#normally-distributed-endpoint">Normally distributed endpoint</a></p></li>
+<li><p><a href="#binary-endpoint">Binary endpoint</a></p></li>
+<li><p><a href="#survival-type-endpoint">Survival-type endpoint</a></p></li>
+<li><p><a href="#survival-type-endpoint-with-censoring">Survival-type endpoint (with censoring)</a></p></li>
+<li><p><a href="#count-type-endpoint">Count-type endpoint</a></p></li>
+</ul>
+<div id="normally-distributed-endpoint" class="section level2">
+<h2>Normally distributed endpoint</h2>
+<p>Suppose that a sponsor is designing a Phase III clinical trial in patients with pulmonary arterial hypertension (PAH). The efficacy of experimental treatments for PAH is commonly evaluated using a six-minute walk test and the primary endpoint is defined as the change from baseline to the end of the 16-week treatment period in the six-minute walk distance.</p>
+<div id="define-a-data-model" class="section level3">
+<h3>Define a Data Model</h3>
+<p>The first step is to initialize the data model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>()</code></pre></div>
+<p>After the initialization, components of the data model can be added to the <code>DataModel</code> object incrementally using the <code>+</code> operator.</p>
+<p>The change from baseline in the six-minute walk distance is assumed to follow a normal distribution. The distribution of the primary endpoint is defined in the <code>OutcomeDist</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>)</code></pre></div>
+<p>The sponsor would like to perform power evaluation over a broad range of sample sizes in each treatment arm:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model +
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>)) </code></pre></div>
+<p>As a side note, the <code>seq</code> function can be used to compactly define sample sizes in a data model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model +
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">70</span>, <span class="dv">5</span>)) </code></pre></div>
+<p>The sponsor is interested in performing power calculations under two treatment effect scenarios (standard and optimistic scenarios). Under these scenarios, the experimental treatment is expected to improve the six-minute walk distance by 40 or 50 meters compared to placebo, respectively, with the common standard deviation of 70 meters.</p>
+<p>Therefore, the mean change in the placebo arm is set to μ = 0 and the mean changes in the six-minute walk distance in the experimental arm are set to μ = 40 (standard scenario) or μ = 50 (optimistic scenario). The common standard deviation is σ = 70.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameter set 1 (standard scenario)</span>
+outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+outcome1.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">40</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+
+<span class="co"># Outcome parameter set 2 (optimistic scenario)</span>
+outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">70</span>)</code></pre></div>
+<p>Note that the mean and standard deviation are explicitly identified in each list. This is done mainly for the user’s convenience.</p>
+<p>After having defined the outcome parameters for each sample, two <code>Sample</code> objects that define the two treatment arms in this trial can be created and added to the <code>DataModel</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment, outcome2.treatment))</code></pre></div>
+</div>
+<div id="define-an-analysis-model" class="section level3">
+<h3>Define an Analysis Model</h3>
+<p>Just like the data model, the analysis model needs to be initialized as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>()</code></pre></div>
+<p>Only one significance test is planned to be carried out in the PAH clinical trial (treatment versus placebo). The treatment effect will be assessed using the one-sided two-sample <em>t</em>-test:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
+<p>According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see <a href="AnalysisModel.html#Description">Analysis Model</a>, the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.</p>
+<p>To illustrate the use of the <code>Statistic</code> object, the mean change in the six-minute walk distance in the treatment arm can be computed using the <code>MeanStat</code> statistic:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model +
+<span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Treatment&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MeanStat&quot;</span>,
+            <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>))</code></pre></div>
+</div>
+<div id="define-an-evaluation-model" class="section level3">
+<h3>Define an Evaluation Model</h3>
+<p>The data and analysis models specified above collectively define the Clinical Scenarios to be examined in the PAH clinical trial. The scenarios are evaluated using success criteria or metrics that are aligned with the clinical objectives of the trial. In this case it is most appropriate to use regular power or, more formally, <em>marginal power</em>. This success criterion is specified in the evaluation model.</p>
+<p>First of all, the evaluation model must be initialized:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>()</code></pre></div>
+<p>Secondly, the success criterion of interest (marginal power) is defined using the <code>Criterion</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.evaluation.model =<span class="st"> </span>case.study1.evaluation.model +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+<p>The <code>tests</code> argument lists the IDs of the tests (defined in the analysis model) to which the criterion is applied (note that more than one test can be specified). The test IDs link the evaluation model with the corresponding analysis model. In this particular case, marginal power will be computed for the t-test that compares the mean change in the six-minute walk distance in the placebo and treatment arms (Placebo vs treatment).</p>
+<p>In order to compute the average value of the mean statistic specified in the analysis model (i.e., the mean change in the six-minute walk distance in the treatment arm) over the simulation runs, another <code>Criterion</code> object needs to be added:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.evaluation.model =<span class="st"> </span>case.study1.evaluation.model +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Average Mean&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
+            <span class="dt">statistics =</span> <span class="kw">statistics</span>(<span class="st">&quot;Mean Treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Average Mean Treatment&quot;</span>))</code></pre></div>
+<p>The <code>statistics</code> argument of this <code>Criterion</code> object lists the ID of the statistic (defined in the analysis model) to which this metric is applied (e.g., <code>Mean Treatment</code>).</p>
+</div>
+<div id="perform-clinical-scenario-evaluation" class="section level3">
+<h3>Perform Clinical Scenario Evaluation</h3>
+<p>After the clinical scenarios (data and analysis models) and evaluation model have been defined, the user is ready to evaluate the success criteria specified in the evaluation model by calling the <code>CSE</code> function.</p>
+<p>To accomplish this, the simulation parameters need to be defined in a <code>SimParameters</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulation parameters</span>
+case.study1.sim.parameters =<span class="st"> </span><span class="kw">SimParameters</span>(<span class="dt">n.sims =</span> <span class="dv">1000</span>, 
+                                           <span class="dt">proc.load =</span> <span class="st">&quot;full&quot;</span>, 
+                                           <span class="dt">seed =</span> <span class="dv">42938001</span>)</code></pre></div>
+<p>The function call for <code>CSE</code> specifies the individual components of Clinical Scenario Evaluation in this case study as well as the simulation parameters:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Perform clinical scenario evaluation</span>
+case.study1.results =<span class="st"> </span><span class="kw">CSE</span>(case.study1.data.model,
+                          case.study1.analysis.model,
+                          case.study1.evaluation.model,
+                          case.study1.sim.parameters)</code></pre></div>
+<p>The simulation results are saved in an <code>CSE</code> object (<code>case.study1.results</code>). This object contains complete information about this particular evaluation, including the data, analysis and evaluation models specified by the user. The most important component of this object is the data frame contained in the list named <em>simulation.results</em> (<code>case.study1.results$simulation.results</code>). This data frame includes the values of the success criteria and metrics defined in the evaluation model.</p>
+</div>
+<div id="summarize-the-simulation-results" class="section level3">
+<h3>Summarize the Simulation Results</h3>
+<div id="summary-of-simulation-results-in-r-console" class="section level4">
+<h4>Summary of simulation results in R console</h4>
+<p>To facilitate the review of the simulation results produced by the <code>CSE</code> function, the user can invoke the <code>summary</code> function. This function displays the data frame containing the simulation results in the R console:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the simulation results in the R console</span>
+<span class="kw">summary</span>(case.study1.results)</code></pre></div>
+<p>If the user is interested in generate graphical summaries of the simulation results (using the the <a href="http://ggplot2.org/">ggplot2</a> package or other packages), this data frame can also be saved to an object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the simulation results in the R console</span>
+case.study1.simulation.results =<span class="st"> </span><span class="kw">summary</span>(case.study1.results)</code></pre></div>
+</div>
+<div id="general-a-simulation-report" class="section level4">
+<h4>General a Simulation Report</h4>
+<div id="presentation-model" class="section level5">
+<h5>Presentation Model</h5>
+<p>A very useful feature of the Mediana package is generation of a Microsoft Word-based report to provide a summary of Clinical Scenario Evaluation Report.</p>
+<p>To generate a simulation report, the user needs to define a presentation model by creating a <code>PresentationModel</code> object. This object must be initialized as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.presentation.model =<span class="st"> </span><span class="kw">PresentationModel</span>()</code></pre></div>
+<p>Project information can be added to the presentation model using the <code>Project</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.presentation.model =<span class="st"> </span>case.study1.presentation.model +
+<span class="st">  </span><span class="kw">Project</span>(<span class="dt">username =</span> <span class="st">&quot;[Mediana's User]&quot;</span>,
+          <span class="dt">title =</span> <span class="st">&quot;Case study 1&quot;</span>,
+          <span class="dt">description =</span> <span class="st">&quot;Clinical trial in patients with pulmonary arterial hypertension&quot;</span>)</code></pre></div>
+<p>The user can easily customize the simulation report by defining report sections and specifying properties of summary tables in the report. The code shown below creates a separate section within the report for each set of outcome parameters (using the <code>Section</code> object) and sets the sorting option for the summary tables (using the <code>Table</code> object). The tables will be sorted by the sample size. Further, in order to define descriptive labels for the outcome parameter scenarios and sample size scenarios, the <code>CustomLabel</code> object needs to be used:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.presentation.model =<span class="st"> </span>case.study1.presentation.model +
+<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) +
+<span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) +
+<span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;sample.size&quot;</span>, 
+              <span class="dt">label=</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>,<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>))) +
+<span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;outcome.parameter&quot;</span>, 
+              <span class="dt">label=</span><span class="kw">c</span>(<span class="st">&quot;Standard&quot;</span>, <span class="st">&quot;Optismistic&quot;</span>))</code></pre></div>
+</div>
+<div id="report-generation" class="section level5">
+<h5>Report generation</h5>
+<p>Once the presentation model has been defined, the simulation report is ready to be generated using the <code>GenerateReport</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Report Generation</span>
+<span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study1.presentation.model,
+               <span class="dt">cse.results =</span> case.study1.results,
+               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 1 (normally distributed endpoint).docx&quot;</span>)</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="binary-endpoint" class="section level2">
+<h2>Binary endpoint</h2>
+<p>Consider a Phase III clinical trial for the treatment of rheumatoid arthritis (RA). The primary endpoint is the response rate based on the American College of Rheumatology (ACR) definition of improvement. The trial’s sponsor in interested in performing power calculations using several treatment effect assumptions (Placebo 30% - Treatment 50%, Placebo 30% - Treatment 55% and Placebo 30% - Treatment 60%)</p>
+<div id="define-a-data-model-1" class="section level3">
+<h3>Define a Data Model</h3>
+<p>The three outcome parameter sets displayed in the table are combined with four sample size sets (<code>SampleSize(c(80, 90, 100, 110))</code>) and the distribution of the primary endpoint (<code>OutcomeDist(outcome.dist = &quot;BinomDist&quot;)</code>) is specified in the <code>DataModel</code> object <code>case.study1.data.model</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameter set 1</span>
+outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.30</span>)
+outcome1.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>)
+
+<span class="co"># Outcome parameter set 2</span>
+outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.30</span>)
+outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.55</span>)
+
+<span class="co"># Outcome parameter set 3</span>
+outcome3.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.30</span>)
+outcome3.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.60</span>)
+
+<span class="co"># Data model</span>
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;BinomDist&quot;</span>) +
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="dv">110</span>)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo,  outcome3.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment, outcome2.treatment, outcome3.treatment))</code></pre></div>
+</div>
+<div id="define-an-analysis-model-1" class="section level3">
+<h3>Define an Analysis Model</h3>
+<p>The analysis model uses a standard two-sample test for comparing proportions (<code>method = &quot;PropTest&quot;</code>) to assess the treatment effect in this clinical trial example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>)</code></pre></div>
+</div>
+<div id="define-an-evaluation-model-1" class="section level3">
+<h3>Define an Evaluation Model</h3>
+<p>Power evaluations are easily performed in this clinical trial example using the same evaluation model utilized in the case of a normally distributed endpoint, i.e., evaluations rely on marginal power:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+<p>An extension of this clinical trial example is provided in <a href="CaseStudy05.html">Case study 5</a>. The extension deals with a more complex setting involving several trial endpoints and multiple treatment arms.</p>
+</div>
+</div>
+<div id="survival-type-endpoint" class="section level2">
+<h2>Survival-type endpoint</h2>
+<p>If the trial’s primary objective is formulated in terms of analyzing the time to a clinically important event (progression or death in an oncology setting), data and analysis models can be set up based on an exponential distribution and the log-rank test.</p>
+<p>As an illustration, consider a Phase III trial which will be conducted to evaluate the efficacy of a new treatment for metastatic colorectal cancer (MCC). Patients will be randomized in a 2:1 ratio to an experimental treatment or placebo (in addition to best supportive care).</p>
+<p>The trial’s primary objective is to assess the effect of the experimental treatment on progression-free survival (PFS).</p>
+<div id="define-a-data-model-2" class="section level3">
+<h3>Define a Data Model</h3>
+<p>A single treatment effect scenario is considered in this clinical trial example. Specifically, the median time to progression is assumed to be:</p>
+<ul>
+<li><p>Placebo : t0 = 6 months,</p></li>
+<li><p>Treatment: t1 = 9 months.</p></li>
+</ul>
+<p>Under an exponential distribution assumption (which is specified using the <code>ExpoDist</code> distribution), the median times correspond to the following hazard rates:</p>
+<ul>
+<li><p>λ0 = log(2)/t0 = 0.116,</p></li>
+<li><p>λ1 = log(2)/t1 = 0.077,</p></li>
+</ul>
+<p>and the resulting hazard ratio (HR) is 0.077/0.116 = 0.67.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters</span>
+median.time.placebo =<span class="st"> </span><span class="dv">6</span>
+rate.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.placebo
+outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.placebo)
+
+median.time.treatment =<span class="st"> </span><span class="dv">9</span>
+rate.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.treatment
+outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.treatment)</code></pre></div>
+<p>It is important to note that, if no censoring mechanisms are specified in a data model with a time-to-event endpoint, all patients will reach the endpoint of interest (e.g., progression) and thus the number of patients will be equal to the number of events. Using this property, power calculations can be performed using either the <code>Event</code> object or <code>SampleSize</code> object. For the purpose of illustration, the <code>Event</code> object will be used in this example.</p>
+<p>To define a data model in the MCC clinical trial, the total event count in the trial is assumed to range between 270 and 300. Since the trial’s design is not balanced, the randomization ratio needs to be specified in the <code>Event</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Number of events parameters</span>
+event.count.total =<span class="st"> </span><span class="kw">c</span>(<span class="dv">210</span>, <span class="dv">300</span>)
+randomization.ratio =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)
+
+<span class="co"># Data model</span>
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>) +
+<span class="st">  </span><span class="kw">Event</span>(<span class="dt">n.events =</span> event.count.total, <span class="dt">rando.ratio =</span> randomization.ratio) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment))</code></pre></div>
+<p>It is worth noting that the primary endpoint’s type (i.e., the<code>outcome.type</code> argument in the <code>OutcomeDist</code> object) is not specified. By default, the outcome type is set to <code>fixed</code>, which means that a design with a fixed follow-up is assumed even though the primary endpoint in this clinical trial is clearly a time-to-event endpoint. This is due to the fact that, as was explained earlier in this case study, there is no censoring in this design and all patients are followed until the event of interest is observed. It is easy to verify that the same results are obtained if the outcome type is set to <code>event</code>.</p>
+</div>
+<div id="define-an-analysis-model-2" class="section level3">
+<h3>Define an Analysis Model</h3>
+<p>The analysis model in this clinical trial is very similar to the analysis models defined in the case studies with normal and binomial outcome variables. The only difference is the choice of the statistical method utilized in the primary analysis (<code>method = &quot;LogrankTest&quot;</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</code></pre></div>
+<p>To illustrate the specification of a <code>Statistic</code> object, the hazard ratio will be computed using the Cox method. This can be accomplished by adding a <code>Statistic</code> object to the <code>AnalysisModel</code> such presented below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model +
+<span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Hazard Ratio&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;HazardRatioStat&quot;</span>,
+       <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">method =</span> <span class="st">&quot;Cox&quot;</span>)) </code></pre></div>
+</div>
+<div id="define-an-evaluation-model-2" class="section level3">
+<h3>Define an Evaluation Model</h3>
+<p>An evaluation model identical to that used earlier in the case studies with normal and binomial distribution can be applied to compute the power function at the selected event counts. Moreover, the average hazard ratio accross the simulations will be computed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Hazard Ratio&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
+            <span class="dt">statistics =</span> <span class="kw">tests</span>(<span class="st">&quot;Hazard Ratio&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Average Hazard Ratio&quot;</span>)) </code></pre></div>
+</div>
+</div>
+<div id="survival-type-endpoint-with-censoring" class="section level2">
+<h2>Survival-type endpoint (with censoring)</h2>
+<p>The power calculations presented in the previous case study assume an idealized setting where each patient is followed until the event of interest (e.g., progression) is observed. In this case, the sample size (number of patients) in each treatment arm is equal to the number of events. In reality, events are often censored and a sponsor is generally interested in determining the number of patients to be recruited in order to ensure a target number of events, which translates into desirable power.</p>
+<p>The Mediana package can be used to perform power calculations in event-driven trials in the presence of censoring. This is accomplished by setting up design parameters such as the length of the enrollment and follow-up periods in a data model using a <code>Design</code> object.</p>
+<p>In general, even though closed-form solutions have been derived for sample size calculations in event-driven designs, the available approaches force clinical trial researchers to make a variety of simplifying assumptions, e.g., assumptions on the enrollment distribution are commonly made, see, for example, Julious (2009, Chapter 15). A general simulation-based approach to power and sample size calculations implemented in the Mediana package enables clinical trial sponsors to remove these artificial restrictions and examine a very broad set of plausible design parameters.</p>
+<div id="define-a-data-model-3" class="section level3">
+<h3>Define a Data Model</h3>
+<p>Suppose, for example, that a standard design with a variable follow-up will be used in the MCC trial introduced in the previous case study. The total study duration will be 21 months, which includes a 9-month enrollment (accrual) period and a minimum follow-up of 12 months. The patients are assumed to be recruited at a uniform rate. The set of design parameters also includes the dropout distribution and its parameters. In this clinical trial, the dropout distribution is exponential with a rate determined from historical data. These design parameters are specified in a <code>Design</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Dropout parameters</span>
+dropout.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> <span class="fl">0.0115</span>)
+
+<span class="co"># Design parameters</span>
+case.study1.design =<span class="st"> </span><span class="kw">Design</span>(<span class="dt">enroll.period =</span> <span class="dv">9</span>,
+                            <span class="dt">study.duration =</span> <span class="dv">21</span>,
+                            <span class="dt">enroll.dist =</span> <span class="st">&quot;UniformDist&quot;</span>,
+                            <span class="dt">dropout.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>,
+                            <span class="dt">dropout.dist.par =</span> dropout.par) </code></pre></div>
+<p>Finally, the primary endpoint’s type is set to <code>event</code> in the <code>OutcomeDist</code> object to indicate that a variable follow-up will be utilized in this clinical trial.</p>
+<p>The complete data model in this case study is defined as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Number of events parameters</span>
+event.count.total =<span class="st"> </span><span class="kw">c</span>(<span class="dv">390</span>, <span class="dv">420</span>)
+randomization.ratio =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)
+
+<span class="co"># Outcome parameters</span>
+median.time.placebo =<span class="st"> </span><span class="dv">6</span>
+rate.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.placebo
+outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.placebo)
+median.time.treatment =<span class="st"> </span><span class="dv">9</span>
+rate.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.treatment
+outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.treatment)
+
+<span class="co"># Dropout parameters</span>
+dropout.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> <span class="fl">0.0115</span>)
+
+<span class="co"># Data model</span>
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>, 
+              <span class="dt">outcome.type =</span> <span class="st">&quot;event&quot;</span>) +
+<span class="st">  </span><span class="kw">Event</span>(<span class="dt">n.events =</span> event.count.total, <span class="dt">rando.ratio =</span> randomization.ratio) +
+<span class="st">  </span><span class="kw">Design</span>(<span class="dt">enroll.period =</span> <span class="dv">9</span>,
+         <span class="dt">study.duration =</span> <span class="dv">21</span>,
+         <span class="dt">enroll.dist =</span> <span class="st">&quot;UniformDist&quot;</span>,
+         <span class="dt">dropout.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>,
+         <span class="dt">dropout.dist.par =</span> dropout.par) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment))</code></pre></div>
+</div>
+<div id="define-an-analysis-model-3" class="section level3">
+<h3>Define an Analysis Model</h3>
+<p>Since the number of events has been fixed in this clinical trial example and some patients will not reach the event of interest, it will be important to estimate the number of patients required to accrue the required number of events. In the Mediana package, this can be accomplished by specifying a descriptive statistic named <code>PatientCountStat</code> (this statistic needs to be specified in a <code>Statistic</code> object). Another descriptive statistic that would be of interest is the event count in each sample. To compute this statistic, <code>EventCountStat</code> needs to be included in a <code>Statistic</code> object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) +
+<span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Events Placebo&quot;</span>,
+            <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>),
+            <span class="dt">method =</span> <span class="st">&quot;EventCountStat&quot;</span>) +
+<span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Events Treatment&quot;</span>,
+            <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>),
+            <span class="dt">method =</span> <span class="st">&quot;EventCountStat&quot;</span>)  +
+<span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Patients Placebo&quot;</span>,
+            <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>),
+            <span class="dt">method =</span> <span class="st">&quot;PatientCountStat&quot;</span>) +
+<span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Patients Treatment&quot;</span>,
+            <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>),
+            <span class="dt">method =</span> <span class="st">&quot;PatientCountStat&quot;</span>)</code></pre></div>
+</div>
+<div id="define-an-evaluation-model-3" class="section level3">
+<h3>Define an Evaluation Model</h3>
+<p>In order to compute the average values of the two statistics (<code>PatientCountStat</code> and <code>EventCountStat</code>) in each sample over the simulation runs, two <code>Criterion</code> objects need to be specified, in addition to the <code>Criterion</code> object defined to obtain marginal power. The IDs of the corresponding <code>Statistic</code> objects will be included in the <code>statistics</code> argument of the two <code>Criterion</code> objects:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))  +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Events&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
+            <span class="dt">statistics =</span> <span class="kw">statistics</span>(<span class="st">&quot;Events Placebo&quot;</span>, <span class="st">&quot;Events Treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Mean Events Placebo&quot;</span>, <span class="st">&quot;Mean Events Treatment&quot;</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Patients&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
+            <span class="dt">statistics =</span> <span class="kw">statistics</span>(<span class="st">&quot;Patients Placebo&quot;</span>, <span class="st">&quot;Patients Treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Mean Patients Placebo&quot;</span>, <span class="st">&quot;Mean Patients Treatment&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="count-type-endpoint" class="section level2">
+<h2>Count-type endpoint</h2>
+<p>The last clinical trial example within Case study 1 deals with a Phase III clinical trial in patients with relapsing-remitting multiple sclerosis (RRMS). The trial aims at assessing the safety and efficacy of a single dose of a novel treatment compared to placebo. The primary endpoint is the number of new gadolinium enhancing lesions seen during a 6-month period on monthly MRIs of the brain and a smaller number indicates treatment benefit. The distribution of such endpoints has been widely studied in the literature and Sormani et al. (<a href="http://www.jns-journal.com/article/S0022-510X(99)00015-5/abstract">1999a</a>, <a href="http://jnnp.bmj.com/content/66/4/465.long">1999b</a>) showed that a negative binomial distribution provides a fairly good fit.</p>
+<p>The list below gives the expected treatment effect in the experimental treatment and placebo arms (note that the negative binomial distribution is parameterized using the mean rather than the probability of success in each trial). The mean number of new lesions is set to 13 in the Treament arm and 7.8 in the Placebo arm, with a common dispersion parameter of 0.5.</p>
+<p>The corresponding treatment effect, i.e., the relative reduction in the mean number of new lesions counts, is 100 * (13 − 7.8)/13 = 40%. The assumptions in the table define a single outcome parameter set.</p>
+<div id="define-a-data-model-4" class="section level3">
+<h3>Define a Data Model</h3>
+<p>The <code>OutcomeDist</code> object defines the distribution of the trial endpoint (<code>NegBinomDist</code>). Further, a balanced design is utilized in this clinical trial and the range of sample sizes is defined in the <code>SampleSize</code> object (it is convenient to do this using the <code>seq</code> function). The <code>Sample</code> object includes the parameters required by the negative binomial distribution (dispersion and mean).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters</span>
+outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">dispersion =</span> <span class="fl">0.5</span>, <span class="dt">mean =</span> <span class="dv">13</span>)
+outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">dispersion =</span> <span class="fl">0.5</span>, <span class="dt">mean =</span> <span class="fl">7.8</span>)
+
+<span class="co"># Data model</span>
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NegBinomDist&quot;</span>) +
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">10</span>)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment))</code></pre></div>
+</div>
+<div id="define-an-analysis-model-4" class="section level3">
+<h3>Define an Analysis Model</h3>
+<p>The treatment effect will be assessed in this clinical trial example using a negative binomial generalized linear model (NBGLM). In the Mediana package, the corresponding test is carrying out using the <code>GLMNegBinomTest</code> method which is specified in the <code>Test</code> object. It should be noted that as a smaller value indicates a treatment benefit, the first sample defined in the <code>samples</code> argument must be <code>Treatment</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment vs Placebo&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>( <span class="st">&quot;Treatment&quot;</span>, <span class="st">&quot;Placebo&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;GLMNegBinomTest&quot;</span>)</code></pre></div>
+</div>
+<div id="define-an-evaluation-model-4" class="section level3">
+<h3>Define an Evaluation Model</h3>
+<p>The objective of this clinical trial is identical to that of the clinical trials presented earlier on this page, i.e., evaluation will be based on marginal power of the primary endpoint test. As a consequence, the same evaluation model can be applied.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Treatment vs Placebo&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Treatment vs Placebo&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

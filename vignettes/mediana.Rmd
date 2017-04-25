@@ -1,0 +1,1323 @@
+---
+title: "Mediana: an R package for clinical trial simulations"
+author: "Gautier Paux and Alex Dmitrieniko"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mediana: an R package for clinical trial simulations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+## About
+
+Mediana is an R package which provides a general framework for clinical trial simulations based on the Clinical Scenario Evaluation approach. The package supports a broad class of data models (including clinical trials with continuous, binary, survival-type and count-type endpoints as well as multivariate outcomes that are based on combinations of different endpoints), analysis strategies and commonly used evaluation criteria.
+
+## Expert and development teams
+
+**Package design**: [Alex Dmitrienko (Mediana Inc.)](http://www.medianainc.com/).
+
+**Core development team**: [Gautier Paux (Servier)](http://www.linkedin.com/in/pauxgautier), [Alex Dmitrienko (Mediana Inc.)](http://www.medianainc.com/).
+
+**Extended development team**: Thomas Brechenmacher (Novartis), Fei Chen (Johnson and Johnson), Ilya Lipkovich (Quintiles), Ming-Dauh Wang (Lilly), Jay Zhang (MedImmune), Haiyan Zheng (Osaka University).
+
+**Expert team**: Keaven Anderson (Merck), Frank Harrell (Vanderbilt University), Mani Lakshminarayanan (Pfizer), Brian Millen (Lilly), Jose Pinheiro (Johnson and Johnson), Thomas Schmelter (Bayer).
+
+## Installation
+
+### Latest release
+
+Install the latest version of the Mediana package from CRAN using the `install.packages` command in R:
+
+```r
+install.packages("Mediana")
+```
+
+Alternatively, you can download the package from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html).
+
+### Development version
+
+The up-to-date development version can be found and installed directly from the GitHub web site. You need to install the `devtools` package and then call the `install_github` function in R:
+
+```r
+# install.packages("devtools")
+devtools::install_github("gpaux/Mediana")
+```
+
+### Potential installation's issue
+
+When installing Mediana package, an error could occur if a java version >= 1.6 is not installed. Java is used in the ReporteRs R package which is required in the Mediana R package to [generate Word report](#simulation-report). 
+
+`system("java -version")` should return java version ‘1.6.0’ or greater.
+
+In order to ensure a proper installation, it is highly recommended to install the latest version of Java in the same architecture of R (32-bit or 64-bit). 
+
+The latest version can be found at [https://www.java.com/en/download/manual.jsp](https://www.java.com/en/download/manual.jsp).
+
+## Clinical Scenario Evaluation Framework
+
+The Mediana R package was developed to provide a general software implementation of the Clinical Scenario Evaluation (CSE) framework. This framework introduced by [Benda et al. (2010)](http://dij.sagepub.com/content/44/3/299.abstract) and [Friede et al. (2010)](http://dij.sagepub.com/content/44/6/713.abstract) recognizes that sample size calculation and power evaluation in clinical trials are high-dimensional statistical problems. This approach helps decompose this complex problem by identifying key elements of the evaluation process. These components are termed models:
+
+- [Data models](#data-model) define the process of generating trial data (e.g., sample sizes,  outcome distributions and parameters).
+- [Analysis models](#analysis-model) define the statistical methods applied to the trial data (e.g., statistical tests, multiplicity adjustments).
+- [Evaluation models](#evaluation-model) specify the measures for evaluating the performance of the analysis strategies (e.g., traditional success criteria such as marginal power or composite criteria such as disjunctive power).
+
+Find out more about the role of each model and how to specify the three models to perform Clinical Scenario Evaluation by reviewing the dedicated pages (click on the links above).
+
+## Case studies
+
+Multiple case studies are provided on the [web site's package](http://gpaux.github.io/Mediana/CaseStudies.html) to facilitate the implementation of Clinical Scenario Evaluation in different clinical trial settings using the Mediana package. These case studies will be updated on a regular basis. Another vignette accessible with the following command  is also available presenting these case studies.
+
+```r
+vignette("case-studies", package = "Mediana")
+```
+
+The Mediana package has been successfully used in multiple clinical trials to perform power calculations as well as optimally select trial designs and analysis strategies (clinical trial optimization). For more information on applications of the Mediana package, download the following papers:
+
+- [Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.](https://www.jstage.jst.go.jp/article/jjscs/28/1/28_1411001_213/_article)
+- [Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics. 26, 120-140.](http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1092032?journalCode=lbps20)
+
+# Data model
+
+Data models define the process of generating patient data in clinical trials.
+
+## Initialization
+
+A data model can be initialized using the following command
+
+```r
+# DataModel initialization
+data.model = DataModel()
+```
+
+It is highly recommended to use this command as it will simplify the process of specifying components of the data model, e.g., `OutcomeDist`, `Sample`, `SampleSize`, `Event` and `Design` objects. 
+
+## Components of a data model
+
+Once the `DataModel` object has been initialized, components of the data model can be specified by adding objects to the model using the '+' operator as shown below.
+
+```r
+# Outcome parameter set 1
+outcome1.placebo = parameters(mean = 0, sd = 70)
+outcome1.treatment = parameters(mean = 40, sd = 70)
+
+# Outcome parameter set 2
+outcome2.placebo = parameters(mean = 0, sd = 70)
+outcome2.treatment = parameters(mean = 50, sd = 70)
+
+# Data model
+case.study1.data.model =  DataModel() +
+  OutcomeDist(outcome.dist = "NormalDist") +
+  SampleSize(c(50, 55, 60, 65, 70)) +
+  Sample(id = "Placebo",
+         outcome.par = parameters(outcome1.placebo, outcome2.placebo)) +
+  Sample(id = "Treatment",
+         outcome.par = parameters(outcome1.treatment, outcome2.treatment))
+```
+
+
+### `OutcomeDist` object
+
+#### Description
+
+This object specifies the distribution of patient outcomes in a data model. An `OutcomeDist` object is defined by two arguments:
+
+- `outcome.dist` defines the outcome distribution.
+
+- `outcome.type` defines the outcome type (optional). There are two acceptable values of this argument: `standard` (fixed-design setting) and `event` (event-driven design setting).
+
+Several distributions that can be specified using the `outcome.dist` argument are already implemented in the Mediana package. These distributions are listed below along with the required parameters to be included in the `outcome.par` argument of the `Sample` object:
+
+- `UniformDist`: generate data following a **univariate distribution**. Required parameter: `max`.
+
+- `NormalDist`: generate data following a **normal distribution**. Required parameters: `mean` and `sd`.
+
+- `BinomDist`: generate data following a **binomial distribution**. Required parameter: `prop`.
+
+- `BetaDist`: generate data following a **beta distribution**. Required parameter: `a` and `b`.
+
+- `ExpoDist`: generate data following an **exponential distribution**. Required parameter: `rate`.
+
+- `WeibullDist`: generate data following a **weibull distribution**. Required parameter: `shape` and `scale`.
+
+- `TruncatedExpoDist`: generate data following a **truncated exponential distribution**. Required parameter: `rate` an `trunc`.
+
+- `PoissonDist`: generate data following a **Poisson distribution**. Required parameter: `lambda`.
+
+- `NegBinomDist`: generate data following a **negative binomial distribution**. Required parameters: `dispersion` and `mean`.
+
+- `MVNormalDist`: generate data following a **multivariate normal distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameters `mean` and `sd`. The `corr` parameter specifies the correlation matrix for the endpoints.
+
+- `MVBinomDist`: generate data following a **multivariate binomial distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `prop`. The `corr` parameter specifies the correlation matrix for the endpoints.
+
+- `MVExpoDist`: generate data following a **multivariate exponential distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `rate`. The `corr `parameter specifies the correlation matrix for the endpoints.
+
+- `MVExpoPFSOSDist`: generate data following a **multivariate exponential distribution to generate PFS and OS endpoints**. The PFS value is imputed to the OS value if the latter occurs earlier. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `rate`. The` corr` parameter specifies the correlation matrix for the endpoints.
+
+- `MVMixedDist`: generate data following a **multivariate mixed distribution**. Required parameters: `type`, `par` and `corr`. The `type` parameter assumes the following values: `NormalDist`, `BinomDist` and `ExpoDist`. For each generated endpoint, the `par` parameter must contain the required parameters according to the distribution type. The `corr` parameter specifies the correlation matrix for the endpoints.
+
+
+The `outcome.type` argument defines the outcome's type. This argument accepts only two values:
+
+- `standard`: for fixed design setting.
+
+- `event`: for event-driven design setting.
+
+The outcome's type must be defined for each endpoint in case of multivariate disribution, e.g. `c("event","event")` in case of multivariate exponential distribution. The `outcome.type` argument is essential to get censored events for time-to-event endpoints if the `SampleSize` object is used to specify the number of patients to generate.
+
+A single `OutcomeDist` object can be added to a `DataModel` object.
+
+For more information about the `OutcomeDist` object, see the documentation for [OutcomeDist](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
+
+If a certain outcome distribution is not implemented in the Mediana package, the user can create a custom function and use it within the package (see the dedicated vignette `vignette("custom-functions", package = "Mediana")`).
+
+#### Example
+
+Examples of `OutcomeDist` objects:	
+
+Specify popular univariate distributions:
+
+```r
+# Normal distribution
+OutcomeDist(outcome.dist = "NormalDist")
+
+# Binomial distribution
+OutcomeDist(outcome.dist = "BinomDist")
+
+# Exponential distribution
+OutcomeDist(outcome.dist = "ExpoDist")
+```
+
+Specify a mixed multivariate distribution:
+
+```r
+# Multivariate Mixed distribution
+OutcomeDist(outcome.dist = "MVMixedDist")
+```
+
+### `Sample` object
+
+#### Description
+
+This object specifies parameters of a sample (e.g., treatment arm in a trial) in a data model. Samples are defined as mutually exclusive groups of patients, for example, treatment arms. A `Sample` object is defined by three arguments:
+
+- `id` defines the sample's unique ID (label).
+
+- `outcome.par` defines the parameters of the outcome distribution for the sample.
+
+- `sample.size` defines the sample's size (optional).
+
+The `sample.size` argument is optional but must be used to define the sample size only if an unbalanced design is considered (i.e., the sample size varies across the samples). The sample size must be either defined in the `Sample` object or in the `SampleSize` object, but not in both. 
+
+Several `Sample` objects can be added to a `DataModel` object.
+
+For more information about the `Sample` object, see the documentation [Sample](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
+
+#### Example
+
+Examples of `Sample` objects:
+
+Specify two samples with a continuous endpoint following a normal distribution:
+
+```r
+# Outcome parameters set 1
+outcome1.placebo = parameters(mean = 0, sd = 70)
+outcome1.treatment = parameters(mean = 40, sd = 70)
+
+# Outcome parameters set 2
+outcome2.placebo = parameters(mean = 0, sd = 70)
+outcome2.treatment = parameters(mean = 50, sd = 70)
+
+# Placebo sample object
+Sample(id = "Placebo",
+       outcome.par = parameters(outcome1.placebo, 
+                                outcome2.placebo))
+
+# Treatment sample object
+Sample(id = "Treatment",
+       outcome.par = parameters(outcome1.treatment, 
+                                outcome2.treatment))
+```
+
+Specify two samples with a binary endpoint following a binomial distribution:
+
+```r
+# Outcome parameters set
+outcome.placebo = parameters(prop = 0.30)
+outcome.treatment = parameters(prop = 0.50)
+
+# Placebo sample object
+Sample(id = "Placebo",
+       outcome.par = parameters(outcome1.placebo))
+
+# Treatment sample object
+Sample(id = "Treatment",
+       outcome.par = parameters(outcome1.treatment))
+```
+
+Specify two samples with a time-to-event (survival) endpoint following an exponential distribution:
+
+```r
+# Outcome parameters
+median.time.placebo = 6
+rate.placebo = log(2)/median.time.placebo
+outcome.placebo = parameters(rate = rate.placebo)
+
+median.time.treatment = 9
+rate.treatment = log(2)/median.time.treatment
+outcome.treatment = parameters(rate = rate.treatment)
+
+# Placebo sample object
+Sample(id = "Placebo",
+       outcome.par = parameters(outcome.placebo))
+
+# Treatment sample object
+Sample(id = "Treatment",
+       outcome.par = parameters(outcome.treatment))
+```
+
+Specify three samples with two primary endpoints that follow a binomial and a normal distribution, respectively:
+
+```r
+# Variable types
+var.type = list("BinomDist", "NormalDist")
+
+# Outcome distribution parameters
+placebo.par = parameters(parameters(prop = 0.3), 
+                         parameters(mean = -0.10, sd = 0.5))
+
+dosel.par = parameters(parameters(prop = 0.40), 
+                       parameters(mean = -0.20, sd = 0.5))
+
+doseh.par = parameters(parameters(prop = 0.50), 
+                       parameters(mean = -0.30, sd = 0.5))
+
+# Correlation between two endpoints
+corr.matrix = matrix(c(1.0, 0.5,
+                       0.5, 1.0), 2, 2)
+
+# Outcome parameters set
+outcome.placebo = parameters(type = var.type, 
+                             par = plac.par, 
+                             corr = corr.matrix)
+
+outcome.dosel = parameters(type = var.type, 
+                           par = dosel.par, 
+                           corr = corr.matrix)
+
+outcome.doseh = parameters(type = var.type, 
+                           par = doseh.par, 
+                           corr = corr.matrix)
+
+# Placebo sample object
+Sample(id = list("Plac ACR20", "Plac HAQ-DI"),
+       outcome.par = parameters(outcome.placebo))
+
+# Low Dose sample object
+Sample(id = list("DoseL ACR20", "DoseL HAQ-DI"),
+       outcome.par = parameters(outcome.dosel))
+
+# High Dose sample object
+Sample(id = list("DoseH ACR20", "DoseH HAQ-DI"),
+       outcome.par = parameters(outcome.doseh))
+```
+
+### `SampleSize` object
+
+#### Description
+
+This object specifies the sample size in a balanced trial design (all samples will have the same sample size). A `SampleSize` object is defined by one argument:
+
+- `sample.size` specifies a list or vector of sample size(s).
+
+A single `SampleSize` object can be added to a `DataModel` object.
+
+For more information about the `SampleSize` object, see the package's documentation [SampleSize](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+
+#### Example
+
+Examples of `SampleSize` objects:
+
+Several equivalent specifications of the `SampleSize` object:
+
+```r
+SampleSize(c(50, 55, 60, 65, 70))
+SampleSize(list(50, 55, 60, 65, 70))
+SampleSize(seq(50, 70, 5))
+```
+
+### `Event` object
+
+#### Description
+
+This object specifies the total number of events (total event count) among all samples in an event-driven clinical trial. An `Event` object is defined by two arguments:
+
+- `n.events` defines a vector of the required event counts.
+
+- `rando.ratio` defines a vector of randomization ratios for each `Sample` object defined in the `DataModel` object.
+
+A single `Event` object can be added to a `DataModel` object.
+
+For more information about the `Event` object, see the package's documentation [Event](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+
+#### Example
+
+Examples of `Event` objects:
+
+Specify the required number of events in a trial with a 2:1 randomization ratio (Treatment:Placebo):
+
+```r
+# Event parameters
+event.count.total = c(390, 420)
+randomization.ratio = c(1,2)
+
+# Event object
+Event(n.events = event.count.total, 
+      rando.ratio = randomization.ratio)
+```
+
+### `Design` object
+
+#### Description
+
+This object specifies the design parameters used in event-driven designs if the user is interested in modeling the enrollment (or accrual) and dropout (or loss to follow up) processes. A `Design` object is defined by seven arguments:
+
+- `enroll.period` defines the length of the enrollment period.
+
+- `enroll.dist` defines the enrollment distribution.
+
+- `enroll.dist.par` defines the parameters of the enrollment distribution (optional).
+
+- `followup.period` defines the length of the follow-up period for each patient in study designs with a fixed follow-up period, i.e., the length of time from the enrollment to planned discontinuation is constant across patients. The user must specify either `followup.period` or `study.duration`.
+
+- `study.duration` defines the total study duration in study designs with a variable follow-up period. The total study duration is defined as the length of time from the enrollment of the first patient to the discontinuation of the last patient.
+
+- `dropout.dist` defines the dropout distribution.
+
+- `dropout.dist.par` defines the parameters of the dropout distribution.
+
+Several `Design` objects can be added to a `DataModel` object.
+
+For more information about the `Design` object, see the package's documentation [Design](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+
+A convienient way to model non-uniform enrollment is to use a beta distribution (`BetaDist`). If `enroll.dist = "BetaDist"`, the `enroll.dist.par` should contain the parameter of the beta distribution (`a` and `b`). These parameters must be derived according to the expected enrollment at a specific timepoint. For example, if half the patients are expected to be enrolled at 75% of the enrollment period, the beta distribution is a `Beta(log(0.5)/log(0.75), 1)`. Generally, let `q` be the proportion of enrolled patients at `p`% of the enrollment period, the Beta distribution can be derived as follows:
+
+- If `q > p`, the Beta distribution is `Beta(a,1)` with `a = log(p) / log(q)`
+
+- If `q < p`, the Beta distribution is `Beta (1,b)` with `b = log(1-p) / log(1-q)`
+
+- Otherwise the Beta distribution is `Beta(1,1)`
+
+
+
+#### Example
+
+Examples of `Design` objects: 
+
+Specify parameters of the enrollment and dropout processes with a uniform enrollment distribution and exponential dropout distribution:
+
+```r
+# Design parameters (in months)
+Design(enroll.period = 9,
+       study.duration = 21,
+       enroll.dist = "UniformDist",
+       dropout.dist = "ExpoDist",
+       dropout.dist.par = parameters(rate = 0.0115)) 
+```
+
+# Analysis model
+
+Analysis models define statistical methods (e.g., significance tests or descriptive statistics) that are applied to the study data in a clinical trial.
+
+## Initialization
+
+An analysis model can be initialized using the following command:
+
+```r
+# AnalysisModel initialization
+analysis.model = AnalysisModel()
+```
+
+It is highly recommended to use this command to initialize an analysis model as it will simplify the process of specifying components of the data model, including the `MultAdj`, `MultAdjProc`, `MultAdjStrategy`, `Test`, `Statistic` objects.
+
+## Components of an analysis model
+
+After an `AnalysisModel` object has been initialized, components of the analysis model can be specified by adding objects to the model using the '+' operator as shown below.
+
+```r
+# Analysis model
+case.study1.analysis.model = AnalysisModel() +
+  Test(id = "Placebo vs treatment",
+       samples = samples("Placebo", "Treatment"),
+       method = "TTest") +
+  Statistic(id = "Mean Treatment",
+            method = "MeanStat",
+            samples = samples("Treatment"))
+```
+
+### `Test` object
+
+#### Description
+
+This object specifies a significance test that will be applied to one or more samples defined in a data model. A `Test` object is defined by the following four arguments:
+
+- `id` defines the test's unique ID (label).
+
+- `method` defines the significance test.
+
+- `samples` defines the IDs of the samples (defined in the data model) that the significance test is applied to.
+
+- `par` defines the parameter(s) of the statistical test.
+
+Several commonly used significance tests are already implemented in the Mediana package. In addition, the user can easily define custom significance tests (see the dedicated vignette `vignette("custom-functions", package = "Mediana")`). The built-in tests are listed below along with the required parameters that need to be included in the `par` argument:
+
+- `TTest`: perform the **two-sample t-test** between the two samples defined in the `samples` argument.
+
+- `TTestNI`: perform the **non-inferiority two-sample t-test** between the two samples defined in the `samples` argument. Required parameter: `margin` (positive non-inferiority margin).
+
+- `WilcoxTest`: perform the **Wilcoxon-Mann-Whitney test** between the two samples defined in the `samples` argument.
+
+- `PropTest`: perform the **two-sample test for proportions** between the two samples defined in the `samples` argument. Optional parameter: `yates` (Yates' continuity correction flag that is set to `TRUE` or `FALSE`).
+
+- `PropTestNI`: perform the **non-inferiority two-sample test for proportions** between the two samples defined in the `samples` argument. Required parameter: `margin` (positive non-inferiority margin). Optional parameter: `yates` (Yates' continuity correction flag that is set to `TRUE` or `FALSE`).
+
+- `FisherTest`: perform the **Fisher exact test** between the two samples defined in the `samples` argument.
+
+- `GLMPoissonTest`: perform the **Poisson regression test** between the two samples defined in the `samples` argument.
+
+- `GLMNegBinomTest`: perform the **Negative-binomial regression test** between the two `samples` defined in the `samples` argument.
+
+- `LogrankTest`: perform the **Log-rank test** between the two samples defined in the `samples` argument.
+
+It needs to be noted that the significance tests listed above are implemented as **one-sided** tests and thus the sample order in the `samples` argument is important. In particular, the Mediana package assumes that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas
+Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure).
+
+Several `Test` objects can be added to an `AnalysisModel`object.
+
+For more information about the `Test` object, see the package's documentation [Test](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
+
+#### Example
+
+Examples of `Test` objects:
+
+Carry out the two-sample t-test:
+
+```r
+# Placebo and Treatment samples were defined in the data model
+Test(id = "Placebo vs treatment",
+     samples = samples("Placebo", "Treatment"),
+     method = "TTest")
+```
+
+Carry out the two-sample t-test for non-inferiority:
+
+```r
+# Placebo and Treatment samples were defined in the data model
+Test(id = "Placebo vs treatment",
+     samples = samples("Placebo", "Treatment"),
+     method = "TTestNI",
+     par = parameters(margin = 0.2))
+```
+
+Carry out the two-sample t-test with pooled samples:
+
+```r
+# Placebo M-, Placebo M+, Treatment M- and Treatment M+ samples were defined in the data model
+Test(id = "OP test",
+     samples = samples(c("Placebo M-", "Placebo M+"),
+                       c("Treatment M-", "Treatment M+")),
+     method = "TTest")
+```
+
+### `Statistic` object
+
+#### Description
+
+This object specifies a descriptive statistic that will be computed based on one or more samples defined in a data model. A `Statistic` object is defined by four arguments:
+
+- `id` defines the descriptive statistic's unique ID (label).
+
+- `method` defines the type of statistic/method for computing the statistic.
+
+- `samples` defines the samples (pre-defined in the data model) to be used for computing the statistic.  
+
+- `par` defines the parameter(s) of the statistic.
+
+Several methods for computing descriptive statistics are already implemented in the Mediana package and the user can also define custom functions for computing descriptive statistics (see the dedicated vignette `vignette("custom-functions", package = "Mediana")`). These methods are shown below along with the required parameters that need to be defined in the `par` argument:
+
+- `MedianStat`: compute the **median** of the sample defined in the `samples` argument.
+
+- `MeanStat`: compute the **mean** of the sample defined in the `samples` argument.
+
+- `SdStat`: compute the **standard deviation** of the sample defined in the `samples` argument.
+
+- `MinStat`: compute the **minimum** value in the sample defined in the `samples` argument.
+
+- `MaxStat`: compute the **maximum** value in the sample defined in the `samples` argument.
+
+- `DiffMeanStat`: compute the **difference of means** between the two samples defined in the `samples` argument. Two samples must be defined.
+
+- `EffectSizeContStat`: compute the **effect size** for a continuous endpoint. Two samples must be defined.
+
+- `RatioEffectSizeContStat`: compute the **ratio of two effect sizes** for a continuous endpoint. Four samples must be defined.
+
+- `DiffPropStat`: compute the **difference of the proportions** between the two samples defined in the `samples` argument. Two samples must be defined.
+
+- `EffectSizePropStat`: compute the **effect size** for a binary endpoint. Two samples must be defined.
+
+- `RatioEffectSizePropStat`: compute the **ratio of two effect sizes** for a binary endpoint. Four samples must be defined.
+
+- `HazardRatioStat`: compute the **hazard ratio** of the two samples defined in the samples argument. Two samples must be defined. By default the Log-Rank method is used. Optional argument: `method` taking as value `Log-Rank` or `Cox`.
+
+- `EffectSizeEventStat`: compute the **effect size** for a survival endpoint (log of the HR. Two samples must be defined. Two samples must be defined. By default the Log-Rank method is used. Optional argument: `method` taking as value `Log-Rank` or `Cox`.
+
+- `RatioEffectSizeEventStat`: compute the **ratio of two effect sizes** for a survival endpoint based on the Log-Rank method. Four samples must be defined. By default the Log-Rank method is used. Optional argument: `method` taking as value `Log-Rank` or `Cox`.
+
+- `EventCountStat`: compute the **number of events** observed in the sample(s) defined in the `samples` argument.
+
+- `PatientCountStat`: compute the **number of patients** observed in the sample(s) defined in the `samples` argument
+
+Several `Statistic` objects can be added to an `AnalysisModel` object.
+
+For more information about the `Statistic` object, see the R documentation [Statistic](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+
+#### Example
+
+Examples of `Statistic` objects:
+
+Compute the mean of a single sample:
+
+```r
+# Treatment sample was defined in the data model
+Statistic(id = "Mean Treatment",
+          method = "MeanStat",
+          samples = samples("Treatment"))
+```
+
+
+### `MultAdjProc` object
+
+#### Description
+
+This object specifies a multiplicity adjustment procedure that will be applied to the significance tests in order to protect the overall Type I error rate. A `MultAdjProc` object is defined by three arguments:
+
+- `proc` defines a multiplicity adjustment procedure.
+
+- `par` defines the parameter(s) of the multiplicity adjustment procedure (optional).
+
+- `tests` defines the specific tests (defined in the analysis model) to which the multiplicity adjustment procedure will be applied.  
+
+If no `tests` are defined, the multiplicity adjustment procedure will be applied to all tests defined in the `AnalysisModel` object.
+
+Several commonly used multiplicity adjustment procedures are included in the Mediana package. In addition, the user can easily define custom multiplicity adjustments. The built-in multiplicity adjustments are defined below along with the required parameters that need to be included in the `par` argument:
+
+- `BonferroniAdj`: **Bonferroni** procedure. Optional parameter: `weight` (vector of hypothesis weights).
+
+- `HolmAdj`: **Holm** procedure. Optional parameter: `weight` (vector of hypothesis weights).
+
+- `HochbergAdj`: **Hochberg** procedure. Optional parameter: `weight` (vector of hypothesis weights).
+
+- `HommelAdj`: **Hommel** procedure. Optional parameter: `weight` (vector of hypothesis weights).
+
+- `FixedSeqAdj`: **Fixed-sequence procedure**.
+
+- `ChainAdj`: Family of **chain procedures**. Required parameters: `weight` (vector of hypothesis weights) and `transition` (matrix of transition parameters).
+
+- `NormalParamAdj`: **Parametric multiple testing procedure** derived from a multivariate normal distribution. Required parameter: `corr` (correlation matrix of the multivariate normal distribution). Optional parameter: `weight` (vector of hypothesis weights).
+
+- `ParallelGatekeepingAdj`: Family of **parallel gatekeeping procedures**. Required parameters: `family` (vectors of hypotheses included in each family), `proc` (vector of procedure names applied to each family), `gamma` (vector of truncation parameters).
+
+- `MultipleSequenceGatekeepingAdj`: Family of **multiple-sequence gatekeeping procedures**. Required parameters: `family` (vectors of hypotheses included in each family), `proc` (vector of procedure names applied to each family), `gamma` (vector of truncation parameters).
+
+- `MixtureGatekeepingAdj`: Family of **mixture-based gatekeeping procedures**. Required parameters: `family` (vectors of hypotheses included in each family), `proc` (vector of procedure names applied to each family), `gamma` (vector of truncation parameters), `serial` (matrix of indicators), `parallel` (matrix of indicators).
+
+Several `MultAdjProc` objects can be added to an `AnalysisModel`object using the '+' operator or by grouping them into a MultAdj object.
+
+For more information about the `MultAdjProc` object, see the package's documentation [MultAdjProc](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+
+#### Example
+
+Examples of `MultAdjProc` objects:
+
+Apply a multiplicity adjustment based on the chain procedure:
+
+```r
+# Parameters of the chain procedure (equivalent to a fixed-sequence procedure)
+# Vector of hypothesis weights
+chain.weight = c(1, 0)
+# Matrix of transition parameters
+chain.transition = matrix(c(0, 1,
+                            0, 0), 2, 2, byrow = TRUE)
+
+# MultAdjProc
+MultAdjProc(proc = "ChainAdj",
+            par = parameters(weight = chain.weight,
+                             transition = chain.transition))
+```
+
+This procedure implementation is facilicated by the use of the `FixedSeqAdj` method intoduced in version 1.0.4.
+
+```r
+# MultAdjProc
+MultAdjProc(proc = "FixedSeqAdj")
+```
+
+Apply a multiple-sequence gatekeeping procedure:
+
+```r
+# Parameters of the multiple-sequence gatekeeping procedure
+# Tests to which the multiplicity adjustment will be applied (defined in the AnalysisModel)
+test.list = tests("Pl vs DoseH - ACR20", 
+                  "Pl vs DoseL - ACR20", 
+                  "Pl vs DoseH - HAQ-DI", 
+                  "Pl vs DoseL - HAQ-DI")
+
+# Hypothesis included in each family (the number corresponds to the position of the test in the test.list vector)
+family = families(family1 = c(1, 2), 
+                  family2 = c(3, 4))
+
+# Component procedure of each family
+component.procedure = families(family1 ="HolmAdj", 
+                               family2 = "HolmAdj")
+
+# Truncation parameter of each family
+gamma = families(family1 = 0.8, 
+                 family2 = 1)
+
+# MultAdjProc
+MultAdjProc(proc = "MultipleSequenceGatekeepingAdj",
+            par = parameters(family = family, 
+                             proc = component.procedure, 
+                             gamma = gamma),
+            tests = test.list)
+```
+
+### `MultAdjStrategy` object
+
+#### Description
+
+This object specifies a multiplicity adjustment strategy that can include several multiplicity adjustment procedures. A multiplicity adjustment strategy may be defined when the same Clinical Scenario Evaluation approach is applied to several clinical trials.
+
+A `MultAdjStrategy` object serves as a wrapper for several `MultAdjProc` objects.
+
+For more information about the `MultAdjStrategy` object, see the package's documentation [MultAdjStrategy](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+
+#### Example
+
+Example of a `MultAdjStrategy` object:
+
+Perform complex multiplicity adjustments based on gatekeeping procedures in two clinical trials with three endpoints:
+
+```r
+# Parallel gatekeeping procedure parameters
+family = families(family1 = c(1), 
+                  family2 = c(2, 3))
+
+component.procedure = families(family1 ="HolmAdj", 
+                               family2 = "HolmAdj")
+
+gamma = families(family1 = 0.8, 
+                 family2 = 1)
+
+# Multiple sequence gatekeeping procedure parameters for Trial A
+mult.adj.trialA = MultAdjProc(proc = "ParallelGatekeepingAdj",
+                              par = parameters(family = family,
+                                               proc = component.procedure,
+                                               gamma = gamma),
+                              tests = tests("Trial A Pla vs Trt End1",
+                                            "Trial A Pla vs Trt End2",
+                                            "Trial A Pla vs Trt End3"))
+
+mult.adj.trialB = MultAdjProc(proc = "ParallelGatekeepingAdj",
+                              par = parameters(family = family,
+                                               proc = component.procedure,
+                                               gamma = gamma),
+                              tests = tests("Trial B Pla vs Trt End1",
+                                            "Trial B Pla vs Trt End2",
+                                            "Trial B Pla vs Trt End3"))
+
+# Analysis model
+analysis.model = AnalysisModel() +
+  MultAdjStrategy(mult.adj.trialA, mult.adj.trialB) +
+  # Tests for study A
+  Test(id = "Trial A Pla vs Trt End1",
+       method = "PropTest",
+       samples = samples("Trial A Plac End1", "Trial A Trt End1")) +
+  Test(id = "Trial A Pla vs Trt End2",
+       method = "TTest",
+       samples = samples("Trial A Plac End2", "Trial A Trt End2")) +
+  Test(id = "Trial A Pla vs Trt End3",
+       method = "TTest",
+       samples = samples("Trial A Plac End3", "Trial A Trt End3")) +
+  # Tests for study B
+  Test(id = "Trial B Pla vs Trt End1",
+       method = "PropTest",
+       samples = samples("Trial B Plac End1", "Trial B Trt End1")) +
+  Test(id = "Trial B Pla vs Trt End2",
+       method = "TTest",
+       samples = samples("Trial B Plac End2", "Trial B Trt End2")) +
+  Test(id = "Trial B Pla vs Trt End3",
+       method = "TTest",
+       samples = samples("Trial B Plac End3", "Trial B Trt End3"))
+```
+
+
+### `MultAdj` object
+
+#### Description
+
+This object can be used to combine several `MultAdjProc` or  `MultAdjStrategy` objects and add them as a single object to an `AnalysisModel` object . This object is provided mainly for convenience and its use is optional.  Alternatively, `MultAdjProc` or `MultAdjStrategy` objects can be added to an `AnalysisModel` object incrementally using the '+' operator.
+
+For more information about the `MultAdj` object, see the package's documentation [MultAdj](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+
+#### Example
+
+Example of a `MultAdj` object:
+
+Perform Clinical Scenario Evaluation to compare three candidate multiplicity adjustment procedures:
+
+```r
+# Multiplicity adjustments to compare
+mult.adj1 = MultAdjProc(proc = "BonferroniAdj")
+mult.adj2 = MultAdjProc(proc = "HolmAdj")
+mult.adj3 = MultAdjProc(proc = "HochbergAdj")
+
+# Analysis model
+analysis.model = AnalysisModel() +
+                 MultAdj(mult.adj1, mult.adj2, mult.adj3) +
+                 Test(id = "Pl vs Dose L",
+                      samples = samples("Placebo", "Dose L"),
+                      method = "TTest") +
+                 Test(id = "Pl vs Dose M",
+                      samples = samples ("Placebo", "Dose M"),
+                      method = "TTest") +
+                 Test(id = "Pl vs Dose H",
+                      samples = samples("Placebo", "Dose H"),
+                      method = "TTest")
+
+# Note that the code presented above is equivalent to:
+analysis.model = AnalysisModel() +
+                 mult.adj1 +
+                 mult.adj2 +
+                 mult.adj3 +
+                 Test(id = "Pl vs Dose L",
+                      samples = samples("Placebo", "Dose L"),
+                      method = "TTest") +
+                 Test(id = "Pl vs Dose M",
+                      samples = samples ("Placebo", "Dose M"),
+                      method = "TTest") +
+                 Test(id = "Pl vs Dose H",
+                      samples = samples("Placebo", "Dose H"),
+                      method = "TTest")
+
+```
+# Evaluation model
+
+Evaluation models are used within the Mediana package to specify the success criteria or metrics for evaluating the performance of the selected clinical scenario (combination of data and analysis models).
+
+## Initialization
+
+An evaluation model can be initialized using the following command:
+
+```r
+# EvaluationModel initialization
+evaluation.model = EvaluationModel()
+```
+
+It is highly recommended to use this command to initialize an evaluation model because it simplifies the process of specifying components of the evaluation model such as `Criterion` objects. 
+
+## Components of an evaluation model
+
+After an `EvaluationModel` object has been initialized, components of the evaluation model can be specified by adding objects to the model using the '+' operator as shown below.
+
+```r
+# Evaluation model
+case.study1.evaluation.model = EvaluationModel() +
+  Criterion(id = "Marginal power",
+            method = "MarginalPower",
+            tests = tests("Placebo vs treatment"),
+            labels = c("Placebo vs treatment"),
+            par = parameters(alpha = 0.025))  +
+  Criterion(id = "Average Mean",
+            method = "MeanSumm",
+            statistics = statistics("Mean Treatment"),
+            labels = c("Average Mean Treatment"))
+```
+
+### `Criterion` object
+
+#### Description
+
+This object specifies the success criteria that will be applied to a clinical scenario to evaluate the performance of selected analysis methods. A `Criterion` object is defined by six arguments:
+
+- `id` defines the criterion's unique ID (label). 
+
+- `method` defines the criterion.
+
+- `tests` defines the IDs of the significance tests (defined in the analysis model) that the criterion is applied to.
+
+- `statistics` defines the IDs the descriptive statistics (defined in the analysis model) that the criterion is applied to. 
+
+- `par` defines the parameter(s) of the criterion.
+
+- `label` defines the label(s) of the criterion values (the label(s) will be used in the simulation report).
+
+Several commonly used success criteria are implemented in the Mediana package. The user can also define custom significance criteria. The built-in success criteria are listed below along with the required parameters that need to be included in the `par` argument:
+
+- `MarginalPower`: compute the marginal power of all tests included in the `test` argument. Required parameter: `alpha` (significance level used in each test).
+
+- `WeightedPower`: compute the weighted power of all tests included in the `test` argument. Required parameters: `alpha` (significance level used in each test) and `weight` (vector of weights assigned to the significance tests).
+
+- `DisjunctivePower`: compute the disjunctive power (probability of achieving statistical significance in at least one test included in the `test` argument). Required parameter: `alpha` (significance level used in each test).
+
+- `ConjunctivePower`: compute the conjunctive power (probability of achieving statistical significance in all tests included in the `test` argument). Required parameter: `alpha` (significance level used in each test).
+
+- `ExpectedRejPower`: compute the expected number of statistical significant tests. Required parameter: `alpha`(significance level used in each test).
+
+Several `Criterion` objects can be added to an `EvaluationModel` object.
+
+For more information about the `Criterion` object, see the package's documentation [Criterion](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+
+If a certain success criterion is not implemented in the Mediana package, the user can create a custom function and use it within the package (see the dedicated vignette `vignette("custom-functions", package = "Mediana")`).
+
+#### Examples
+
+Examples of `Criterion` objects:
+
+Compute marginal power with alpha = 0.025:
+
+```r
+Criterion(id = "Marginal power",
+          method = "MarginalPower",
+          tests = tests("Placebo vs treatment"),
+          labels = c("Placebo vs treatment"),
+          par = parameters(alpha = 0.025))
+```
+
+Compute weighted power with alpha = 0.025 and unequal test-specific weights:
+
+```r
+Criterion(id = "Weighted power",
+          method = "WeightedPower",
+          tests = tests("Placebo vs treatment - Endpoint 1",
+                        "Placebo vs treatment - Endpoint 2"),
+          labels = c("Weighted power"),
+          par = parameters(alpha = 0.025,
+                           weight = c(2/3, 1/3)))
+```
+
+Compute disjunctive power with alpha = 0.025:
+
+```r
+Criterion(id = "Disjunctive power",
+          method = "DisjunctivePower",
+          tests = tests("Placebo vs Dose H",
+                        "Placebo vs Dose M",
+                        "Placebo vs Dose L"),
+          labels = c("Disjunctive power"),
+          par = parameters(alpha = 0.025))
+```
+
+# Clinical Scenario Evaluation 
+
+Clinical Scenario Evaluation (CSE) is performed based on the data, analysis and evaluation models as well as simulation parameters specified by the user. The simulation parameters are defined using the `SimParameters` object.
+
+## Clinical Scenario Evaluation objects
+
+### `SimParameters` object
+
+#### Description
+
+The `SimParameters` object is a required argument of the `CSE` function and has the following arguments:
+
+- `n.sims` defines the number of simulations.
+- `seed` defines the seed to be used in the simulations.
+- `proc.load` defines the processor load in parallel computations.
+
+The `proc.load` argument is used to define the number of processor cores dedicated to the simulations. A numeric value can be defined as well as character value which automatically detects the number of cores:
+
+- `low`: 1 processor core.
+
+- `med`: Number of available processor cores / 2.
+
+- `high`: Number of available processor cores 1.
+
+- `full`: All available processor cores.
+
+#### Examples
+
+Examples of `SimParameters` object specification:
+
+Perform 10000 simulations using all available processor cores:
+
+```r
+SimParameters(n.sims = 10000, 
+              proc.load = "full", 
+              seed = 42938001)
+```
+
+Perform 10000 simulations using 2 processor cores:
+
+```r
+SimParameters(n.sims = 10000, 
+              proc.load = 2, 
+              seed = 42938001)
+```
+
+
+### `CSE` function
+
+#### Description
+
+The `CSE` function is invoked to runs simulations under the Clinical Scenario Evaluation approach. This function uses four arguments:
+
+- `data` defines a `DataModel` object.
+
+- `analysis` defines an `AnalysisModel` object.
+
+- `evaluation` defines an `EvaluationModel` object.
+
+- `simulation` defines a `SimParameters` object.
+
+#### Examples
+
+The following example illustrates the use of the `CSE` function:
+
+```r
+# Outcome parameter set 1
+outcome1.placebo = parameters(mean = 0, sd = 70)
+outcome1.treatment = parameters(mean = 40, sd = 70)
+
+# Outcome parameter set 2
+outcome2.placebo = parameters(mean = 0, sd = 70)
+outcome2.treatment = parameters(mean = 50, sd = 70)
+
+# Data model
+case.study1.data.model = DataModel() +
+  OutcomeDist(outcome.dist = "NormalDist") +
+  SampleSize(c(50, 55, 60, 65, 70)) +
+  Sample(id = "Placebo",
+         outcome.par = parameters(outcome1.placebo, outcome2.placebo)) +
+  Sample(id = "Treatment",
+         outcome.par = parameters(outcome1.treatment, outcome2.treatment))
+
+# Analysis model
+case.study1.analysis.model = AnalysisModel() +
+  Test(id = "Placebo vs treatment",
+       samples = samples("Placebo", "Treatment"),
+       method = "TTest")
+
+# Evaluation model
+case.study1.evaluation.model = EvaluationModel() +
+  Criterion(id = "Marginal power",
+            method = "MarginalPower",
+            tests = tests("Placebo vs treatment"),
+            labels = c("Placebo vs treatment"),
+            par = parameters(alpha = 0.025))
+
+# Simulation Parameters
+case.study1.sim.parameters = SimParameters(n.sims = 1000, proc.load = 2, seed = 42938001)
+
+# Perform clinical scenario evaluation
+case.study1.results = CSE(case.study1.data.model,
+                          case.study1.analysis.model,
+                          case.study1.evaluation.model,
+                          case.study1.sim.parameters)
+```
+
+
+### Summary of results
+
+Once Clinical Scenario Evaluation-based simulations have been run, the `CSE` object returned by the `CSE` function contains a list with the following components:
+
+- `simulation.results`: a data frame containing the results of the simulations for each scenario.
+
+- `analysis.scenario.grid`: a data frame containing the grid of the combination of data and analysis scenarios.
+
+- `data.structure`: a list containing the data structure according to the `DataModel` object.
+
+- `analysis.structure`: a list containing the analysis structure according to the `AnalysisModel` object.
+
+- `evaluation.structure`: a list containing the evaluation structure according to the `EvaluationModel` object.
+
+- `sim.parameters`: a list containing the simulation parameters according to `SimParameters` object.
+
+- `timestamp`: a list containing information about the start time, end time and duration of the simulation runs.
+
+The simulation results can be summarized in the R console using the `summary` function:
+
+```r
+summary(case.study1.results)
+```
+
+A Microsoft Word-based simulation report can be generated from the simulation results produced by the `CSE` function using the `GenerateReport` function, see [Simulation report](#simulation-report).
+
+# Simulation report
+
+The Mediana R package uses the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) package to generate a Microsoft Word-based report that summarizes the results of Clinical Scenario Evaluation-based simulations. 
+
+The user can easily customize this simulation report by adding a description of the project as well as labels to each scenario, including data scenarios (sample size, outcome distribution parameters, design parameters) and analysis scenarios (multiplicity adjustment). The user can also customize the report's structure, e.g., create sections and subsections within the report and specify how the rows will be sorted within each table.
+
+In order to customize the report, the user has to use a `PresentationModel` object described below.
+
+Once a `PresentationModel` object has been defined, the `GenerateReport` function can be called to generate a Clinical Scenario Evaluation report.
+
+## Initialization
+
+A presentation model can be initialized using the following command
+```r
+# PresentationModel initialization
+presentation.model = PresentationModel()
+```
+
+Initialization with this command is highly recommended as it will simplify the process of adding related objects, e.g., the `Project`, `Section`, `Subsection`, `Table`, `CustomLabel` objects. 
+
+## Specific objects
+
+Once the `PresentationModel` object has been initialized, specific objects can be added by simply using the '+' operator as in data, analysis and evaluation models.
+
+### `Project` object
+
+#### Description
+
+This object specifies a description of the project. The `Project` object is defined by three optional arguments:
+
+- `username` defines the username to be included in the report (by default, the username is "[Unknown User]").
+
+- `title` defines the project's in the report (the default value is "[Unknown title]").
+
+- `description` defines the project's description (the default value is "[No description]").
+
+This information will be added in the report generated using the `GenerateReport` function. 
+
+A single object of the `Project` class can be added to an object of the `PresentationModel` class.
+
+#### Examples
+
+A simple `Project` object can be created as follows: 
+
+```r
+Project(username = "Gautier Paux",
+        title = "Case study 1",
+        description = "Clinical trial in patients with pulmonary arterial hypertension")
+```
+
+### `Section` object
+
+#### Description
+
+This object specifies the sections that will be created within the simulation report. A `Section` object is defined by a single argument:
+
+- `by` defines the rules for setting up sections.
+
+The `by` argument can contain several parameters from the following list:
+
+- `sample.size`: a separate section will be created for each sample size.
+
+- `event`: a separate section will be created for each event count.
+
+- `outcome.parameter`: a separate section will be created for each outcome parameter scenario.
+
+- `design.parameter`: a separate section will be created for each design parameter scenario.
+
+- `multiplicity.adjustment`: a separate section will be created for each multiplicity adjustment scenario.
+ 
+Note that, if a parameter is defined in the `by` argument, it must be defined only in this object (i.e., neither in the `Subection` object nor in the `Table` object).
+
+A single object of the `Section` class can be added to an object of the `PresentationModel` class.
+
+#### Examples
+
+A `Section` object can be defined as follows: 
+
+Create a separate section within the report for each outcome parameter scenario:
+
+```r
+Section(by = "outcome.parameter") 
+```
+
+Create a separate section for each unique combination of the sample size and outcome parameter scenarios:
+
+```r
+Section(by = c("sample.size", "outcome.parameter"))
+```
+
+### `Subsection` object
+
+#### Description
+
+This object specifies the rules for creating subsections within the simulation report. A `Subsection` object is defined by a single argument:
+
+- `by` defines the rules for creating subsections.
+
+The `by` argument can contain several parameters from the following list:
+
+- `sample.size`: a separate subsection will be created for each sample size.
+
+- `event`: a separate subsection will be created for each number of events.
+
+- `outcome.parameter`: a separate subsection will be created for each outcome parameter scenario.
+
+- `design.parameter`: a separate subsection will be created for each design parameter scenario.
+
+- `multiplicity.adjustment`: a separate subsection will be created for each multiplicity adjustment scenario.
+
+As before, if a parameter is defined in the `by` argument, it must be defined only in this object (i.e., neither in the `Section` object nor in the `Table` object).
+
+A single object of the `Subsection` class can be added to an object of the `PresentationModel` class. 
+#### Examples
+
+`Subsection` objects can be set up as follows: 
+
+Create a separate subsection for each sample size scenario:
+
+```r
+Subsection(by = "sample.size") 
+```
+
+Create a separate subsection for each unique combination of the sample size and outcome parameter scenarios:
+
+```r
+Subsection(by = c("sample.size", "outcome.parameter"))
+```
+
+### `Table` object
+
+#### Description
+
+This object specifies how the summary tables will be sorted within the report. A `Table` object is defined by a single argument:
+
+- `by` defines how the tables of the report will be sorted.
+
+The `by` argument can contain several parameters, the value must be contain in the following list:
+
+- `sample.size`: the tables will be sorted by the sample size.
+
+- `event`: the tables will be sorted by the number of events.
+
+- `outcome.parameter`: the tables will be sorted by the outcome parameter scenario.
+
+- `design.parameter`: the tables will be sorted by the design parameter scenario.
+
+- `multiplicity.adjustment`: the tables will be sorted by the multiplicity adjustment scenario.
+
+If a parameter is defined in the `by` argument it must be defined only in this object (i.e., neither in the `Section` object nor in the `Subsection` object).
+
+A single object of class `Table` can be added to an object of class `PresentationModel`.
+
+#### Examples
+
+Examples of `Table` objects: 
+
+Create a summary table sorted by sample size scenarios:
+
+```r
+Table(by = "sample.size") 
+```
+
+Create a summary table sorted by sample size and outcome parameter scenarios:
+
+```r
+Table(by = c("sample.size", "outcome.parameter"))
+```
+
+### `CustomLabel` object
+
+#### Description
+
+This object specifies the labels that will be assigned to sets of parameter values or simulation scenarios. These labels will be used in the section and subsection titles of the Clinical Scenario Evaluation Report as well as in the summary tables. A `CustomLabel` object is defined by two arguments:
+
+- `param` defines a parameter (scenario) to which the current set of labels will be assigned.
+
+- `label` defines the label(s) to assign to each value of the parameter.
+
+The `param` argument can contain several parameters from the following list:
+
+- `sample.size`:  labels will be applied to sample size values.
+
+- `event`:  labels will be applied to number of events values.
+
+- `outcome.parameter`:  labels will be applied to outcome parameter scenarios.
+
+- `design.parameter`:  labels will be applied to design parameter scenarios.
+
+- `multiplicity.adjustment`:  labels will be applied to multiplicity adjustment scenarios.
+
+Several objects of the `CustomLabel` class can be added to an object of the `PresentationModel` class.
+
+#### Examples
+
+Examples of `CustomLabel` objects: 
+
+Assign a custom label to the sample size values:
+
+```r
+CustomLabel(param = "sample.size",
+            label= paste0("N = ",c(50, 55, 60, 65, 70)))
+```
+
+Assign a custom label to the outcome parameter scenarios:
+
+```r
+CustomLabel(param = "outcome.parameter", 
+            label=c("Pessimistic", "Expected", "Optimistic"))
+```
+
+## `GenerateReport` function
+
+### Description
+
+The Clinical Scenario Evaluation Report is generated using the `GenerateReport` function. This function has four arguments:
+
+- `presentation.model` defines a `PresentationModel` object.
+
+- `cse.result` defines a `CSE` object returned by the CSE function.
+
+- `report.filename` defines the filename of the Word-based report generated by this function.
+
+- `report.template` defines a Word-based template (it is an optional argument).
+
+The `GenerateReport` function requires the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) package to generate a Word-based simulation report. Optionally, a custom template can be selected by defining `report.template`, this argument specifies the name of a Word document located in the working directory.
+
+The Word-based simulation report is structured as follows:
+
+1. GENERAL INFORMATION
+	1. PROJECT INFORMATION
+	2. SIMULATION PARAMETERS 
+1. DATA MODEL
+	1. DESIGN (if a `Design` object has been defined)
+	2. SAMPLE SIZE (or EVENT if an `Event` object has been defined)
+	2. OUTCOME DISTRIBUTION
+	3. DESIGN
+1. ANALYSIS MODEL
+	1. TESTS
+	2. MULTIPLICITY ADJUSTMENT
+1. EVALUATION MODEL
+	1. CRITERIA
+1. RESULTS
+	1. SECTION (if a `Section` object has been defined)
+		1. SUBSECTION (if a `Subsection` object has been defined)
+		2. ...
+	1. ...
+
+### Examples
+
+This example illustrates the use of the `GenerateReport` function: 
+
+```r
+# Define a presentation model
+case.study1.presentation.model = PresentationModel() +
+  Section(by = "outcome.parameter") +
+  Table(by = "sample.size") +
+  CustomLabel(param = "sample.size",
+              label= paste0("N = ",c(50, 55, 60, 65, 70))) +
+  CustomLabel(param = "outcome.parameter",
+              label=c("Standard 1", "Standard 2"))
+
+# Report Generation
+GenerateReport(presentation.model = case.study1.presentation.model,
+               cse.results = case.study1.results,
+               report.filename = "Case study 1 (normally distributed endpoint).docx")
+```

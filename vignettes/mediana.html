@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Gautier Paux and Alex Dmitrieniko" />
+
+<meta name="date" content="2017-04-25" />
+
+<title>Mediana: an R package for clinical trial simulations</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Mediana: an R package for clinical trial simulations</h1>
+<h4 class="author"><em>Gautier Paux and Alex Dmitrieniko</em></h4>
+<h4 class="date"><em>2017-04-25</em></h4>
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<div id="about" class="section level2">
+<h2>About</h2>
+<p>Mediana is an R package which provides a general framework for clinical trial simulations based on the Clinical Scenario Evaluation approach. The package supports a broad class of data models (including clinical trials with continuous, binary, survival-type and count-type endpoints as well as multivariate outcomes that are based on combinations of different endpoints), analysis strategies and commonly used evaluation criteria.</p>
+</div>
+<div id="expert-and-development-teams" class="section level2">
+<h2>Expert and development teams</h2>
+<p><strong>Package design</strong>: <a href="http://www.medianainc.com/">Alex Dmitrienko (Mediana Inc.)</a>.</p>
+<p><strong>Core development team</strong>: <a href="http://www.linkedin.com/in/pauxgautier">Gautier Paux (Servier)</a>, <a href="http://www.medianainc.com/">Alex Dmitrienko (Mediana Inc.)</a>.</p>
+<p><strong>Extended development team</strong>: Thomas Brechenmacher (Novartis), Fei Chen (Johnson and Johnson), Ilya Lipkovich (Quintiles), Ming-Dauh Wang (Lilly), Jay Zhang (MedImmune), Haiyan Zheng (Osaka University).</p>
+<p><strong>Expert team</strong>: Keaven Anderson (Merck), Frank Harrell (Vanderbilt University), Mani Lakshminarayanan (Pfizer), Brian Millen (Lilly), Jose Pinheiro (Johnson and Johnson), Thomas Schmelter (Bayer).</p>
+</div>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<div id="latest-release" class="section level3">
+<h3>Latest release</h3>
+<p>Install the latest version of the Mediana package from CRAN using the <code>install.packages</code> command in R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;Mediana&quot;</span>)</code></pre></div>
+<p>Alternatively, you can download the package from the <a href="https://cran.r-project.org/web/packages/Mediana/index.html">CRAN website</a>.</p>
+</div>
+<div id="development-version" class="section level3">
+<h3>Development version</h3>
+<p>The up-to-date development version can be found and installed directly from the GitHub web site. You need to install the <code>devtools</code> package and then call the <code>install_github</code> function in R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;devtools&quot;)</span>
+devtools::<span class="kw">install_github</span>(<span class="st">&quot;gpaux/Mediana&quot;</span>)</code></pre></div>
+</div>
+<div id="potential-installations-issue" class="section level3">
+<h3>Potential installation’s issue</h3>
+<p>When installing Mediana package, an error could occur if a java version &gt;= 1.6 is not installed. Java is used in the ReporteRs R package which is required in the Mediana R package to <a href="#simulation-report">generate Word report</a>.</p>
+<p><code>system(&quot;java -version&quot;)</code> should return java version ‘1.6.0’ or greater.</p>
+<p>In order to ensure a proper installation, it is highly recommended to install the latest version of Java in the same architecture of R (32-bit or 64-bit).</p>
+<p>The latest version can be found at <a href="https://www.java.com/en/download/manual.jsp" class="uri">https://www.java.com/en/download/manual.jsp</a>.</p>
+</div>
+</div>
+<div id="clinical-scenario-evaluation-framework" class="section level2">
+<h2>Clinical Scenario Evaluation Framework</h2>
+<p>The Mediana R package was developed to provide a general software implementation of the Clinical Scenario Evaluation (CSE) framework. This framework introduced by <a href="http://dij.sagepub.com/content/44/3/299.abstract">Benda et al. (2010)</a> and <a href="http://dij.sagepub.com/content/44/6/713.abstract">Friede et al. (2010)</a> recognizes that sample size calculation and power evaluation in clinical trials are high-dimensional statistical problems. This approach helps decompose this complex problem by identifying key elements of the evaluation process. These components are termed models:</p>
+<ul>
+<li><a href="#data-model">Data models</a> define the process of generating trial data (e.g., sample sizes, outcome distributions and parameters).</li>
+<li><a href="#analysis-model">Analysis models</a> define the statistical methods applied to the trial data (e.g., statistical tests, multiplicity adjustments).</li>
+<li><a href="#evaluation-model">Evaluation models</a> specify the measures for evaluating the performance of the analysis strategies (e.g., traditional success criteria such as marginal power or composite criteria such as disjunctive power).</li>
+</ul>
+<p>Find out more about the role of each model and how to specify the three models to perform Clinical Scenario Evaluation by reviewing the dedicated pages (click on the links above).</p>
+</div>
+<div id="case-studies" class="section level2">
+<h2>Case studies</h2>
+<p>Multiple case studies are provided on the <a href="http://gpaux.github.io/Mediana/CaseStudies.html">web site’s package</a> to facilitate the implementation of Clinical Scenario Evaluation in different clinical trial settings using the Mediana package. These case studies will be updated on a regular basis. Another vignette accessible with the following command is also available presenting these case studies.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">&quot;case-studies&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;Mediana&quot;</span>)</code></pre></div>
+<p>The Mediana package has been successfully used in multiple clinical trials to perform power calculations as well as optimally select trial designs and analysis strategies (clinical trial optimization). For more information on applications of the Mediana package, download the following papers:</p>
+<ul>
+<li><a href="https://www.jstage.jst.go.jp/article/jjscs/28/1/28_1411001_213/_article">Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.</a></li>
+<li><a href="http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1092032?journalCode=lbps20">Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics. 26, 120-140.</a></li>
+</ul>
+</div>
+</div>
+<div id="data-model" class="section level1">
+<h1>Data model</h1>
+<p>Data models define the process of generating patient data in clinical trials.</p>
+<div id="initialization" class="section level2">
+<h2>Initialization</h2>
+<p>A data model can be initialized using the following command</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># DataModel initialization</span>
+data.model =<span class="st"> </span><span class="kw">DataModel</span>()</code></pre></div>
+<p>It is highly recommended to use this command as it will simplify the process of specifying components of the data model, e.g., <code>OutcomeDist</code>, <code>Sample</code>, <code>SampleSize</code>, <code>Event</code> and <code>Design</code> objects.</p>
+</div>
+<div id="components-of-a-data-model" class="section level2">
+<h2>Components of a data model</h2>
+<p>Once the <code>DataModel</code> object has been initialized, components of the data model can be specified by adding objects to the model using the ‘+’ operator as shown below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameter set 1</span>
+outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+outcome1.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">40</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+
+<span class="co"># Outcome parameter set 2</span>
+outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+
+<span class="co"># Data model</span>
+case.study1.data.model =<span class="st">  </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment, outcome2.treatment))</code></pre></div>
+<div id="outcomedist-object" class="section level3">
+<h3><code>OutcomeDist</code> object</h3>
+<div id="description" class="section level4">
+<h4>Description</h4>
+<p>This object specifies the distribution of patient outcomes in a data model. An <code>OutcomeDist</code> object is defined by two arguments:</p>
+<ul>
+<li><p><code>outcome.dist</code> defines the outcome distribution.</p></li>
+<li><p><code>outcome.type</code> defines the outcome type (optional). There are two acceptable values of this argument: <code>standard</code> (fixed-design setting) and <code>event</code> (event-driven design setting).</p></li>
+</ul>
+<p>Several distributions that can be specified using the <code>outcome.dist</code> argument are already implemented in the Mediana package. These distributions are listed below along with the required parameters to be included in the <code>outcome.par</code> argument of the <code>Sample</code> object:</p>
+<ul>
+<li><p><code>UniformDist</code>: generate data following a <strong>univariate distribution</strong>. Required parameter: <code>max</code>.</p></li>
+<li><p><code>NormalDist</code>: generate data following a <strong>normal distribution</strong>. Required parameters: <code>mean</code> and <code>sd</code>.</p></li>
+<li><p><code>BinomDist</code>: generate data following a <strong>binomial distribution</strong>. Required parameter: <code>prop</code>.</p></li>
+<li><p><code>BetaDist</code>: generate data following a <strong>beta distribution</strong>. Required parameter: <code>a</code> and <code>b</code>.</p></li>
+<li><p><code>ExpoDist</code>: generate data following an <strong>exponential distribution</strong>. Required parameter: <code>rate</code>.</p></li>
+<li><p><code>WeibullDist</code>: generate data following a <strong>weibull distribution</strong>. Required parameter: <code>shape</code> and <code>scale</code>.</p></li>
+<li><p><code>TruncatedExpoDist</code>: generate data following a <strong>truncated exponential distribution</strong>. Required parameter: <code>rate</code> an <code>trunc</code>.</p></li>
+<li><p><code>PoissonDist</code>: generate data following a <strong>Poisson distribution</strong>. Required parameter: <code>lambda</code>.</p></li>
+<li><p><code>NegBinomDist</code>: generate data following a <strong>negative binomial distribution</strong>. Required parameters: <code>dispersion</code> and <code>mean</code>.</p></li>
+<li><p><code>MVNormalDist</code>: generate data following a <strong>multivariate normal distribution</strong>. Required parameters: <code>par</code> and <code>corr</code>. For each generated endpoint, the <code>par</code> parameter must contain the required parameters <code>mean</code> and <code>sd</code>. The <code>corr</code> parameter specifies the correlation matrix for the endpoints.</p></li>
+<li><p><code>MVBinomDist</code>: generate data following a <strong>multivariate binomial distribution</strong>. Required parameters: <code>par</code> and <code>corr</code>. For each generated endpoint, the <code>par</code> parameter must contain the required parameter <code>prop</code>. The <code>corr</code> parameter specifies the correlation matrix for the endpoints.</p></li>
+<li><p><code>MVExpoDist</code>: generate data following a <strong>multivariate exponential distribution</strong>. Required parameters: <code>par</code> and <code>corr</code>. For each generated endpoint, the <code>par</code> parameter must contain the required parameter <code>rate</code>. The <code>corr</code>parameter specifies the correlation matrix for the endpoints.</p></li>
+<li><p><code>MVExpoPFSOSDist</code>: generate data following a <strong>multivariate exponential distribution to generate PFS and OS endpoints</strong>. The PFS value is imputed to the OS value if the latter occurs earlier. Required parameters: <code>par</code> and <code>corr</code>. For each generated endpoint, the <code>par</code> parameter must contain the required parameter <code>rate</code>. The<code>corr</code> parameter specifies the correlation matrix for the endpoints.</p></li>
+<li><p><code>MVMixedDist</code>: generate data following a <strong>multivariate mixed distribution</strong>. Required parameters: <code>type</code>, <code>par</code> and <code>corr</code>. The <code>type</code> parameter assumes the following values: <code>NormalDist</code>, <code>BinomDist</code> and <code>ExpoDist</code>. For each generated endpoint, the <code>par</code> parameter must contain the required parameters according to the distribution type. The <code>corr</code> parameter specifies the correlation matrix for the endpoints.</p></li>
+</ul>
+<p>The <code>outcome.type</code> argument defines the outcome’s type. This argument accepts only two values:</p>
+<ul>
+<li><p><code>standard</code>: for fixed design setting.</p></li>
+<li><p><code>event</code>: for event-driven design setting.</p></li>
+</ul>
+<p>The outcome’s type must be defined for each endpoint in case of multivariate disribution, e.g. <code>c(&quot;event&quot;,&quot;event&quot;)</code> in case of multivariate exponential distribution. The <code>outcome.type</code> argument is essential to get censored events for time-to-event endpoints if the <code>SampleSize</code> object is used to specify the number of patients to generate.</p>
+<p>A single <code>OutcomeDist</code> object can be added to a <code>DataModel</code> object.</p>
+<p>For more information about the <code>OutcomeDist</code> object, see the documentation for <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">OutcomeDist</a> on the CRAN web site.</p>
+<p>If a certain outcome distribution is not implemented in the Mediana package, the user can create a custom function and use it within the package (see the dedicated vignette <code>vignette(&quot;custom-functions&quot;, package = &quot;Mediana&quot;)</code>).</p>
+</div>
+<div id="example" class="section level4">
+<h4>Example</h4>
+<p>Examples of <code>OutcomeDist</code> objects:</p>
+<p>Specify popular univariate distributions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Normal distribution</span>
+<span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>)
+
+<span class="co"># Binomial distribution</span>
+<span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;BinomDist&quot;</span>)
+
+<span class="co"># Exponential distribution</span>
+<span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>)</code></pre></div>
+<p>Specify a mixed multivariate distribution:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Multivariate Mixed distribution</span>
+<span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;MVMixedDist&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="sample-object" class="section level3">
+<h3><code>Sample</code> object</h3>
+<div id="description-1" class="section level4">
+<h4>Description</h4>
+<p>This object specifies parameters of a sample (e.g., treatment arm in a trial) in a data model. Samples are defined as mutually exclusive groups of patients, for example, treatment arms. A <code>Sample</code> object is defined by three arguments:</p>
+<ul>
+<li><p><code>id</code> defines the sample’s unique ID (label).</p></li>
+<li><p><code>outcome.par</code> defines the parameters of the outcome distribution for the sample.</p></li>
+<li><p><code>sample.size</code> defines the sample’s size (optional).</p></li>
+</ul>
+<p>The <code>sample.size</code> argument is optional but must be used to define the sample size only if an unbalanced design is considered (i.e., the sample size varies across the samples). The sample size must be either defined in the <code>Sample</code> object or in the <code>SampleSize</code> object, but not in both.</p>
+<p>Several <code>Sample</code> objects can be added to a <code>DataModel</code> object.</p>
+<p>For more information about the <code>Sample</code> object, see the documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Sample</a> on the CRAN web site.</p>
+</div>
+<div id="example-1" class="section level4">
+<h4>Example</h4>
+<p>Examples of <code>Sample</code> objects:</p>
+<p>Specify two samples with a continuous endpoint following a normal distribution:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters set 1</span>
+outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+outcome1.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">40</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+
+<span class="co"># Outcome parameters set 2</span>
+outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+
+<span class="co"># Placebo sample object</span>
+<span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+       <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, 
+                                outcome2.placebo))
+
+<span class="co"># Treatment sample object</span>
+<span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+       <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment, 
+                                outcome2.treatment))</code></pre></div>
+<p>Specify two samples with a binary endpoint following a binomial distribution:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters set</span>
+outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.30</span>)
+outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>)
+
+<span class="co"># Placebo sample object</span>
+<span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+       <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo))
+
+<span class="co"># Treatment sample object</span>
+<span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+       <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment))</code></pre></div>
+<p>Specify two samples with a time-to-event (survival) endpoint following an exponential distribution:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters</span>
+median.time.placebo =<span class="st"> </span><span class="dv">6</span>
+rate.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.placebo
+outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.placebo)
+
+median.time.treatment =<span class="st"> </span><span class="dv">9</span>
+rate.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.treatment
+outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.treatment)
+
+<span class="co"># Placebo sample object</span>
+<span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+       <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo))
+
+<span class="co"># Treatment sample object</span>
+<span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+       <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment))</code></pre></div>
+<p>Specify three samples with two primary endpoints that follow a binomial and a normal distribution, respectively:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Variable types</span>
+var.type =<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;BinomDist&quot;</span>, <span class="st">&quot;NormalDist&quot;</span>)
+
+<span class="co"># Outcome distribution parameters</span>
+placebo.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.3</span>), 
+                         <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.10</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+
+dosel.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.40</span>), 
+                       <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.20</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+
+doseh.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), 
+                       <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+
+<span class="co"># Correlation between two endpoints</span>
+corr.matrix =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>,
+                       <span class="fl">0.5</span>, <span class="fl">1.0</span>), <span class="dv">2</span>, <span class="dv">2</span>)
+
+<span class="co"># Outcome parameters set</span>
+outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                             <span class="dt">par =</span> plac.par, 
+                             <span class="dt">corr =</span> corr.matrix)
+
+outcome.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                           <span class="dt">par =</span> dosel.par, 
+                           <span class="dt">corr =</span> corr.matrix)
+
+outcome.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                           <span class="dt">par =</span> doseh.par, 
+                           <span class="dt">corr =</span> corr.matrix)
+
+<span class="co"># Placebo sample object</span>
+<span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;Plac ACR20&quot;</span>, <span class="st">&quot;Plac HAQ-DI&quot;</span>),
+       <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo))
+
+<span class="co"># Low Dose sample object</span>
+<span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseL ACR20&quot;</span>, <span class="st">&quot;DoseL HAQ-DI&quot;</span>),
+       <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.dosel))
+
+<span class="co"># High Dose sample object</span>
+<span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseH ACR20&quot;</span>, <span class="st">&quot;DoseH HAQ-DI&quot;</span>),
+       <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.doseh))</code></pre></div>
+</div>
+</div>
+<div id="samplesize-object" class="section level3">
+<h3><code>SampleSize</code> object</h3>
+<div id="description-2" class="section level4">
+<h4>Description</h4>
+<p>This object specifies the sample size in a balanced trial design (all samples will have the same sample size). A <code>SampleSize</code> object is defined by one argument:</p>
+<ul>
+<li><code>sample.size</code> specifies a list or vector of sample size(s).</li>
+</ul>
+<p>A single <code>SampleSize</code> object can be added to a <code>DataModel</code> object.</p>
+<p>For more information about the <code>SampleSize</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">SampleSize</a>.</p>
+</div>
+<div id="example-2" class="section level4">
+<h4>Example</h4>
+<p>Examples of <code>SampleSize</code> objects:</p>
+<p>Several equivalent specifications of the <code>SampleSize</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>))
+<span class="kw">SampleSize</span>(<span class="kw">list</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>))
+<span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">70</span>, <span class="dv">5</span>))</code></pre></div>
+</div>
+</div>
+<div id="event-object" class="section level3">
+<h3><code>Event</code> object</h3>
+<div id="description-3" class="section level4">
+<h4>Description</h4>
+<p>This object specifies the total number of events (total event count) among all samples in an event-driven clinical trial. An <code>Event</code> object is defined by two arguments:</p>
+<ul>
+<li><p><code>n.events</code> defines a vector of the required event counts.</p></li>
+<li><p><code>rando.ratio</code> defines a vector of randomization ratios for each <code>Sample</code> object defined in the <code>DataModel</code> object.</p></li>
+</ul>
+<p>A single <code>Event</code> object can be added to a <code>DataModel</code> object.</p>
+<p>For more information about the <code>Event</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Event</a>.</p>
+</div>
+<div id="example-3" class="section level4">
+<h4>Example</h4>
+<p>Examples of <code>Event</code> objects:</p>
+<p>Specify the required number of events in a trial with a 2:1 randomization ratio (Treatment:Placebo):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Event parameters</span>
+event.count.total =<span class="st"> </span><span class="kw">c</span>(<span class="dv">390</span>, <span class="dv">420</span>)
+randomization.ratio =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)
+
+<span class="co"># Event object</span>
+<span class="kw">Event</span>(<span class="dt">n.events =</span> event.count.total, 
+      <span class="dt">rando.ratio =</span> randomization.ratio)</code></pre></div>
+</div>
+</div>
+<div id="design-object" class="section level3">
+<h3><code>Design</code> object</h3>
+<div id="description-4" class="section level4">
+<h4>Description</h4>
+<p>This object specifies the design parameters used in event-driven designs if the user is interested in modeling the enrollment (or accrual) and dropout (or loss to follow up) processes. A <code>Design</code> object is defined by seven arguments:</p>
+<ul>
+<li><p><code>enroll.period</code> defines the length of the enrollment period.</p></li>
+<li><p><code>enroll.dist</code> defines the enrollment distribution.</p></li>
+<li><p><code>enroll.dist.par</code> defines the parameters of the enrollment distribution (optional).</p></li>
+<li><p><code>followup.period</code> defines the length of the follow-up period for each patient in study designs with a fixed follow-up period, i.e., the length of time from the enrollment to planned discontinuation is constant across patients. The user must specify either <code>followup.period</code> or <code>study.duration</code>.</p></li>
+<li><p><code>study.duration</code> defines the total study duration in study designs with a variable follow-up period. The total study duration is defined as the length of time from the enrollment of the first patient to the discontinuation of the last patient.</p></li>
+<li><p><code>dropout.dist</code> defines the dropout distribution.</p></li>
+<li><p><code>dropout.dist.par</code> defines the parameters of the dropout distribution.</p></li>
+</ul>
+<p>Several <code>Design</code> objects can be added to a <code>DataModel</code> object.</p>
+<p>For more information about the <code>Design</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Design</a>.</p>
+<p>A convienient way to model non-uniform enrollment is to use a beta distribution (<code>BetaDist</code>). If <code>enroll.dist = &quot;BetaDist&quot;</code>, the <code>enroll.dist.par</code> should contain the parameter of the beta distribution (<code>a</code> and <code>b</code>). These parameters must be derived according to the expected enrollment at a specific timepoint. For example, if half the patients are expected to be enrolled at 75% of the enrollment period, the beta distribution is a <code>Beta(log(0.5)/log(0.75), 1)</code>. Generally, let <code>q</code> be the proportion of enrolled patients at <code>p</code>% of the enrollment period, the Beta distribution can be derived as follows:</p>
+<ul>
+<li><p>If <code>q &gt; p</code>, the Beta distribution is <code>Beta(a,1)</code> with <code>a = log(p) / log(q)</code></p></li>
+<li><p>If <code>q &lt; p</code>, the Beta distribution is <code>Beta (1,b)</code> with <code>b = log(1-p) / log(1-q)</code></p></li>
+<li><p>Otherwise the Beta distribution is <code>Beta(1,1)</code></p></li>
+</ul>
+</div>
+<div id="example-4" class="section level4">
+<h4>Example</h4>
+<p>Examples of <code>Design</code> objects:</p>
+<p>Specify parameters of the enrollment and dropout processes with a uniform enrollment distribution and exponential dropout distribution:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Design parameters (in months)</span>
+<span class="kw">Design</span>(<span class="dt">enroll.period =</span> <span class="dv">9</span>,
+       <span class="dt">study.duration =</span> <span class="dv">21</span>,
+       <span class="dt">enroll.dist =</span> <span class="st">&quot;UniformDist&quot;</span>,
+       <span class="dt">dropout.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>,
+       <span class="dt">dropout.dist.par =</span> <span class="kw">parameters</span>(<span class="dt">rate =</span> <span class="fl">0.0115</span>)) </code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="analysis-model" class="section level1">
+<h1>Analysis model</h1>
+<p>Analysis models define statistical methods (e.g., significance tests or descriptive statistics) that are applied to the study data in a clinical trial.</p>
+<div id="initialization-1" class="section level2">
+<h2>Initialization</h2>
+<p>An analysis model can be initialized using the following command:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># AnalysisModel initialization</span>
+analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>()</code></pre></div>
+<p>It is highly recommended to use this command to initialize an analysis model as it will simplify the process of specifying components of the data model, including the <code>MultAdj</code>, <code>MultAdjProc</code>, <code>MultAdjStrategy</code>, <code>Test</code>, <code>Statistic</code> objects.</p>
+</div>
+<div id="components-of-an-analysis-model" class="section level2">
+<h2>Components of an analysis model</h2>
+<p>After an <code>AnalysisModel</code> object has been initialized, components of the analysis model can be specified by adding objects to the model using the ‘+’ operator as shown below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Treatment&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MeanStat&quot;</span>,
+            <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>))</code></pre></div>
+<div id="test-object" class="section level3">
+<h3><code>Test</code> object</h3>
+<div id="description-5" class="section level4">
+<h4>Description</h4>
+<p>This object specifies a significance test that will be applied to one or more samples defined in a data model. A <code>Test</code> object is defined by the following four arguments:</p>
+<ul>
+<li><p><code>id</code> defines the test’s unique ID (label).</p></li>
+<li><p><code>method</code> defines the significance test.</p></li>
+<li><p><code>samples</code> defines the IDs of the samples (defined in the data model) that the significance test is applied to.</p></li>
+<li><p><code>par</code> defines the parameter(s) of the statistical test.</p></li>
+</ul>
+<p>Several commonly used significance tests are already implemented in the Mediana package. In addition, the user can easily define custom significance tests (see the dedicated vignette <code>vignette(&quot;custom-functions&quot;, package = &quot;Mediana&quot;)</code>). The built-in tests are listed below along with the required parameters that need to be included in the <code>par</code> argument:</p>
+<ul>
+<li><p><code>TTest</code>: perform the <strong>two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
+<li><p><code>TTestNI</code>: perform the <strong>non-inferiority two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin).</p></li>
+<li><p><code>WilcoxTest</code>: perform the <strong>Wilcoxon-Mann-Whitney test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
+<li><p><code>PropTest</code>: perform the <strong>two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>).</p></li>
+<li><p><code>PropTestNI</code>: perform the <strong>non-inferiority two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin). Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>).</p></li>
+<li><p><code>FisherTest</code>: perform the <strong>Fisher exact test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
+<li><p><code>GLMPoissonTest</code>: perform the <strong>Poisson regression test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
+<li><p><code>GLMNegBinomTest</code>: perform the <strong>Negative-binomial regression test</strong> between the two <code>samples</code> defined in the <code>samples</code> argument.</p></li>
+<li><p><code>LogrankTest</code>: perform the <strong>Log-rank test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
+</ul>
+<p>It needs to be noted that the significance tests listed above are implemented as <strong>one-sided</strong> tests and thus the sample order in the <code>samples</code> argument is important. In particular, the Mediana package assumes that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure).</p>
+<p>Several <code>Test</code> objects can be added to an <code>AnalysisModel</code>object.</p>
+<p>For more information about the <code>Test</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Test</a> on the CRAN web site.</p>
+</div>
+<div id="example-5" class="section level4">
+<h4>Example</h4>
+<p>Examples of <code>Test</code> objects:</p>
+<p>Carry out the two-sample t-test:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Placebo and Treatment samples were defined in the data model</span>
+<span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
+     <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+     <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
+<p>Carry out the two-sample t-test for non-inferiority:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Placebo and Treatment samples were defined in the data model</span>
+<span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
+     <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+     <span class="dt">method =</span> <span class="st">&quot;TTestNI&quot;</span>,
+     <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">margin =</span> <span class="fl">0.2</span>))</code></pre></div>
+<p>Carry out the two-sample t-test with pooled samples:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Placebo M-, Placebo M+, Treatment M- and Treatment M+ samples were defined in the data model</span>
+<span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OP test&quot;</span>,
+     <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="kw">c</span>(<span class="st">&quot;Placebo M-&quot;</span>, <span class="st">&quot;Placebo M+&quot;</span>),
+                       <span class="kw">c</span>(<span class="st">&quot;Treatment M-&quot;</span>, <span class="st">&quot;Treatment M+&quot;</span>)),
+     <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="statistic-object" class="section level3">
+<h3><code>Statistic</code> object</h3>
+<div id="description-6" class="section level4">
+<h4>Description</h4>
+<p>This object specifies a descriptive statistic that will be computed based on one or more samples defined in a data model. A <code>Statistic</code> object is defined by four arguments:</p>
+<ul>
+<li><p><code>id</code> defines the descriptive statistic’s unique ID (label).</p></li>
+<li><p><code>method</code> defines the type of statistic/method for computing the statistic.</p></li>
+<li><p><code>samples</code> defines the samples (pre-defined in the data model) to be used for computing the statistic.</p></li>
+<li><p><code>par</code> defines the parameter(s) of the statistic.</p></li>
+</ul>
+<p>Several methods for computing descriptive statistics are already implemented in the Mediana package and the user can also define custom functions for computing descriptive statistics (see the dedicated vignette <code>vignette(&quot;custom-functions&quot;, package = &quot;Mediana&quot;)</code>). These methods are shown below along with the required parameters that need to be defined in the <code>par</code> argument:</p>
+<ul>
+<li><p><code>MedianStat</code>: compute the <strong>median</strong> of the sample defined in the <code>samples</code> argument.</p></li>
+<li><p><code>MeanStat</code>: compute the <strong>mean</strong> of the sample defined in the <code>samples</code> argument.</p></li>
+<li><p><code>SdStat</code>: compute the <strong>standard deviation</strong> of the sample defined in the <code>samples</code> argument.</p></li>
+<li><p><code>MinStat</code>: compute the <strong>minimum</strong> value in the sample defined in the <code>samples</code> argument.</p></li>
+<li><p><code>MaxStat</code>: compute the <strong>maximum</strong> value in the sample defined in the <code>samples</code> argument.</p></li>
+<li><p><code>DiffMeanStat</code>: compute the <strong>difference of means</strong> between the two samples defined in the <code>samples</code> argument. Two samples must be defined.</p></li>
+<li><p><code>EffectSizeContStat</code>: compute the <strong>effect size</strong> for a continuous endpoint. Two samples must be defined.</p></li>
+<li><p><code>RatioEffectSizeContStat</code>: compute the <strong>ratio of two effect sizes</strong> for a continuous endpoint. Four samples must be defined.</p></li>
+<li><p><code>DiffPropStat</code>: compute the <strong>difference of the proportions</strong> between the two samples defined in the <code>samples</code> argument. Two samples must be defined.</p></li>
+<li><p><code>EffectSizePropStat</code>: compute the <strong>effect size</strong> for a binary endpoint. Two samples must be defined.</p></li>
+<li><p><code>RatioEffectSizePropStat</code>: compute the <strong>ratio of two effect sizes</strong> for a binary endpoint. Four samples must be defined.</p></li>
+<li><p><code>HazardRatioStat</code>: compute the <strong>hazard ratio</strong> of the two samples defined in the samples argument. Two samples must be defined. By default the Log-Rank method is used. Optional argument: <code>method</code> taking as value <code>Log-Rank</code> or <code>Cox</code>.</p></li>
+<li><p><code>EffectSizeEventStat</code>: compute the <strong>effect size</strong> for a survival endpoint (log of the HR. Two samples must be defined. Two samples must be defined. By default the Log-Rank method is used. Optional argument: <code>method</code> taking as value <code>Log-Rank</code> or <code>Cox</code>.</p></li>
+<li><p><code>RatioEffectSizeEventStat</code>: compute the <strong>ratio of two effect sizes</strong> for a survival endpoint based on the Log-Rank method. Four samples must be defined. By default the Log-Rank method is used. Optional argument: <code>method</code> taking as value <code>Log-Rank</code> or <code>Cox</code>.</p></li>
+<li><p><code>EventCountStat</code>: compute the <strong>number of events</strong> observed in the sample(s) defined in the <code>samples</code> argument.</p></li>
+<li><p><code>PatientCountStat</code>: compute the <strong>number of patients</strong> observed in the sample(s) defined in the <code>samples</code> argument</p></li>
+</ul>
+<p>Several <code>Statistic</code> objects can be added to an <code>AnalysisModel</code> object.</p>
+<p>For more information about the <code>Statistic</code> object, see the R documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Statistic</a>.</p>
+</div>
+<div id="example-6" class="section level4">
+<h4>Example</h4>
+<p>Examples of <code>Statistic</code> objects:</p>
+<p>Compute the mean of a single sample:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Treatment sample was defined in the data model</span>
+<span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Treatment&quot;</span>,
+          <span class="dt">method =</span> <span class="st">&quot;MeanStat&quot;</span>,
+          <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="multadjproc-object" class="section level3">
+<h3><code>MultAdjProc</code> object</h3>
+<div id="description-7" class="section level4">
+<h4>Description</h4>
+<p>This object specifies a multiplicity adjustment procedure that will be applied to the significance tests in order to protect the overall Type I error rate. A <code>MultAdjProc</code> object is defined by three arguments:</p>
+<ul>
+<li><p><code>proc</code> defines a multiplicity adjustment procedure.</p></li>
+<li><p><code>par</code> defines the parameter(s) of the multiplicity adjustment procedure (optional).</p></li>
+<li><p><code>tests</code> defines the specific tests (defined in the analysis model) to which the multiplicity adjustment procedure will be applied.</p></li>
+</ul>
+<p>If no <code>tests</code> are defined, the multiplicity adjustment procedure will be applied to all tests defined in the <code>AnalysisModel</code> object.</p>
+<p>Several commonly used multiplicity adjustment procedures are included in the Mediana package. In addition, the user can easily define custom multiplicity adjustments. The built-in multiplicity adjustments are defined below along with the required parameters that need to be included in the <code>par</code> argument:</p>
+<ul>
+<li><p><code>BonferroniAdj</code>: <strong>Bonferroni</strong> procedure. Optional parameter: <code>weight</code> (vector of hypothesis weights).</p></li>
+<li><p><code>HolmAdj</code>: <strong>Holm</strong> procedure. Optional parameter: <code>weight</code> (vector of hypothesis weights).</p></li>
+<li><p><code>HochbergAdj</code>: <strong>Hochberg</strong> procedure. Optional parameter: <code>weight</code> (vector of hypothesis weights).</p></li>
+<li><p><code>HommelAdj</code>: <strong>Hommel</strong> procedure. Optional parameter: <code>weight</code> (vector of hypothesis weights).</p></li>
+<li><p><code>FixedSeqAdj</code>: <strong>Fixed-sequence procedure</strong>.</p></li>
+<li><p><code>ChainAdj</code>: Family of <strong>chain procedures</strong>. Required parameters: <code>weight</code> (vector of hypothesis weights) and <code>transition</code> (matrix of transition parameters).</p></li>
+<li><p><code>NormalParamAdj</code>: <strong>Parametric multiple testing procedure</strong> derived from a multivariate normal distribution. Required parameter: <code>corr</code> (correlation matrix of the multivariate normal distribution). Optional parameter: <code>weight</code> (vector of hypothesis weights).</p></li>
+<li><p><code>ParallelGatekeepingAdj</code>: Family of <strong>parallel gatekeeping procedures</strong>. Required parameters: <code>family</code> (vectors of hypotheses included in each family), <code>proc</code> (vector of procedure names applied to each family), <code>gamma</code> (vector of truncation parameters).</p></li>
+<li><p><code>MultipleSequenceGatekeepingAdj</code>: Family of <strong>multiple-sequence gatekeeping procedures</strong>. Required parameters: <code>family</code> (vectors of hypotheses included in each family), <code>proc</code> (vector of procedure names applied to each family), <code>gamma</code> (vector of truncation parameters).</p></li>
+<li><p><code>MixtureGatekeepingAdj</code>: Family of <strong>mixture-based gatekeeping procedures</strong>. Required parameters: <code>family</code> (vectors of hypotheses included in each family), <code>proc</code> (vector of procedure names applied to each family), <code>gamma</code> (vector of truncation parameters), <code>serial</code> (matrix of indicators), <code>parallel</code> (matrix of indicators).</p></li>
+</ul>
+<p>Several <code>MultAdjProc</code> objects can be added to an <code>AnalysisModel</code>object using the ‘+’ operator or by grouping them into a MultAdj object.</p>
+<p>For more information about the <code>MultAdjProc</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">MultAdjProc</a>.</p>
+</div>
+<div id="example-7" class="section level4">
+<h4>Example</h4>
+<p>Examples of <code>MultAdjProc</code> objects:</p>
+<p>Apply a multiplicity adjustment based on the chain procedure:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Parameters of the chain procedure (equivalent to a fixed-sequence procedure)</span>
+<span class="co"># Vector of hypothesis weights</span>
+chain.weight =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)
+<span class="co"># Matrix of transition parameters</span>
+chain.transition =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>,
+                            <span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># MultAdjProc</span>
+<span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;ChainAdj&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> chain.weight,
+                             <span class="dt">transition =</span> chain.transition))</code></pre></div>
+<p>This procedure implementation is facilicated by the use of the <code>FixedSeqAdj</code> method intoduced in version 1.0.4.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MultAdjProc</span>
+<span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;FixedSeqAdj&quot;</span>)</code></pre></div>
+<p>Apply a multiple-sequence gatekeeping procedure:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Parameters of the multiple-sequence gatekeeping procedure</span>
+<span class="co"># Tests to which the multiplicity adjustment will be applied (defined in the AnalysisModel)</span>
+test.list =<span class="st"> </span><span class="kw">tests</span>(<span class="st">&quot;Pl vs DoseH - ACR20&quot;</span>, 
+                  <span class="st">&quot;Pl vs DoseL - ACR20&quot;</span>, 
+                  <span class="st">&quot;Pl vs DoseH - HAQ-DI&quot;</span>, 
+                  <span class="st">&quot;Pl vs DoseL - HAQ-DI&quot;</span>)
+
+<span class="co"># Hypothesis included in each family (the number corresponds to the position of the test in the test.list vector)</span>
+family =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), 
+                  <span class="dt">family2 =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))
+
+<span class="co"># Component procedure of each family</span>
+component.procedure =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span><span class="st">&quot;HolmAdj&quot;</span>, 
+                               <span class="dt">family2 =</span> <span class="st">&quot;HolmAdj&quot;</span>)
+
+<span class="co"># Truncation parameter of each family</span>
+gamma =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="fl">0.8</span>, 
+                 <span class="dt">family2 =</span> <span class="dv">1</span>)
+
+<span class="co"># MultAdjProc</span>
+<span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;MultipleSequenceGatekeepingAdj&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">family =</span> family, 
+                             <span class="dt">proc =</span> component.procedure, 
+                             <span class="dt">gamma =</span> gamma),
+            <span class="dt">tests =</span> test.list)</code></pre></div>
+</div>
+</div>
+<div id="multadjstrategy-object" class="section level3">
+<h3><code>MultAdjStrategy</code> object</h3>
+<div id="description-8" class="section level4">
+<h4>Description</h4>
+<p>This object specifies a multiplicity adjustment strategy that can include several multiplicity adjustment procedures. A multiplicity adjustment strategy may be defined when the same Clinical Scenario Evaluation approach is applied to several clinical trials.</p>
+<p>A <code>MultAdjStrategy</code> object serves as a wrapper for several <code>MultAdjProc</code> objects.</p>
+<p>For more information about the <code>MultAdjStrategy</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">MultAdjStrategy</a>.</p>
+</div>
+<div id="example-8" class="section level4">
+<h4>Example</h4>
+<p>Example of a <code>MultAdjStrategy</code> object:</p>
+<p>Perform complex multiplicity adjustments based on gatekeeping procedures in two clinical trials with three endpoints:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Parallel gatekeeping procedure parameters</span>
+family =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="kw">c</span>(<span class="dv">1</span>), 
+                  <span class="dt">family2 =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))
+
+component.procedure =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span><span class="st">&quot;HolmAdj&quot;</span>, 
+                               <span class="dt">family2 =</span> <span class="st">&quot;HolmAdj&quot;</span>)
+
+gamma =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="fl">0.8</span>, 
+                 <span class="dt">family2 =</span> <span class="dv">1</span>)
+
+<span class="co"># Multiple sequence gatekeeping procedure parameters for Trial A</span>
+mult.adj.trialA =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;ParallelGatekeepingAdj&quot;</span>,
+                              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">family =</span> family,
+                                               <span class="dt">proc =</span> component.procedure,
+                                               <span class="dt">gamma =</span> gamma),
+                              <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Trial A Pla vs Trt End1&quot;</span>,
+                                            <span class="st">&quot;Trial A Pla vs Trt End2&quot;</span>,
+                                            <span class="st">&quot;Trial A Pla vs Trt End3&quot;</span>))
+
+mult.adj.trialB =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;ParallelGatekeepingAdj&quot;</span>,
+                              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">family =</span> family,
+                                               <span class="dt">proc =</span> component.procedure,
+                                               <span class="dt">gamma =</span> gamma),
+                              <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Trial B Pla vs Trt End1&quot;</span>,
+                                            <span class="st">&quot;Trial B Pla vs Trt End2&quot;</span>,
+                                            <span class="st">&quot;Trial B Pla vs Trt End3&quot;</span>))
+
+<span class="co"># Analysis model</span>
+analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">MultAdjStrategy</span>(mult.adj.trialA, mult.adj.trialB) +
+<span class="st">  </span><span class="co"># Tests for study A</span>
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial A Pla vs Trt End1&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial A Plac End1&quot;</span>, <span class="st">&quot;Trial A Trt End1&quot;</span>)) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial A Pla vs Trt End2&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial A Plac End2&quot;</span>, <span class="st">&quot;Trial A Trt End2&quot;</span>)) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial A Pla vs Trt End3&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial A Plac End3&quot;</span>, <span class="st">&quot;Trial A Trt End3&quot;</span>)) +
+<span class="st">  </span><span class="co"># Tests for study B</span>
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial B Pla vs Trt End1&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial B Plac End1&quot;</span>, <span class="st">&quot;Trial B Trt End1&quot;</span>)) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial B Pla vs Trt End2&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial B Plac End2&quot;</span>, <span class="st">&quot;Trial B Trt End2&quot;</span>)) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial B Pla vs Trt End3&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial B Plac End3&quot;</span>, <span class="st">&quot;Trial B Trt End3&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="multadj-object" class="section level3">
+<h3><code>MultAdj</code> object</h3>
+<div id="description-9" class="section level4">
+<h4>Description</h4>
+<p>This object can be used to combine several <code>MultAdjProc</code> or <code>MultAdjStrategy</code> objects and add them as a single object to an <code>AnalysisModel</code> object . This object is provided mainly for convenience and its use is optional. Alternatively, <code>MultAdjProc</code> or <code>MultAdjStrategy</code> objects can be added to an <code>AnalysisModel</code> object incrementally using the ‘+’ operator.</p>
+<p>For more information about the <code>MultAdj</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">MultAdj</a>.</p>
+</div>
+<div id="example-9" class="section level4">
+<h4>Example</h4>
+<p>Example of a <code>MultAdj</code> object:</p>
+<p>Perform Clinical Scenario Evaluation to compare three candidate multiplicity adjustment procedures:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Multiplicity adjustments to compare</span>
+mult.adj1 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;BonferroniAdj&quot;</span>)
+mult.adj2 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HolmAdj&quot;</span>)
+mult.adj3 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>)
+
+<span class="co"># Analysis model</span>
+analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">                 </span><span class="kw">MultAdj</span>(mult.adj1, mult.adj2, mult.adj3) +
+<span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose L&quot;</span>,
+                      <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose M&quot;</span>,
+                      <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose H&quot;</span>,
+                      <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)
+
+<span class="co"># Note that the code presented above is equivalent to:</span>
+analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">                 </span>mult.adj1 +
+<span class="st">                 </span>mult.adj2 +
+<span class="st">                 </span>mult.adj3 +
+<span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose L&quot;</span>,
+                      <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose M&quot;</span>,
+                      <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose H&quot;</span>,
+                      <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="evaluation-model" class="section level1">
+<h1>Evaluation model</h1>
+<p>Evaluation models are used within the Mediana package to specify the success criteria or metrics for evaluating the performance of the selected clinical scenario (combination of data and analysis models).</p>
+<div id="initialization-2" class="section level2">
+<h2>Initialization</h2>
+<p>An evaluation model can be initialized using the following command:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># EvaluationModel initialization</span>
+evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>()</code></pre></div>
+<p>It is highly recommended to use this command to initialize an evaluation model because it simplifies the process of specifying components of the evaluation model such as <code>Criterion</code> objects.</p>
+</div>
+<div id="components-of-an-evaluation-model" class="section level2">
+<h2>Components of an evaluation model</h2>
+<p>After an <code>EvaluationModel</code> object has been initialized, components of the evaluation model can be specified by adding objects to the model using the ‘+’ operator as shown below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))  +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Average Mean&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
+            <span class="dt">statistics =</span> <span class="kw">statistics</span>(<span class="st">&quot;Mean Treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Average Mean Treatment&quot;</span>))</code></pre></div>
+<div id="criterion-object" class="section level3">
+<h3><code>Criterion</code> object</h3>
+<div id="description-10" class="section level4">
+<h4>Description</h4>
+<p>This object specifies the success criteria that will be applied to a clinical scenario to evaluate the performance of selected analysis methods. A <code>Criterion</code> object is defined by six arguments:</p>
+<ul>
+<li><p><code>id</code> defines the criterion’s unique ID (label).</p></li>
+<li><p><code>method</code> defines the criterion.</p></li>
+<li><p><code>tests</code> defines the IDs of the significance tests (defined in the analysis model) that the criterion is applied to.</p></li>
+<li><p><code>statistics</code> defines the IDs the descriptive statistics (defined in the analysis model) that the criterion is applied to.</p></li>
+<li><p><code>par</code> defines the parameter(s) of the criterion.</p></li>
+<li><p><code>label</code> defines the label(s) of the criterion values (the label(s) will be used in the simulation report).</p></li>
+</ul>
+<p>Several commonly used success criteria are implemented in the Mediana package. The user can also define custom significance criteria. The built-in success criteria are listed below along with the required parameters that need to be included in the <code>par</code> argument:</p>
+<ul>
+<li><p><code>MarginalPower</code>: compute the marginal power of all tests included in the <code>test</code> argument. Required parameter: <code>alpha</code> (significance level used in each test).</p></li>
+<li><p><code>WeightedPower</code>: compute the weighted power of all tests included in the <code>test</code> argument. Required parameters: <code>alpha</code> (significance level used in each test) and <code>weight</code> (vector of weights assigned to the significance tests).</p></li>
+<li><p><code>DisjunctivePower</code>: compute the disjunctive power (probability of achieving statistical significance in at least one test included in the <code>test</code> argument). Required parameter: <code>alpha</code> (significance level used in each test).</p></li>
+<li><p><code>ConjunctivePower</code>: compute the conjunctive power (probability of achieving statistical significance in all tests included in the <code>test</code> argument). Required parameter: <code>alpha</code> (significance level used in each test).</p></li>
+<li><p><code>ExpectedRejPower</code>: compute the expected number of statistical significant tests. Required parameter: <code>alpha</code>(significance level used in each test).</p></li>
+</ul>
+<p>Several <code>Criterion</code> objects can be added to an <code>EvaluationModel</code> object.</p>
+<p>For more information about the <code>Criterion</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Criterion</a>.</p>
+<p>If a certain success criterion is not implemented in the Mediana package, the user can create a custom function and use it within the package (see the dedicated vignette <code>vignette(&quot;custom-functions&quot;, package = &quot;Mediana&quot;)</code>).</p>
+</div>
+<div id="examples" class="section level4">
+<h4>Examples</h4>
+<p>Examples of <code>Criterion</code> objects:</p>
+<p>Compute marginal power with alpha = 0.025:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+          <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+          <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+          <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+<p>Compute weighted power with alpha = 0.025 and unequal test-specific weights:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Weighted power&quot;</span>,
+          <span class="dt">method =</span> <span class="st">&quot;WeightedPower&quot;</span>,
+          <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment - Endpoint 1&quot;</span>,
+                        <span class="st">&quot;Placebo vs treatment - Endpoint 2&quot;</span>),
+          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Weighted power&quot;</span>),
+          <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>,
+                           <span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">2</span>/<span class="dv">3</span>, <span class="dv">1</span>/<span class="dv">3</span>)))</code></pre></div>
+<p>Compute disjunctive power with alpha = 0.025:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
+          <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
+          <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose H&quot;</span>,
+                        <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+                        <span class="st">&quot;Placebo vs Dose L&quot;</span>),
+          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Disjunctive power&quot;</span>),
+          <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="clinical-scenario-evaluation" class="section level1">
+<h1>Clinical Scenario Evaluation</h1>
+<p>Clinical Scenario Evaluation (CSE) is performed based on the data, analysis and evaluation models as well as simulation parameters specified by the user. The simulation parameters are defined using the <code>SimParameters</code> object.</p>
+<div id="clinical-scenario-evaluation-objects" class="section level2">
+<h2>Clinical Scenario Evaluation objects</h2>
+<div id="simparameters-object" class="section level3">
+<h3><code>SimParameters</code> object</h3>
+<div id="description-11" class="section level4">
+<h4>Description</h4>
+<p>The <code>SimParameters</code> object is a required argument of the <code>CSE</code> function and has the following arguments:</p>
+<ul>
+<li><code>n.sims</code> defines the number of simulations.</li>
+<li><code>seed</code> defines the seed to be used in the simulations.</li>
+<li><code>proc.load</code> defines the processor load in parallel computations.</li>
+</ul>
+<p>The <code>proc.load</code> argument is used to define the number of processor cores dedicated to the simulations. A numeric value can be defined as well as character value which automatically detects the number of cores:</p>
+<ul>
+<li><p><code>low</code>: 1 processor core.</p></li>
+<li><p><code>med</code>: Number of available processor cores / 2.</p></li>
+<li><p><code>high</code>: Number of available processor cores 1.</p></li>
+<li><p><code>full</code>: All available processor cores.</p></li>
+</ul>
+</div>
+<div id="examples-1" class="section level4">
+<h4>Examples</h4>
+<p>Examples of <code>SimParameters</code> object specification:</p>
+<p>Perform 10000 simulations using all available processor cores:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SimParameters</span>(<span class="dt">n.sims =</span> <span class="dv">10000</span>, 
+              <span class="dt">proc.load =</span> <span class="st">&quot;full&quot;</span>, 
+              <span class="dt">seed =</span> <span class="dv">42938001</span>)</code></pre></div>
+<p>Perform 10000 simulations using 2 processor cores:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SimParameters</span>(<span class="dt">n.sims =</span> <span class="dv">10000</span>, 
+              <span class="dt">proc.load =</span> <span class="dv">2</span>, 
+              <span class="dt">seed =</span> <span class="dv">42938001</span>)</code></pre></div>
+</div>
+</div>
+<div id="cse-function" class="section level3">
+<h3><code>CSE</code> function</h3>
+<div id="description-12" class="section level4">
+<h4>Description</h4>
+<p>The <code>CSE</code> function is invoked to runs simulations under the Clinical Scenario Evaluation approach. This function uses four arguments:</p>
+<ul>
+<li><p><code>data</code> defines a <code>DataModel</code> object.</p></li>
+<li><p><code>analysis</code> defines an <code>AnalysisModel</code> object.</p></li>
+<li><p><code>evaluation</code> defines an <code>EvaluationModel</code> object.</p></li>
+<li><p><code>simulation</code> defines a <code>SimParameters</code> object.</p></li>
+</ul>
+</div>
+<div id="examples-2" class="section level4">
+<h4>Examples</h4>
+<p>The following example illustrates the use of the <code>CSE</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameter set 1</span>
+outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+outcome1.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">40</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+
+<span class="co"># Outcome parameter set 2</span>
+outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
+
+<span class="co"># Data model</span>
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment, outcome2.treatment))
+
+<span class="co"># Analysis model</span>
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)
+
+<span class="co"># Evaluation model</span>
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))
+
+<span class="co"># Simulation Parameters</span>
+case.study1.sim.parameters =<span class="st"> </span><span class="kw">SimParameters</span>(<span class="dt">n.sims =</span> <span class="dv">1000</span>, <span class="dt">proc.load =</span> <span class="dv">2</span>, <span class="dt">seed =</span> <span class="dv">42938001</span>)
+
+<span class="co"># Perform clinical scenario evaluation</span>
+case.study1.results =<span class="st"> </span><span class="kw">CSE</span>(case.study1.data.model,
+                          case.study1.analysis.model,
+                          case.study1.evaluation.model,
+                          case.study1.sim.parameters)</code></pre></div>
+</div>
+</div>
+<div id="summary-of-results" class="section level3">
+<h3>Summary of results</h3>
+<p>Once Clinical Scenario Evaluation-based simulations have been run, the <code>CSE</code> object returned by the <code>CSE</code> function contains a list with the following components:</p>
+<ul>
+<li><p><code>simulation.results</code>: a data frame containing the results of the simulations for each scenario.</p></li>
+<li><p><code>analysis.scenario.grid</code>: a data frame containing the grid of the combination of data and analysis scenarios.</p></li>
+<li><p><code>data.structure</code>: a list containing the data structure according to the <code>DataModel</code> object.</p></li>
+<li><p><code>analysis.structure</code>: a list containing the analysis structure according to the <code>AnalysisModel</code> object.</p></li>
+<li><p><code>evaluation.structure</code>: a list containing the evaluation structure according to the <code>EvaluationModel</code> object.</p></li>
+<li><p><code>sim.parameters</code>: a list containing the simulation parameters according to <code>SimParameters</code> object.</p></li>
+<li><p><code>timestamp</code>: a list containing information about the start time, end time and duration of the simulation runs.</p></li>
+</ul>
+<p>The simulation results can be summarized in the R console using the <code>summary</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(case.study1.results)</code></pre></div>
+<p>A Microsoft Word-based simulation report can be generated from the simulation results produced by the <code>CSE</code> function using the <code>GenerateReport</code> function, see <a href="#simulation-report">Simulation report</a>.</p>
+</div>
+</div>
+</div>
+<div id="simulation-report" class="section level1">
+<h1>Simulation report</h1>
+<p>The Mediana R package uses the <a href="http://davidgohel.github.io/ReporteRs/">ReporteRs R package</a> package to generate a Microsoft Word-based report that summarizes the results of Clinical Scenario Evaluation-based simulations.</p>
+<p>The user can easily customize this simulation report by adding a description of the project as well as labels to each scenario, including data scenarios (sample size, outcome distribution parameters, design parameters) and analysis scenarios (multiplicity adjustment). The user can also customize the report’s structure, e.g., create sections and subsections within the report and specify how the rows will be sorted within each table.</p>
+<p>In order to customize the report, the user has to use a <code>PresentationModel</code> object described below.</p>
+<p>Once a <code>PresentationModel</code> object has been defined, the <code>GenerateReport</code> function can be called to generate a Clinical Scenario Evaluation report.</p>
+<div id="initialization-3" class="section level2">
+<h2>Initialization</h2>
+<p>A presentation model can be initialized using the following command</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># PresentationModel initialization</span>
+presentation.model =<span class="st"> </span><span class="kw">PresentationModel</span>()</code></pre></div>
+<p>Initialization with this command is highly recommended as it will simplify the process of adding related objects, e.g., the <code>Project</code>, <code>Section</code>, <code>Subsection</code>, <code>Table</code>, <code>CustomLabel</code> objects.</p>
+</div>
+<div id="specific-objects" class="section level2">
+<h2>Specific objects</h2>
+<p>Once the <code>PresentationModel</code> object has been initialized, specific objects can be added by simply using the ‘+’ operator as in data, analysis and evaluation models.</p>
+<div id="project-object" class="section level3">
+<h3><code>Project</code> object</h3>
+<div id="description-13" class="section level4">
+<h4>Description</h4>
+<p>This object specifies a description of the project. The <code>Project</code> object is defined by three optional arguments:</p>
+<ul>
+<li><p><code>username</code> defines the username to be included in the report (by default, the username is “[Unknown User]”).</p></li>
+<li><p><code>title</code> defines the project’s in the report (the default value is “[Unknown title]”).</p></li>
+<li><p><code>description</code> defines the project’s description (the default value is “[No description]”).</p></li>
+</ul>
+<p>This information will be added in the report generated using the <code>GenerateReport</code> function.</p>
+<p>A single object of the <code>Project</code> class can be added to an object of the <code>PresentationModel</code> class.</p>
+</div>
+<div id="examples-3" class="section level4">
+<h4>Examples</h4>
+<p>A simple <code>Project</code> object can be created as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Project</span>(<span class="dt">username =</span> <span class="st">&quot;Gautier Paux&quot;</span>,
+        <span class="dt">title =</span> <span class="st">&quot;Case study 1&quot;</span>,
+        <span class="dt">description =</span> <span class="st">&quot;Clinical trial in patients with pulmonary arterial hypertension&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="section-object" class="section level3">
+<h3><code>Section</code> object</h3>
+<div id="description-14" class="section level4">
+<h4>Description</h4>
+<p>This object specifies the sections that will be created within the simulation report. A <code>Section</code> object is defined by a single argument:</p>
+<ul>
+<li><code>by</code> defines the rules for setting up sections.</li>
+</ul>
+<p>The <code>by</code> argument can contain several parameters from the following list:</p>
+<ul>
+<li><p><code>sample.size</code>: a separate section will be created for each sample size.</p></li>
+<li><p><code>event</code>: a separate section will be created for each event count.</p></li>
+<li><p><code>outcome.parameter</code>: a separate section will be created for each outcome parameter scenario.</p></li>
+<li><p><code>design.parameter</code>: a separate section will be created for each design parameter scenario.</p></li>
+<li><p><code>multiplicity.adjustment</code>: a separate section will be created for each multiplicity adjustment scenario.</p></li>
+</ul>
+<p>Note that, if a parameter is defined in the <code>by</code> argument, it must be defined only in this object (i.e., neither in the <code>Subection</code> object nor in the <code>Table</code> object).</p>
+<p>A single object of the <code>Section</code> class can be added to an object of the <code>PresentationModel</code> class.</p>
+</div>
+<div id="examples-4" class="section level4">
+<h4>Examples</h4>
+<p>A <code>Section</code> object can be defined as follows:</p>
+<p>Create a separate section within the report for each outcome parameter scenario:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) </code></pre></div>
+<p>Create a separate section for each unique combination of the sample size and outcome parameter scenarios:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Section</span>(<span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;sample.size&quot;</span>, <span class="st">&quot;outcome.parameter&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="subsection-object" class="section level3">
+<h3><code>Subsection</code> object</h3>
+<div id="description-15" class="section level4">
+<h4>Description</h4>
+<p>This object specifies the rules for creating subsections within the simulation report. A <code>Subsection</code> object is defined by a single argument:</p>
+<ul>
+<li><code>by</code> defines the rules for creating subsections.</li>
+</ul>
+<p>The <code>by</code> argument can contain several parameters from the following list:</p>
+<ul>
+<li><p><code>sample.size</code>: a separate subsection will be created for each sample size.</p></li>
+<li><p><code>event</code>: a separate subsection will be created for each number of events.</p></li>
+<li><p><code>outcome.parameter</code>: a separate subsection will be created for each outcome parameter scenario.</p></li>
+<li><p><code>design.parameter</code>: a separate subsection will be created for each design parameter scenario.</p></li>
+<li><p><code>multiplicity.adjustment</code>: a separate subsection will be created for each multiplicity adjustment scenario.</p></li>
+</ul>
+<p>As before, if a parameter is defined in the <code>by</code> argument, it must be defined only in this object (i.e., neither in the <code>Section</code> object nor in the <code>Table</code> object).</p>
+<p>A single object of the <code>Subsection</code> class can be added to an object of the <code>PresentationModel</code> class. #### Examples</p>
+<p><code>Subsection</code> objects can be set up as follows:</p>
+<p>Create a separate subsection for each sample size scenario:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Subsection</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) </code></pre></div>
+<p>Create a separate subsection for each unique combination of the sample size and outcome parameter scenarios:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Subsection</span>(<span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;sample.size&quot;</span>, <span class="st">&quot;outcome.parameter&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="table-object" class="section level3">
+<h3><code>Table</code> object</h3>
+<div id="description-16" class="section level4">
+<h4>Description</h4>
+<p>This object specifies how the summary tables will be sorted within the report. A <code>Table</code> object is defined by a single argument:</p>
+<ul>
+<li><code>by</code> defines how the tables of the report will be sorted.</li>
+</ul>
+<p>The <code>by</code> argument can contain several parameters, the value must be contain in the following list:</p>
+<ul>
+<li><p><code>sample.size</code>: the tables will be sorted by the sample size.</p></li>
+<li><p><code>event</code>: the tables will be sorted by the number of events.</p></li>
+<li><p><code>outcome.parameter</code>: the tables will be sorted by the outcome parameter scenario.</p></li>
+<li><p><code>design.parameter</code>: the tables will be sorted by the design parameter scenario.</p></li>
+<li><p><code>multiplicity.adjustment</code>: the tables will be sorted by the multiplicity adjustment scenario.</p></li>
+</ul>
+<p>If a parameter is defined in the <code>by</code> argument it must be defined only in this object (i.e., neither in the <code>Section</code> object nor in the <code>Subsection</code> object).</p>
+<p>A single object of class <code>Table</code> can be added to an object of class <code>PresentationModel</code>.</p>
+</div>
+<div id="examples-5" class="section level4">
+<h4>Examples</h4>
+<p>Examples of <code>Table</code> objects:</p>
+<p>Create a summary table sorted by sample size scenarios:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) </code></pre></div>
+<p>Create a summary table sorted by sample size and outcome parameter scenarios:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Table</span>(<span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;sample.size&quot;</span>, <span class="st">&quot;outcome.parameter&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="customlabel-object" class="section level3">
+<h3><code>CustomLabel</code> object</h3>
+<div id="description-17" class="section level4">
+<h4>Description</h4>
+<p>This object specifies the labels that will be assigned to sets of parameter values or simulation scenarios. These labels will be used in the section and subsection titles of the Clinical Scenario Evaluation Report as well as in the summary tables. A <code>CustomLabel</code> object is defined by two arguments:</p>
+<ul>
+<li><p><code>param</code> defines a parameter (scenario) to which the current set of labels will be assigned.</p></li>
+<li><p><code>label</code> defines the label(s) to assign to each value of the parameter.</p></li>
+</ul>
+<p>The <code>param</code> argument can contain several parameters from the following list:</p>
+<ul>
+<li><p><code>sample.size</code>: labels will be applied to sample size values.</p></li>
+<li><p><code>event</code>: labels will be applied to number of events values.</p></li>
+<li><p><code>outcome.parameter</code>: labels will be applied to outcome parameter scenarios.</p></li>
+<li><p><code>design.parameter</code>: labels will be applied to design parameter scenarios.</p></li>
+<li><p><code>multiplicity.adjustment</code>: labels will be applied to multiplicity adjustment scenarios.</p></li>
+</ul>
+<p>Several objects of the <code>CustomLabel</code> class can be added to an object of the <code>PresentationModel</code> class.</p>
+</div>
+<div id="examples-6" class="section level4">
+<h4>Examples</h4>
+<p>Examples of <code>CustomLabel</code> objects:</p>
+<p>Assign a custom label to the sample size values:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;sample.size&quot;</span>,
+            <span class="dt">label=</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>,<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>)))</code></pre></div>
+<p>Assign a custom label to the outcome parameter scenarios:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;outcome.parameter&quot;</span>, 
+            <span class="dt">label=</span><span class="kw">c</span>(<span class="st">&quot;Pessimistic&quot;</span>, <span class="st">&quot;Expected&quot;</span>, <span class="st">&quot;Optimistic&quot;</span>))</code></pre></div>
+</div>
+</div>
+</div>
+<div id="generatereport-function" class="section level2">
+<h2><code>GenerateReport</code> function</h2>
+<div id="description-18" class="section level3">
+<h3>Description</h3>
+<p>The Clinical Scenario Evaluation Report is generated using the <code>GenerateReport</code> function. This function has four arguments:</p>
+<ul>
+<li><p><code>presentation.model</code> defines a <code>PresentationModel</code> object.</p></li>
+<li><p><code>cse.result</code> defines a <code>CSE</code> object returned by the CSE function.</p></li>
+<li><p><code>report.filename</code> defines the filename of the Word-based report generated by this function.</p></li>
+<li><p><code>report.template</code> defines a Word-based template (it is an optional argument).</p></li>
+</ul>
+<p>The <code>GenerateReport</code> function requires the <a href="http://davidgohel.github.io/ReporteRs/">ReporteRs R package</a> package to generate a Word-based simulation report. Optionally, a custom template can be selected by defining <code>report.template</code>, this argument specifies the name of a Word document located in the working directory.</p>
+<p>The Word-based simulation report is structured as follows:</p>
+<ol style="list-style-type: decimal">
+<li>GENERAL INFORMATION
+<ol style="list-style-type: decimal">
+<li>PROJECT INFORMATION</li>
+<li>SIMULATION PARAMETERS</li>
+</ol></li>
+<li>DATA MODEL
+<ol style="list-style-type: decimal">
+<li>DESIGN (if a <code>Design</code> object has been defined)</li>
+<li>SAMPLE SIZE (or EVENT if an <code>Event</code> object has been defined)</li>
+<li>OUTCOME DISTRIBUTION</li>
+<li>DESIGN</li>
+</ol></li>
+<li>ANALYSIS MODEL
+<ol style="list-style-type: decimal">
+<li>TESTS</li>
+<li>MULTIPLICITY ADJUSTMENT</li>
+</ol></li>
+<li>EVALUATION MODEL
+<ol style="list-style-type: decimal">
+<li>CRITERIA</li>
+</ol></li>
+<li>RESULTS
+<ol style="list-style-type: decimal">
+<li>SECTION (if a <code>Section</code> object has been defined)
+<ol style="list-style-type: decimal">
+<li>SUBSECTION (if a <code>Subsection</code> object has been defined)</li>
+<li>…</li>
+</ol></li>
+<li>…</li>
+</ol></li>
+</ol>
+</div>
+<div id="examples-7" class="section level3">
+<h3>Examples</h3>
+<p>This example illustrates the use of the <code>GenerateReport</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a presentation model</span>
+case.study1.presentation.model =<span class="st"> </span><span class="kw">PresentationModel</span>() +
+<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) +
+<span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) +
+<span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;sample.size&quot;</span>,
+              <span class="dt">label=</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>,<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>))) +
+<span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;outcome.parameter&quot;</span>,
+              <span class="dt">label=</span><span class="kw">c</span>(<span class="st">&quot;Standard 1&quot;</span>, <span class="st">&quot;Standard 2&quot;</span>))
+
+<span class="co"># Report Generation</span>
+<span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study1.presentation.model,
+               <span class="dt">cse.results =</span> case.study1.results,
+               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 1 (normally distributed endpoint).docx&quot;</span>)</code></pre></div>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

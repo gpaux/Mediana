@@ -1,0 +1,142 @@
+
+body {
+  position: relative; 
+ }
+
+ ul.nav-pills {
+  top: 20px;
+  position: fixed;
+ }
+ .fixed {
+  position: fixed;
+ }
+
+ /* sidebar */
+ .bs-docs-sidebar {
+  padding-left: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+ }
+
+ /* all links */
+ .bs-docs-sidebar .nav>li>a {
+  color: #999;
+  border-left: 2px solid transparent;
+  padding: 1px 20px;
+  font-size: 12px;
+  font-weight: 400;
+ }
+
+ /* nested links */
+ .bs-docs-sidebar .nav .nav>li>a {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 30px;
+  font-size: 12px;
+ }
+
+ /* active & hover links */
+ .bs-docs-sidebar .nav>.active>a, 
+ .bs-docs-sidebar .nav>li>a:hover, 
+ .bs-docs-sidebar .nav>li>a:focus {
+  color: #053552;
+  text-decoration: none;    
+  background-color: transparent;  
+  border-left-color: #053552; 
+ }
+
+ /* all active links */
+ .bs-docs-sidebar .nav>.active>a, 
+ .bs-docs-sidebar .nav>.active:hover>a,
+ .bs-docs-sidebar .nav>.active:focus>a {
+  font-weight: 700;
+ }
+
+ /* nested active links */
+ .bs-docs-sidebar .nav .nav>.active>a, 
+ .bs-docs-sidebar .nav .nav>.active:hover>a,
+ .bs-docs-sidebar .nav .nav>.active:focus>a {
+  font-weight: 500;
+ }
+
+ /* hide inactive nested list */
+ .bs-docs-sidebar .nav ul.nav {
+  display: none;
+ }
+
+ /* show active nested list */
+ .bs-docs-sidebar .nav>.active>ul.nav {
+  display: block;
+ }
+
+ /*Header formatting */
+ .MainContent {
+  margin-top: -20px;
+ }
+
+ /*back to top */
+ .back-to-top {
+  color: #999;
+  border-left: 2px solid transparent;
+  padding: 1px 20px;
+  font-size: 12px;
+  font-weight: 400;
+ }
+
+.bs-docs-footer{
+  padding-top:40px;
+  padding-bottom:40px;
+  margin-top:100px;
+  color:#777;
+  text-align:center;
+  border-top:1px   solid #e5e5e5}
+
+.bs-docs-footer-links{
+  padding-left:0;
+  margin-top:20px;
+  color:#999}
+
+.bs-docs-footer-links li {
+  display:inline;
+  padding:0 2px}
+
+.bs-docs-footer-links li:first-child{
+  padding-left:0}@media (min-width:768px){.bs-docs-footer p{margin-bottom:0}}.bs-docs-social{margin-bottom:20px;text-align:center}.bs-docs-social-buttons{display:inline-block;padding-left:0;margin-bottom:0;list-style:none}.bs-docs-social-buttons li{display:inline-block;padding:5px 8px;line-height:1}.bs-docs-social-buttons .twitter-follow-button{width:225px!important}.bs-docs-social-buttons .twitter-share-button{width:98px!important}.github-btn{overflow:hidden;border:0}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #053552;
+    margin: 1em 0;
+    padding: 0;
+}
+
+h1 {
+    color: #053552;
+    font-size: 40px;
+}
+
+h2, h3, h4, h5 {
+    color: #053552;
+}
+
+h2:after
+{
+    content:' ';
+    display:block;
+    border:1px solid #053552;
+    margin-top: 10px;
+}
+
+h3:after
+{
+    content:' ';
+    display:block;
+    border:1px solid #eee;
+    margin-top: 10px;
+}
+
+.product .img-responsive {
+    margin: 0 auto;
+}
