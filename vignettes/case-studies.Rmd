@@ -148,7 +148,7 @@ case.study1.analysis.model = case.study1.analysis.model +
        method = "TTest")
 ```
 
-According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see [Analysis Model](AnalysisModel.html#Description), the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.
+According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see [Analysis Model](http://gpaux.github.io/Mediana/AnalysisModel.html), the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.
 
 To illustrate the use of the `Statistic` object, the mean change in the six-minute walk distance in the treatment arm can be computed using the `MeanStat` statistic:
 
@@ -278,6 +278,14 @@ GenerateReport(presentation.model = case.study1.presentation.model,
                report.filename = "Case study 1 (normally distributed endpoint).docx")
 ```
 
+### Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%201%20(normally%20distributed%20endpoint).R)
+
+- [CSE report](http://gpaux.github.io/Mediana/Case%20study%201%20(normally%20distributed%20endpoint).docx)
+
 ## Binary endpoint
 
 Consider a Phase III clinical trial for the treatment of rheumatoid arthritis (RA). The primary endpoint is the response rate based on the American College of Rheumatology (ACR) definition of improvement. The trial's sponsor in interested in performing power calculations using several treatment effect assumptions (Placebo 30% - Treatment 50%, Placebo 30% - Treatment 55% and Placebo 30% - Treatment 60%)
@@ -336,7 +344,15 @@ case.study1.evaluation.model = EvaluationModel() +
             par = parameters(alpha = 0.025))
 ```
 
-An extension of this clinical trial example is provided in [Case study 5](CaseStudy05.html). The extension deals with a more complex setting involving several trial endpoints and multiple treatment arms.
+An extension of this clinical trial example is provided in [Case study 5](#case-study-5-1). The extension deals with a more complex setting involving several trial endpoints and multiple treatment arms.
+
+### Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%201%20(binary%20endpoint).R)
+
+- [CSE report](http://gpaux.github.io/Mediana/Case%20study%201%20(binary%20endpoint).docx)
 
 ## Survival-type endpoint
 
@@ -434,6 +450,14 @@ case.study1.evaluation.model = EvaluationModel() +
             statistics = tests("Hazard Ratio"),
             labels = c("Average Hazard Ratio")) 
 ```
+
+### Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%201%20(survival-type%20endpoint).R)
+
+- [CSE report](http://gpaux.github.io/Mediana/Case%20study%201%20(survival-type%20endpoint).docx)
 
 ## Survival-type endpoint (with censoring)
 
@@ -541,6 +565,14 @@ case.study1.evaluation.model = EvaluationModel() +
             labels = c("Mean Patients Placebo", "Mean Patients Treatment"))
 ```
 
+### Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%201%20(survival-type%20endpoint%20with%20censoring).R)
+
+- [CSE report](http://gpaux.github.io/Mediana/Case%20study%201%20(survival-type%20endpoint%20with%20censoring).docx)
+
 ## Count-type endpoint
 
 The last clinical trial example within Case study 1 deals with a Phase III clinical trial in patients with relapsing-remitting multiple sclerosis (RRMS). The trial aims at assessing the safety and efficacy of a single dose of a novel treatment compared to placebo. The primary endpoint is the number of new gadolinium enhancing lesions seen during a 6-month period on monthly MRIs of the brain and a smaller number indicates treatment benefit. The distribution of such endpoints has been widely studied in the literature and Sormani et al. ([1999a](http://www.jns-journal.com/article/S0022-510X(99)00015-5/abstract), [1999b](http://jnnp.bmj.com/content/66/4/465.long)) showed that a negative
@@ -594,3 +626,1022 @@ case.study1.evaluation.model = EvaluationModel() +
             labels = c("Treatment vs Placebo"),
             par = parameters(alpha = 0.025))
 ```
+
+### Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%201%20(count-type%20endpoint).R)
+
+- [CSE report](http://gpaux.github.io/Mediana/Case%20study%201%20(count-type%20endpoint).docx)
+
+# Case study 2
+
+## Summary
+
+This clinical trial example deals with settings where no analytical methods are available to support power calculations. However, as demonstrated below, simulation-based approaches are easily applied to perform а comprehensive assessment of the relevant operating characteristics within the clinical scenario evaluation framework.
+
+Case study 2 is based on a clinical trial example introduced in Dmitrienko and D'Agostino (2013, Section 10). This example deals with a Phase III clinical trial in a schizophrenia population. Three doses of a new treatment, labelled Dose L, Dose M and Dose H, will be tested versus placebo. The trial will be declared successful if a beneficial treatment effect is demonstrated in any of the three dosing groups compared to the placebo group.
+
+The primary endpoint is defined as the reduction in the Positive and Negative Syndrome Scale (PANSS) total score compared to baseline and a larger reduction in the PANSS total score indicates treatment benefit. This endpoint is normally distributed and the treatment effect assumptions in the four treatment arms are displayed in the next table.
+
+```{r, results = "asis", echo = FALSE}
+pander::pandoc.table(data.frame(Arm = c("Placebo",
+                   "Dose L",
+                   "Dose M",
+                   "Dose H"),
+           Mean = c(16,
+                    19.5,
+                    21,
+                    21),
+           SD = rep(18,4)))
+```
+
+## Define a Data Model
+
+The treatment effect assumptions presented in the table above define a single outcome parameter set and the common sample size is set to 260 patients. These parameters are specified in the following data model:
+
+```r
+# Outcome parameters
+outcome.pl = parameters(mean = 16, sd = 18)
+outcome.dosel = parameters(mean = 19.5, sd = 18)
+outcome.dosem = parameters(mean = 21, sd = 18)
+outcome.doseh = parameters(mean = 21, sd = 18)
+
+# Data model
+case.study2.data.model = DataModel() +
+  OutcomeDist(outcome.dist = "NormalDist") +
+  SampleSize(seq(220, 260, 20)) +
+  Sample(id = "Placebo",
+         outcome.par = parameters(outcome.pl)) +
+  Sample(id = "Dose L",
+         outcome.par = parameters(outcome.dosel)) +
+  Sample(id = "Dose M",
+         outcome.par = parameters(outcome.dosem)) +
+  Sample(id = "Dose H",
+         outcome.par = parameters(outcome.doseh))
+```
+
+## Define an Analysis Model
+
+The analysis model, shown below, defines the three individual tests that will be carried out in the schizophrenia clinical trial. Each test corresponds to a dose-placebo comparison such as:
+
+- H1: Null hypothesis of no difference between Dose L and placebo.
+
+- H2: Null hypothesis of no difference between Dose M and placebo.
+
+- H3: Null hypothesis of no difference between Dose H and placebo.
+
+Each comparison will be carried out based on a one-sided two-sample *t*-test (`TTest` method defined in each `Test` object).
+
+As indicated earlier, the overall success criterion in the trial is formulated in terms of demonstrating a beneficial effect at any of the three doses. Due to multiple opportunities to claim success, the overall Type I error rate will be inflated and the Hochberg procedure is introduced to protect the error rate at the nominal level.
+
+Since no procedure parameters are defined, the three significance tests (or, equivalently, three null hypotheses of no effect) are assumed to be equally weighted. The corresponding analysis model is defined below:
+
+```r
+# Analysis model
+case.study2.analysis.model = AnalysisModel() +
+  MultAdjProc(proc = "HochbergAdj") +
+  Test(id = "Placebo vs Dose L",
+       samples = samples("Placebo", "Dose L"),
+       method = "TTest") +
+  Test(id = "Placebo vs Dose M",
+       samples = samples ("Placebo", "Dose M"),
+       method = "TTest") +
+  Test(id = "Placebo vs Dose H",
+       samples = samples("Placebo", "Dose H"),
+       method = "TTest")
+```
+
+To request the Hochberg procedure with unequally weighted  hypotheses, the user needs to assign a list of hypothesis weights to the `par` argument of the `MultAdjProc` object. The weights typically reflect the relative importance of the individual null hypotheses. Assume, for example, that 60% of the overall weight is assigned to H3 and the remainder is split between H1 and H2. In this case, the `MultAdjProc` object should be defined as follow:
+
+```r
+MultAdjProc(proc = "HochbergAdj",
+            par = parameters(weight = c(0.2, 0.2, 0.6)))
+```
+
+It should be noted that the order of the weights must be identical to the order of the `Test` objects defined in the analysis model.
+
+## Define an Evaluation Model
+
+An evaluation model specifies clinically relevant criteria for assessing the performance of the individual tests defined in the corresponding analysis model or composite measures of success. In virtually any setting, it is of interest to compute the probability of achieving a significant outcome in each individual test, e.g., the probability of a significant difference between placebo and each dose. This is accomplished by requesting a `Criterion` object with `method = "MarginalPower"`.
+
+Since the trial will be declared successful if at least one dose-placebo comparison is significant, it is natural to compute the overall success probability, which is defined as the probability of demonstrating treatment benefit in one of more dosing groups. This is equivalent to evaluating disjunctive power in the trial (`method = "DisjunctivePower"`).
+
+In addition, the user can easily define a custom evaluation criterion. Suppose that, based on the results of the previously conducted trials, the sponsor expects a much larger treatment treatment difference at Dose H compared to Doses L and M. Given this, the sponsor may be interested in evaluating the probability of observing a significant treatment effect at Dose H and at least one other dose. The associated evaluation criterion is implemented in the following function:
+
+```r
+# Custom evaluation criterion (Dose H and at least one of the two other doses are significant)
+case.study2.criterion = function(test.result, statistic.result, parameter) {
+  
+  alpha = parameter
+  significant = ((test.result[,3] <= alpha) & ((test.result[,1] <= alpha) | (test.result[,2] <= alpha)))
+  power = mean(significant)
+  return(power)
+}
+```
+
+The function's first argument (`test.result`) is a matrix of p-values produced by the `Test` objects defined in the analysis model and the second argument (`statistic.result`) is a matrix of results produced by the `Statistic` objects defined in the analysis model. In this example, the criteria will only use the `test.result` argument, which will contain the p-values produced by the tests associated with the three dose-placebo comparisons. The last argument (`parameter`) contains the optional parameter(s) defined by the user in the `Criterion` object. In this example, the `par` argument contains the overall alpha level.
+
+The `case.study2.criterion` function computes the probability of a significant treatment effect at Dose H (`test.result[,3] <= alpha`) and a significant treatment difference at Dose L or Dose M (`(test.result[,1] <= alpha) | (test.result[,2]<= alpha)`). Since this criterion assumes that the third test is based on the comparison of Dose H versus Placebo, the order in which the tests are included in the evaluation model is important.
+
+The following evaluation model specifies marginal and disjunctive power as well as the custom evaluation criterion defined above:
+
+```r
+# Evaluation model
+case.study2.evaluation.model = EvaluationModel() +
+  Criterion(id = "Marginal power",
+            method = "MarginalPower",
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
+            labels = c("Placebo vs Dose L",
+                       "Placebo vs Dose M",
+                       "Placebo vs Dose H"),
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Disjunctive power",
+            method = "DisjunctivePower",
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
+            labels = "Disjunctive power",
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Dose H and at least one dose",
+            method = "case.study2.criterion",
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
+            labels = "Dose H and at least one of the two other doses are significant",
+            par = parameters(alpha = 0.025))
+```
+
+Another potential option is to apply the conjunctive criterion which is met if a significant treatment difference is detected simultaneously in all three dosing groups (`method = "ConjunctivePower"`). This criterion helps characterize the likelihood of a consistent treatment effect across the doses.
+
+The user can also use the `metric.tests` parameter to choose the specific tests to which the disjunctive and conjunctive criteria are applied (the resulting criteria are known as subset disjunctive and conjunctive criteria). To illustrate, the following statement computes the probability of a significant treatment effect at Dose M or Dose H (Dose L is excluded from this calculation):
+
+```r
+Criterion(id = "Disjunctive power",
+          method = "DisjunctivePower",
+          tests = tests("Pl vs Dose M",
+                        "Pl vs Dose H"),
+          labels = "Disjunctive power",
+          par = parameters(alpha = 0.025))
+```
+
+## Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%202.R)
+
+- [CSE report](http://gpaux.github.io/Mediana/Case%20study%202.docx)
+
+# Case study 3
+
+## Summary
+
+This case study deals with a Phase III clinical trial in patients with mild or moderate asthma (it is based on a clinical trial example from [Millen et al., 2014, Section 2.2](http://dij.sagepub.com/content/48/4/453.abstract)). The trial is intended to support a tailoring strategy. In particular, the treatment effect of a single dose of a new treatment will be compared to that of placebo in the overall population of patients as well as a pre-specified subpopulation of patients with a marker-positive status at baseline (for compactness, the overall population
+is denoted by OP, marker-positive subpopulation is denoted by M+ and marker- negative subpopulation is denoted by M−). 
+
+Marker-positive patients are more likely to receive benefit from the experimental treatment. The overall objective of the clinical trial accounts for the fact that the treatment's effect may, in fact, be limited to the marker-positive subpopulation. The trial will be declared successful if the treatment's beneficial effect is established in the overall population of patients or, alternatively, the effect is established only in the subpopulation. The primary endpoint in the clinical trial is defined as an increase from baseline in the forced expiratory volume in one second (FEV1). This endpoint is normally distributed and improvement is associated with a larger change in FEV1.
+
+## Define a Data Model
+
+To set up a data model for this clinical trial, it is natural to define samples (mutually exclusive groups of patients) as follows:
+
+- **Sample 1:** Marker-negative patients in the placebo arm.
+
+- **Sample 2:** Marker-positive patients in the placebo arm.
+
+- **Sample 3:** Marker-negative patients in the treatment arm.
+
+- **Sample 4:** Marker-positive patients in the treatment arm.
+
+Using this definition of samples, the trial's sponsor can model the fact that the treatment's effect is most pronounced in patients with a marker-positive status.
+
+The treatment effect assumptions in the four samples are summarized in the next table (expiratory volume in FEV1 is measured in liters). As shown in the table, the mean change in FEV1 is constant across the marker-negative and marker-positive subpopulations in the placebo arm (Samples 1 and 2). A positive treatment effect is expected in both subpopulations in the treatment arm but marker-positive patients will experience most of the beneficial effect (Sample 4).
+
+```{r, results = "asis", echo = FALSE}
+pander::pandoc.table(data.frame(Sample = c("Placebo M-",
+                         "Placebo M+",
+                         "Treament M-",
+                         "Treatment M+"),
+              Mean = c(0.12,
+                       0.12,
+                       0.24,
+                       0.30),
+              SD = rep(0.45,4)))
+```
+
+The following data model incorporates the assumptions listed above by defining a single set of outcome parameters. The data model includes three sample size sets (total sample size is set to 330, 340 and 350 patients). The sizes of the individual samples are computed based on historic information (40% of patients in the population of interest are expected to have a marker-positive status). In order to define specific sample size for each sample, they will be specified within each `Sample` object.
+
+```r
+# Outcome parameters
+outcome.placebo.minus = parameters(mean = 0.12, sd = 0.45)
+outcome.placebo.plus = parameters(mean = 0.12, sd = 0.45)
+outcome.treatment.minus = parameters(mean = 0.24, sd = 0.45)
+outcome.treatment.plus = parameters(mean = 0.30, sd = 0.45)
+
+# Sample size parameters
+sample.size.total = c(330, 340, 350)
+sample.size.placebo.minus = as.list(0.3 * sample.size.total)
+sample.size.placebo.plus = as.list(0.2 * sample.size.total)
+sample.size.treatment.minus = as.list(0.3 * sample.size.total)
+sample.size.treatment.plus = as.list(0.2 * sample.size.total)
+
+# Data model
+case.study3.data.model = DataModel() +
+  OutcomeDist(outcome.dist = "NormalDist") +
+  Sample(id = "Placebo M-",
+         sample.size = sample.size.placebo.minus,
+         outcome.par = parameters(outcome.placebo.minus)) +
+  Sample(id = "Placebo M+",
+         sample.size = sample.size.placebo.plus,
+         outcome.par = parameters(outcome.placebo.plus)) +
+  Sample(id = "Treatment M-",
+         sample.size = sample.size.treatment.minus,
+         outcome.par = parameters(outcome.treatment.minus)) +
+  Sample(id = "Treatment M+",
+         sample.size = sample.size.treatment.plus,
+         outcome.par = parameters(outcome.treatment.plus))
+```
+
+## Define an Analysis Model
+
+The analysis model in this clinical trial example is generally similar to that used in [Case study 2](#case-study-2-1) but there is an important difference which is described below.
+
+As in [Case study 2](#case-study-2-1), the primary endpoint follows a normal distribution and thus the treatment effect will be assessed using the two-sample *t*-test. 
+
+Since two null hypotheses are tested in this trial (null hypotheses of no effect in the overall population of patients and subpopulation of marker-positive patients), a multiplicity adjustment needs to be applied. The Hochberg procedure with equally weighted null hypotheses will be used for this purpose.
+
+A key feature of the analysis strategy in this case study is that the samples defined in the data model are different from the samples used in the analysis of the primary endpoint. As shown in the Table, four samples are included in the data model. However, from the analysis perspective, the sponsor in interested in examining the treatment effect in two samples, namely, the overall population and marker-positive subpopulation. As shown below, to perform a comparison in the overall population, the *t*-test is applied to the following analysis samples:
+
+- **Placebo arm:** Samples 1 and 2 (`Placebo M-` and `Placebo M+`) are merged.
+ 
+- **Treatment arm:** Samples 3 and 4 (`Treatment M-` and `Treatment M+`) are merged.
+ 
+Further, the treatment effect test in the subpopulation of marker-positive patients is carried out based on these analysis samples:
+
+- **Placebo arm:** Sample 2 (`Placebo M+`).
+
+- **Treatment arm:** Sample 4 (`Treatment M+`).
+
+These analysis samples are specified in the analysis model below. The samples defined in the data model are merged using `c()` or `list()` function, e.g., `c("Placebo M-", "Placebo M+")`defines the placebo arm and `c("Treatment M-", "Treatment M+")` defines the experimental treatment arm in the overall population test.
+
+```r
+# Analysis model
+case.study3.analysis.model = AnalysisModel() +
+  MultAdjProc(proc = "HochbergAdj") +
+  Test(id = "OP test",
+       samples = samples(c("Placebo M-", "Placebo M+"),
+                         c("Treatment M-", "Treatment M+")),
+       method = "TTest") +
+  Test(id = "M+ test",
+       samples = samples("Placebo M+", "Treatment M+"),
+       method = "TTest")
+```
+
+## Define an Evaluation Model
+
+It is reasonable to consider the following success criteria in this case study:
+
+- **Marginal power:** Probability of a significant outcome in each patient population.
+
+- **Disjunctive power:** Probability of a significant treatment effect in the overall population (OP) or marker-positive subpopulation (M+). This metric defines the overall probability of success in this clinical trial.
+ 
+- **Conjunctive power:** Probability of simultaneously achieving significance in the overall population and marker-positive subpopulation. This criterion will be useful if the trial's sponsor is interested in pursuing an enhanced efficacy claim ([Millen et al., 2012](http://dij.sagepub.com/content/46/6/647.abstract)).
+ 
+The following evaluation model applies the three criteria to the two tests listed in the analysis model:
+
+```r
+# Evaluation model
+case.study3.evaluation.model = EvaluationModel() +
+  Criterion(id = "Marginal power",
+            method = "MarginalPower",
+            tests = tests("OP test",
+                          "M+ test"),
+            labels = c("OP test",
+                       "M+ test"),
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Disjunctive power",
+            method = "DisjunctivePower",
+            tests = tests("OP test",
+                          "M+ test"),
+            labels = "Disjunctive power",
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Conjunctive power",
+            method = "ConjunctivePower",
+            tests = tests("OP test",
+                          "M+ test"),
+            labels = "Conjunctive power",
+            par = parameters(alpha = 0.025))
+```
+
+## Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%203.R)
+
+- [CSE report](http://gpaux.github.io/Mediana/Case%20study%203.docx)
+
+# Case study 4
+
+## Summary
+
+Case study 4 serves as an extension of the oncology clinical trial example presented in [Case study 1](#case-study-1-1). Consider again a Phase III trial in patients with metastatic colorectal cancer (MCC). The same general design will be assumed in this section; however, an additional endpoint (overall survival) will be introduced. The case of two endpoints helps showcase the package's ability to model complex design and analysis strategies in trials with multivariate outcomes.
+
+Progression-free survival (PFS) is the primary endpoint in this clinical trial and overall survival (OS) serves as the key secondary endpoint, which provides supportive evidence of treatment efficacy. A hierarchical testing approach will be utilized in the analysis of the two endpoints. The PFS analysis will be performed first at &alpha; = 0.025 (one-sided), followed by the OS analysis at the same level if a significant effect on PFS is established. The resulting testing procedure is equivalent to the fixed-sequence procedure and controls the overall Type I error rate ([Dmitrienko and D’Agostino, 2013](http://onlinelibrary.wiley.com/doi/10.1002/sim.5990/abstract)).
+
+The treatment effect assumptions that will be used in clinical scenario evaluation are listed in the table below. The table shows the hypothesized median times along with the corresponding hazard rates for the primary and secondary endpoints. It follows from the table that the expected effect size is much larger for PFS compared to OS (PFS hazard ratio is lower than OS hazard ratio).
+
+```{r, results = "asis", echo = FALSE}
+pander::pandoc.table(data.frame(Endpoint = c("Progression-free survival",
+                         "",
+                         "",
+                         "Overall survival",
+                         "",
+                         ""),
+              Statistic = c(rep(c("Median time (months)",
+                                  "Hazard rate",
+                                  "Hazard ratio"),2)),
+              Placebo = c(6, 0.116, 0.67,
+                          15, 0.046, 0.79),
+              Treatment = c(9, 0.077,"",19,0.036,"")))
+```
+
+## Define a Data Model
+
+In this clinical trial two endpoints are evaluated for each patient (PFS and OS) and thus their joint distribution needs to be listed in the general set.
+
+A bivariate exponential distribution will be used in this example and samples from this bivariate distribution will be generated by the `MVExpoPFSOSDist` function which implements multivariate exponential distributions. The function utilizes the copula method, i.e., random variables that follow a bivariate normal distribution will be generated and then converted into exponential random variables.
+
+The next several statements specify the parameters of the bivariate exponential distribution:
+
+- Parameters of the marginal exponential distributions, i.e., the hazard rates.
+
+- Correlation matrix of the underlying multivariate normal distribution used in the copula method.
+
+The hazard rates for PFS and OS in each treatment arm are defined based on
+the information presented in the table above (`placebo.par` and `treatment.par`) and the correlation matrix is specified based on historical information (`corr.matrix`). These parameters are combined to define the outcome parameter sets (`outcome.placebo` and  `outcome.treatment`) that will be included in the sample-specific set of data model parameters (`Sample` object).
+
+```r
+# Outcome parameters: Progression-free survival
+median.time.pfs.placebo = 6
+rate.pfs.placebo = log(2)/median.time.pfs.placebo
+outcome.pfs.placebo = parameters(rate = rate.pfs.placebo)
+median.time.pfs.treatment = 9
+
+rate.pfs.treatment = log(2)/median.time.pfs.treatment
+outcome.pfs.treatment = parameters(rate = rate.pfs.treatment)
+hazard.pfs.ratio = rate.pfs.treatment/rate.pfs.placebo
+
+# Outcome parameters: Overall survival
+median.time.os.placebo = 15
+rate.os.placebo = log(2)/median.time.os.placebo
+outcome.os.placebo = parameters(rate = rate.os.placebo)
+median.time.os.treatment = 19
+
+rate.os.treatment = log(2)/median.time.os.treatment
+outcome.os.treatment = parameters(rate = rate.os.treatment)
+hazard.os.ratio = rate.os.treatment/rate.os.placebo
+
+# Parameter lists
+placebo.par = parameters(parameters(rate = rate.pfs.placebo), 
+                         parameters(rate = rate.os.placebo))
+
+treatment.par = parameters(parameters(rate = rate.pfs.treatment), 
+                           parameters(rate = rate.os.treatment))
+
+# Correlation between two endpoints
+corr.matrix = matrix(c(1.0, 0.3,
+                       0.3, 1.0), 2, 2)
+
+# Outcome parameters
+outcome.placebo = parameters(par = placebo.par, corr = corr.matrix)
+outcome.treatment = parameters(par = treatment.par, corr = corr.matrix)
+```
+
+To define the sample-specific data model parameters, a 2:1 randomization ratio will be used in this clinical trial and thus the number of events as well as the randomization ratio are specified by the user in the `Event` object. Secondly, a separate sample ID needs to be assigned to each endpoint within the two samples (e.g. `Placebo PFS` and `Placebo OS`) corresponding to the two treatment arms. This will enable the user to construct analysis models for examining the treatment effect on each endpoint.
+
+```r
+# Number of events
+event.count.total = c(270, 300)
+randomization.ratio = c(1, 2)
+
+# Data model
+case.study4.data.model = DataModel() +
+  OutcomeDist(outcome.dist = "MVExpoPFSOSDist") +
+  Event(n.events = event.count.total, 
+        rando.ratio = randomization.ratio) +
+  Sample(id = list("Placebo PFS", "Placebo OS"),
+         outcome.par = parameters(outcome.placebo)) +
+  Sample(id = list("Treatment PFS", "Treatment OS"),
+         outcome.par = parameters(outcome.treatment))
+```
+
+## Define an Analysis Model
+
+The treatment comparisons for both endpoints will be carried out based on the log-rank test (`method = "LogrankTest"`). Further, as was stated in the beginning of this page, the two endpoints will be tested hierarchically using a multiplicity adjustment procedure known as the fixed-sequence procedure. This procedure belongs to the class of chain procedures (`proc = "ChainAdj"`) and the following figure provides a visual summary of the decision rules used in this procedure. 
+
+<center>
+  <div class="col-md-12">
+    <img src="CaseStudy04-fig1.png" class="img-responsive" height="150">
+  </div>
+</center>
+
+The circles in this figure denote the two null hypotheses of interest:
+
+- H1: Null hypothesis of no difference between the two arms with respect to PFS.
+
+- H2: Null hypothesis of no difference between the two arms with respect to OS.
+
+The value displayed above a circle defines the initial weight of each null hypothesis.
+All of the overall &alpha; is allocated to H1 to ensure that the OS test will be carried out only after the PFS test is significant and the arrow indicates that H2 will be tested
+after H1 is rejected.
+
+More formally, a chain procedure is uniquely defined by specifying a vector of hypothesis weights (W) and matrix of transition parameters (G). Based on the figure, these parameters are given by
+
+<center>
+  <div class="col-md-12">
+    <img src="CaseStudy04-fig2.png" class="img-responsive">
+  </div>
+</center>
+
+Two objects (named `chain.weight` and `chain.transition`) are defined below to pass the hypothesis weights and transition parameters to the multiplicity adjustment parameters.
+
+```r
+# Parameters of the chain procedure (fixed-sequence procedure)
+# Vector of hypothesis weights
+chain.weight = c(1, 0)
+# Matrix of transition parameters
+chain.transition = matrix(c(0, 1,
+                            0, 0), 2, 2, byrow = TRUE)
+
+# Analysis model
+case.study4.analysis.model = AnalysisModel() +
+  MultAdjProc(proc = "ChainAdj",
+              par = parameters(weight = chain.weight, transition = chain.transition)) +
+  Test(id = "PFS test",
+       samples = samples("Placebo PFS", "Treatment PFS"),
+       method = "LogrankTest") +
+  Test(id = "OS test",
+       samples = samples("Placebo OS", "Treatment OS"),
+       method = "LogrankTest")
+```
+
+As shown above, the two significance tests included in the analysis model reflect the two-fold objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (`id = "PFS test"`) whereas the other test is carried out to assess the treatment effect on OS (`test.id = "OS test"`).
+
+Alternatively, the fixed-sequence procedure can be implemented using the method `FixedSeqAdj` introduced from version 1.0.4. This implementation is facilitated as no parameters have to be specified.
+
+```r
+# Analysis model
+case.study4.analysis.model = AnalysisModel() +
+  MultAdjProc(proc = "FixedSeqAdj") +
+  Test(id = "PFS test",
+       samples = samples("Placebo PFS", "Treatment PFS"),
+       method = "LogrankTest") +
+  Test(id = "OS test",
+       samples = samples("Placebo OS", "Treatment OS"),
+       method = "LogrankTest")
+```
+
+## Define an Evaluation Model
+
+The evaluation model specifies the most basic criterion for assessing the probability
+of success in the PFS and OS analyses (marginal power). A criterion based on disjunctive power could be considered but it would not provide additional information.
+
+Due to the hierarchical testing approach, the probability of detecting a significant
+treatment effect on at least one endpoint (disjunctive power) is simply equal to the
+probability of establishing a significant PFS effect.
+
+```r
+# Evaluation model
+case.study4.evaluation.model = EvaluationModel() +
+  Criterion(id = "Marginal power",
+            method = "MarginalPower",
+            tests = tests("PFS test",
+                          "OS test"),
+            labels = c("PFS test",
+                       "OS test"),
+            par = parameters(alpha = 0.025))
+```
+
+## Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%204.R)
+
+- [CSE report](http://gpaux.github.io/Mediana/Case%20study%204.docx)
+
+# Case study 5
+
+## Summary
+
+This case study extends the straightforward setting presented in [Case study 1](#case-study-1-1) to a more complex setting involving two trial endpoints and three treatment arms. Case study 5 illustrates the process of performing power calculations in clinical trials with multiple, hierarchically structured objectives and "multivariate" multiplicity adjustment strategies (gatekeeping procedures).
+
+Consider a three-arm Phase III clinical trial for the treatment of rheumatoid arthritis (RA). Two co-primary endpoints will be used to evaluate the effect of a novel treatment on clinical response and on physical function. The endpoints are defined as follows:
+
+- Endpoint 1: Response rate based on the American College of Rheumatology definition of improvement (ACR20).
+ 
+- Endpoint 2: Change from baseline in the Health Assessment Questionnaire-Disability Index (HAQ-DI).
+ 
+The two endpoints have different marginal distributions. The first endpoint is binary whereas the second one is continuous and follows a normal distribution.
+
+The efficacy profile of two doses of a new treatment (Doses L and Dose H) will be compared to that of a placebo and a successful outcome will be defined as a significant treatment effect at either or both doses. A hierarchical structure has been established within each dose so that Endpoint 2 will be tested if and only if there is evidence of a significant effect on Endpoint 1.
+
+Three treatment effect scenarios for each endpoint are displayed in the table below. The scenarios define three outcome parameter sets. The first set represents a rather conservative treatment effect scenario, the second set is a standard (most plausible) scenario and the third set represents an optimistic scenario. Note that a reduction in the HAQ-DI score indicates a beneficial effect and thus the mean changes are assumed to be negative for Endpoint 2.
+
+```{r, results = "asis", echo = FALSE}
+pander::pandoc.table(data.frame(Endpoint = c("ACR20 (%)",
+                                             "",
+                                             "",
+                                             "HAQ-DI (mean (SD))",
+                                             "",
+                                             ""),
+                                "Outcome parameter set" = c(rep(c("Conservative",
+                                                                "Standard",
+                                                                "Optimistic"),2)),
+                                Placebo = c("30%", "30%", "30%",
+                                            "−0.10 (0.50)", "−0.10 (0.50)", "−0.10 (0.50)"),
+                                "Dose L" = c("40%", "45%", "50%",
+                                           "−0.20 (0.50)", "−0.25 (0.50)", "−0.30 (0.50)"),
+                                "Dose H" = c("50%", "55%", "60%",
+                                           "−0.30 (0.50)", "−0.35 (0.50)", "−0.40 (0.50)")))
+```
+
+## Define a Data Model
+
+As in [Case study 4](#case-study-4-1), two endpoints are evaluated for each patient in this clinical trial example, which means that their joint distribution needs to be specified. The `MVMixedDist` method will be utilized for specifying a bivariate distribution with binomial and normal marginals (`var.type = list("BinomDist", "NormalDist")`). In general, this function is used for modeling correlated normal, binomial and exponential endpoints and relies on the copula method, i.e., random variables are generated from a multivariate normal distribution and converted into variables with pre-specified marginal distributions.
+
+Three parameters must be defined to specify the joint distribution of Endpoints 1 and 2 in this clinical trial example:
+
+- Variable types (binomial and normal).
+
+- Outcome distribution parameters (proportion for Endpoint 1, mean and SD for Endpoint 2) based on the assumptions listed in the Table above.
+
+- Correlation matrix of the multivariate normal distribution used in the copula method.
+
+These parameters are combined to define three outcome parameter sets (e.g., `outcome1.plac `,  `outcome1.dosel ` and  `outcome1.doseh `) that will be included in the `Sample` object in the
+data model. 
+
+```r
+# Variable types
+var.type = list("BinomDist", "NormalDist")
+
+# Outcome distribution parameters
+placebo.par = parameters(parameters(prop = 0.3), 
+                         parameters(mean = -0.10, sd = 0.5))
+
+dosel.par1 = parameters(parameters(prop = 0.40), 
+                        parameters(mean = -0.20, sd = 0.5))
+dosel.par2 = parameters(parameters(prop = 0.45), 
+                        parameters(mean = -0.25, sd = 0.5))
+dosel.par3 = parameters(parameters(prop = 0.50), 
+                        parameters(mean = -0.30, sd = 0.5))
+
+doseh.par1 = parameters(parameters(prop = 0.50), 
+                        parameters(mean = -0.30, sd = 0.5))
+doseh.par2 = parameters(parameters(prop = 0.55), 
+                        parameters(mean = -0.35, sd = 0.5))
+doseh.par3 = parameters(parameters(prop = 0.60), 
+                        parameters(mean = -0.40, sd = 0.5))
+
+# Correlation between two endpoints
+corr.matrix = matrix(c(1.0, 0.5,
+                       0.5, 1.0), 2, 2)
+
+# Outcome parameter set 1
+outcome1.placebo = parameters(type = var.type, 
+                              par = placebo.par, 
+                              corr = corr.matrix)
+outcome1.dosel = parameters(type = var.type, 
+                            par = dosel.par1, 
+                            corr = corr.matrix)
+outcome1.doseh = parameters(type = var.type, 
+                            par = doseh.par1, 
+                            corr = corr.matrix)
+
+# Outcome parameter set 2
+outcome2.placebo = parameters(type = var.type, 
+                              par = placebo.par, 
+                              corr = corr.matrix)
+outcome2.dosel = parameters(type = var.type, 
+                            par = dosel.par2, 
+                            corr = corr.matrix)
+outcome2.doseh = parameters(type = var.type, 
+                            par = doseh.par2, 
+                            corr = corr.matrix)
+
+# Outcome parameter set 3
+outcome3.placebo = parameters(type = var.type, 
+                              par = placebo.par, 
+                              corr = corr.matrix)
+outcome3.doseh = parameters(type = var.type, 
+                            par = doseh.par3, 
+                            corr = corr.matrix)
+outcome3.dosel = parameters(type = var.type, 
+                            par = dosel.par3, 
+                            corr = corr.matrix)
+```
+
+These outcome parameter set are then combined within each `Sample` object and the common sample size per treatment arm ranges between 100 and 120:
+
+```r
+# Data model
+case.study5.data.model = DataModel() +
+  OutcomeDist(outcome.dist = "MVMixedDist") +
+  SampleSize(c(100, 120)) +
+  Sample(id = list("Placebo ACR20", "Placebo HAQ-DI"),
+         outcome.par = parameters(outcome1.placebo, outcome2.placebo, outcome3.placebo)) +
+  Sample(id = list("DoseL ACR20", "DoseL HAQ-DI"),
+         outcome.par = parameters(outcome1.dosel, outcome2.dosel, outcome3.dosel)) +
+  Sample(id = list("DoseH ACR20", "DoseH HAQ-DI"),
+         outcome.par = parameters(outcome1.doseh, outcome2.doseh, outcome3.doseh))
+```
+
+## Define an Analysis Model
+
+To set up the analysis model in this clinical trial example, note that the treatment comparisons for Endpoints 1 and 2 will be carried out based on two different statistical tests:
+
+- Endpoint 1: Two-sample test for comparing proportions (`method = "PropTest"`).
+
+- Endpoint 2: Two-sample t-test (`method = "TTest"`).
+ 
+It was pointed out earlier in this page that the two endpoints will be tested hierarchically within each dose. The figure below provides a visual summary of the testing strategy used in this clinical trial. The circles in this figure denote the four null hypotheses of interest:
+
+H1: Null hypothesis of no difference between Dose L and placebo with respect to
+Endpoint 1.
+
+H2: Null hypothesis of no difference between Dose H and placebo with respect
+to Endpoint 1.
+
+H3: Null hypothesis of no difference between Dose L and placebo with respect to
+Endpoint 2.
+
+H4: Null hypothesis of no difference between Dose H and placebo with respect
+to Endpoint 2.
+
+<center>
+  <div class="col-md-12">
+    <img src="CaseStudy05-fig1.png" class="img-responsive">
+  </div>
+</center>
+
+A multiple testing procedure known as the multiple-sequence gatekeeping procedure will be applied to account for the hierarchical structure of this multiplicity problem. This procedure belongs to the class of mixture-based gatekeeping procedures introduced in [Dmitrienko et al. (2015)](http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1074917). This gatekeeping procedure is specified by defining the following three parameters:
+
+- Families of null hypotheses (`family`).
+ 
+- Component procedures used in the families (`component.procedure`).
+
+- Truncation parameters used in the families (`gamma`).
+
+```r
+# Parameters of the gatekeeping procedure procedure (multiple-sequence gatekeeping procedure)
+# Tests to which the multiplicity adjustment will be applied
+test.list = tests("Placebo vs DoseH - ACR20", 
+                  "Placebo vs DoseL - ACR20", 
+                  "Placebo vs DoseH - HAQ-DI", 
+                  "Placebo vs DoseL - HAQ-DI")
+
+# Families of hypotheses
+family = families(family1 = c(1, 2), 
+                  family2 = c(3, 4))
+
+# Component procedures for each family
+component.procedure = families(family1 ="HolmAdj", 
+                               family2 = "HolmAdj")
+
+# Truncation parameter for each family
+gamma = families(family1 = 0.8, 
+                 family2 = 1)
+```
+
+These parameters are included in the `MultAdjProc` object defined below. The tests to which the multiplicity adjustment will be applied are defined in the `tests` argument. The use of this argument is optional if all tests included in the analysis model are to be included. The argument `family` states that the null hypotheses will be grouped into two families:
+
+- Family 1: H1 and H2.
+
+- Family 2: H3 and H4.
+
+It is to be noted that the order corresponds to the order of the tests defined in the analysis model, except if the tests are specifically specified in the `tests` argument of the `MultAdjProc` object.
+
+The families will be tested sequentially and a truncated Holm procedure will be applied within each family (`component.procedure`). Lastly, the truncation parameter will be set to 0.8 in Family 1 and to 1 in Family 2 (`gamma`). The resulting parameters are included in the `par` argument of the `MultAdjProc` object and, as before, the `proc` argument is used to specify the multiple testing procedure (`MultipleSequenceGatekeepingAdj`).
+
+The test are then specified in the analysis model and the overall analysis model is defined as follows:
+
+```r
+# Analysis model
+case.study5.analysis.model = AnalysisModel() +
+  MultAdjProc(proc = "MultipleSequenceGatekeepingAdj",
+              par = parameters(family = family, 
+                               proc = component.procedure, 
+                               gamma = gamma),
+              tests = test.list) +
+  Test(id = "Placebo vs DoseL - ACR20",
+       method = "PropTest",
+       samples = samples("Placebo ACR20", "DoseL ACR20")) +
+  Test(id = "Placebo vs DoseH - ACR20",
+       method = "PropTest",
+       samples = samples("Placebo ACR20", "DoseH ACR20")) +
+  Test(id = "Placebo vs DoseL - HAQ-DI",
+       method = "TTest",
+       samples = samples("DoseL HAQ-DI", "Placebo HAQ-DI")) +
+  Test(id = "Placebo vs DoseH - HAQ-DI",
+       method = "TTest",
+       samples = samples("DoseH HAQ-DI", "Placebo HAQ-DI"))
+```
+
+Recall that a numerically lower value indicates a beneficial effect for the HAQ-DI score and, as a result, the experimental treatment arm must be defined prior to the placebo arm in the test.samples parameters corresponding to the HAQ-DI tests, e.g., `samples = samples("DoseL HAQ-DI", "Placebo HAQ-DI")`.
+
+## Define an Evaluation Model
+
+In order to assess the probability of success in this clinical trial, a hybrid criterion based on the conjunctive criterion (both trial endpoints must be significant) and disjunctive criterion (at least one dose-placebo comparison must be significant) can be considered. 
+
+This criterion will be met if a significant effect is established at one or two doses on Endpoint 1 (ACR20) and also at one or two doses on Endpoint 2 (HAQ-DI). However, due to the hierarchical structure of the testing strategy (see Figure), this is equivalent to demonstrating a significant difference between Placebo and at least one dose with respect to Endpoint 2. The corresponding criterion is a subset disjunctive criterion based on the two Endpoint 2 tests (subset disjunctive power was briefly mentioned in [Case study 2](CaseStudy02)). 
+
+In addition, the sponsor may also be interested in evaluating marginal power as well as subset disjunctive power based on the Endpoint 1 tests. The latter criterion will be met if a significant difference between Placebo and at least one dose is established with respect
+to Endpoint 1. Additionally, as in [Case study 2](CaseStudy02), the user could consider defining custom evaluation criteria. The three resulting evaluation criteria (marginal power, subset disjunctive criterion based on the Endpoint 1 tests and subset disjunctive criterion based on the Endpoint 2 tests) are included in the following evaluation model.
+
+```r
+# Evaluation model
+case.study5.evaluation.model = EvaluationModel() +
+  Criterion(id = "Marginal power",
+            method = "MarginalPower",
+            tests = tests("Placebo vs DoseL - ACR20",
+                          "Placebo vs DoseH - ACR20",
+                          "Placebo vs DoseL - HAQ-DI",
+                          "Placebo vs DoseH - HAQ-DI"),
+            labels = c("Placebo vs DoseL - ACR20",
+                       "Placebo vs DoseH - ACR20",
+                       "Placebo vs DoseL - HAQ-DI",
+                       "Placebo vs DoseH - HAQ-DI"),
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Disjunctive power - ACR20",
+            method = "DisjunctivePower",
+            tests = tests("Placebo vs DoseL - ACR20",
+                          "Placebo vs DoseH - ACR20"),
+            labels = "Disjunctive power - ACR20",
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Disjunctive power - HAQ-DI",
+            method = "DisjunctivePower",
+            tests = tests("Placebo vs DoseL - HAQ-DI",
+                          "Placebo vs DoseH - HAQ-DI"),
+            labels = "Disjunctive power - HAQ-DI",
+            par = parameters(alpha = 0.025))
+```
+
+## Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%205.R)
+
+- [CSE report](http://gpaux.github.io/Mediana/Case%20study%205.docx)
+
+# Case study 6
+
+## Summary
+
+Case study 6 is an extension of [Case study 2](#case-study-2-1) where the objective of the sponsor is to compare several Multiple Testing Procedures (MTPs). The main difference is in the specification of the analysis model.
+
+## Define a Data Model
+
+The same data model as in [Case study 2](#case-study-2-1) will be used in this case study. However, as shown in the table below, a new set of outcome parameters will be added in this case study (an optimistic set of parameters).
+
+```{r, results = "asis", echo = FALSE}
+pander::pandoc.table(data.frame("Outcome parameter set" = c("Standard",
+                                                            "",
+                                                            "",
+                                                            "",
+                                                            "Optimistic",
+                                                            "",
+                                                            "",
+                                                            ""),
+                                "Arm" = c(rep(c("Placebo",
+                                                "Dose L",
+                                                "Dose M",
+                                                "Dose H"),2)),
+                                "Mean" = c(16, 19.5, 21, 21,
+                                           16, 20, 21, 22),
+                                "SD" = c(rep(18,8))))
+```
+
+```r
+# Standard
+outcome1.placebo = parameters(mean = 16, sd = 18)
+outcome1.dosel = parameters(mean = 19.5, sd = 18)
+outcome1.dosem = parameters(mean = 21, sd = 18)
+outcome1.doseh = parameters(mean = 21, sd = 18)
+
+# Optimistic
+outcome2.placebo = parameters(mean = 16, sd = 18)
+outcome2.dosel = parameters(mean = 20, sd = 18)
+outcome2.dosem = parameters(mean = 21, sd = 18)
+outcome2.doseh = parameters(mean = 22, sd = 18)
+
+# Data model
+case.study6.data.model = DataModel() +
+  OutcomeDist(outcome.dist = "NormalDist") +
+  SampleSize(seq(220, 260, 20)) +
+  Sample(id = "Placebo",
+         outcome.par = parameters(outcome1.placebo, outcome2.placebo)) +
+  Sample(id = "Dose L",
+         outcome.par = parameters(outcome1.dosel, outcome2.dosel)) +
+  Sample(id = "Dose M",
+         outcome.par = parameters(outcome1.dosem, outcome2.dosem)) +
+  Sample(id = "Dose H",
+         outcome.par = parameters(outcome1.doseh, outcome2.doseh))
+```
+
+## Define an Analysis Model
+
+As in [Case study 2](#case-study-2-1), each dose-placebo comparison will be performed using a one-sided two-sample *t*-test (`TTest` method defined in each `Test` object). The same nomenclature will be used to define the hypotheses, i.e.:
+
+- H1: Null hypothesis of no difference between Dose L and placebo.
+
+- H2: Null hypothesis of no difference between Dose M and placebo.
+
+- H3: Null hypothesis of no difference between Dose H and placebo.
+
+In this case study, as in [Case study 2](#case-study-2-1), the overall success criterion in the trial is formulated in terms of demonstrating a beneficial effect at any of the three doses, inducing an inflation of the overall Type I error rate. In this case study, the sponsor is interested in comparing several Multiple Testing Procedures, such as the weighted Bonferroni, Holm and Hochberg procedures. These MTPs are defined as below:
+
+```r
+# Multiplicity adjustments
+# No adjustment
+mult.adj1 = MultAdjProc(proc = NA)
+
+# Bonferroni adjustment (with unequal weights)
+mult.adj2 = MultAdjProc(proc = "BonferroniAdj",
+                        par = parameters(weight = c(1/4,1/4,1/2)))
+
+# Holm adjustment (with unequal weights)
+mult.adj3 = MultAdjProc(proc = "HolmAdj", 
+                        par = parameters(weight = c(1/4,1/4,1/2)))
+
+# Hochberg adjustment (with unequal weights)
+mult.adj4 = MultAdjProc(proc = "HochbergAdj", 
+                        par = parameters(weight = c(1/4,1/4,1/2)))
+```
+
+The `mult.adj1` object, which specified that no adjustment will be used, is defined in order to observe the decrease in power induced by each MTPs.
+
+It should be noted that for each weighted procedure, a higher weight is assigned to the test of Placebo vs Dose H (1/2), and the remaining weight is equally assigned to the two other tests (i.e. 1/4 for each test). These parameters are specified in the `par` argument of each MTP.
+
+The analysis model is defined as follows:
+
+```r
+# Analysis model
+case.study6.analysis.model = AnalysisModel() +
+  MultAdj(mult.adj1, mult.adj2, mult.adj3, mult.adj4) +
+  Test(id = "Placebo vs Dose L",
+       samples = samples("Placebo", "Dose L"),
+       method = "TTest") +
+  Test(id = "Placebo vs Dose M",
+       samples = samples ("Placebo", "Dose M"),
+       method = "TTest") +
+  Test(id = "Placebo vs Dose H",
+       samples = samples("Placebo", "Dose H"),
+       method = "TTest")
+```
+
+For the sake of compactness, all MTPs are combined using a `MultAdj` object, but it is worth mentioning that each MTP could have been directly added to the `AnalysisModel` object using the `+` operator.
+
+## Define an Evaluation Model
+
+As for the data model, the same evaluation model as in [Case study 2](#case-study-2-1) will be used in this case study. Refer to [Case study 2](#case-study-2-1) for more information.
+
+```r
+# Evaluation model
+case.study6.evaluation.model = EvaluationModel() +
+  Criterion(id = "Marginal power",
+            method = "MarginalPower",
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
+            labels = c("Placebo vs Dose L",
+                       "Placebo vs Dose M",
+                       "Placebo vs Dose H"),
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Disjunctive power",
+            method = "DisjunctivePower",
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
+            labels = "Disjunctive power",
+            par = parameters(alpha = 0.025)) +
+  Criterion(id = "Dose H and at least one dose",
+            method = "case.study6.criterion",
+            tests = tests("Placebo vs Dose L",
+                          "Placebo vs Dose M",
+                          "Placebo vs Dose H"),
+            labels = "Dose H and at least one of the two other doses are significant",
+            par = parameters(alpha = 0.025))
+```
+
+The last `Criterion` object specifies the custom criterion which computes the probability of a significant treatment effect at Dose H and a significant treatment difference at Dose L or Dose M. 
+
+## Perform Clinical Scenario Evaluation
+
+Using the data, analysis and evaluation models, simulation-based Clinical Scenario Evaluation is performed by calling the `CSE` function:
+
+```r
+# Simulation Parameters
+case.study6.sim.parameters =  SimParameters(n.sims = 1000, 
+                                            proc.load = "full", 
+                                            seed = 42938001)
+
+# Perform clinical scenario evaluation
+case.study6.results = CSE(case.study6.data.model,
+                          case.study6.analysis.model,
+                          case.study6.evaluation.model,
+                          case.study6.sim.parameters)
+```
+
+## Generate a Simulation Report
+
+This case study will also illustrate the process of customizing a Word-based simulation report. This can be accomplished by defining custom sections and subsections to provide a structured summary of the complex set of simulation results.
+
+### Create a Customized Simulation Report
+
+#### Define a Presentation Model
+
+Several presentation models will be used produce customized simulation reports:
+
+- A report without subsections.
+
+- A report with subsections.
+
+- A report with combined sections.
+
+First of all, a default `PresentationModel` object (`case.study6.presentation.model.default`) will  be created. This object will include the common components of the report that are shared across the presentation models. The project information (`Project` object), sorting options in summary tables (`Table` object) and specification of custom labels (`CustomLabel` objects) are included in this object:
+
+```r
+case.study6.presentation.model.default = PresentationModel() +
+  Project(username = "[Mediana's User]",
+          title = "Case study 6",
+          description = "Clinical trial in patients with schizophrenia - Several MTPs") +
+  Table(by = "sample.size") +
+  CustomLabel(param = "sample.size", 
+              label = paste0("N = ", seq(220, 260, 20))) +
+  CustomLabel(param = "multiplicity.adjustment", 
+              label = c("No adjustment", "Bonferroni adjustment", "Holm adjustment", "Hochberg adjustment"))
+```
+
+#### Report without subsections
+
+The first simulation report will include a section for each outcome parameter set. To accomplish this, a `Section` object is added to the default `PresentationModel` object and the report is generated:
+
+```r
+# Reporting 1 - Without subsections
+case.study6.presentation.model1 = case.study6.presentation.model.default +
+  Section(by = "outcome.parameter")
+
+# Report Generation
+GenerateReport(presentation.model = case.study6.presentation.model1,
+               cse.results = case.study6.results,
+               report.filename = "Case study 6 - Without subsections.docx")
+```
+
+#### Report with subsections
+
+The second report will include a section for each outcome parameter set and, in addition, a subsection will be created for each multiplicity adjustment procedure. The `Section` and `Subsection` objects are added to the default `PresentationModel` object as shown below and the report is generated:
+
+```r
+# Reporting 2 - With subsections
+case.study6.presentation.model2 = case.study6.presentation.model.default +
+  Section(by = "outcome.parameter") +
+  Subsection(by = "multiplicity.adjustment") 
+
+# Report Generation
+GenerateReport(presentation.model = case.study6.presentation.model2,
+               cse.results = case.study6.results,
+               report.filename = "Case study 6 - With subsections.docx")
+```
+
+#### Report with combined sections
+
+Finally, the third report will include a section for each combination of outcome parameter set and  each multiplicity adjustment procedure. This is accomplished by adding a `Section` object to the default `PresentationModel` object and specifying the outcome parameter and multiplicity adjustment in the section's `by` argument.
+
+```r
+# Reporting 3 - Combined sections
+case.study6.presentation.model3 = case.study6.presentation.model.default +
+  Section(by = c("outcome.parameter", "multiplicity.adjustment"))
+
+# Report Generation
+GenerateReport(presentation.model = case.study6.presentation.model3,
+               cse.results = case.study6.results,
+               report.filename = "Case study 6 - Combined Sections.docx")
+```
+
+## Download
+
+The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:
+
+- [R code](http://gpaux.github.io/Mediana/Case%20study%206.R)
+
+- [CSE report without subsections](http://gpaux.github.io/Mediana/Case%20study%206%20-%20Without%20subsections.docx)
+
+- [CSE report with subsections](http://gpaux.github.io/Mediana/Case%20study%206%20-%20With%20subsections.docx)
+
+- [CSE report with combined subsections](http://gpaux.github.io/Mediana/Case%20study%206%20-%20Combined%20Sections.docx)
