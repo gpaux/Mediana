@@ -181,17 +181,13 @@ To set up the analysis model in this clinical trial example, note that the treat
  
 It was pointed out earlier in this page that the two endpoints will be tested hierarchically within each dose. The figure below provides a visual summary of the testing strategy used in this clinical trial. The circles in this figure denote the four null hypotheses of interest:
 
-H1: Null hypothesis of no difference between Dose L and placebo with respect to
-Endpoint 1.
+- H1: Null hypothesis of no difference between Dose L and placebo with respect to Endpoint 1.
 
-H2: Null hypothesis of no difference between Dose H and placebo with respect
-to Endpoint 1.
+- H2: Null hypothesis of no difference between Dose H and placebo with respect to Endpoint 1.
 
-H3: Null hypothesis of no difference between Dose L and placebo with respect to
-Endpoint 2.
+- H3: Null hypothesis of no difference between Dose L and placebo with respect to Endpoint 2.
 
-H4: Null hypothesis of no difference between Dose H and placebo with respect
-to Endpoint 2.
+- H4: Null hypothesis of no difference between Dose H and placebo with respect to Endpoint 2.
 
 <center>
   <div class="col-md-12">

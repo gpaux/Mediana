@@ -285,7 +285,7 @@ Click on the icons below to download the R code used in this case study and repo
 
 <center>
   <div class="col-md-3">
-    <a href="Case study 6 - Combined Sections.docx" class="img-responsive">
+    <a href="Case study 6 - Without Sections.docx" class="img-responsive">
       <img src="Logo_Microsoft_Word.png" class="img-responsive" height="100">
     </a>
 	<br>

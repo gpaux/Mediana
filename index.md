@@ -7,6 +7,22 @@ tagline:
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana) ![cranlogs](http://cranlogs.r-pkg.org./badges/Mediana)
 
+## Clinical trial optimization using R
+
+<center>
+  <div class="col-md-3">
+    <a href="https://www.crcpress.com/Clinical-Trial-Optimization-using-R/Dmitrienko/p/book/9781498735070" class="img-responsive">
+      <img src="book.jpg" class="img-responsive"/>
+    </a>
+  </div>
+</center>
+
+[Clinical Trial Optimization Using R](https://www.crcpress.com/Clinical-Trial-Optimization-using-R/Dmitrienko/p/book/9781498735070) explores a unified and broadly applicable framework for optimizing decision making and strategy selection in clinical development, through a series of examples and case studies.It provides the clinical researcher with a powerful evaluation paradigm, as well as supportive R tools, to evaluate and select among simultaneous competing designs or analysis options. It is applicable broadly to statisticians and other quantitative clinical trialists, who have an interest in optimizing clinical trials, clinical trial programs, or associated analytics and decision making.
+
+This book presents in depth the Clinical Scenario Evaluation (CSE) framework, and discusses optimization strategies, including the quantitative assessment of tradeoffs. A variety of common development challenges are evaluated as case studies, and used to show how this framework both simplifies and optimizes strategy selection. Specific settings include optimizing adaptive designs, multiplicity and subgroup analysis strategies, and overall development decision-making criteria around Go/No-Go. After this book, the reader will be equipped to extend the CSE framework to their particular development challenges as well.
+
+Mediana R package has been widely used to implement the case studies presented in this book. The detailed description and R code of these case studies are available on this website.
+
 ## New release ! [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana)
 
 The version 1.0.4 of the Mediana R package has been released on 07 February 2017. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:

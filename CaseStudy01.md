@@ -73,11 +73,11 @@ The sponsor is interested in performing power calculations under two treatment e
             <tr>
                 <td>Standard</td>
                 <td>0 (70)</td>
-                <td>0 (70)</td>
+                <td>40 (70)</td>
             </tr>
             <tr>
                 <td>Optimistic</td>
-                <td>40 (70)</td>
+                <td>0 (70)</td>
                 <td>50 (70)</td>
             </tr>
         </tbody>
