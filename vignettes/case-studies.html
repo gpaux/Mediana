@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrienko" />
 
-<meta name="date" content="2017-04-25" />
+<meta name="date" content="2017-05-17" />
 
 <title>Case studies</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Case studies</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrienko</em></h4>
-<h4 class="date"><em>2017-04-25</em></h4>
+<h4 class="date"><em>2017-05-17</em></h4>
 
 
 
@@ -169,7 +169,7 @@ outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
-<p>According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see <a href="AnalysisModel.html#Description">Analysis Model</a>, the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.</p>
+<p>According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see <a href="http://gpaux.github.io/Mediana/AnalysisModel.html">Analysis Model</a>, the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.</p>
 <p>To illustrate the use of the <code>Statistic</code> object, the mean change in the six-minute walk distance in the treatment arm can be computed using the <code>MeanStat</code> statistic:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model +
 <span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Treatment&quot;</span>,
@@ -255,6 +255,14 @@ case.study1.simulation.results =<span class="st"> </span><span class="kw">summar
 </div>
 </div>
 </div>
+<div id="download" class="section level3">
+<h3>Download</h3>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(normally%20distributed%20endpoint).R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(normally%20distributed%20endpoint).docx">CSE report</a></p></li>
+</ul>
+</div>
 </div>
 <div id="binary-endpoint" class="section level2">
 <h2>Binary endpoint</h2>
@@ -302,7 +310,15 @@ case.study1.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
             <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
-<p>An extension of this clinical trial example is provided in <a href="CaseStudy05.html">Case study 5</a>. The extension deals with a more complex setting involving several trial endpoints and multiple treatment arms.</p>
+<p>An extension of this clinical trial example is provided in <a href="#case-study-5-1">Case study 5</a>. The extension deals with a more complex setting involving several trial endpoints and multiple treatment arms.</p>
+</div>
+<div id="download-1" class="section level3">
+<h3>Download</h3>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(binary%20endpoint).R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(binary%20endpoint).docx">CSE report</a></p></li>
+</ul>
 </div>
 </div>
 <div id="survival-type-endpoint" class="section level2">
@@ -377,6 +393,14 @@ case.study1.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
             <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
             <span class="dt">statistics =</span> <span class="kw">tests</span>(<span class="st">&quot;Hazard Ratio&quot;</span>),
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Average Hazard Ratio&quot;</span>)) </code></pre></div>
+</div>
+<div id="download-2" class="section level3">
+<h3>Download</h3>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(survival-type%20endpoint).R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(survival-type%20endpoint).docx">CSE report</a></p></li>
+</ul>
 </div>
 </div>
 <div id="survival-type-endpoint-with-censoring" class="section level2">
@@ -468,6 +492,14 @@ case.study1.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
             <span class="dt">statistics =</span> <span class="kw">statistics</span>(<span class="st">&quot;Patients Placebo&quot;</span>, <span class="st">&quot;Patients Treatment&quot;</span>),
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Mean Patients Placebo&quot;</span>, <span class="st">&quot;Mean Patients Treatment&quot;</span>))</code></pre></div>
 </div>
+<div id="download-3" class="section level3">
+<h3>Download</h3>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(survival-type%20endpoint%20with%20censoring).R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(survival-type%20endpoint%20with%20censoring).docx">CSE report</a></p></li>
+</ul>
+</div>
 </div>
 <div id="count-type-endpoint" class="section level2">
 <h2>Count-type endpoint</h2>
@@ -510,6 +542,1036 @@ case.study1.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Treatment vs Placebo&quot;</span>),
             <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
 </div>
+<div id="download-4" class="section level3">
+<h3>Download</h3>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(count-type%20endpoint).R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%201%20(count-type%20endpoint).docx">CSE report</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="case-study-2-1" class="section level1">
+<h1>Case study 2</h1>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>This clinical trial example deals with settings where no analytical methods are available to support power calculations. However, as demonstrated below, simulation-based approaches are easily applied to perform а comprehensive assessment of the relevant operating characteristics within the clinical scenario evaluation framework.</p>
+<p>Case study 2 is based on a clinical trial example introduced in Dmitrienko and D’Agostino (2013, Section 10). This example deals with a Phase III clinical trial in a schizophrenia population. Three doses of a new treatment, labelled Dose L, Dose M and Dose H, will be tested versus placebo. The trial will be declared successful if a beneficial treatment effect is demonstrated in any of the three dosing groups compared to the placebo group.</p>
+<p>The primary endpoint is defined as the reduction in the Positive and Negative Syndrome Scale (PANSS) total score compared to baseline and a larger reduction in the PANSS total score indicates treatment benefit. This endpoint is normally distributed and the treatment effect assumptions in the four treatment arms are displayed in the next table.</p>
+<table style="width:26%;">
+<colgroup>
+<col width="11%"></col>
+<col width="9%"></col>
+<col width="5%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Arm</th>
+<th align="center">Mean</th>
+<th align="center">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Placebo</td>
+<td align="center">16</td>
+<td align="center">18</td>
+</tr>
+<tr class="even">
+<td align="center">Dose L</td>
+<td align="center">19.5</td>
+<td align="center">18</td>
+</tr>
+<tr class="odd">
+<td align="center">Dose M</td>
+<td align="center">21</td>
+<td align="center">18</td>
+</tr>
+<tr class="even">
+<td align="center">Dose H</td>
+<td align="center">21</td>
+<td align="center">18</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="define-a-data-model-5" class="section level2">
+<h2>Define a Data Model</h2>
+<p>The treatment effect assumptions presented in the table above define a single outcome parameter set and the common sample size is set to 260 patients. These parameters are specified in the following data model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters</span>
+outcome.pl =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">16</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+outcome.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">19.5</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+outcome.dosem =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+outcome.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+
+<span class="co"># Data model</span>
+case.study2.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.pl)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose L&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.dosel)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose M&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.dosem)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.doseh))</code></pre></div>
+</div>
+<div id="define-an-analysis-model-5" class="section level2">
+<h2>Define an Analysis Model</h2>
+<p>The analysis model, shown below, defines the three individual tests that will be carried out in the schizophrenia clinical trial. Each test corresponds to a dose-placebo comparison such as:</p>
+<ul>
+<li><p>H1: Null hypothesis of no difference between Dose L and placebo.</p></li>
+<li><p>H2: Null hypothesis of no difference between Dose M and placebo.</p></li>
+<li><p>H3: Null hypothesis of no difference between Dose H and placebo.</p></li>
+</ul>
+<p>Each comparison will be carried out based on a one-sided two-sample <em>t</em>-test (<code>TTest</code> method defined in each <code>Test</code> object).</p>
+<p>As indicated earlier, the overall success criterion in the trial is formulated in terms of demonstrating a beneficial effect at any of the three doses. Due to multiple opportunities to claim success, the overall Type I error rate will be inflated and the Hochberg procedure is introduced to protect the error rate at the nominal level.</p>
+<p>Since no procedure parameters are defined, the three significance tests (or, equivalently, three null hypotheses of no effect) are assumed to be equally weighted. The corresponding analysis model is defined below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study2.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose L&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose H&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
+<p>To request the Hochberg procedure with unequally weighted hypotheses, the user needs to assign a list of hypothesis weights to the <code>par</code> argument of the <code>MultAdjProc</code> object. The weights typically reflect the relative importance of the individual null hypotheses. Assume, for example, that 60% of the overall weight is assigned to H3 and the remainder is split between H1 and H2. In this case, the <code>MultAdjProc</code> object should be defined as follow:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.6</span>)))</code></pre></div>
+<p>It should be noted that the order of the weights must be identical to the order of the <code>Test</code> objects defined in the analysis model.</p>
+</div>
+<div id="define-an-evaluation-model-5" class="section level2">
+<h2>Define an Evaluation Model</h2>
+<p>An evaluation model specifies clinically relevant criteria for assessing the performance of the individual tests defined in the corresponding analysis model or composite measures of success. In virtually any setting, it is of interest to compute the probability of achieving a significant outcome in each individual test, e.g., the probability of a significant difference between placebo and each dose. This is accomplished by requesting a <code>Criterion</code> object with <code>method = &quot;MarginalPower&quot;</code>.</p>
+<p>Since the trial will be declared successful if at least one dose-placebo comparison is significant, it is natural to compute the overall success probability, which is defined as the probability of demonstrating treatment benefit in one of more dosing groups. This is equivalent to evaluating disjunctive power in the trial (<code>method = &quot;DisjunctivePower&quot;</code>).</p>
+<p>In addition, the user can easily define a custom evaluation criterion. Suppose that, based on the results of the previously conducted trials, the sponsor expects a much larger treatment treatment difference at Dose H compared to Doses L and M. Given this, the sponsor may be interested in evaluating the probability of observing a significant treatment effect at Dose H and at least one other dose. The associated evaluation criterion is implemented in the following function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Custom evaluation criterion (Dose H and at least one of the two other doses are significant)</span>
+case.study2.criterion =<span class="st"> </span>function(test.result, statistic.result, parameter) {
+  
+  alpha =<span class="st"> </span>parameter
+  significant =<span class="st"> </span>((test.result[,<span class="dv">3</span>] &lt;=<span class="st"> </span>alpha) &amp;<span class="st"> </span>((test.result[,<span class="dv">1</span>] &lt;=<span class="st"> </span>alpha) |<span class="st"> </span>(test.result[,<span class="dv">2</span>] &lt;=<span class="st"> </span>alpha)))
+  power =<span class="st"> </span><span class="kw">mean</span>(significant)
+  <span class="kw">return</span>(power)
+}</code></pre></div>
+<p>The function’s first argument (<code>test.result</code>) is a matrix of p-values produced by the <code>Test</code> objects defined in the analysis model and the second argument (<code>statistic.result</code>) is a matrix of results produced by the <code>Statistic</code> objects defined in the analysis model. In this example, the criteria will only use the <code>test.result</code> argument, which will contain the p-values produced by the tests associated with the three dose-placebo comparisons. The last argument (<code>parameter</code>) contains the optional parameter(s) defined by the user in the <code>Criterion</code> object. In this example, the <code>par</code> argument contains the overall alpha level.</p>
+<p>The <code>case.study2.criterion</code> function computes the probability of a significant treatment effect at Dose H (<code>test.result[,3] &lt;= alpha</code>) and a significant treatment difference at Dose L or Dose M (<code>(test.result[,1] &lt;= alpha) | (test.result[,2]&lt;= alpha)</code>). Since this criterion assumes that the third test is based on the comparison of Dose H versus Placebo, the order in which the tests are included in the evaluation model is important.</p>
+<p>The following evaluation model specifies marginal and disjunctive power as well as the custom evaluation criterion defined above:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study2.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
+                       <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+                       <span class="st">&quot;Placebo vs Dose H&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),
+            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H and at least one dose&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;case.study2.criterion&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),
+            <span class="dt">labels =</span> <span class="st">&quot;Dose H and at least one of the two other doses are significant&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+<p>Another potential option is to apply the conjunctive criterion which is met if a significant treatment difference is detected simultaneously in all three dosing groups (<code>method = &quot;ConjunctivePower&quot;</code>). This criterion helps characterize the likelihood of a consistent treatment effect across the doses.</p>
+<p>The user can also use the <code>metric.tests</code> parameter to choose the specific tests to which the disjunctive and conjunctive criteria are applied (the resulting criteria are known as subset disjunctive and conjunctive criteria). To illustrate, the following statement computes the probability of a significant treatment effect at Dose M or Dose H (Dose L is excluded from this calculation):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
+          <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
+          <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Pl vs Dose M&quot;</span>,
+                        <span class="st">&quot;Pl vs Dose H&quot;</span>),
+          <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
+          <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+</div>
+<div id="download-5" class="section level2">
+<h2>Download</h2>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%202.R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%202.docx">CSE report</a></p></li>
+</ul>
+</div>
+</div>
+<div id="case-study-3-1" class="section level1">
+<h1>Case study 3</h1>
+<div id="summary-1" class="section level2">
+<h2>Summary</h2>
+<p>This case study deals with a Phase III clinical trial in patients with mild or moderate asthma (it is based on a clinical trial example from <a href="http://dij.sagepub.com/content/48/4/453.abstract">Millen et al., 2014, Section 2.2</a>). The trial is intended to support a tailoring strategy. In particular, the treatment effect of a single dose of a new treatment will be compared to that of placebo in the overall population of patients as well as a pre-specified subpopulation of patients with a marker-positive status at baseline (for compactness, the overall population is denoted by OP, marker-positive subpopulation is denoted by M+ and marker- negative subpopulation is denoted by M−).</p>
+<p>Marker-positive patients are more likely to receive benefit from the experimental treatment. The overall objective of the clinical trial accounts for the fact that the treatment’s effect may, in fact, be limited to the marker-positive subpopulation. The trial will be declared successful if the treatment’s beneficial effect is established in the overall population of patients or, alternatively, the effect is established only in the subpopulation. The primary endpoint in the clinical trial is defined as an increase from baseline in the forced expiratory volume in one second (FEV1). This endpoint is normally distributed and improvement is associated with a larger change in FEV1.</p>
+</div>
+<div id="define-a-data-model-6" class="section level2">
+<h2>Define a Data Model</h2>
+<p>To set up a data model for this clinical trial, it is natural to define samples (mutually exclusive groups of patients) as follows:</p>
+<ul>
+<li><p><strong>Sample 1:</strong> Marker-negative patients in the placebo arm.</p></li>
+<li><p><strong>Sample 2:</strong> Marker-positive patients in the placebo arm.</p></li>
+<li><p><strong>Sample 3:</strong> Marker-negative patients in the treatment arm.</p></li>
+<li><p><strong>Sample 4:</strong> Marker-positive patients in the treatment arm.</p></li>
+</ul>
+<p>Using this definition of samples, the trial’s sponsor can model the fact that the treatment’s effect is most pronounced in patients with a marker-positive status.</p>
+<p>The treatment effect assumptions in the four samples are summarized in the next table (expiratory volume in FEV1 is measured in liters). As shown in the table, the mean change in FEV1 is constant across the marker-negative and marker-positive subpopulations in the placebo arm (Samples 1 and 2). A positive treatment effect is expected in both subpopulations in the treatment arm but marker-positive patients will experience most of the beneficial effect (Sample 4).</p>
+<table style="width:33%;">
+<colgroup>
+<col width="18%"></col>
+<col width="9%"></col>
+<col width="5%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Sample</th>
+<th align="center">Mean</th>
+<th align="center">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Placebo M-</td>
+<td align="center">0.12</td>
+<td align="center">0.45</td>
+</tr>
+<tr class="even">
+<td align="center">Placebo M+</td>
+<td align="center">0.12</td>
+<td align="center">0.45</td>
+</tr>
+<tr class="odd">
+<td align="center">Treament M-</td>
+<td align="center">0.24</td>
+<td align="center">0.45</td>
+</tr>
+<tr class="even">
+<td align="center">Treatment M+</td>
+<td align="center">0.3</td>
+<td align="center">0.45</td>
+</tr>
+</tbody>
+</table>
+<p>The following data model incorporates the assumptions listed above by defining a single set of outcome parameters. The data model includes three sample size sets (total sample size is set to 330, 340 and 350 patients). The sizes of the individual samples are computed based on historic information (40% of patients in the population of interest are expected to have a marker-positive status). In order to define specific sample size for each sample, they will be specified within each <code>Sample</code> object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters</span>
+outcome.placebo.minus =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">0.12</span>, <span class="dt">sd =</span> <span class="fl">0.45</span>)
+outcome.placebo.plus =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">0.12</span>, <span class="dt">sd =</span> <span class="fl">0.45</span>)
+outcome.treatment.minus =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">0.24</span>, <span class="dt">sd =</span> <span class="fl">0.45</span>)
+outcome.treatment.plus =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.45</span>)
+
+<span class="co"># Sample size parameters</span>
+sample.size.total =<span class="st"> </span><span class="kw">c</span>(<span class="dv">330</span>, <span class="dv">340</span>, <span class="dv">350</span>)
+sample.size.placebo.minus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.3</span> *<span class="st"> </span>sample.size.total)
+sample.size.placebo.plus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.2</span> *<span class="st"> </span>sample.size.total)
+sample.size.treatment.minus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.3</span> *<span class="st"> </span>sample.size.total)
+sample.size.treatment.plus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.2</span> *<span class="st"> </span>sample.size.total)
+
+<span class="co"># Data model</span>
+case.study3.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo M-&quot;</span>,
+         <span class="dt">sample.size =</span> sample.size.placebo.minus,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo.minus)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo M+&quot;</span>,
+         <span class="dt">sample.size =</span> sample.size.placebo.plus,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo.plus)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment M-&quot;</span>,
+         <span class="dt">sample.size =</span> sample.size.treatment.minus,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment.minus)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment M+&quot;</span>,
+         <span class="dt">sample.size =</span> sample.size.treatment.plus,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment.plus))</code></pre></div>
+</div>
+<div id="define-an-analysis-model-6" class="section level2">
+<h2>Define an Analysis Model</h2>
+<p>The analysis model in this clinical trial example is generally similar to that used in <a href="#case-study-2-1">Case study 2</a> but there is an important difference which is described below.</p>
+<p>As in <a href="#case-study-2-1">Case study 2</a>, the primary endpoint follows a normal distribution and thus the treatment effect will be assessed using the two-sample <em>t</em>-test.</p>
+<p>Since two null hypotheses are tested in this trial (null hypotheses of no effect in the overall population of patients and subpopulation of marker-positive patients), a multiplicity adjustment needs to be applied. The Hochberg procedure with equally weighted null hypotheses will be used for this purpose.</p>
+<p>A key feature of the analysis strategy in this case study is that the samples defined in the data model are different from the samples used in the analysis of the primary endpoint. As shown in the Table, four samples are included in the data model. However, from the analysis perspective, the sponsor in interested in examining the treatment effect in two samples, namely, the overall population and marker-positive subpopulation. As shown below, to perform a comparison in the overall population, the <em>t</em>-test is applied to the following analysis samples:</p>
+<ul>
+<li><p><strong>Placebo arm:</strong> Samples 1 and 2 (<code>Placebo M-</code> and <code>Placebo M+</code>) are merged.</p></li>
+<li><p><strong>Treatment arm:</strong> Samples 3 and 4 (<code>Treatment M-</code> and <code>Treatment M+</code>) are merged.</p></li>
+</ul>
+<p>Further, the treatment effect test in the subpopulation of marker-positive patients is carried out based on these analysis samples:</p>
+<ul>
+<li><p><strong>Placebo arm:</strong> Sample 2 (<code>Placebo M+</code>).</p></li>
+<li><p><strong>Treatment arm:</strong> Sample 4 (<code>Treatment M+</code>).</p></li>
+</ul>
+<p>These analysis samples are specified in the analysis model below. The samples defined in the data model are merged using <code>c()</code> or <code>list()</code> function, e.g., <code>c(&quot;Placebo M-&quot;, &quot;Placebo M+&quot;)</code>defines the placebo arm and <code>c(&quot;Treatment M-&quot;, &quot;Treatment M+&quot;)</code> defines the experimental treatment arm in the overall population test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study3.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OP test&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="kw">c</span>(<span class="st">&quot;Placebo M-&quot;</span>, <span class="st">&quot;Placebo M+&quot;</span>),
+                         <span class="kw">c</span>(<span class="st">&quot;Treatment M-&quot;</span>, <span class="st">&quot;Treatment M+&quot;</span>)),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;M+ test&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo M+&quot;</span>, <span class="st">&quot;Treatment M+&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
+</div>
+<div id="define-an-evaluation-model-6" class="section level2">
+<h2>Define an Evaluation Model</h2>
+<p>It is reasonable to consider the following success criteria in this case study:</p>
+<ul>
+<li><p><strong>Marginal power:</strong> Probability of a significant outcome in each patient population.</p></li>
+<li><p><strong>Disjunctive power:</strong> Probability of a significant treatment effect in the overall population (OP) or marker-positive subpopulation (M+). This metric defines the overall probability of success in this clinical trial.</p></li>
+<li><p><strong>Conjunctive power:</strong> Probability of simultaneously achieving significance in the overall population and marker-positive subpopulation. This criterion will be useful if the trial’s sponsor is interested in pursuing an enhanced efficacy claim (<a href="http://dij.sagepub.com/content/46/6/647.abstract">Millen et al., 2012</a>).</p></li>
+</ul>
+<p>The following evaluation model applies the three criteria to the two tests listed in the analysis model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study3.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;OP test&quot;</span>,
+                          <span class="st">&quot;M+ test&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;OP test&quot;</span>,
+                       <span class="st">&quot;M+ test&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;OP test&quot;</span>,
+                          <span class="st">&quot;M+ test&quot;</span>),
+            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Conjunctive power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;ConjunctivePower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;OP test&quot;</span>,
+                          <span class="st">&quot;M+ test&quot;</span>),
+            <span class="dt">labels =</span> <span class="st">&quot;Conjunctive power&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+</div>
+<div id="download-6" class="section level2">
+<h2>Download</h2>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%203.R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%203.docx">CSE report</a></p></li>
+</ul>
+</div>
+</div>
+<div id="case-study-4-1" class="section level1">
+<h1>Case study 4</h1>
+<div id="summary-2" class="section level2">
+<h2>Summary</h2>
+<p>Case study 4 serves as an extension of the oncology clinical trial example presented in <a href="#case-study-1-1">Case study 1</a>. Consider again a Phase III trial in patients with metastatic colorectal cancer (MCC). The same general design will be assumed in this section; however, an additional endpoint (overall survival) will be introduced. The case of two endpoints helps showcase the package’s ability to model complex design and analysis strategies in trials with multivariate outcomes.</p>
+<p>Progression-free survival (PFS) is the primary endpoint in this clinical trial and overall survival (OS) serves as the key secondary endpoint, which provides supportive evidence of treatment efficacy. A hierarchical testing approach will be utilized in the analysis of the two endpoints. The PFS analysis will be performed first at α = 0.025 (one-sided), followed by the OS analysis at the same level if a significant effect on PFS is established. The resulting testing procedure is equivalent to the fixed-sequence procedure and controls the overall Type I error rate (<a href="http://onlinelibrary.wiley.com/doi/10.1002/sim.5990/abstract">Dmitrienko and D’Agostino, 2013</a>).</p>
+<p>The treatment effect assumptions that will be used in clinical scenario evaluation are listed in the table below. The table shows the hypothesized median times along with the corresponding hazard rates for the primary and secondary endpoints. It follows from the table that the expected effect size is much larger for PFS compared to OS (PFS hazard ratio is lower than OS hazard ratio).</p>
+<table style="width:94%;">
+<colgroup>
+<col width="36%"></col>
+<col width="29%"></col>
+<col width="13%"></col>
+<col width="15%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Endpoint</th>
+<th align="center">Statistic</th>
+<th align="center">Placebo</th>
+<th align="center">Treatment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Progression-free survival</td>
+<td align="center">Median time (months)</td>
+<td align="center">6</td>
+<td align="center">9</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Hazard rate</td>
+<td align="center">0.116</td>
+<td align="center">0.077</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Hazard ratio</td>
+<td align="center">0.67</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">Overall survival</td>
+<td align="center">Median time (months)</td>
+<td align="center">15</td>
+<td align="center">19</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Hazard rate</td>
+<td align="center">0.046</td>
+<td align="center">0.036</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Hazard ratio</td>
+<td align="center">0.79</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="define-a-data-model-7" class="section level2">
+<h2>Define a Data Model</h2>
+<p>In this clinical trial two endpoints are evaluated for each patient (PFS and OS) and thus their joint distribution needs to be listed in the general set.</p>
+<p>A bivariate exponential distribution will be used in this example and samples from this bivariate distribution will be generated by the <code>MVExpoPFSOSDist</code> function which implements multivariate exponential distributions. The function utilizes the copula method, i.e., random variables that follow a bivariate normal distribution will be generated and then converted into exponential random variables.</p>
+<p>The next several statements specify the parameters of the bivariate exponential distribution:</p>
+<ul>
+<li><p>Parameters of the marginal exponential distributions, i.e., the hazard rates.</p></li>
+<li><p>Correlation matrix of the underlying multivariate normal distribution used in the copula method.</p></li>
+</ul>
+<p>The hazard rates for PFS and OS in each treatment arm are defined based on the information presented in the table above (<code>placebo.par</code> and <code>treatment.par</code>) and the correlation matrix is specified based on historical information (<code>corr.matrix</code>). These parameters are combined to define the outcome parameter sets (<code>outcome.placebo</code> and <code>outcome.treatment</code>) that will be included in the sample-specific set of data model parameters (<code>Sample</code> object).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters: Progression-free survival</span>
+median.time.pfs.placebo =<span class="st"> </span><span class="dv">6</span>
+rate.pfs.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.pfs.placebo
+outcome.pfs.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.pfs.placebo)
+median.time.pfs.treatment =<span class="st"> </span><span class="dv">9</span>
+
+rate.pfs.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.pfs.treatment
+outcome.pfs.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.pfs.treatment)
+hazard.pfs.ratio =<span class="st"> </span>rate.pfs.treatment/rate.pfs.placebo
+
+<span class="co"># Outcome parameters: Overall survival</span>
+median.time.os.placebo =<span class="st"> </span><span class="dv">15</span>
+rate.os.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.os.placebo
+outcome.os.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.os.placebo)
+median.time.os.treatment =<span class="st"> </span><span class="dv">19</span>
+
+rate.os.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.os.treatment
+outcome.os.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.os.treatment)
+hazard.os.ratio =<span class="st"> </span>rate.os.treatment/rate.os.placebo
+
+<span class="co"># Parameter lists</span>
+placebo.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">rate =</span> rate.pfs.placebo), 
+                         <span class="kw">parameters</span>(<span class="dt">rate =</span> rate.os.placebo))
+
+treatment.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">rate =</span> rate.pfs.treatment), 
+                           <span class="kw">parameters</span>(<span class="dt">rate =</span> rate.os.treatment))
+
+<span class="co"># Correlation between two endpoints</span>
+corr.matrix =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.3</span>,
+                       <span class="fl">0.3</span>, <span class="fl">1.0</span>), <span class="dv">2</span>, <span class="dv">2</span>)
+
+<span class="co"># Outcome parameters</span>
+outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">par =</span> placebo.par, <span class="dt">corr =</span> corr.matrix)
+outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">par =</span> treatment.par, <span class="dt">corr =</span> corr.matrix)</code></pre></div>
+<p>To define the sample-specific data model parameters, a 2:1 randomization ratio will be used in this clinical trial and thus the number of events as well as the randomization ratio are specified by the user in the <code>Event</code> object. Secondly, a separate sample ID needs to be assigned to each endpoint within the two samples (e.g. <code>Placebo PFS</code> and <code>Placebo OS</code>) corresponding to the two treatment arms. This will enable the user to construct analysis models for examining the treatment effect on each endpoint.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Number of events</span>
+event.count.total =<span class="st"> </span><span class="kw">c</span>(<span class="dv">270</span>, <span class="dv">300</span>)
+randomization.ratio =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)
+
+<span class="co"># Data model</span>
+case.study4.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;MVExpoPFSOSDist&quot;</span>) +
+<span class="st">  </span><span class="kw">Event</span>(<span class="dt">n.events =</span> event.count.total, 
+        <span class="dt">rando.ratio =</span> randomization.ratio) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Placebo OS&quot;</span>),
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;Treatment PFS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment))</code></pre></div>
+</div>
+<div id="define-an-analysis-model-7" class="section level2">
+<h2>Define an Analysis Model</h2>
+<p>The treatment comparisons for both endpoints will be carried out based on the log-rank test (<code>method = &quot;LogrankTest&quot;</code>). Further, as was stated in the beginning of this page, the two endpoints will be tested hierarchically using a multiplicity adjustment procedure known as the fixed-sequence procedure. This procedure belongs to the class of chain procedures (<code>proc = &quot;ChainAdj&quot;</code>) and the following figure provides a visual summary of the decision rules used in this procedure.</p>
+<center>
+<div class="col-md-12">
+<pre><code>&lt;img src=&quot;CaseStudy04-fig1.png&quot; class=&quot;img-responsive&quot; height=&quot;150&quot;&gt;</code></pre>
+</div>
+</center>
+<p>The circles in this figure denote the two null hypotheses of interest:</p>
+<ul>
+<li><p>H1: Null hypothesis of no difference between the two arms with respect to PFS.</p></li>
+<li><p>H2: Null hypothesis of no difference between the two arms with respect to OS.</p></li>
+</ul>
+<p>The value displayed above a circle defines the initial weight of each null hypothesis. All of the overall α is allocated to H1 to ensure that the OS test will be carried out only after the PFS test is significant and the arrow indicates that H2 will be tested after H1 is rejected.</p>
+<p>More formally, a chain procedure is uniquely defined by specifying a vector of hypothesis weights (W) and matrix of transition parameters (G). Based on the figure, these parameters are given by</p>
+<center>
+<div class="col-md-12">
+<pre><code>&lt;img src=&quot;CaseStudy04-fig2.png&quot; class=&quot;img-responsive&quot;&gt;</code></pre>
+</div>
+</center>
+<p>Two objects (named <code>chain.weight</code> and <code>chain.transition</code>) are defined below to pass the hypothesis weights and transition parameters to the multiplicity adjustment parameters.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Parameters of the chain procedure (fixed-sequence procedure)</span>
+<span class="co"># Vector of hypothesis weights</span>
+chain.weight =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)
+<span class="co"># Matrix of transition parameters</span>
+chain.transition =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>,
+                            <span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># Analysis model</span>
+case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;ChainAdj&quot;</span>,
+              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> chain.weight, <span class="dt">transition =</span> chain.transition)) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;PFS test&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Treatment PFS&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OS test&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo OS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</code></pre></div>
+<p>As shown above, the two significance tests included in the analysis model reflect the two-fold objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (<code>id = &quot;PFS test&quot;</code>) whereas the other test is carried out to assess the treatment effect on OS (<code>test.id = &quot;OS test&quot;</code>).</p>
+<p>Alternatively, the fixed-sequence procedure can be implemented using the method <code>FixedSeqAdj</code> introduced from version 1.0.4. This implementation is facilitated as no parameters have to be specified.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;FixedSeqAdj&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;PFS test&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Treatment PFS&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OS test&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo OS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</code></pre></div>
+</div>
+<div id="define-an-evaluation-model-7" class="section level2">
+<h2>Define an Evaluation Model</h2>
+<p>The evaluation model specifies the most basic criterion for assessing the probability of success in the PFS and OS analyses (marginal power). A criterion based on disjunctive power could be considered but it would not provide additional information.</p>
+<p>Due to the hierarchical testing approach, the probability of detecting a significant treatment effect on at least one endpoint (disjunctive power) is simply equal to the probability of establishing a significant PFS effect.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study4.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;PFS test&quot;</span>,
+                          <span class="st">&quot;OS test&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;PFS test&quot;</span>,
+                       <span class="st">&quot;OS test&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+</div>
+<div id="download-7" class="section level2">
+<h2>Download</h2>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%204.R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%204.docx">CSE report</a></p></li>
+</ul>
+</div>
+</div>
+<div id="case-study-5-1" class="section level1">
+<h1>Case study 5</h1>
+<div id="summary-3" class="section level2">
+<h2>Summary</h2>
+<p>This case study extends the straightforward setting presented in <a href="#case-study-1-1">Case study 1</a> to a more complex setting involving two trial endpoints and three treatment arms. Case study 5 illustrates the process of performing power calculations in clinical trials with multiple, hierarchically structured objectives and “multivariate” multiplicity adjustment strategies (gatekeeping procedures).</p>
+<p>Consider a three-arm Phase III clinical trial for the treatment of rheumatoid arthritis (RA). Two co-primary endpoints will be used to evaluate the effect of a novel treatment on clinical response and on physical function. The endpoints are defined as follows:</p>
+<ul>
+<li><p>Endpoint 1: Response rate based on the American College of Rheumatology definition of improvement (ACR20).</p></li>
+<li><p>Endpoint 2: Change from baseline in the Health Assessment Questionnaire-Disability Index (HAQ-DI).</p></li>
+</ul>
+<p>The two endpoints have different marginal distributions. The first endpoint is binary whereas the second one is continuous and follows a normal distribution.</p>
+<p>The efficacy profile of two doses of a new treatment (Doses L and Dose H) will be compared to that of a placebo and a successful outcome will be defined as a significant treatment effect at either or both doses. A hierarchical structure has been established within each dose so that Endpoint 2 will be tested if and only if there is evidence of a significant effect on Endpoint 1.</p>
+<p>Three treatment effect scenarios for each endpoint are displayed in the table below. The scenarios define three outcome parameter sets. The first set represents a rather conservative treatment effect scenario, the second set is a standard (most plausible) scenario and the third set represents an optimistic scenario. Note that a reduction in the HAQ-DI score indicates a beneficial effect and thus the mean changes are assumed to be negative for Endpoint 2.</p>
+<table>
+<colgroup>
+<col width="23%"></col>
+<col width="29%"></col>
+<col width="15%"></col>
+<col width="15%"></col>
+<col width="15%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Endpoint</th>
+<th align="center">Outcome.parameter.set</th>
+<th align="center">Placebo</th>
+<th align="center">Dose.L</th>
+<th align="center">Dose.H</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">ACR20 (%)</td>
+<td align="center">Conservative</td>
+<td align="center">30%</td>
+<td align="center">40%</td>
+<td align="center">50%</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Standard</td>
+<td align="center">30%</td>
+<td align="center">45%</td>
+<td align="center">55%</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Optimistic</td>
+<td align="center">30%</td>
+<td align="center">50%</td>
+<td align="center">60%</td>
+</tr>
+<tr class="even">
+<td align="center">HAQ-DI (mean (SD))</td>
+<td align="center">Conservative</td>
+<td align="center">-0.10 (0.50)</td>
+<td align="center">-0.20 (0.50)</td>
+<td align="center">-0.30 (0.50)</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Standard</td>
+<td align="center">-0.10 (0.50)</td>
+<td align="center">-0.25 (0.50)</td>
+<td align="center">-0.35 (0.50)</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Optimistic</td>
+<td align="center">-0.10 (0.50)</td>
+<td align="center">-0.30 (0.50)</td>
+<td align="center">-0.40 (0.50)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="define-a-data-model-8" class="section level2">
+<h2>Define a Data Model</h2>
+<p>As in <a href="#case-study-4-1">Case study 4</a>, two endpoints are evaluated for each patient in this clinical trial example, which means that their joint distribution needs to be specified. The <code>MVMixedDist</code> method will be utilized for specifying a bivariate distribution with binomial and normal marginals (<code>var.type = list(&quot;BinomDist&quot;, &quot;NormalDist&quot;)</code>). In general, this function is used for modeling correlated normal, binomial and exponential endpoints and relies on the copula method, i.e., random variables are generated from a multivariate normal distribution and converted into variables with pre-specified marginal distributions.</p>
+<p>Three parameters must be defined to specify the joint distribution of Endpoints 1 and 2 in this clinical trial example:</p>
+<ul>
+<li><p>Variable types (binomial and normal).</p></li>
+<li><p>Outcome distribution parameters (proportion for Endpoint 1, mean and SD for Endpoint 2) based on the assumptions listed in the Table above.</p></li>
+<li><p>Correlation matrix of the multivariate normal distribution used in the copula method.</p></li>
+</ul>
+<p>These parameters are combined to define three outcome parameter sets (e.g., <code>outcome1.plac</code>, <code>outcome1.dosel</code> and <code>outcome1.doseh</code>) that will be included in the <code>Sample</code> object in the data model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Variable types</span>
+var.type =<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;BinomDist&quot;</span>, <span class="st">&quot;NormalDist&quot;</span>)
+
+<span class="co"># Outcome distribution parameters</span>
+placebo.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.3</span>), 
+                         <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.10</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+
+dosel.par1 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.40</span>), 
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.20</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+dosel.par2 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.45</span>), 
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.25</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+dosel.par3 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), 
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+
+doseh.par1 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), 
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+doseh.par2 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.55</span>), 
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.35</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+doseh.par3 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.60</span>), 
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.40</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+
+<span class="co"># Correlation between two endpoints</span>
+corr.matrix =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>,
+                       <span class="fl">0.5</span>, <span class="fl">1.0</span>), <span class="dv">2</span>, <span class="dv">2</span>)
+
+<span class="co"># Outcome parameter set 1</span>
+outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                              <span class="dt">par =</span> placebo.par, 
+                              <span class="dt">corr =</span> corr.matrix)
+outcome1.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                            <span class="dt">par =</span> dosel.par1, 
+                            <span class="dt">corr =</span> corr.matrix)
+outcome1.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                            <span class="dt">par =</span> doseh.par1, 
+                            <span class="dt">corr =</span> corr.matrix)
+
+<span class="co"># Outcome parameter set 2</span>
+outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                              <span class="dt">par =</span> placebo.par, 
+                              <span class="dt">corr =</span> corr.matrix)
+outcome2.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                            <span class="dt">par =</span> dosel.par2, 
+                            <span class="dt">corr =</span> corr.matrix)
+outcome2.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                            <span class="dt">par =</span> doseh.par2, 
+                            <span class="dt">corr =</span> corr.matrix)
+
+<span class="co"># Outcome parameter set 3</span>
+outcome3.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                              <span class="dt">par =</span> placebo.par, 
+                              <span class="dt">corr =</span> corr.matrix)
+outcome3.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                            <span class="dt">par =</span> doseh.par3, 
+                            <span class="dt">corr =</span> corr.matrix)
+outcome3.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, 
+                            <span class="dt">par =</span> dosel.par3, 
+                            <span class="dt">corr =</span> corr.matrix)</code></pre></div>
+<p>These outcome parameter set are then combined within each <code>Sample</code> object and the common sample size per treatment arm ranges between 100 and 120:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data model</span>
+case.study5.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;MVMixedDist&quot;</span>) +
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>),
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo, outcome3.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseL ACR20&quot;</span>, <span class="st">&quot;DoseL HAQ-DI&quot;</span>),
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel, outcome3.dosel)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseH ACR20&quot;</span>, <span class="st">&quot;DoseH HAQ-DI&quot;</span>),
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.doseh, outcome2.doseh, outcome3.doseh))</code></pre></div>
+</div>
+<div id="define-an-analysis-model-8" class="section level2">
+<h2>Define an Analysis Model</h2>
+<p>To set up the analysis model in this clinical trial example, note that the treatment comparisons for Endpoints 1 and 2 will be carried out based on two different statistical tests:</p>
+<ul>
+<li><p>Endpoint 1: Two-sample test for comparing proportions (<code>method = &quot;PropTest&quot;</code>).</p></li>
+<li><p>Endpoint 2: Two-sample t-test (<code>method = &quot;TTest&quot;</code>).</p></li>
+</ul>
+<p>It was pointed out earlier in this page that the two endpoints will be tested hierarchically within each dose. The figure below provides a visual summary of the testing strategy used in this clinical trial. The circles in this figure denote the four null hypotheses of interest:</p>
+<p>H1: Null hypothesis of no difference between Dose L and placebo with respect to Endpoint 1.</p>
+<p>H2: Null hypothesis of no difference between Dose H and placebo with respect to Endpoint 1.</p>
+<p>H3: Null hypothesis of no difference between Dose L and placebo with respect to Endpoint 2.</p>
+<p>H4: Null hypothesis of no difference between Dose H and placebo with respect to Endpoint 2.</p>
+<center>
+<div class="col-md-12">
+<pre><code>&lt;img src=&quot;CaseStudy05-fig1.png&quot; class=&quot;img-responsive&quot;&gt;</code></pre>
+</div>
+</center>
+<p>A multiple testing procedure known as the multiple-sequence gatekeeping procedure will be applied to account for the hierarchical structure of this multiplicity problem. This procedure belongs to the class of mixture-based gatekeeping procedures introduced in <a href="http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1074917">Dmitrienko et al. (2015)</a>. This gatekeeping procedure is specified by defining the following three parameters:</p>
+<ul>
+<li><p>Families of null hypotheses (<code>family</code>).</p></li>
+<li><p>Component procedures used in the families (<code>component.procedure</code>).</p></li>
+<li><p>Truncation parameters used in the families (<code>gamma</code>).</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Parameters of the gatekeeping procedure procedure (multiple-sequence gatekeeping procedure)</span>
+<span class="co"># Tests to which the multiplicity adjustment will be applied</span>
+test.list =<span class="st"> </span><span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>, 
+                  <span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>, 
+                  <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>, 
+                  <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>)
+
+<span class="co"># Families of hypotheses</span>
+family =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), 
+                  <span class="dt">family2 =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))
+
+<span class="co"># Component procedures for each family</span>
+component.procedure =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span><span class="st">&quot;HolmAdj&quot;</span>, 
+                               <span class="dt">family2 =</span> <span class="st">&quot;HolmAdj&quot;</span>)
+
+<span class="co"># Truncation parameter for each family</span>
+gamma =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="fl">0.8</span>, 
+                 <span class="dt">family2 =</span> <span class="dv">1</span>)</code></pre></div>
+<p>These parameters are included in the <code>MultAdjProc</code> object defined below. The tests to which the multiplicity adjustment will be applied are defined in the <code>tests</code> argument. The use of this argument is optional if all tests included in the analysis model are to be included. The argument <code>family</code> states that the null hypotheses will be grouped into two families:</p>
+<ul>
+<li><p>Family 1: H1 and H2.</p></li>
+<li><p>Family 2: H3 and H4.</p></li>
+</ul>
+<p>It is to be noted that the order corresponds to the order of the tests defined in the analysis model, except if the tests are specifically specified in the <code>tests</code> argument of the <code>MultAdjProc</code> object.</p>
+<p>The families will be tested sequentially and a truncated Holm procedure will be applied within each family (<code>component.procedure</code>). Lastly, the truncation parameter will be set to 0.8 in Family 1 and to 1 in Family 2 (<code>gamma</code>). The resulting parameters are included in the <code>par</code> argument of the <code>MultAdjProc</code> object and, as before, the <code>proc</code> argument is used to specify the multiple testing procedure (<code>MultipleSequenceGatekeepingAdj</code>).</p>
+<p>The test are then specified in the analysis model and the overall analysis model is defined as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study5.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;MultipleSequenceGatekeepingAdj&quot;</span>,
+              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">family =</span> family, 
+                               <span class="dt">proc =</span> component.procedure, 
+                               <span class="dt">gamma =</span> gamma),
+              <span class="dt">tests =</span> test.list) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseL ACR20&quot;</span>)) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseH ACR20&quot;</span>)) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;DoseL HAQ-DI&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>)) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>,
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;DoseH HAQ-DI&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>))</code></pre></div>
+<p>Recall that a numerically lower value indicates a beneficial effect for the HAQ-DI score and, as a result, the experimental treatment arm must be defined prior to the placebo arm in the test.samples parameters corresponding to the HAQ-DI tests, e.g., <code>samples = samples(&quot;DoseL HAQ-DI&quot;, &quot;Placebo HAQ-DI&quot;)</code>.</p>
+</div>
+<div id="define-an-evaluation-model-8" class="section level2">
+<h2>Define an Evaluation Model</h2>
+<p>In order to assess the probability of success in this clinical trial, a hybrid criterion based on the conjunctive criterion (both trial endpoints must be significant) and disjunctive criterion (at least one dose-placebo comparison must be significant) can be considered.</p>
+<p>This criterion will be met if a significant effect is established at one or two doses on Endpoint 1 (ACR20) and also at one or two doses on Endpoint 2 (HAQ-DI). However, due to the hierarchical structure of the testing strategy (see Figure), this is equivalent to demonstrating a significant difference between Placebo and at least one dose with respect to Endpoint 2. The corresponding criterion is a subset disjunctive criterion based on the two Endpoint 2 tests (subset disjunctive power was briefly mentioned in <a href="CaseStudy02">Case study 2</a>).</p>
+<p>In addition, the sponsor may also be interested in evaluating marginal power as well as subset disjunctive power based on the Endpoint 1 tests. The latter criterion will be met if a significant difference between Placebo and at least one dose is established with respect to Endpoint 1. Additionally, as in <a href="CaseStudy02">Case study 2</a>, the user could consider defining custom evaluation criteria. The three resulting evaluation criteria (marginal power, subset disjunctive criterion based on the Endpoint 1 tests and subset disjunctive criterion based on the Endpoint 2 tests) are included in the following evaluation model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study5.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,
+                          <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,
+                          <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,
+                          <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,
+                       <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,
+                       <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,
+                       <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power - ACR20&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,
+                          <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>),
+            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power - ACR20&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power - HAQ-DI&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,
+                          <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),
+            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power - HAQ-DI&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+</div>
+<div id="download-8" class="section level2">
+<h2>Download</h2>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%205.R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%205.docx">CSE report</a></p></li>
+</ul>
+</div>
+</div>
+<div id="case-study-6-1" class="section level1">
+<h1>Case study 6</h1>
+<div id="summary-4" class="section level2">
+<h2>Summary</h2>
+<p>Case study 6 is an extension of <a href="#case-study-2-1">Case study 2</a> where the objective of the sponsor is to compare several Multiple Testing Procedures (MTPs). The main difference is in the specification of the analysis model.</p>
+</div>
+<div id="define-a-data-model-9" class="section level2">
+<h2>Define a Data Model</h2>
+<p>The same data model as in <a href="#case-study-2-1">Case study 2</a> will be used in this case study. However, as shown in the table below, a new set of outcome parameters will be added in this case study (an optimistic set of parameters).</p>
+<table style="width:60%;">
+<colgroup>
+<col width="33%"></col>
+<col width="11%"></col>
+<col width="9%"></col>
+<col width="5%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Outcome.parameter.set</th>
+<th align="center">Arm</th>
+<th align="center">Mean</th>
+<th align="center">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Standard</td>
+<td align="center">Placebo</td>
+<td align="center">16</td>
+<td align="center">18</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Dose L</td>
+<td align="center">19.5</td>
+<td align="center">18</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Dose M</td>
+<td align="center">21</td>
+<td align="center">18</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Dose H</td>
+<td align="center">21</td>
+<td align="center">18</td>
+</tr>
+<tr class="odd">
+<td align="center">Optimistic</td>
+<td align="center">Placebo</td>
+<td align="center">16</td>
+<td align="center">18</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Dose L</td>
+<td align="center">20</td>
+<td align="center">18</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Dose M</td>
+<td align="center">21</td>
+<td align="center">18</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Dose H</td>
+<td align="center">22</td>
+<td align="center">18</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Standard</span>
+outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">16</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+outcome1.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">19.5</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+outcome1.dosem =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+outcome1.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+
+<span class="co"># Optimistic</span>
+outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">16</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+outcome2.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">20</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+outcome2.dosem =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+outcome2.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
+
+<span class="co"># Data model</span>
+case.study6.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose L&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose M&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosem, outcome2.dosem)) +
+<span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H&quot;</span>,
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.doseh, outcome2.doseh))</code></pre></div>
+</div>
+<div id="define-an-analysis-model-9" class="section level2">
+<h2>Define an Analysis Model</h2>
+<p>As in <a href="#case-study-2-1">Case study 2</a>, each dose-placebo comparison will be performed using a one-sided two-sample <em>t</em>-test (<code>TTest</code> method defined in each <code>Test</code> object). The same nomenclature will be used to define the hypotheses, i.e.:</p>
+<ul>
+<li><p>H1: Null hypothesis of no difference between Dose L and placebo.</p></li>
+<li><p>H2: Null hypothesis of no difference between Dose M and placebo.</p></li>
+<li><p>H3: Null hypothesis of no difference between Dose H and placebo.</p></li>
+</ul>
+<p>In this case study, as in <a href="#case-study-2-1">Case study 2</a>, the overall success criterion in the trial is formulated in terms of demonstrating a beneficial effect at any of the three doses, inducing an inflation of the overall Type I error rate. In this case study, the sponsor is interested in comparing several Multiple Testing Procedures, such as the weighted Bonferroni, Holm and Hochberg procedures. These MTPs are defined as below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Multiplicity adjustments</span>
+<span class="co"># No adjustment</span>
+mult.adj1 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="ot">NA</span>)
+
+<span class="co"># Bonferroni adjustment (with unequal weights)</span>
+mult.adj2 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;BonferroniAdj&quot;</span>,
+                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">2</span>)))
+
+<span class="co"># Holm adjustment (with unequal weights)</span>
+mult.adj3 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HolmAdj&quot;</span>, 
+                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">2</span>)))
+
+<span class="co"># Hochberg adjustment (with unequal weights)</span>
+mult.adj4 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>, 
+                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">2</span>)))</code></pre></div>
+<p>The <code>mult.adj1</code> object, which specified that no adjustment will be used, is defined in order to observe the decrease in power induced by each MTPs.</p>
+<p>It should be noted that for each weighted procedure, a higher weight is assigned to the test of Placebo vs Dose H (1/2), and the remaining weight is equally assigned to the two other tests (i.e. 1/4 for each test). These parameters are specified in the <code>par</code> argument of each MTP.</p>
+<p>The analysis model is defined as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study6.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">MultAdj</span>(mult.adj1, mult.adj2, mult.adj3, mult.adj4) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose L&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose H&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
+<p>For the sake of compactness, all MTPs are combined using a <code>MultAdj</code> object, but it is worth mentioning that each MTP could have been directly added to the <code>AnalysisModel</code> object using the <code>+</code> operator.</p>
+</div>
+<div id="define-an-evaluation-model-9" class="section level2">
+<h2>Define an Evaluation Model</h2>
+<p>As for the data model, the same evaluation model as in <a href="#case-study-2-1">Case study 2</a> will be used in this case study. Refer to <a href="#case-study-2-1">Case study 2</a> for more information.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
+case.study6.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
+                       <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+                       <span class="st">&quot;Placebo vs Dose H&quot;</span>),
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),
+            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+<span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H and at least one dose&quot;</span>,
+            <span class="dt">method =</span> <span class="st">&quot;case.study6.criterion&quot;</span>,
+            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,
+                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),
+            <span class="dt">labels =</span> <span class="st">&quot;Dose H and at least one of the two other doses are significant&quot;</span>,
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
+<p>The last <code>Criterion</code> object specifies the custom criterion which computes the probability of a significant treatment effect at Dose H and a significant treatment difference at Dose L or Dose M.</p>
+</div>
+<div id="perform-clinical-scenario-evaluation-1" class="section level2">
+<h2>Perform Clinical Scenario Evaluation</h2>
+<p>Using the data, analysis and evaluation models, simulation-based Clinical Scenario Evaluation is performed by calling the <code>CSE</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulation Parameters</span>
+case.study6.sim.parameters =<span class="st">  </span><span class="kw">SimParameters</span>(<span class="dt">n.sims =</span> <span class="dv">1000</span>, 
+                                            <span class="dt">proc.load =</span> <span class="st">&quot;full&quot;</span>, 
+                                            <span class="dt">seed =</span> <span class="dv">42938001</span>)
+
+<span class="co"># Perform clinical scenario evaluation</span>
+case.study6.results =<span class="st"> </span><span class="kw">CSE</span>(case.study6.data.model,
+                          case.study6.analysis.model,
+                          case.study6.evaluation.model,
+                          case.study6.sim.parameters)</code></pre></div>
+</div>
+<div id="generate-a-simulation-report" class="section level2">
+<h2>Generate a Simulation Report</h2>
+<p>This case study will also illustrate the process of customizing a Word-based simulation report. This can be accomplished by defining custom sections and subsections to provide a structured summary of the complex set of simulation results.</p>
+<div id="create-a-customized-simulation-report" class="section level3">
+<h3>Create a Customized Simulation Report</h3>
+<div id="define-a-presentation-model" class="section level4">
+<h4>Define a Presentation Model</h4>
+<p>Several presentation models will be used produce customized simulation reports:</p>
+<ul>
+<li><p>A report without subsections.</p></li>
+<li><p>A report with subsections.</p></li>
+<li><p>A report with combined sections.</p></li>
+</ul>
+<p>First of all, a default <code>PresentationModel</code> object (<code>case.study6.presentation.model.default</code>) will be created. This object will include the common components of the report that are shared across the presentation models. The project information (<code>Project</code> object), sorting options in summary tables (<code>Table</code> object) and specification of custom labels (<code>CustomLabel</code> objects) are included in this object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study6.presentation.model.default =<span class="st"> </span><span class="kw">PresentationModel</span>() +
+<span class="st">  </span><span class="kw">Project</span>(<span class="dt">username =</span> <span class="st">&quot;[Mediana's User]&quot;</span>,
+          <span class="dt">title =</span> <span class="st">&quot;Case study 6&quot;</span>,
+          <span class="dt">description =</span> <span class="st">&quot;Clinical trial in patients with schizophrenia - Several MTPs&quot;</span>) +
+<span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) +
+<span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;sample.size&quot;</span>, 
+              <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>, <span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>))) +
+<span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;multiplicity.adjustment&quot;</span>, 
+              <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;No adjustment&quot;</span>, <span class="st">&quot;Bonferroni adjustment&quot;</span>, <span class="st">&quot;Holm adjustment&quot;</span>, <span class="st">&quot;Hochberg adjustment&quot;</span>))</code></pre></div>
+</div>
+<div id="report-without-subsections" class="section level4">
+<h4>Report without subsections</h4>
+<p>The first simulation report will include a section for each outcome parameter set. To accomplish this, a <code>Section</code> object is added to the default <code>PresentationModel</code> object and the report is generated:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Reporting 1 - Without subsections</span>
+case.study6.presentation.model1 =<span class="st"> </span>case.study6.presentation.model.default +
+<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>)
+
+<span class="co"># Report Generation</span>
+<span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study6.presentation.model1,
+               <span class="dt">cse.results =</span> case.study6.results,
+               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 6 - Without subsections.docx&quot;</span>)</code></pre></div>
+</div>
+<div id="report-with-subsections" class="section level4">
+<h4>Report with subsections</h4>
+<p>The second report will include a section for each outcome parameter set and, in addition, a subsection will be created for each multiplicity adjustment procedure. The <code>Section</code> and <code>Subsection</code> objects are added to the default <code>PresentationModel</code> object as shown below and the report is generated:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Reporting 2 - With subsections</span>
+case.study6.presentation.model2 =<span class="st"> </span>case.study6.presentation.model.default +
+<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) +
+<span class="st">  </span><span class="kw">Subsection</span>(<span class="dt">by =</span> <span class="st">&quot;multiplicity.adjustment&quot;</span>) 
+
+<span class="co"># Report Generation</span>
+<span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study6.presentation.model2,
+               <span class="dt">cse.results =</span> case.study6.results,
+               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 6 - With subsections.docx&quot;</span>)</code></pre></div>
+</div>
+<div id="report-with-combined-sections" class="section level4">
+<h4>Report with combined sections</h4>
+<p>Finally, the third report will include a section for each combination of outcome parameter set and each multiplicity adjustment procedure. This is accomplished by adding a <code>Section</code> object to the default <code>PresentationModel</code> object and specifying the outcome parameter and multiplicity adjustment in the section’s <code>by</code> argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Reporting 3 - Combined sections</span>
+case.study6.presentation.model3 =<span class="st"> </span>case.study6.presentation.model.default +
+<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;outcome.parameter&quot;</span>, <span class="st">&quot;multiplicity.adjustment&quot;</span>))
+
+<span class="co"># Report Generation</span>
+<span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study6.presentation.model3,
+               <span class="dt">cse.results =</span> case.study6.results,
+               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 6 - Combined Sections.docx&quot;</span>)</code></pre></div>
+</div>
+</div>
+</div>
+<div id="download-9" class="section level2">
+<h2>Download</h2>
+<p>The R code and the report that summarizes the results of Clinical Scenario Evaluation for this case study can be downloaded on the Mediana website:</p>
+<ul>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%206.R">R code</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%206%20-%20Without%20subsections.docx">CSE report without subsections</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%206%20-%20With%20subsections.docx">CSE report with subsections</a></p></li>
+<li><p><a href="http://gpaux.github.io/Mediana/Case%20study%206%20-%20Combined%20Sections.docx">CSE report with combined subsections</a></p></li>
+</ul>
 </div>
 </div>
 
