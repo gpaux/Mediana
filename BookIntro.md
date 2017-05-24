@@ -45,4 +45,14 @@ This chapter introduce key concepts of clinical trial optimization in the contex
 
 ## Subgroup Analysis in Clinical Trials
 
-On construction
+This chapter will approach the topic of subgroup analysis in Phase III
+trials from a general Clinical Scenario Evaluation (CSE) perspective and introduce
+practical approaches to clinical trial optimization in a confirmatory
+subgroup analysis setting, i.e., in Phase III clinical trials with pre-defined patient
+subpopulations.
+
+1. [Case study 1](subgroup_CaseStudy01.html)
+
+2. [Case study 2](subgroup_CaseStudy02.html)
+
+3. [Case study 3](subgroup_CaseStudy03.html)

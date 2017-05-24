@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Case study 2
-header: Case study 2
+title: Case study 3
+header: Case study 3
 group: 
 ---
 
