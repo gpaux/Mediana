@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrieniko" />
 
-<meta name="date" content="2017-04-25" />
+<meta name="date" content="2017-05-25" />
 
 <title>Mediana: an R package for clinical trial simulations</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Mediana: an R package for clinical trial simulations</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrieniko</em></h4>
-<h4 class="date"><em>2017-04-25</em></h4>
+<h4 class="date"><em>2017-05-25</em></h4>
 
 
 
@@ -82,8 +82,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="expert-and-development-teams" class="section level2">
 <h2>Expert and development teams</h2>
-<p><strong>Package design</strong>: <a href="http://www.medianainc.com/">Alex Dmitrienko (Mediana Inc.)</a>.</p>
-<p><strong>Core development team</strong>: <a href="http://www.linkedin.com/in/pauxgautier">Gautier Paux (Servier)</a>, <a href="http://www.medianainc.com/">Alex Dmitrienko (Mediana Inc.)</a>.</p>
+<p><strong>Package design</strong>: Alex Dmitrienko (Mediana Inc.).</p>
+<p><strong>Core development team</strong>: Gautier Paux (Servier), Alex Dmitrienko (Mediana Inc.).</p>
 <p><strong>Extended development team</strong>: Thomas Brechenmacher (Novartis), Fei Chen (Johnson and Johnson), Ilya Lipkovich (Quintiles), Ming-Dauh Wang (Lilly), Jay Zhang (MedImmune), Haiyan Zheng (Osaka University).</p>
 <p><strong>Expert team</strong>: Keaven Anderson (Merck), Frank Harrell (Vanderbilt University), Mani Lakshminarayanan (Pfizer), Brian Millen (Lilly), Jose Pinheiro (Johnson and Johnson), Thomas Schmelter (Bayer).</p>
 </div>
@@ -93,7 +93,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>Latest release</h3>
 <p>Install the latest version of the Mediana package from CRAN using the <code>install.packages</code> command in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;Mediana&quot;</span>)</code></pre></div>
-<p>Alternatively, you can download the package from the <a href="https://cran.r-project.org/web/packages/Mediana/index.html">CRAN website</a>.</p>
+<p>Alternatively, you can download the package from the <a href="https://cran.r-project.org/package=Mediana">CRAN website</a>.</p>
 </div>
 <div id="development-version" class="section level3">
 <h3>Development version</h3>
@@ -192,7 +192,7 @@ case.study1.data.model =<span class="st">  </span><span class="kw">DataModel</sp
 </ul>
 <p>The outcome’s type must be defined for each endpoint in case of multivariate disribution, e.g. <code>c(&quot;event&quot;,&quot;event&quot;)</code> in case of multivariate exponential distribution. The <code>outcome.type</code> argument is essential to get censored events for time-to-event endpoints if the <code>SampleSize</code> object is used to specify the number of patients to generate.</p>
 <p>A single <code>OutcomeDist</code> object can be added to a <code>DataModel</code> object.</p>
-<p>For more information about the <code>OutcomeDist</code> object, see the documentation for <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">OutcomeDist</a> on the CRAN web site.</p>
+<p>For more information about the <code>OutcomeDist</code> object, see the documentation for <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">OutcomeDist</a> on the CRAN web site.</p>
 <p>If a certain outcome distribution is not implemented in the Mediana package, the user can create a custom function and use it within the package (see the dedicated vignette <code>vignette(&quot;custom-functions&quot;, package = &quot;Mediana&quot;)</code>).</p>
 </div>
 <div id="example" class="section level4">
@@ -224,7 +224,7 @@ case.study1.data.model =<span class="st">  </span><span class="kw">DataModel</sp
 </ul>
 <p>The <code>sample.size</code> argument is optional but must be used to define the sample size only if an unbalanced design is considered (i.e., the sample size varies across the samples). The sample size must be either defined in the <code>Sample</code> object or in the <code>SampleSize</code> object, but not in both.</p>
 <p>Several <code>Sample</code> objects can be added to a <code>DataModel</code> object.</p>
-<p>For more information about the <code>Sample</code> object, see the documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Sample</a> on the CRAN web site.</p>
+<p>For more information about the <code>Sample</code> object, see the documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">Sample</a> on the CRAN web site.</p>
 </div>
 <div id="example-1" class="section level4">
 <h4>Example</h4>
@@ -329,7 +329,7 @@ outcome.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span
 <li><code>sample.size</code> specifies a list or vector of sample size(s).</li>
 </ul>
 <p>A single <code>SampleSize</code> object can be added to a <code>DataModel</code> object.</p>
-<p>For more information about the <code>SampleSize</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">SampleSize</a>.</p>
+<p>For more information about the <code>SampleSize</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">SampleSize</a>.</p>
 </div>
 <div id="example-2" class="section level4">
 <h4>Example</h4>
@@ -350,7 +350,7 @@ outcome.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span
 <li><p><code>rando.ratio</code> defines a vector of randomization ratios for each <code>Sample</code> object defined in the <code>DataModel</code> object.</p></li>
 </ul>
 <p>A single <code>Event</code> object can be added to a <code>DataModel</code> object.</p>
-<p>For more information about the <code>Event</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Event</a>.</p>
+<p>For more information about the <code>Event</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">Event</a>.</p>
 </div>
 <div id="example-3" class="section level4">
 <h4>Example</h4>
@@ -380,7 +380,7 @@ randomization.ratio =<span class="st"> </span><span class="kw">c</span>(<span cl
 <li><p><code>dropout.dist.par</code> defines the parameters of the dropout distribution.</p></li>
 </ul>
 <p>Several <code>Design</code> objects can be added to a <code>DataModel</code> object.</p>
-<p>For more information about the <code>Design</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Design</a>.</p>
+<p>For more information about the <code>Design</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">Design</a>.</p>
 <p>A convienient way to model non-uniform enrollment is to use a beta distribution (<code>BetaDist</code>). If <code>enroll.dist = &quot;BetaDist&quot;</code>, the <code>enroll.dist.par</code> should contain the parameter of the beta distribution (<code>a</code> and <code>b</code>). These parameters must be derived according to the expected enrollment at a specific timepoint. For example, if half the patients are expected to be enrolled at 75% of the enrollment period, the beta distribution is a <code>Beta(log(0.5)/log(0.75), 1)</code>. Generally, let <code>q</code> be the proportion of enrolled patients at <code>p</code>% of the enrollment period, the Beta distribution can be derived as follows:</p>
 <ul>
 <li><p>If <code>q &gt; p</code>, the Beta distribution is <code>Beta(a,1)</code> with <code>a = log(p) / log(q)</code></p></li>
@@ -448,7 +448,7 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 </ul>
 <p>It needs to be noted that the significance tests listed above are implemented as <strong>one-sided</strong> tests and thus the sample order in the <code>samples</code> argument is important. In particular, the Mediana package assumes that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure).</p>
 <p>Several <code>Test</code> objects can be added to an <code>AnalysisModel</code>object.</p>
-<p>For more information about the <code>Test</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Test</a> on the CRAN web site.</p>
+<p>For more information about the <code>Test</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">Test</a> on the CRAN web site.</p>
 </div>
 <div id="example-5" class="section level4">
 <h4>Example</h4>
@@ -503,7 +503,7 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <li><p><code>PatientCountStat</code>: compute the <strong>number of patients</strong> observed in the sample(s) defined in the <code>samples</code> argument</p></li>
 </ul>
 <p>Several <code>Statistic</code> objects can be added to an <code>AnalysisModel</code> object.</p>
-<p>For more information about the <code>Statistic</code> object, see the R documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Statistic</a>.</p>
+<p>For more information about the <code>Statistic</code> object, see the R documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">Statistic</a>.</p>
 </div>
 <div id="example-6" class="section level4">
 <h4>Example</h4>
@@ -540,7 +540,7 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <li><p><code>MixtureGatekeepingAdj</code>: Family of <strong>mixture-based gatekeeping procedures</strong>. Required parameters: <code>family</code> (vectors of hypotheses included in each family), <code>proc</code> (vector of procedure names applied to each family), <code>gamma</code> (vector of truncation parameters), <code>serial</code> (matrix of indicators), <code>parallel</code> (matrix of indicators).</p></li>
 </ul>
 <p>Several <code>MultAdjProc</code> objects can be added to an <code>AnalysisModel</code>object using the ‘+’ operator or by grouping them into a MultAdj object.</p>
-<p>For more information about the <code>MultAdjProc</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">MultAdjProc</a>.</p>
+<p>For more information about the <code>MultAdjProc</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">MultAdjProc</a>.</p>
 </div>
 <div id="example-7" class="section level4">
 <h4>Example</h4>
@@ -594,7 +594,7 @@ gamma =<span class="st"> </span><span class="kw">families</span>(<span class="dt
 <h4>Description</h4>
 <p>This object specifies a multiplicity adjustment strategy that can include several multiplicity adjustment procedures. A multiplicity adjustment strategy may be defined when the same Clinical Scenario Evaluation approach is applied to several clinical trials.</p>
 <p>A <code>MultAdjStrategy</code> object serves as a wrapper for several <code>MultAdjProc</code> objects.</p>
-<p>For more information about the <code>MultAdjStrategy</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">MultAdjStrategy</a>.</p>
+<p>For more information about the <code>MultAdjStrategy</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">MultAdjStrategy</a>.</p>
 </div>
 <div id="example-8" class="section level4">
 <h4>Example</h4>
@@ -657,7 +657,7 @@ analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>()
 <div id="description-9" class="section level4">
 <h4>Description</h4>
 <p>This object can be used to combine several <code>MultAdjProc</code> or <code>MultAdjStrategy</code> objects and add them as a single object to an <code>AnalysisModel</code> object . This object is provided mainly for convenience and its use is optional. Alternatively, <code>MultAdjProc</code> or <code>MultAdjStrategy</code> objects can be added to an <code>AnalysisModel</code> object incrementally using the ‘+’ operator.</p>
-<p>For more information about the <code>MultAdj</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">MultAdj</a>.</p>
+<p>For more information about the <code>MultAdj</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">MultAdj</a>.</p>
 </div>
 <div id="example-9" class="section level4">
 <h4>Example</h4>
@@ -745,7 +745,7 @@ case.study1.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 <li><p><code>ExpectedRejPower</code>: compute the expected number of statistical significant tests. Required parameter: <code>alpha</code>(significance level used in each test).</p></li>
 </ul>
 <p>Several <code>Criterion</code> objects can be added to an <code>EvaluationModel</code> object.</p>
-<p>For more information about the <code>Criterion</code> object, see the package’s documentation <a href="https://cran.r-project.org/web/packages/Mediana/Mediana.pdf">Criterion</a>.</p>
+<p>For more information about the <code>Criterion</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">Criterion</a>.</p>
 <p>If a certain success criterion is not implemented in the Mediana package, the user can create a custom function and use it within the package (see the dedicated vignette <code>vignette(&quot;custom-functions&quot;, package = &quot;Mediana&quot;)</code>).</p>
 </div>
 <div id="examples" class="section level4">

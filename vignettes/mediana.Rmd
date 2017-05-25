@@ -17,9 +17,9 @@ Mediana is an R package which provides a general framework for clinical trial si
 
 ## Expert and development teams
 
-**Package design**: [Alex Dmitrienko (Mediana Inc.)](http://www.medianainc.com/).
+**Package design**: Alex Dmitrienko (Mediana Inc.).
 
-**Core development team**: [Gautier Paux (Servier)](http://www.linkedin.com/in/pauxgautier), [Alex Dmitrienko (Mediana Inc.)](http://www.medianainc.com/).
+**Core development team**: Gautier Paux (Servier), Alex Dmitrienko (Mediana Inc.).
 
 **Extended development team**: Thomas Brechenmacher (Novartis), Fei Chen (Johnson and Johnson), Ilya Lipkovich (Quintiles), Ming-Dauh Wang (Lilly), Jay Zhang (MedImmune), Haiyan Zheng (Osaka University).
 
@@ -35,7 +35,7 @@ Install the latest version of the Mediana package from CRAN using the `install.p
 install.packages("Mediana")
 ```
 
-Alternatively, you can download the package from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html).
+Alternatively, you can download the package from the [CRAN website](https://cran.r-project.org/package=Mediana).
 
 ### Development version
 
@@ -169,7 +169,7 @@ The outcome's type must be defined for each endpoint in case of multivariate dis
 
 A single `OutcomeDist` object can be added to a `DataModel` object.
 
-For more information about the `OutcomeDist` object, see the documentation for [OutcomeDist](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
+For more information about the `OutcomeDist` object, see the documentation for [OutcomeDist](https://cran.r-project.org/package=Mediana/Mediana.pdf) on the CRAN web site.
 
 If a certain outcome distribution is not implemented in the Mediana package, the user can create a custom function and use it within the package (see the dedicated vignette `vignette("custom-functions", package = "Mediana")`).
 
@@ -213,7 +213,7 @@ The `sample.size` argument is optional but must be used to define the sample siz
 
 Several `Sample` objects can be added to a `DataModel` object.
 
-For more information about the `Sample` object, see the documentation [Sample](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
+For more information about the `Sample` object, see the documentation [Sample](https://cran.r-project.org/package=Mediana/Mediana.pdf) on the CRAN web site.
 
 #### Example
 
@@ -334,7 +334,7 @@ This object specifies the sample size in a balanced trial design (all samples wi
 
 A single `SampleSize` object can be added to a `DataModel` object.
 
-For more information about the `SampleSize` object, see the package's documentation [SampleSize](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `SampleSize` object, see the package's documentation [SampleSize](https://cran.r-project.org/package=Mediana/Mediana.pdf).
 
 #### Example
 
@@ -360,7 +360,7 @@ This object specifies the total number of events (total event count) among all s
 
 A single `Event` object can be added to a `DataModel` object.
 
-For more information about the `Event` object, see the package's documentation [Event](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `Event` object, see the package's documentation [Event](https://cran.r-project.org/package=Mediana/Mediana.pdf).
 
 #### Example
 
@@ -400,7 +400,7 @@ This object specifies the design parameters used in event-driven designs if the 
 
 Several `Design` objects can be added to a `DataModel` object.
 
-For more information about the `Design` object, see the package's documentation [Design](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `Design` object, see the package's documentation [Design](https://cran.r-project.org/package=Mediana/Mediana.pdf).
 
 A convienient way to model non-uniform enrollment is to use a beta distribution (`BetaDist`). If `enroll.dist = "BetaDist"`, the `enroll.dist.par` should contain the parameter of the beta distribution (`a` and `b`). These parameters must be derived according to the expected enrollment at a specific timepoint. For example, if half the patients are expected to be enrolled at 75% of the enrollment period, the beta distribution is a `Beta(log(0.5)/log(0.75), 1)`. Generally, let `q` be the proportion of enrolled patients at `p`% of the enrollment period, the Beta distribution can be derived as follows:
 
@@ -496,7 +496,7 @@ Sample 2 should include patients allocated to the experimental treatment arm. Th
 
 Several `Test` objects can be added to an `AnalysisModel`object.
 
-For more information about the `Test` object, see the package's documentation [Test](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
+For more information about the `Test` object, see the package's documentation [Test](https://cran.r-project.org/package=Mediana/Mediana.pdf) on the CRAN web site.
 
 #### Example
 
@@ -581,7 +581,7 @@ Several methods for computing descriptive statistics are already implemented in 
 
 Several `Statistic` objects can be added to an `AnalysisModel` object.
 
-For more information about the `Statistic` object, see the R documentation [Statistic](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `Statistic` object, see the R documentation [Statistic](https://cran.r-project.org/package=Mediana/Mediana.pdf).
 
 #### Example
 
@@ -635,7 +635,7 @@ Several commonly used multiplicity adjustment procedures are included in the Med
 
 Several `MultAdjProc` objects can be added to an `AnalysisModel`object using the '+' operator or by grouping them into a MultAdj object.
 
-For more information about the `MultAdjProc` object, see the package's documentation [MultAdjProc](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `MultAdjProc` object, see the package's documentation [MultAdjProc](https://cran.r-project.org/package=Mediana/Mediana.pdf).
 
 #### Example
 
@@ -702,7 +702,7 @@ This object specifies a multiplicity adjustment strategy that can include severa
 
 A `MultAdjStrategy` object serves as a wrapper for several `MultAdjProc` objects.
 
-For more information about the `MultAdjStrategy` object, see the package's documentation [MultAdjStrategy](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `MultAdjStrategy` object, see the package's documentation [MultAdjStrategy](https://cran.r-project.org/package=Mediana/Mediana.pdf).
 
 #### Example
 
@@ -770,7 +770,7 @@ analysis.model = AnalysisModel() +
 
 This object can be used to combine several `MultAdjProc` or  `MultAdjStrategy` objects and add them as a single object to an `AnalysisModel` object . This object is provided mainly for convenience and its use is optional.  Alternatively, `MultAdjProc` or `MultAdjStrategy` objects can be added to an `AnalysisModel` object incrementally using the '+' operator.
 
-For more information about the `MultAdj` object, see the package's documentation [MultAdj](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `MultAdj` object, see the package's documentation [MultAdj](https://cran.r-project.org/package=Mediana/Mediana.pdf).
 
 #### Example
 
@@ -878,7 +878,7 @@ Several commonly used success criteria are implemented in the Mediana package. T
 
 Several `Criterion` objects can be added to an `EvaluationModel` object.
 
-For more information about the `Criterion` object, see the package's documentation [Criterion](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf).
+For more information about the `Criterion` object, see the package's documentation [Criterion](https://cran.r-project.org/package=Mediana/Mediana.pdf).
 
 If a certain success criterion is not implemented in the Mediana package, the user can create a custom function and use it within the package (see the dedicated vignette `vignette("custom-functions", package = "Mediana")`).
 

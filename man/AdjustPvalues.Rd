@@ -106,7 +106,7 @@ gatekeeping procedures. \emph{Biometrical Journal}. 50, 667--677. \cr
 }
 
 \seealso{
-See Also \code{\link{MultAdjProc}}.
+See Also \code{\link{MultAdjProc}} and \code{\link{AdjustCIs}}.
 }
 
 \examples{

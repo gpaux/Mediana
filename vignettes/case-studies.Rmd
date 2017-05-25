@@ -2,7 +2,7 @@
 title: "Case studies"
 author: "Gautier Paux and Alex Dmitrienko"
 date: "`r Sys.Date()`"
-output: html_vignette
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Case studies}
   %\VignetteEngine{knitr::rmarkdown}
