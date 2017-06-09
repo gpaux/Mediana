@@ -1,3 +1,9 @@
+# Mediana 1.0.6
+
+## New features
+ 
+## Bug fixes
+
 # Mediana 1.0.5
 
 ## New features
