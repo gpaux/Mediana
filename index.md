@@ -25,17 +25,13 @@ Mediana R package has been widely used to implement the case studies presented i
 
 ## New release ! [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana)
 
-The version 1.0.4 of the Mediana R package has been released on 07 February 2017. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
+The version 1.0.5 of the Mediana R package has been released on 25 May 2017. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
 
-- Addition of the Fixed-sequence procedure (`FixedSeqAdj`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#MultAdjProcobject)).
+- Addition of the `AdjustPvalues` function which can be used to get adjusted p-values from a Multiple Testing Procedure. This function cannot be used within the CSE framework but it is an add-on function to compute adjusted p-values. Documentation is presented in this [page](AdjustPvalues.html)
 
-- Addition of the Cox method to calculate the HR, effect size and ratio of effect size for time-to-event endpoint. This can be accomplished by setting the  `method` argument in the parameter list to set-up the calculation based on the Cox method. (`par = parameters(method = "Cox"`), see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
+- Addition of the `AdjustCIs` function which can be used to get simultaneous confidence intervals from a Multiple Testing Procedure. This function cannot be used within the CSE framework but it is an add-on function to simultaneous confidence intervals. Documentation is presented in this [page](AdjustPvalues.html#AdjustCIsfunction)
 
-- Addition of the package version information in the report.
-
-- Revision of one-sided p-value computation for Log-Rank test.
-
-- Revision of the function to calculate the Hazard Ratio Statistic (HazardRatioStat method). By default, this calculation is now based on the log-rank statistic ((O2/E2)/(O1/E1) where O and E are Observed and Expected event in sample 2 and sample 1. A parameter can be added using the `method` argument in the parameter list to set-up the calculation based on the Cox method (`par = parameters(method = "Cox"`), see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
+- Creation of vignettes
 
 - Some bug fixes.
 
