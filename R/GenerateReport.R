@@ -5,5 +5,9 @@
 # Description: This function is used to create a summary table with all results
 #' @export
 GenerateReport = function(presentation.model = NULL, cse.results, report.filename, report.template = NULL){
+  if (!requireNamespace("ReporteRs", quietly = TRUE)) {
+    stop("ReporteRs R package is needed for to generate the report. Please install it.",
+         call. = FALSE)
+  }
   UseMethod("GenerateReport")
 }

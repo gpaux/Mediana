@@ -2,7 +2,7 @@ Package: Mediana
 Type: Package
 Title: Clinical Trial Simulations
 Version: 1.0.6
-Date: 2017-06-03
+Date: 2017-08-02
 Author: Gautier Paux, Alex Dmitrienko.
 Maintainer: Gautier Paux <gautier@paux.fr>
 BugReports: https://github.com/gpaux/Mediana/issues
@@ -18,7 +18,6 @@ Imports:
     foreach,
     MASS,
     mvtnorm,
-    ReporteRs,
     stats,
     survival,
     utils
@@ -26,6 +25,7 @@ License: GPL-2
 URL: http://gpaux.github.io/Mediana/
 RoxygenNote: 6.0.1
 Suggests: knitr,
+    ReporteRs,
     rmarkdown,
     pander
 VignetteBuilder: knitr

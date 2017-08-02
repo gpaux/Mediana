@@ -32,6 +32,7 @@ Objects of class \code{MultAdjProc} are used in objects of class \code{AnalysisM
 \item \code{HommelAdj}: Hommel procedure. Optional parameter: \code{weight}.
 \item \code{FixedSeqAdj}: Fixed-sequence procedure.
 \item \code{ChainAdj}: Family of chain procedures. Required parameters: \code{weight} and \code{transition}.
+\item \code{FallbackAdj}: Fallback procedure. Required parameters: \code{weight}.
 \item \code{NormalParamAdj}: Parametric multiple testing procedure derived from a multivariate normal distribution. Required parameter: \code{corr}. Optional parameter: \code{weight}.
 \item \code{ParallelGatekeepingAdj}: Family of parallel gatekeeping procedures. Required parameters: \code{family}, \code{proc}, \code{gamma}.
 \item \code{MultipleSequenceGatekeepingAdj}: Family of multiple-sequence gatekeeping procedures. Required parameters: \code{family}, \code{proc}, \code{gamma}.

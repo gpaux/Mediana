@@ -13,7 +13,7 @@ Provides a general framework for clinical trial simulations based on the Clinica
 Package: \tab Mediana\cr
 Type: \tab Package\cr
 Version: \tab 1.0.6\cr
-Date: \tab 2017-06-03\cr
+Date: \tab 2017-08-02\cr
 License: \tab GPL-2\cr
 }
 %~~ An overview of how to use the package, including the most important functions ~~
@@ -25,6 +25,15 @@ Maintainer: Gautier Paux <gautier@paux.fr>
 }
 \references{
 Benda, N., Branson, M., Maurer, W., Friede, T. (2010). Aspects of modernizing drug development using clinical scenario planning and evaluation. Drug Information Journal. 44, 299-315.
+
+Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.
+
+Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics. 26, 120-140.
+
+Dmitrienko, A. and Pulkstenis, E. (2017). Clinical Trial Optimization Using R. New-York : CRC Press.
+
+Friede, T., Nicholas, R., Stallard, N., Todd, S., Parsons, N.R., Valdes-Marquez, E., Chataway, J. (2010). Refinement of the clinical scenario evaluation framework for assessment of competing development strategies with an application to multiple sclerosis. Drug Information Journal 44:713-718.
+
 
 \url{http://gpaux.github.io/Mediana/}
 

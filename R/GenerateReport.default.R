@@ -4,7 +4,6 @@
 # Argument: ResultDes returned by the CSE function and presentation model and Word-document title and Word-template.
 # Description: This function is used to create a summary table with all results
 #' @export
-#' @import ReporteRs
 
 GenerateReport.default = function(presentation.model = NULL, cse.results, report.filename, report.template = NULL){
   # Add error checks
@@ -24,30 +23,30 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
     if (file.exists(report.filename)) file.remove(report.filename)
   }
 
-  # Create a DOCX object
+  # Create a ReporteRs::docx object
   if (!is.null(report.template)) {
-    doc = docx(title = report.structure$title, template = report.template)
+    doc = ReporteRs::docx(title = report.structure$title, template = report.template)
   } else {
     # Use standard template
-    doc = docx(title = report.structure$title)
+    doc = ReporteRs::docx(title = report.structure$title)
   }
 
   # Report's title
-  doc = addParagraph(doc, value = report.structure$title, stylename = "TitleDoc")
+  doc = ReporteRs::addParagraph(doc, value = report.structure$title, stylename = "TitleDoc")
 
   # Text formatting
-  my.text.format = parProperties(text.align = "left")
+  my.text.format = ReporteRs::parProperties(text.align = "left")
 
   # Table formatting
-  header.cellProperties = cellProperties(border.left.width = 0, border.right.width = 0, border.bottom.width = 2, border.top.width = 2, padding = 5, background.color = "#eeeeee")
-  data.cellProperties = cellProperties(border.left.width = 0, border.right.width = 0, border.bottom.width = 1, border.top.width = 0, padding = 3)
+  header.cellProperties = ReporteRs::cellProperties(border.left.width = 0, border.right.width = 0, border.bottom.width = 2, border.top.width = 2, padding = 5, background.color = "#eeeeee")
+  data.cellProperties = ReporteRs::cellProperties(border.left.width = 0, border.right.width = 0, border.bottom.width = 1, border.top.width = 0, padding = 3)
 
-  header.textProperties = textProperties(font.size = 11, font.weight = "bold", font.family = "Calibri")
-  data.textProperties = textProperties(font.size = 11, font.family = "Calibri")
+  header.textProperties = ReporteRs::textProperties(font.size = 11, font.weight = "bold", font.family = "Calibri")
+  data.textProperties = ReporteRs::textProperties(font.size = 11, font.family = "Calibri")
 
-  leftPar = parProperties(text.align = "left")
-  rightPar = parProperties(text.align = "right")
-  centerPar = parProperties(text.align = "center")
+  leftPar = ReporteRs::parProperties(text.align = "left")
+  rightPar = ReporteRs::parProperties(text.align = "right")
+  centerPar = ReporteRs::parProperties(text.align = "center")
 
   # Number of sections in the report (the report's title is not counted)
   n.sections = length(report.structure$section)
@@ -56,7 +55,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
   for(section.index in 1:n.sections) {
 
     # Section's title (if non-empty)
-    if (!is.na(report.structure$section[[section.index]]$title)) doc = addTitle(doc, value = report.structure$section[[section.index]]$title, 1)
+    if (!is.na(report.structure$section[[section.index]]$title)) doc = ReporteRs::addTitle(doc, value = report.structure$section[[section.index]]$title, 1)
 
     # Number of subsections in the current section
     n.subsections = length(report.structure$section[[section.index]]$subsection)
@@ -65,7 +64,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
     for(subsection.index in 1:n.subsections) {
 
       # Subsection's title (if non-empty)
-      if (!is.na(report.structure$section[[section.index]]$subsection[[subsection.index]]$title)) doc = addTitle(doc, value = report.structure$section[[section.index]]$subsection[[subsection.index]]$title, 2)
+      if (!is.na(report.structure$section[[section.index]]$subsection[[subsection.index]]$title)) doc = ReporteRs::addTitle(doc, value = report.structure$section[[section.index]]$subsection[[subsection.index]]$title, 2)
 
       # Number of subsubsections in the current section
       n.subsubsections = length(report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection)
@@ -75,7 +74,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
         for(subsubsection.index in 1:n.subsubsections) {
 
           # Subsubsection's title (if non-empty)
-          if (!is.na(report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$title)) doc = addTitle(doc, value = report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$title, 3)
+          if (!is.na(report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$title)) doc = ReporteRs::addTitle(doc, value = report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$title, 3)
 
           # Number of subsubsubsections in the current section
           n.subsubsubsection = length(report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$subsubsubsection)
@@ -85,7 +84,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
             for(subsubsubsection.index in 1:n.subsubsubsection) {
 
               # Subsubsubsection's title (if non-empty)
-              if (!is.na(report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$subsubsubsection[[subsubsubsection.index]]$title)) doc = addTitle(doc, value = report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$subsubsubsection[[subsubsubsection.index]]$title, 4)
+              if (!is.na(report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$subsubsubsection[[subsubsubsection.index]]$title)) doc = ReporteRs::addTitle(doc, value = report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$subsubsubsection[[subsubsubsection.index]]$title, 4)
 
               # Number of items in the current subsubsection
               n.items = length(report.structure$section[[section.index]]$subsection[[subsection.index]]$subsubsection[[subsubsection.index]]$subsubsubsection[[subsubsubsection.index]]$item)
@@ -107,29 +106,29 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
 
                 switch( type,
                         text = {
-                          if (label != "") doc = addParagraph(doc, value = paste(label, value), stylename = "Normal", par.properties = my.text.format)
-                          else  doc = addParagraph(doc, value = value, stylename = "Normal", par.properties = my.text.format)
+                          if (label != "") doc = ReporteRs::addParagraph(doc, value = paste(label, value), stylename = "Normal", par.properties = my.text.format)
+                          else  doc = ReporteRs::addParagraph(doc, value = value, stylename = "Normal", par.properties = my.text.format)
                         },
                         table = {
                           header.columns = (is.null(param$groupedheader.row))
-                          summary_table = FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns, body.text.props =  data.textProperties, header.text.props = header.textProperties)
+                          summary_table = ReporteRs::FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns, body.text.props =  data.textProperties, header.text.props = header.textProperties)
                           if (!is.null(param$span.columns)) {
                             for (ind.span in 1:length(param$span.columns)){
-                              summary_table = spanFlexTableRows(summary_table, j = param$span.columns[ind.span], runs = as.character(value[,ind.span]) )
+                              summary_table = ReporteRs::spanFlexTableRows(summary_table, j = param$span.columns[ind.span], runs = as.character(value[,ind.span]) )
                             }
                           }
-                          summary_table = setFlexTableBorders(summary_table, inner.vertical = borderNone(),
-                                                              outer.vertical = borderNone())
+                          summary_table = ReporteRs::setFlexTableBorders(summary_table, inner.vertical = ReporteRs::borderNone(),
+                                                              outer.vertical = ReporteRs::borderNone())
                           if (!is.null(param$groupedheader.row)) {
-                            summary_table = addHeaderRow(summary_table, value = param$groupedheader.row$values, colspan = param$groupedheader.row$colspan)
-                            summary_table = addHeaderRow(summary_table, value = colnames( value ))
+                            summary_table = ReporteRs::addHeaderRow(summary_table, value = param$groupedheader.row$values, colspan = param$groupedheader.row$colspan)
+                            summary_table = ReporteRs::addHeaderRow(summary_table, value = colnames( value ))
                           }
-                          doc = addParagraph(doc, value = label, stylename = "rTableLegend", par.properties = my.text.format)
-                          doc = addFlexTable(doc, summary_table)
+                          doc = ReporteRs::addParagraph(doc, value = label, stylename = "rTableLegend", par.properties = my.text.format)
+                          doc = ReporteRs::addFlexTable(doc, summary_table)
                         },
                         plot =  {
-                          doc = addPlot(doc, fun = print, x = value, width = 6, height = 5, main = label)
-                          doc = addParagraph(doc, value = label, stylename = "rPlotLegend", par.properties = my.text.format)
+                          doc = ReporteRs::addPlot(doc, fun = print, x = value, width = 6, height = 5, main = label)
+                          doc = ReporteRs::addParagraph(doc, value = label, stylename = "rPlotLegend", par.properties = my.text.format)
                         }
                 )
               }
@@ -156,29 +155,29 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
 
               switch( type,
                       text = {
-                        if (label != "") doc = addParagraph(doc, value = paste(label, value), stylename = "Normal", par.properties = my.text.format)
-                        else  doc = addParagraph(doc, value = value, stylename = "Normal", par.properties = my.text.format)
+                        if (label != "") doc = ReporteRs::addParagraph(doc, value = paste(label, value), stylename = "Normal", par.properties = my.text.format)
+                        else  doc = ReporteRs::addParagraph(doc, value = value, stylename = "Normal", par.properties = my.text.format)
                       },
                       table = {
                         header.columns = (is.null(param$groupedheader.row))
-                        summary_table = FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns, body.text.props =  data.textProperties, header.text.props = header.textProperties)
+                        summary_table = ReporteRs::FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns, body.text.props =  data.textProperties, header.text.props = header.textProperties)
                         if (!is.null(param$span.columns)) {
                           for (ind.span in 1:length(param$span.columns)){
-                            summary_table = spanFlexTableRows(summary_table, j = param$span.columns[ind.span], runs = as.character(value[,ind.span]) )
+                            summary_table = ReporteRs::spanFlexTableRows(summary_table, j = param$span.columns[ind.span], runs = as.character(value[,ind.span]) )
                           }
                         }
-                        summary_table = setFlexTableBorders(summary_table, inner.vertical = borderNone(),
-                                                            outer.vertical = borderNone())
+                        summary_table = ReporteRs::setFlexTableBorders(summary_table, inner.vertical = ReporteRs::borderNone(),
+                                                            outer.vertical = ReporteRs::borderNone())
                         if (!is.null(param$groupedheader.row)) {
-                          summary_table = addHeaderRow(summary_table, value = param$groupedheader.row$values, colspan = param$groupedheader.row$colspan)
-                          summary_table = addHeaderRow(summary_table, value = colnames( value ))
+                          summary_table = ReporteRs::addHeaderRow(summary_table, value = param$groupedheader.row$values, colspan = param$groupedheader.row$colspan)
+                          summary_table = ReporteRs::addHeaderRow(summary_table, value = colnames( value ))
                         }
-                        doc = addParagraph(doc, value = label, stylename = "rTableLegend", par.properties = my.text.format)
-                        doc = addFlexTable(doc, summary_table)
+                        doc = ReporteRs::addParagraph(doc, value = label, stylename = "rTableLegend", par.properties = my.text.format)
+                        doc = ReporteRs::addFlexTable(doc, summary_table)
                       },
                       plot =  {
-                        doc = addPlot(doc, fun = print, x = value, width = 6, height = 5, main = label)
-                        doc = addParagraph(doc, value = label, stylename = "rPlotLegend", par.properties = my.text.format)
+                        doc = ReporteRs::addPlot(doc, fun = print, x = value, width = 6, height = 5, main = label)
+                        doc = ReporteRs::addParagraph(doc, value = label, stylename = "rPlotLegend", par.properties = my.text.format)
                       }
               )
             }
@@ -207,29 +206,29 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
 
           switch( type,
                   text = {
-                    if (label != "") doc = addParagraph(doc, value = paste(label, value), stylename = "Normal", par.properties = my.text.format)
-                    else  doc = addParagraph(doc, value = value, stylename = "Normal", par.properties = my.text.format)
+                    if (label != "") doc = ReporteRs::addParagraph(doc, value = paste(label, value), stylename = "Normal", par.properties = my.text.format)
+                    else  doc = ReporteRs::addParagraph(doc, value = value, stylename = "Normal", par.properties = my.text.format)
                   },
                   table = {
                     header.columns = (is.null(param$groupedheader.row))
-                    summary_table = FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns, body.text.props =  data.textProperties, header.text.props = header.textProperties)
+                    summary_table = ReporteRs::FlexTable(data = value, body.cell.props = data.cellProperties, header.cell.props = header.cellProperties, header.columns = header.columns, body.text.props =  data.textProperties, header.text.props = header.textProperties)
                     if (!is.null(param$span.columns)) {
                       for (ind.span in 1:length(param$span.columns)){
-                        summary_table = spanFlexTableRows(summary_table, j = param$span.columns[ind.span], runs = as.character(value[,ind.span]) )
+                        summary_table = ReporteRs::spanFlexTableRows(summary_table, j = param$span.columns[ind.span], runs = as.character(value[,ind.span]) )
                       }
                     }
-                    summary_table = setFlexTableBorders(summary_table, inner.vertical = borderNone(),
-                                                        outer.vertical = borderNone())
+                    summary_table = ReporteRs::setFlexTableBorders(summary_table, inner.vertical = ReporteRs::borderNone(),
+                                                        outer.vertical = ReporteRs::borderNone())
                     if (!is.null(param$groupedheader.row)) {
-                      summary_table = addHeaderRow(summary_table, value = param$groupedheader.row$values, colspan = param$groupedheader.row$colspan)
-                      summary_table = addHeaderRow(summary_table, value = colnames( value ))
+                      summary_table = ReporteRs::addHeaderRow(summary_table, value = param$groupedheader.row$values, colspan = param$groupedheader.row$colspan)
+                      summary_table = ReporteRs::addHeaderRow(summary_table, value = colnames( value ))
                     }
-                    doc = addParagraph(doc, value = label, stylename = "rTableLegend", par.properties = my.text.format)
-                    doc = addFlexTable(doc, summary_table)
+                    doc = ReporteRs::addParagraph(doc, value = label, stylename = "rTableLegend", par.properties = my.text.format)
+                    doc = ReporteRs::addFlexTable(doc, summary_table)
                   },
                   plot =  {
-                    doc = addPlot(doc, fun = print, x = value, width = 6, height = 5, main = label)
-                    doc = addParagraph(doc, value = label, stylename = "rPlotLegend", par.properties = my.text.format)
+                    doc = ReporteRs::addPlot(doc, fun = print, x = value, width = 6, height = 5, main = label)
+                    doc = ReporteRs::addParagraph(doc, value = label, stylename = "rPlotLegend", par.properties = my.text.format)
                   }
           )
         }
@@ -240,7 +239,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
   }
 
   # Save the report
-  writeDoc(doc, report.filename)
+  ReporteRs::writeDoc(doc, report.filename)
 
   # Return
   return(invisible(report.results))

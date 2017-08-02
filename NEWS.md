@@ -1,9 +1,19 @@
 # Mediana 1.0.6
 
 ## New features
+
+* Addition of the Proportion statistic (`PropStat`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
  
+ * Addition of the Fallback procedure (`FallbackAdj`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#MultAdjProcobject)).
+ 
+* Addition of a function to get the analysis results generated in the CSE using the `AnalysisStack` function (see [Analysis stack](http://gpaux.github.io/Mediana/AnalysisStack.html)).
+ 
+* Addition of the `ExtractAnalysisStack` function to extract a specific set of results in an `AnalysisStack` object (see [Analysis stack](http://gpaux.github.io/Mediana/AnalysisStack.html#ExtractAnalysisStack.html)).
+
 ## Bug fixes
 
+* Due to difficulties for several users to install the package because of java issue, the ReporteRs R pacakage is not required anymore (remove from Imports), but to be able to generate the report, user will require to have the ReporteRs R package installed.
+ 
 # Mediana 1.0.5
 
 ## New features

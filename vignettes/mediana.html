@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrieniko" />
 
-<meta name="date" content="2017-05-25" />
+<meta name="date" content="2017-08-02" />
 
 <title>Mediana: an R package for clinical trial simulations</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Mediana: an R package for clinical trial simulations</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrieniko</em></h4>
-<h4 class="date"><em>2017-05-25</em></h4>
+<h4 class="date"><em>2017-08-02</em></h4>
 
 
 
@@ -493,6 +493,7 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <li><p><code>DiffMeanStat</code>: compute the <strong>difference of means</strong> between the two samples defined in the <code>samples</code> argument. Two samples must be defined.</p></li>
 <li><p><code>EffectSizeContStat</code>: compute the <strong>effect size</strong> for a continuous endpoint. Two samples must be defined.</p></li>
 <li><p><code>RatioEffectSizeContStat</code>: compute the <strong>ratio of two effect sizes</strong> for a continuous endpoint. Four samples must be defined.</p></li>
+<li><p><code>PropStat</code>: generate the <strong>proportion </strong> of the sample defined in the <code>samples</code> argument.</p></li>
 <li><p><code>DiffPropStat</code>: compute the <strong>difference of the proportions</strong> between the two samples defined in the <code>samples</code> argument. Two samples must be defined.</p></li>
 <li><p><code>EffectSizePropStat</code>: compute the <strong>effect size</strong> for a binary endpoint. Two samples must be defined.</p></li>
 <li><p><code>RatioEffectSizePropStat</code>: compute the <strong>ratio of two effect sizes</strong> for a binary endpoint. Four samples must be defined.</p></li>
@@ -534,6 +535,7 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <li><p><code>HommelAdj</code>: <strong>Hommel</strong> procedure. Optional parameter: <code>weight</code> (vector of hypothesis weights).</p></li>
 <li><p><code>FixedSeqAdj</code>: <strong>Fixed-sequence procedure</strong>.</p></li>
 <li><p><code>ChainAdj</code>: Family of <strong>chain procedures</strong>. Required parameters: <code>weight</code> (vector of hypothesis weights) and <code>transition</code> (matrix of transition parameters).</p></li>
+<li><p><code>FallbackAdj</code>: <strong>Fallback</strong> procedure. Required parameters: <code>weight</code> (vector of hypothesis weights).</p></li>
 <li><p><code>NormalParamAdj</code>: <strong>Parametric multiple testing procedure</strong> derived from a multivariate normal distribution. Required parameter: <code>corr</code> (correlation matrix of the multivariate normal distribution). Optional parameter: <code>weight</code> (vector of hypothesis weights).</p></li>
 <li><p><code>ParallelGatekeepingAdj</code>: Family of <strong>parallel gatekeeping procedures</strong>. Required parameters: <code>family</code> (vectors of hypotheses included in each family), <code>proc</code> (vector of procedure names applied to each family), <code>gamma</code> (vector of truncation parameters).</p></li>
 <li><p><code>MultipleSequenceGatekeepingAdj</code>: Family of <strong>multiple-sequence gatekeeping procedures</strong>. Required parameters: <code>family</code> (vectors of hypotheses included in each family), <code>proc</code> (vector of procedure names applied to each family), <code>gamma</code> (vector of truncation parameters).</p></li>

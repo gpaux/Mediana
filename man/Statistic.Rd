@@ -37,6 +37,7 @@ Objects of class \code{Statistic} are used in objects of class \code{AnalysisMod
 \item \code{DiffMeanStat}: generate the difference of means between the two samples defined in the \code{samples} argument. Two samples must be defined.
 \item \code{EffectSizeContStat}: generate the effect size for a continuous endpoint. Two samples must be defined.
 \item \code{RatioEffectSizeContStat}: generate the ratio of two effect sizes for a continuous endpoint. Four samples must be defined.
+\item \code{PropStat}: generate the proportion of the sample defined in the \code{samples} argument.
 \item \code{DiffPropStat}: generate the difference of the proportions between the two samples defined in the \code{samples} argument. Two samples must be defined.
 \item \code{EffectSizePropStat}: generate the effect size for a binary endpoint. Two samples must be defined.
 \item \code{RatioEffectSizePropStat}: generate the ratio of two effect sizes for a binary endpoint. Four samples must be defined.

@@ -563,6 +563,8 @@ Several methods for computing descriptive statistics are already implemented in 
 
 - `RatioEffectSizeContStat`: compute the **ratio of two effect sizes** for a continuous endpoint. Four samples must be defined.
 
+- `PropStat`: generate the **proportion ** of the sample defined in the `samples` argument.
+
 - `DiffPropStat`: compute the **difference of the proportions** between the two samples defined in the `samples` argument. Two samples must be defined.
 
 - `EffectSizePropStat`: compute the **effect size** for a binary endpoint. Two samples must be defined.
@@ -624,6 +626,8 @@ Several commonly used multiplicity adjustment procedures are included in the Med
 - `FixedSeqAdj`: **Fixed-sequence procedure**.
 
 - `ChainAdj`: Family of **chain procedures**. Required parameters: `weight` (vector of hypothesis weights) and `transition` (matrix of transition parameters).
+
+- `FallbackAdj`: **Fallback** procedure. Required parameters: `weight` (vector of hypothesis weights).
 
 - `NormalParamAdj`: **Parametric multiple testing procedure** derived from a multivariate normal distribution. Required parameter: `corr` (correlation matrix of the multivariate normal distribution). Optional parameter: `weight` (vector of hypothesis weights).
 
