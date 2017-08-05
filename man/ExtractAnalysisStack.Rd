@@ -68,7 +68,7 @@ case.study1.analysis.model = AnalysisModel() +
 
 
 # Simulation Parameters
-case.study1.sim.parameters = SimParameters(n.sims = 100,
+case.study1.sim.parameters = SimParameters(n.sims = 1000,
                                            proc.load = 2,
                                            seed = 42938001)
 

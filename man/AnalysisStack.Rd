@@ -26,16 +26,15 @@ defines a \code{SimParameters} object.
 \value{
 This function generates an analysis stack according to the data and analysis models and the simulation parameters objetcs. The object returned by the function is a AnalysisStack object containing:
   \item{description }{a description of the object.}
-  \item{analysis.set }{a list of size \code{n.sims} defined in the \code{sim.parameters} object. This list contains the analysis results generated for each data scenario (first level), and for each test and statistic defined in the \code{analysis.parameters} object. The results generated for the \code{i}th simulation runs and the \code{j}th data scenario are stored in \code{analysis.stack$analysis.set[[i]][[j]]$result}. Then, this list is composed of three lists:
+  \item{analysis.set }{a list of size \code{n.sims} defined in the \code{SimParameters} object. This list contains the analysis results generated for each data scenario (first level), and for each test and statistic defined in the \code{AnalysisModel} object. The results generated for the \code{i}th simulation runs and the \code{j}th data scenario are stored in \code{analysis.stack$analysis.set[[i]][[j]]$result} (where \code{analysis.stack} is a \code{AnalysisStack} object). Then, this list is composed of three lists:
 \itemize{
 \item \code{tests} return the unadjusted p-values for to the tests defined in the \code{AnalysisModel} object.
 \item \code{statistic} return the statistic defined in the \code{AnalysisModel} object.
-\item \code{test.adjust} return a list of adjusted p-values according to the multiple testing procedure defined in the \code{AnalysisModel} object. The lenght of this list corresponds to the number of \code{MultAdjProc} objects defined in the \code{AnalysisModel} object.
-where \code{analysis.stack} is a \code{AnalysisStack} object.
+\item \code{test.adjust} return a list of adjusted p-values according to the multiple testing procedure defined in the \code{AnalysisModel} object. The lenght of this list corresponds to the number of \code{MultAdjProc} objects defined in the \code{AnalysisModel} object. Note that if no \code{MultAdjProc} objects have been defined, this list contains the unadjusted p-values.
 }
 }
-  \item{analysis.scenario.grid }{a data frame indicating all analysis scenarios according to the \code{DataModel} and \code{AnalysisModel} objects.}
-  \item{analysis.structure }{a list containing the analysis structure according to the \code{AnalysisModel} object.}
+  \item{analysis.scenario.grid}{a data frame indicating all data and analysis scenarios according to the \code{DataModel} and \code{AnalysisModel} objects.}
+  \item{analysis.structure}{a list containing the analysis structure according to the \code{AnalysisModel} object.}
   \item{sim.parameters }{a list containing the simulation parameters according to \code{SimParameters} object.}
 
   A specific \code{analysis.set} of a \code{AnalysisStack} object can be extracted using the \code{ExtractAnalysisStack} function.
@@ -82,11 +81,11 @@ case.study1.analysis.model = AnalysisModel() +
 
 
 # Simulation Parameters
-case.study1.sim.parameters = SimParameters(n.sims = 100,
+case.study1.sim.parameters = SimParameters(n.sims = 1000,
                                            proc.load = 2,
                                            seed = 42938001)
 
-# Generate data
+# Generate results
 case.study1.analysis.stack = AnalysisStack(data.model = case.study1.data.model,
                                            analysis.model = case.study1.analysis.model,
                                            sim.parameters = case.study1.sim.parameters)
