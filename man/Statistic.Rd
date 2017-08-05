@@ -29,23 +29,23 @@ Objects of class \code{Statistic} are used in objects of class \code{AnalysisMod
 
 \code{method} argument defines the statistical method. Several methods are already implemented in the Mediana package (listed below, along with the required parameters to define in the \code{par} parameter):
 \itemize{
-\item \code{MedianStat}: generate the median of the sample defined in the \code{samples} argument.
-\item \code{MeanStat}: generate the mean of the sample defined in the \code{samples} argument.
-\item \code{SdStat}: generate the standard deviation of the sample defined in the \code{samples} argument.
-\item \code{MinStat}: generate the minimum of the sample defined in the \code{samples} argument.
-\item \code{MaxStat}: generate the maximum of the sample defined in the \code{samples} argument.
-\item \code{DiffMeanStat}: generate the difference of means between the two samples defined in the \code{samples} argument. Two samples must be defined.
-\item \code{EffectSizeContStat}: generate the effect size for a continuous endpoint. Two samples must be defined.
-\item \code{RatioEffectSizeContStat}: generate the ratio of two effect sizes for a continuous endpoint. Four samples must be defined.
-\item \code{PropStat}: generate the proportion of the sample defined in the \code{samples} argument.
-\item \code{DiffPropStat}: generate the difference of the proportions between the two samples defined in the \code{samples} argument. Two samples must be defined.
-\item \code{EffectSizePropStat}: generate the effect size for a binary endpoint. Two samples must be defined.
-\item \code{RatioEffectSizePropStat}: generate the ratio of two effect sizes for a binary endpoint. Four samples must be defined.
-\item \code{HazardRatioStat}: generate the hazard ratio of the two samples defined in the \code{samples} argument. Two samples must be defined. By default the Log-Rank method is used. Optional argument: \code{method} taking as value \code{Log-Rank} or \code{Cox}.
-\item \code{EffectSizeEventStat}: generate the effect size for a survival endpoint (log of the HR). Two samples must be defined. Two samples must be defined. By default the Log-Rank method is used. Optional argument: \code{method} taking as value \code{Log-Rank} or \code{Cox}.
-\item \code{RatioEffectSizeEventStat}: generate the ratio of two effect sizes for a survival endpoint. Four samples must be defined. By default the Log-Rank method is used. Optional argument: \code{method} taking as value \code{Log-Rank} or \code{Cox}.
-\item \code{EventCountStat}: generate the number of events observed in the sample(s) defined in the \code{samples} argument.
-\item \code{PatientCountStat}: generate the number of patients observed in the sample(s) defined in the \code{samples} argument.
+\item \code{MedianStat}: compute the median of the sample defined in the \code{samples} argument.
+\item \code{MeanStat}: compute the mean of the sample defined in the \code{samples} argument.
+\item \code{SdStat}: compute the standard deviation of the sample defined in the \code{samples} argument.
+\item \code{MinStat}: compute the minimum of the sample defined in the \code{samples} argument.
+\item \code{MaxStat}: compute the maximum of the sample defined in the \code{samples} argument.
+\item \code{DiffMeanStat}: compute the difference of means between the two samples defined in the \code{samples} argument. Two samples must be defined.
+\item \code{EffectSizeContStat}: compute the effect size for a continuous endpoint. Two samples must be defined.
+\item \code{RatioEffectSizeContStat}: compute the ratio of two effect sizes for a continuous endpoint. Four samples must be defined.
+\item \code{PropStat}: compute the proportion of the sample defined in the \code{samples} argument.
+\item \code{DiffPropStat}: compute the difference of the proportions between the two samples defined in the \code{samples} argument. Two samples must be defined.
+\item \code{EffectSizePropStat}: compute the effect size for a binary endpoint. Two samples must be defined.
+\item \code{RatioEffectSizePropStat}: compute the ratio of two effect sizes for a binary endpoint. Four samples must be defined.
+\item \code{HazardRatioStat}: compute the hazard ratio of the two samples defined in the \code{samples} argument. Two samples must be defined. By default the Log-Rank method is used. Optional argument: \code{method} taking as value \code{Log-Rank} or \code{Cox}.
+\item \code{EffectSizeEventStat}: compute the effect size for a survival endpoint (log of the HR). Two samples must be defined. Two samples must be defined. By default the Log-Rank method is used. Optional argument: \code{method} taking as value \code{Log-Rank} or \code{Cox}.
+\item \code{RatioEffectSizeEventStat}: compute the ratio of two effect sizes for a survival endpoint. Four samples must be defined. By default the Log-Rank method is used. Optional argument: \code{method} taking as value \code{Log-Rank} or \code{Cox}.
+\item \code{EventCountStat}: compute the number of events observed in the sample(s) defined in the \code{samples} argument.
+\item \code{PatientCountStat}: compute the number of patients observed in the sample(s) defined in the \code{samples} argument.
 }
 }
 
