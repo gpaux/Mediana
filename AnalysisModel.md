@@ -142,7 +142,7 @@ Several methods for computing descriptive statistics are already implemented in 
 
 - `RatioEffectSizeContStat`: compute the **ratio of two effect sizes** for a continuous endpoint. Four samples must be defined.
 
-- `PropStat`: generate the **proportion** of the sample defined in the `samples` argument.
+- `PropStat`: compute the **proportion** of the sample defined in the `samples` argument.
 
 - `DiffPropStat`: compute the **difference of the proportions** between the two samples defined in the `samples` argument. Two samples must be defined.
 
