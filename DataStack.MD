@@ -26,9 +26,9 @@ The `DataStack` function returns a `DataStack` object containing a list with the
 
 - `description`: a description of the object.
 
-- `data.set`: a list of size `n.sims` defined in the `sim.parameters` object. This list contains the data generated for each data scenario (`data.scenario` level) and each sample (`sample` level). The data generated for the *i*th simulation run, the *j*th data scenario and the *k*th sample is stored in `data.stack$data.set[[i]]$data.scenario[[j]]$sample[[k]]` where `data.stack` is the `DataStack` object.
+- `data.set`: a list of size `n.sims` defined in the `SimParameters` object. This list contains the data generated for each data scenario (`data.scenario` level) and each sample (`sample` level). The data generated for the *i*th simulation run, the *j*th data scenario and the *k*th sample is stored in `data.stack$data.set[[i]]$data.scenario[[j]]$sample[[k]]` where `data.stack` is the `DataStack` object.
 
-- `data.data.scenario.grid`: a data frame indicating all data scenarios according to the `DataModel` object.
+- `data.scenario.grid`: a data frame indicating all data scenarios according to the `DataModel` object.
 
 - `data.structure`: a list containing the data structure according to the `DataModel` object.
 
@@ -113,7 +113,7 @@ To ease the manipulation of a `DataStack` object, a function has been created to
 
 #### Inputs
 
-The `ExtractDataStack` function requires the input of a pre-specified objects defined in the following two arguments:
+The `ExtractDataStack` function requires the input of a pre-specified object defined in the following two arguments:
 
 - `data.stack` defines a `DataStack` object, as described above.
 
@@ -139,4 +139,4 @@ case.study1.extracted.data.stack = ExtractDataStack(data.stack = case.study1.dat
                                                     simulation.run = 100)
 {% endhighlight %}
 
-A carefull attention should be paid on the index of the nested lists. As only one simulation run index has been specified, the result for the 100th simulation runs is stored in the first level of the list (`case.study1.extracted.data.stack$data.set[[1]]`). Similarly, as only one data scenario has been requested, the result for the 2nd data scenario is now in the first position (`case.study1.extracted.data.stack$data.set[[1]]$data.scenario[[1]]`).
+A carefull attention should be paid on the index of the nested lists. As only one simulation run index has been specified in this example, the result for the 100th simulation runs is stored in the first level of the list (`case.study1.extracted.data.stack$data.set[[1]]`). Similarly, as only one data scenario has been requested, the result for the 2nd data scenario is now in the first position (`case.study1.extracted.data.stack$data.set[[1]]$data.scenario[[1]]`).
