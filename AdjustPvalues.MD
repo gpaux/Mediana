@@ -24,6 +24,7 @@ The `AdjustPvalues` function requires the input of two pre-specified objects def
 	- `HochbergAdj`: Hochberg procedure. Optional parameter: `weight`.
 	- `HommelAdj`: Hommel procedure. Optional parameter: `weight`.
 	- `FixedSeqAdj`: Fixed-sequence procedure.
+	- `FallbackAdj`: **Fallback** procedure. Required parameters: `weight`.
 	- `DunnettAdj`: Single-step Dunnett procedure. Required parameters: `n`.
 	- `StepDownDunnettAdj`: Step-down Dunnett procedure. Required parameters: `n`.
 	- `ChainAdj`: Family of chain procedures. Required parameters: `weight` and `transition`.
