@@ -24,7 +24,7 @@ The `AdjustPvalues` function requires the input of two pre-specified objects def
 	- `HochbergAdj`: Hochberg procedure. Optional parameter: `weight`.
 	- `HommelAdj`: Hommel procedure. Optional parameter: `weight`.
 	- `FixedSeqAdj`: Fixed-sequence procedure.
-	- `FallbackAdj`: **Fallback** procedure. Required parameters: `weight`.
+	- `FallbackAdj`: Fallback procedure. Required parameters: `weight`.
 	- `DunnettAdj`: Single-step Dunnett procedure. Required parameters: `n`.
 	- `StepDownDunnettAdj`: Step-down Dunnett procedure. Required parameters: `n`.
 	- `ChainAdj`: Family of chain procedures. Required parameters: `weight` and `transition`.
@@ -55,7 +55,7 @@ These *p*-values will be adjusted with several multiple testing procedures as sp
 
 {% highlight R %}
 # Bonferroni, Holm, Hochberg, Hommel and Fixed-sequence procedure
-proc = c("BonferroniAdj", "HolmAdj", "HochbergAdj", "HommelAdj", "FixedSeqAdj")
+proc = c("BonferroniAdj", "HolmAdj", "HochbergAdj", "HommelAdj", "FixedSeqAdj", "FallbackAdj")
 {% endhighlight %}
 
 In order to obtain the adjusted *p*-values for all these procedures, the `sapply` function can be used as follows. Note that as no `weight` parameter is defined, the equally weighted procedures are used to adjust the *p*-values. Finally, for the fixed-sequence procedure (`FixedSeqAdj`), the order of the testing sequence is based on the order of the *p*-values in the vector.
@@ -68,10 +68,10 @@ sapply(proc, function(x) {AdjustPvalues(rawp,
 
 The output is as follows:
 {% highlight R %}
-     BonferroniAdj HolmAdj HochbergAdj HommelAdj FixedSeqAdj
-[1,]         0.036   0.027       0.023     0.023       0.012
-[2,]         0.027   0.027       0.023     0.018       0.012
-[3,]         0.069   0.027       0.023     0.023       0.023
+     BonferroniAdj HolmAdj HochbergAdj HommelAdj FixedSeqAdj FallbackAdj
+[1,]         0.036   0.027       0.023     0.023       0.012      0.0360
+[2,]         0.027   0.027       0.023     0.018       0.012      0.0270
+[3,]         0.069   0.027       0.023     0.023       0.023      0.0345
 {% endhighlight %}
 
 In order to specify unequal weights for the three raw *p*-values, the `weight` parameter can be defined as follows. Note that this parameter has no effect on the adjustment with the fixed-sequence procedure.
@@ -85,10 +85,10 @@ sapply(proc, function(x) {AdjustPvalues(rawp,
 
 The output is as follows:
 {% highlight R %}
-     BonferroniAdj HolmAdj HochbergAdj HommelAdj FixedSeqAdj
-[1,]         0.024   0.024       0.018     0.018       0.012
-[2,]         0.036   0.024       0.018     0.018       0.012
-[3,]         0.092   0.024       0.023     0.023       0.023
+     BonferroniAdj HolmAdj HochbergAdj HommelAdj FixedSeqAdj FallbackAdj
+[1,]         0.024   0.024       0.018     0.018       0.012       0.024
+[2,]         0.036   0.024       0.018     0.018       0.012       0.024
+[3,]         0.092   0.024       0.023     0.023       0.023       0.024
 {% endhighlight %}
 
 #### Traditional parametric procedures
