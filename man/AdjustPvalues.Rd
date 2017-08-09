@@ -6,7 +6,7 @@ AdjustPvalues function
 }
 
 \description{Computation of adjusted p-values for commonly used multiple testing procedures based on univariate
-p-values (Bonferroni, Holm, Hommel, Hochberg, fixed-sequence procedures), commonly used parametric multiple testing procedures (single-step and step-down Dunnett procedures) and multistage gatepeeking procedure.
+p-values (Bonferroni, Holm, Hommel, Hochberg, fixed-sequence and Fallback procedures), commonly used parametric multiple testing procedures (single-step and step-down Dunnett procedures) and multistage gatepeeking procedure.
 }
 
 \usage{
@@ -45,7 +45,7 @@ defines the parameters associated to the multiple testing procedure
 \details{
 This function can be used to adjust p-values according to a multiple testing procedure defines in the \code{proc} argument.
 
-This function computes adjusted p-values and generates decision rules for the Bonferroni, Holm (Holm, 1979), Hommel (Hommel, 1988), Hochberg (Hochberg, 1988) and fixed-sequence (Westfall and Krishen, 2001) procedures. The adjusted p-values are computed using the closure principle (Marcus, Peritz and Gabriel, 1976) in general hypothesis testing problems (equally or unequally weighted null hypotheses). For more information on the algorithms used in the function, see Dmitrienko et al. (2009, Section 2.6).
+This function computes adjusted p-values and generates decision rules for the Bonferroni, Holm (Holm, 1979), Hommel (Hommel, 1988), Hochberg (Hochberg, 1988), fixed-sequence (Westfall and Krishen, 2001) and Fallback (Wiens, 2003; Wiens and Dmitrienko, 2005) procedures. The adjusted p-values are computed using the closure principle (Marcus, Peritz and Gabriel, 1976) in general hypothesis testing problems (equally or unequally weighted null hypotheses). For more information on the algorithms used in the function, see Dmitrienko et al. (2009, Section 2.6).
 
 This function computes adjusted p-values for the single-step Dunnett procedure (Dunnett, 1955) and step-down Dunnett procedure (Naik, 1975; Marcus, Peritz and Gabriel, 1976) in one-sided hypothesis testing problems with a balanced one-way layout and equally weighted null hypotheses. For the Dunnett procedures, it is assumed that the test statistics follow a t distribution. For more information on the algorithms used in the function, see Dmitrienko et al. (2009, Section 2.7).
 
@@ -66,6 +66,11 @@ Hall/CRC Press, New York. \cr
 Dmitrienko, A., Kordzakhia, G., Tamhane, A.C. (2011). Multistage and mixture
 parallel gatekeeping procedures in clinical trials. \emph{Journal of
 Biopharmaceutical Statistics}. 21, 726--747.
+
+
+Dmitrienko, A., Tamhane, A., Wiens, B. (2008). General multistage
+gatekeeping procedures. \emph{Biometrical Journal}. 50, 667--677. \cr
+
 
 Dmitrienko, A., Tamhane, A.C. (2009). Gatekeeping procedures in
 clinical trials. \emph{Multiple Testing Problems in Pharmaceutical
@@ -101,8 +106,8 @@ Statistical Planning and Inference}. 99, 25--40. \cr
 
 Wiens, B. (2003). A fixed-sequence Bonferroni procedure for
 testing multiple endpoints. \emph{Pharmaceutical Statistics}. 2, 211--215. \cr
-Dmitrienko, A., Tamhane, A., Wiens, B. (2008). General multistage
-gatekeeping procedures. \emph{Biometrical Journal}. 50, 667--677. \cr
+
+Wiens, B., Dmitrienko, A. (2005). The fallback procedure for evaluating a single family of hypotheses. \emph{Journal of Biopharmaceutical Statistics}. 15, 929--942. \cr
 
 }
 
@@ -112,7 +117,7 @@ See Also \code{\link{MultAdjProc}} and \code{\link{AdjustCIs}}.
 
 \examples{
 # Bonferroni, Holm, Hochberg, Hommel and Fixed-sequence procedure
-proc = c("BonferroniAdj", "HolmAdj", "HochbergAdj", "HommelAdj", "FixedSeqAdj")
+proc = c("BonferroniAdj", "HolmAdj", "HochbergAdj", "HommelAdj", "FixedSeqAdj", "FallbackAdj")
 rawp = c(0.012, 0.009, 0.023)
 
 # Equally weighted
