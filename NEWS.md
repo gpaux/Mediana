@@ -12,6 +12,8 @@
 
 * Creation of a vignette to describe the functions implementing the adjusted *p*-values (`AdjustPvalues`) and one-sided simultaneous confidence intervals (`AdjustCIs`).
 
+* Minor revisions of the generated report
+
 ## Bug fixes
 
 * Due to difficulties for several users to install the Mediana R package because of java issue, the ReporteRs R pacakage is not required anymore (remove from Imports). However, to be able to generate the report, the user will require to have the ReporteRs R package installed.
