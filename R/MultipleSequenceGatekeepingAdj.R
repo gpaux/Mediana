@@ -163,7 +163,7 @@ MultipleSequenceGatekeepingAdj = function(rawp, par) {
       proc.par[i,3] = proc[i]
       proc.par[i,4] = gamma[i]
     }
-    colnames(proc.par) = c("Family", "Hypotheses", "Component procedure", "Truncation parameter")
+    colnames(proc.par) = c("Family", "Tests", "Component procedure", "Truncation parameter")
     result=list(list("Multiple-sequence gatekeeping"),list(proc.par))
   }
 

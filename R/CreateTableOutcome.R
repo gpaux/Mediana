@@ -8,7 +8,7 @@ CreateTableOutcome = function(data.structure, label = NULL) {
 
   # Number of sample ID
   n.id <- length(data.structure$id)
-  id.label = c(unlist(lapply(lapply(data.structure$id, unlist), paste0, collapse = ", ")))
+  id.label = c(unlist(lapply(lapply(data.structure$id, function(x) unlist(paste0("{",x,"}"))), paste0, collapse = ", ")))
 
   # Number of outcome
   n.outcome = length(data.structure$outcome.parameter.set)
@@ -43,12 +43,12 @@ CreateTableOutcome = function(data.structure, label = NULL) {
   if (data.structure$outcome$outcome.dist.dim > 1) {
     for (i in 1:n.outcome) {
       for (j in 1:n.id) {
-        par = paste0(mapply(mergeOutcomeParameter, parameter.labels$par, data.structure$outcome.parameter.set[[i]][[j]]$par), collapse = ", ")
+        par = paste0(mapply(function(x,y) paste0("{",mergeOutcomeParameter(x,y),"}"), parameter.labels$par, data.structure$outcome.parameter.set[[i]][[j]]$par), collapse = ", ")
         corr = paste0("corr = {", paste(t(data.structure$outcome.parameter.set[[i]][[j]]$corr), collapse = ","),"}", collapse = "")
         outcome.table[ind, 1] = i
         outcome.table[ind, 2] = label[i]
         outcome.table[ind, 3] = id.label[j]
-        outcome.table[ind, 4] = paste0(par, ", ",corr)
+        outcome.table[ind, 4] = paste0(par, ",\n",corr)
         ind<-ind+1
       }
     }

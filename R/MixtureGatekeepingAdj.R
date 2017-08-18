@@ -184,7 +184,7 @@ MixtureGatekeepingAdj = function(rawp, par) {
         hyp.par[index,4] = ifelse(sum(serial[[family[[i]][j]]])>0,paste0("{",paste(test.id[which(serial[[family[[i]][j]]]==1)], collapse = ", "),"}"),"")
       }
     }
-    colnames(hyp.par) = c("Family", "Hypothesis", "Parallel rejection set", "Serial rejection set")
+    colnames(hyp.par) = c("Family", "Tests", "Parallel rejection set", "Serial rejection set")
     result=list(list("Mixture-based gatekeeping"),list(proc.par, hyp.par))
   }
 
