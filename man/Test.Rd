@@ -29,15 +29,15 @@ Objects of class \code{Test} are used in objects of class \code{AnalysisModel} t
 
 \code{method} argument defines the statistical test method. Several methods are already implemented in the Mediana package (listed below, along with the required parameters to define in the \code{par} parameter):
 \itemize{
-\item \code{TTest}: perform a two-sample t-test between the two samples defined in the \code{samples} argument. Two samples must be defined.
-\item \code{TTestNI}: perform a non-inferiority two-sample t-test between the two samples defined in the \code{samples} argument. Required parameter: \code{margin}. Two samples must be defined.
-\item \code{WilcoxTest}: perform a Wilcoxon-Mann-Whitney test between the two samples defined in the \code{samples} argument. Two samples must be defined.
-\item \code{PropTest}: perform a two-sample test for proportions between the two samples defined in the \code{samples} argument. Optional parameter: \code{yates} (Yates' continuity correction TRUE or FALSE). Two samples must be defined.
-\item \code{PropTestNI}: perform a non-inferiority two-sample test for proportions between the two samples defined in the \code{samples} argument. Required parameter: \code{margin}. Optional parameter: \code{yates} (Yates' continuity correction TRUE or FALSE). Two samples must be defined.
-\item \code{FisherTest}: perform a Fisher exact test between the two samples defined in the \code{samples} argument. Two samples must be defined.
-\item \code{GLMPoissonTest}: perform a Poisson regression test between the two samples defined in the \code{samples} argument. Two samples must be defined.
-\item \code{GLMNegBinomTest}: perform a Negative-binomial regression test between the two samples defined in the \code{samples} argument. Two samples must be defined.
-\item \code{LogrankTest}: perform a Log-rank test between the two samples defined in the \code{samples} argument. Two samples must be defined.
+\item \code{TTest}: perform a two-sample t-test between the two samples defined in the \code{samples} argument. Optional parameter: \code{larger} (Larger value is expected in the second sample (TRUE or FALSE)). Two samples must be defined.
+\item \code{TTestNI}: perform a non-inferiority two-sample t-test between the two samples defined in the \code{samples} argument. Required parameter: \code{margin}. Optional parameter: \code{larger} (Larger value is expected in the second sample (TRUE or FALSE)).Two samples must be defined.
+\item \code{WilcoxTest}: perform a Wilcoxon-Mann-Whitney test between the two samples defined in the \code{samples} argument. Optional parameter: \code{larger} (Larger value is expected in the second sample (TRUE or FALSE)).Two samples must be defined.
+\item \code{PropTest}: perform a two-sample test for proportions between the two samples defined in the \code{samples} argument. Optional parameter: \code{yates} (Yates' continuity correction TRUE or FALSE) and \code{larger} (Larger value is expected in the second sample (TRUE or FALSE)). Two samples must be defined.
+\item \code{PropTestNI}: perform a non-inferiority two-sample test for proportions between the two samples defined in the \code{samples} argument. Required parameter: \code{margin}. Optional parameter: \code{yates} (Yates' continuity correction TRUE or FALSE) and \code{larger} (Larger value is expected in the second sample (TRUE or FALSE)). Two samples must be defined.
+\item \code{FisherTest}: perform a Fisher exact test between the two samples defined in the \code{samples} argument. Optional parameter: \code{larger} (Larger value is expected in the second sample (TRUE or FALSE)). Two samples must be defined.
+\item \code{GLMPoissonTest}: perform a Poisson regression test between the two samples defined in the \code{samples} argument. Optional parameter: \code{larger} (Larger value is expected in the second sample (TRUE or FALSE)). Two samples must be defined.
+\item \code{GLMNegBinomTest}: perform a Negative-binomial regression test between the two samples defined in the \code{samples} argument. Optional parameter: \code{larger} (Larger value is expected in the second sample (TRUE or FALSE)).Two samples must be defined.
+\item \code{LogrankTest}: perform a Log-rank test between the two samples defined in the \code{samples} argument. Optional parameter: \code{larger} (Larger value is expected in the second sample (TRUE or FALSE)). Two samples must be defined.
 }
 
 It is to be noted that the statistical tests implemented are one-sided.

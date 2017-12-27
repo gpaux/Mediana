@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrieniko" />
 
-<meta name="date" content="2017-08-02" />
+<meta name="date" content="2017-12-27" />
 
 <title>Mediana: an R package for clinical trial simulations</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Mediana: an R package for clinical trial simulations</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrieniko</em></h4>
-<h4 class="date"><em>2017-08-02</em></h4>
+<h4 class="date"><em>2017-12-27</em></h4>
 
 
 
@@ -381,10 +381,10 @@ randomization.ratio =<span class="st"> </span><span class="kw">c</span>(<span cl
 </ul>
 <p>Several <code>Design</code> objects can be added to a <code>DataModel</code> object.</p>
 <p>For more information about the <code>Design</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">Design</a>.</p>
-<p>A convienient way to model non-uniform enrollment is to use a beta distribution (<code>BetaDist</code>). If <code>enroll.dist = &quot;BetaDist&quot;</code>, the <code>enroll.dist.par</code> should contain the parameter of the beta distribution (<code>a</code> and <code>b</code>). These parameters must be derived according to the expected enrollment at a specific timepoint. For example, if half the patients are expected to be enrolled at 75% of the enrollment period, the beta distribution is a <code>Beta(log(0.5)/log(0.75), 1)</code>. Generally, let <code>q</code> be the proportion of enrolled patients at <code>p</code>% of the enrollment period, the Beta distribution can be derived as follows:</p>
+<p>A convienient way to model non-uniform enrollment is to use a beta distribution (<code>BetaDist</code>). If <code>enroll.dist = &quot;BetaDist&quot;</code>, the <code>enroll.dist.par</code> should contain the parameter of the beta distribution (<code>a</code> and <code>b</code>). These parameters must be derived according to the expected enrollment at a specific timepoint. For example, if half the patients are expected to be enrolled at 75% of the enrollment period, the beta distribution is a <code>Beta(log(0.5)/log(0.75), 1)</code>. Generally, let <code>q</code> be the proportion of enrolled patients at <code>100p</code>% of the enrollment period, the Beta distribution can be derived as follows:</p>
 <ul>
-<li><p>If <code>q &gt; p</code>, the Beta distribution is <code>Beta(a,1)</code> with <code>a = log(p) / log(q)</code></p></li>
-<li><p>If <code>q &lt; p</code>, the Beta distribution is <code>Beta (1,b)</code> with <code>b = log(1-p) / log(1-q)</code></p></li>
+<li><p>If <code>q &lt; p</code>, the Beta distribution is <code>Beta(a,1)</code> with <code>a = log(q) / log(p)</code></p></li>
+<li><p>If <code>q &gt; p</code>, the Beta distribution is <code>Beta (1,b)</code> with <code>b = log(1-q) / log(1-p)</code></p></li>
 <li><p>Otherwise the Beta distribution is <code>Beta(1,1)</code></p></li>
 </ul>
 </div>
@@ -436,17 +436,17 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 </ul>
 <p>Several commonly used significance tests are already implemented in the Mediana package. In addition, the user can easily define custom significance tests (see the dedicated vignette <code>vignette(&quot;custom-functions&quot;, package = &quot;Mediana&quot;)</code>). The built-in tests are listed below along with the required parameters that need to be included in the <code>par</code> argument:</p>
 <ul>
-<li><p><code>TTest</code>: perform the <strong>two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
-<li><p><code>TTestNI</code>: perform the <strong>non-inferiority two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin).</p></li>
-<li><p><code>WilcoxTest</code>: perform the <strong>Wilcoxon-Mann-Whitney test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
-<li><p><code>PropTest</code>: perform the <strong>two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>).</p></li>
-<li><p><code>PropTestNI</code>: perform the <strong>non-inferiority two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin). Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>).</p></li>
-<li><p><code>FisherTest</code>: perform the <strong>Fisher exact test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
-<li><p><code>GLMPoissonTest</code>: perform the <strong>Poisson regression test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
-<li><p><code>GLMNegBinomTest</code>: perform the <strong>Negative-binomial regression test</strong> between the two <code>samples</code> defined in the <code>samples</code> argument.</p></li>
-<li><p><code>LogrankTest</code>: perform the <strong>Log-rank test</strong> between the two samples defined in the <code>samples</code> argument.</p></li>
+<li><p><code>TTest</code>: perform the <strong>two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
+<li><p><code>TTestNI</code>: perform the <strong>non-inferiority two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin). Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
+<li><p><code>WilcoxTest</code>: perform the <strong>Wilcoxon-Mann-Whitney test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
+<li><p><code>PropTest</code>: perform the <strong>two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>) and <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
+<li><p><code>PropTestNI</code>: perform the <strong>non-inferiority two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin). Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>) and <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
+<li><p><code>FisherTest</code>: perform the <strong>Fisher exact test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
+<li><p><code>GLMPoissonTest</code>: perform the <strong>Poisson regression test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
+<li><p><code>GLMNegBinomTest</code>: perform the <strong>Negative-binomial regression test</strong> between the two <code>samples</code> defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
+<li><p><code>LogrankTest</code>: perform the <strong>Log-rank test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
 </ul>
-<p>It needs to be noted that the significance tests listed above are implemented as <strong>one-sided</strong> tests and thus the sample order in the <code>samples</code> argument is important. In particular, the Mediana package assumes that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure).</p>
+<p>It needs to be noted that the significance tests listed above are implemented as <strong>one-sided</strong> tests and thus the sample order in the <code>samples</code> argument is important. In particular, the Mediana package assumes by default that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure), or alternatively (from version 1.0.6), the optional parameters <code>larger</code> must be set to FALSE to indicate that a larger value is expected on the first Sample.</p>
 <p>Several <code>Test</code> objects can be added to an <code>AnalysisModel</code>object.</p>
 <p>For more information about the <code>Test</code> object, see the package’s documentation <a href="https://cran.r-project.org/package=Mediana/Mediana.pdf">Test</a> on the CRAN web site.</p>
 </div>
@@ -458,6 +458,12 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
      <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
+<p>Carry out the two-sample t-test with larger values expected in the first sample (from v1.0.6):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Placebo and Treatment samples were defined in the data model</span>
+<span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
+     <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>, <span class="st">&quot;Placebo&quot;</span>),
+     <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
+     <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">larger =</span> <span class="ot">FALSE</span>))</code></pre></div>
 <p>Carry out the two-sample t-test for non-inferiority:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Placebo and Treatment samples were defined in the data model</span>
 <span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,

@@ -15,11 +15,12 @@ CreateTableTest = function(analysis.structure, label = NULL) {
     test.table[i, 1] = analysis.structure$test[[i]]$id
     test.desc = do.call(analysis.structure$test[[i]]$method,list(c(),list("Description",analysis.structure$test[[i]]$par)))
     test.table[i, 2] = test.desc[[1]]
-    if (length(test.desc)>1) {
-      test.table[i, 3] = paste0(test.desc[[2]],analysis.structure$test[[i]]$par, collapse = "\n")
-    } else {
-      test.table[i, 3] = analysis.structure$test[[i]]$par
-    }
+    # if (length(test.desc)>1) {
+    #   test.table[i, 3] = paste0(test.desc[[2]],analysis.structure$test[[i]]$par, collapse = "\n")
+    # } else {
+    #   test.table[i, 3] = paste0(names(analysis.structure$test[[i]]$par), " = ", analysis.structure$test[[i]]$par, collapse = "\n")
+    # }
+    if (!all(is.na(analysis.structure$test[[i]]$par))) test.table[i, 3] = paste0(names(analysis.structure$test[[i]]$par), " = ", analysis.structure$test[[i]]$par, collapse = "\n")
     nsample[i]=length(analysis.structure$test[[i]]$samples)
     npersample=rep(0,nsample[i])
     sample.id=rep("",nsample[i])

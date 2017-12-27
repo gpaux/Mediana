@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrienko" />
 
-<meta name="date" content="2017-08-02" />
+<meta name="date" content="2017-12-27" />
 
 <title>Case studies</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Case studies</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrienko</em></h4>
-<h4 class="date"><em>2017-08-02</em></h4>
+<h4 class="date"><em>2017-12-27</em></h4>
 
 
 
@@ -169,7 +169,7 @@ outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
-<p>According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see <a href="http://gpaux.github.io/Mediana/AnalysisModel.html">Analysis Model</a>, the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.</p>
+<p>According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see <a href="http://gpaux.github.io/Mediana/AnalysisModel.html">Analysis Model</a>, the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2. It is of note that from version 1.0.6, it is possible to specify an option to indicate if a larger numeric values is expected in the Sample 2 (<code>larger = TRUE</code>) or in Sample 1 (<code>larger = FALSE</code>). By default, this argument is set to <code>TRUE</code>.</p>
 <p>To illustrate the use of the <code>Statistic</code> object, the mean change in the six-minute walk distance in the treatment arm can be computed using the <code>MeanStat</code> statistic:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model +
 <span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Treatment&quot;</span>,
@@ -530,6 +530,13 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment vs Placebo&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>( <span class="st">&quot;Treatment&quot;</span>, <span class="st">&quot;Placebo&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;GLMNegBinomTest&quot;</span>)</code></pre></div>
+<p>Alternatively, from version 1.0.6, it is possible to specify the argument <code>lower</code> in the parameters of the method. If set to <code>FALSE</code> a numerically lower value is expected in Sample 2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+<span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment vs Placebo&quot;</span>,
+       <span class="dt">samples =</span> <span class="kw">samples</span>( <span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
+       <span class="dt">method =</span> <span class="st">&quot;GLMNegBinomTest&quot;</span>,
+       <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">larger =</span> <span class="ot">FALSE</span>))</code></pre></div>
 </div>
 <div id="define-an-evaluation-model-4" class="section level3">
 <h3>Define an Evaluation Model</h3>

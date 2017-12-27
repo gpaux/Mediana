@@ -16,6 +16,14 @@ TTestNI = function(sample.list, parameter) {
 
     margin = as.numeric(parameter[[2]]$margin)
 
+    # Check if larger treatment effect is expected for the second sample or not (default = TRUE)
+    if (is.null(parameter[[2]]$larger)) larger = TRUE
+    else {
+      if (!is.logical(parameter[[2]]$larger))
+        stop("Analysis model: TTestNI test: the larger argument must be logical (TRUE or FALSE).")
+      larger = parameter[[2]]$larger
+    }
+
 
     # Sample list is assumed to include two data frames that represent two analysis samples
 
@@ -30,10 +38,11 @@ TTestNI = function(sample.list, parameter) {
     outcome2.complete = outcome2[stats::complete.cases(outcome2)]
 
     # One-sided p-value (treatment effect in sample 2 is expected to be greater than in sample 1)
-    result = stats::t.test(outcome2.complete  + margin, outcome1.complete, alternative = "greater")$p.value
+    if (larger) result = stats::t.test(outcome2.complete  + margin, outcome1.complete, alternative = "greater")$p.value
+    else result = stats::t.test(outcome1.complete  + margin, outcome2.complete, alternative = "greater")$p.value
   }
   else if (call == TRUE) {
-    result=list("Student's t-test", "Non-inferiority margin = ")
+    result=list("Student's t-test (non-inferiority)")
   }
 
   return(result)

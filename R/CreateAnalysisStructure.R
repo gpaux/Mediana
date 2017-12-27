@@ -52,8 +52,8 @@ CreateAnalysisStructure = function(analysis.model) {
           }
 
           # Test parameters (optional)
-          if (is.null(analysis.model$tests[[i]]$par)) par = NA else par = analysis.model$tests[[i]]$par
-
+          if (is.null(analysis.model$tests[[i]]$par)) par = NA
+          else par = analysis.model$tests[[i]]$par
           test[[i]] = list(id = id, method = method, samples = samples, par = par)
     }
 

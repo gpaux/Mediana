@@ -11,6 +11,17 @@ LogrankTest = function(sample.list, parameter) {
 
   if (call == FALSE | is.na(call)) {
 
+    # No parameters are defined
+    if (is.na(parameter[[2]])) {
+      larger = TRUE
+    }
+    else {
+      if (!all(names(parameter[[2]]) %in% c("larger"))) stop("Analysis model: LogRankTest test: this function accepts only one argument (larger)")
+      # Parameters are defined but not the larger argument
+      if (!is.logical(parameter[[2]]$larger)) stop("Analysis model: LogRankTest test: the larger argument must be logical (TRUE or FALSE).")
+      larger = parameter[[2]]$larger
+    }
+
     # Sample list is assumed to include two data frames that represent two analysis samples
 
     # Outcomes in Sample 1
@@ -58,7 +69,7 @@ LogrankTest = function(sample.list, parameter) {
     stat.test = sum(data$u1)/sqrt(sum(data$v1))
 
     # Compute one-sided p-value
-    result = stats::pnorm(stat.test, lower.tail = FALSE)
+    result = stats::pnorm(stat.test, lower.tail = !larger)
 
   }
 

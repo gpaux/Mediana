@@ -11,6 +11,17 @@ GLMNegBinomTest = function(sample.list, parameter) {
 
   if (call == FALSE | is.na(call)) {
 
+    # No parameters are defined
+    if (is.na(parameter[[2]])) {
+      larger = TRUE
+    }
+    else {
+      if (!all(names(parameter[[2]]) %in% c("larger"))) stop("Analysis model: GLMNegBinomTest test: this function accepts only one argument (larger)")
+      # Parameters are defined but not the larger argument
+      if (!is.logical(parameter[[2]]$larger)) stop("Analysis model: GLMNegBinomTest test: the larger argument must be logical (TRUE or FALSE).")
+      larger = parameter[[2]]$larger
+    }
+
     # Sample list is assumed to include two data frames that represent two analysis samples
 
     # Outcomes in Sample 1
@@ -28,11 +39,12 @@ GLMNegBinomTest = function(sample.list, parameter) {
     colnames(data.complete) = c("TRT", "RESPONSE")
     data.complete$TRT=as.factor(data.complete$TRT)
 
-    # One-sided p-value
-    result = summary(MASS::glm.nb(RESPONSE ~ TRT, data = data.complete))$coefficients["TRT2", "Pr(>|z|)"]/2
+    # One-sided p-value (to be checked)
+    # result = summary(MASS::glm.nb(RESPONSE ~ TRT, data = data.complete))$coefficients["TRT2", "Pr(>|z|)"]/2
+    z = summary(MASS::glm.nb(RESPONSE ~ TRT, data = data.complete))$coefficients["TRT2", "z value"]
+    result = stats::pnorm(z, lower.tail = !larger)
   }
   else if (call == TRUE) {
-
     result=list("Negative-binomial regression test")
   }
 

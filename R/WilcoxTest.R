@@ -11,25 +11,37 @@ WilcoxTest = function(sample.list, parameter) {
 
   if (call == FALSE | is.na(call)) {
 
-    # Sample list is assumed to include two data frames that represent two analysis samples
+    # No parameters are defined
+    if (is.na(parameter[[2]])) {
+      larger = TRUE
+    }
+    else {
+      if (!all(names(parameter[[2]]) %in% c("larger"))) stop("Analysis model: WilcoxTest test: this function accepts only one argument (larger)")
+      # Parameters are defined but not the larger argument
+      if (!is.logical(parameter[[2]]$larger)) stop("Analysis model: WilcoxTest test: the larger argument must be logical (TRUE or FALSE).")
+      larger = parameter[[2]]$larger
+    }
 
-    # Outcomes in Sample 1
-    outcome1 = sample.list[[1]][, "outcome"]
-    # Remove the missing values due to dropouts/incomplete observations
-    outcome1.complete = outcome1[stats::complete.cases(outcome1)]
+  # Sample list is assumed to include two data frames that represent two analysis samples
 
-    # Outcomes in Sample 2
-    outcome2 = sample.list[[2]][, "outcome"]
-    # Remove the missing values due to dropouts/incomplete observations
-    outcome2.complete = outcome2[stats::complete.cases(outcome2)]
+  # Outcomes in Sample 1
+  outcome1 = sample.list[[1]][, "outcome"]
+  # Remove the missing values due to dropouts/incomplete observations
+  outcome1.complete = outcome1[stats::complete.cases(outcome1)]
 
-    # One-sided p-value (treatment effect in sample 2 is expected to be greater than in sample 1)
-    result = stats::wilcox.test(outcome2.complete, outcome1.complete, alternative = "greater")$p.value
-  }
-  else if (call == TRUE) {
-    result=list("Wilcoxon-Mann-Withney test")
-  }
+  # Outcomes in Sample 2
+  outcome2 = sample.list[[2]][, "outcome"]
+  # Remove the missing values due to dropouts/incomplete observations
+  outcome2.complete = outcome2[stats::complete.cases(outcome2)]
 
-  return(result)
+  # One-sided p-value (treatment effect in sample 2 is expected to be greater than in sample 1)
+  if (larger) result = stats::wilcox.test(outcome2.complete, outcome1.complete, alternative = "greater")$p.value
+  else result = stats::wilcox.test(outcome2.complete, outcome1.complete, alternative = "less")$p.value
+}
+else if (call == TRUE) {
+  result=list("Wilcoxon-Mann-Withney test")
+}
+
+return(result)
 }
 # End of WilcoxTest

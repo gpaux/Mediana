@@ -14,9 +14,13 @@
 
 * Minor revisions of the generated report
 
+* It is now possible to use an option to specify the desirable direction of the treatment effect in a test, e.g., `larger = TRUE` means that numerically larger values are expected in the second sample compared to the first sample and `larger = FALSE` otherwise.  This is an optional argument for all two-sample statistical tests to be included in the Test object. By default, if this argument is not specified, it is expected that a numerically larger value is expected in the second sample (i.e., by default `larger = TRUE`).
+
 ## Bug fixes
 
 * Due to difficulties for several users to install the Mediana R package because of java issue, the ReporteRs R pacakage is not required anymore (remove from Imports). However, to be able to generate the report, the user will require to have the ReporteRs R package installed.
+
+* Minor revision to the two-sample non-inferiority test for proportions to ensure that the number of successes is not greater than the sample size
  
 # Mediana 1.0.5
 
