@@ -52,30 +52,53 @@ This object specifies a significance test that will be applied to one or more sa
 
 Several commonly used significance tests are already implemented in the Mediana package. In addition, the user can easily define custom significance tests (see [User-defined functions](CustomFunctions.html#User-definedfunctionsforAnalysisModel)). The built-in tests are listed below along with the required parameters that need to be included in the `par` argument:
 
-- `TTest`: perform the **two-sample t-test** between the two samples defined in the `samples` argument.
+- `TTest`: perform the **two-sample t-test** between the two samples defined in the `samples` argument. Optional parameter: `larger` (Larger value is expected in the second sample (TRUE or FALSE)).
 
-- `TTestNI`: perform the **non-inferiority two-sample t-test** between the two samples defined in the `samples` argument. Required parameter: `margin` (positive non-inferiority margin).
+- `TTestNI`: perform the **non-inferiority two-sample t-test** between the two samples defined in the `samples` argument. Required parameter: `margin` (positive non-inferiority margin). Optional parameter: `larger` (Larger value is expected in the second sample (TRUE or FALSE)).
 
-- `WilcoxTest`: perform the **Wilcoxon-Mann-Whitney test** between the two samples defined in the `samples` argument.
+- `WilcoxTest`: perform the **Wilcoxon-Mann-Whitney test** between the two samples defined in the `samples` argument. Optional parameter: `larger` (Larger value is expected in the second sample (TRUE or FALSE)).
 
-- `PropTest`: perform the **two-sample test for proportions** between the two samples defined in the `samples` argument. Optional parameter: `yates` (Yates' continuity correction flag that is set to `TRUE` or `FALSE`).
+- `PropTest`: perform the **two-sample test for proportions** between the two samples defined in the `samples` argument. Optional parameter: `yates` (Yates' continuity correction flag that is set to `TRUE` or `FALSE`) and `larger` (Larger value is expected in the second sample (TRUE or FALSE)). 
 
-- `PropTestNI`: perform the **non-inferiority two-sample test for proportions** between the two samples defined in the `samples` argument. Required parameter: `margin` (positive non-inferiority margin). Optional parameter: `yates` (Yates' continuity correction flag that is set to `TRUE` or `FALSE`).
+- `PropTestNI`: perform the **non-inferiority two-sample test for proportions** between the two samples defined in the `samples` argument. Required parameter: `margin` (positive non-inferiority margin). Optional parameter: `yates` (Yates' continuity correction flag that is set to `TRUE` or `FALSE`) and `larger` (Larger value is expected in the second sample (TRUE or FALSE)).
 
-- `FisherTest`: perform the **Fisher exact test** between the two samples defined in the `samples` argument.
+- `FisherTest`: perform the **Fisher exact test** between the two samples defined in the `samples` argument. Optional parameter: `larger` (Larger value is expected in the second sample (TRUE or FALSE)).
 
-- `GLMPoissonTest`: perform the **Poisson regression test** between the two samples defined in the `samples` argument.
+- `GLMPoissonTest`: perform the **Poisson regression test** between the two samples defined in the `samples` argument. Optional parameter: `larger` (Larger value is expected in the second sample (TRUE or FALSE)).
 
-- `GLMNegBinomTest`: perform the **Negative-binomial regression test** between the two `samples` defined in the `samples` argument.
+- `GLMNegBinomTest`: perform the **Negative-binomial regression test** between the two `samples` defined in the `samples` argument. Optional parameter: `larger` (Larger value is expected in the second sample (TRUE or FALSE)).
 
-- `LogrankTest`: perform the **Log-rank test** between the two samples defined in the `samples` argument.
+- `LogrankTest`: perform the **Log-rank test** between the two samples defined in the `samples` argument. Optional parameter: `larger` (Larger value is expected in the second sample (TRUE or FALSE)).
 
-It needs to be noted that the significance tests listed above are implemented as **one-sided** tests and thus the sample order in the `samples` argument is important. In particular, the Mediana package assumes that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas
-Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure).
+It needs to be noted that the significance tests listed above are implemented as **one-sided** tests and thus the sample order in the `samples` argument is important. In particular, the Mediana package assumes by default that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas
+Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure), or alternatively (from version 1.0.6), the optional parameters `larger` must be set to FALSE to indicate that a larger value is expected on the first Sample.
 
 Several `Test` objects can be added to an `AnalysisModel`object.
 
-For more information about the `Test` object, see the package's documentation [Test](https://cran.r-project.org/web/packages/Mediana/Mediana.pdf) on the CRAN web site.
+For more information about the `Test` object, see the package's documentation [Test](http://cran.r-project.org/package=Mediana/Mediana.pdf) on the CRAN web site.
+
+#### Example
+
+Examples of `Test` objects:
+
+Carry out the two-sample t-test:
+
+```r
+# Placebo and Treatment samples were defined in the data model
+Test(id = "Placebo vs treatment",
+     samples = samples("Placebo", "Treatment"),
+     method = "TTest")
+```
+
+Carry out the two-sample t-test with larger values expected in the first sample (from v1.0.6):
+
+```r
+# Placebo and Treatment samples were defined in the data model
+Test(id = "Placebo vs treatment",
+     samples = samples("Treatment", "Placebo"),
+     method = "TTest",
+     par = parameters(larger = FALSE))
+```
 
 #### Example
 
@@ -88,6 +111,16 @@ Carry out the two-sample t-test:
 Test(id = "Placebo vs treatment",
      samples = samples("Placebo", "Treatment"),
      method = "TTest")
+{% endhighlight %}
+
+Carry out the two-sample t-test with larger values expected in the first sample (from v1.0.6):
+
+{% highlight R %}
+# Placebo and Treatment samples were defined in the data model
+Test(id = "Placebo vs treatment",
+     samples = samples("Treatment", "Placebo"),
+     method = "TTest",
+     par = parameters(larger = FALSE))
 {% endhighlight %}
 
 Carry out the two-sample t-test for non-inferiority:

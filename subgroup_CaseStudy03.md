@@ -155,7 +155,7 @@ the general population (`prevalence.pos`) is set to 0.55.
 {% highlight R %}
 # Sample size parameters
 prevalence.pos = 0.55
-sample.size.total = 360
+sample.size.total = 270
 
 sample.size.placebo.neg = round(((1-prevalence.pos) / 2) * sample.size.total)
 sample.size.placebo.pos = round((prevalence.pos / 2 * sample.size.total))
@@ -351,7 +351,7 @@ subgroup.cs3.evaluation.model =
                              v2 = prevalence.pos / (2 * (1 + prevalence.pos)),
                              v3 = 1/2,
                              influence_threshold = 0.15,
-                             interaction_threshold = 1.6)) + 
+                             interaction_threshold = 1.5)) + 
   Criterion(id = "Probability of a broad claim",
             method = "subgroup.cs3.BroadClaimPower",
             tests = tests("OP test", "Bio-Pos test"),
@@ -360,7 +360,7 @@ subgroup.cs3.evaluation.model =
             labels = c("Probability of a broad claim"),
             par = parameters(alpha = 0.025, 
                              influence_threshold = 0.15,
-                             interaction_threshold = 1.6)) + 
+                             interaction_threshold = 1.5)) + 
   Criterion(id = "Probability of a restricted claim",
             method = "subgroup.cs3.RestrictedClaimPower",
             tests = tests("OP test", "Bio-Pos test"),
@@ -369,7 +369,7 @@ subgroup.cs3.evaluation.model =
             labels = c("Probability of a restricted claim"),
             par = parameters(alpha = 0.025, 
                              influence_threshold = 0.15,
-                             interaction_threshold = 1.6)) + 
+                             interaction_threshold = 1.5)) + 
   Criterion(id = "Probability of an enhanced claim",
             method = "subgroup.cs3.EnhancedClaimPower",
             tests = tests("OP test", "Bio-Pos test"),
@@ -378,7 +378,7 @@ subgroup.cs3.evaluation.model =
             labels = c("Probability of an enhanced claim"),
             par = parameters(alpha = 0.025, 
                              influence_threshold = 0.15,
-                             interaction_threshold = 1.6))
+                             interaction_threshold = 1.5))
 {% endhighlight %}
 
 ## Perform Clinical Scenario Evaluation

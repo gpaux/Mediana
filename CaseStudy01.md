@@ -125,7 +125,7 @@ case.study1.analysis.model = case.study1.analysis.model +
        method = "TTest")
 {% endhighlight %}
 
-According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see [Analysis Model](AnalysisModel.html#Description), the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.
+According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see [Analysis Model](AnalysisModel.html#Description), the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2.  It is of note that from version 1.0.6, it is possible to specify an option to indicate if a larger numeric values is expected in the Sample 2 (`larger = TRUE`) or in Sample 1 (`larger = FALSE`). By default, this argument is set to `TRUE`.
 
 To illustrate the use of the `Statistic` object, the mean change in the six-minute walk distance in the treatment arm can be computed using the `MeanStat` statistic:
 
@@ -672,7 +672,7 @@ case.study1.data.model = DataModel() +
 
 ### Define an Analysis Model
 
-The treatment effect will be assessed in this clinical trial example using a negative binomial generalized linear model (NBGLM). In the Mediana package, the corresponding test is carrying out using the `GLMNegBinomTest` method which is specified in the `Test` object. It should be noted that as a smaller value indicates a treatment benefit, the first sample defined in the `samples` argument must be `Treatment`.
+The treatment effect will be assessed in this clinical trial example using a negative binomial generalized linear model (NBGLM). In the Mediana package, the corresponding test is carrying out using the `GLMNegBinomTest` method which is specified in the `Test` object. It should be noted that as a smaller value indicates a treatment benefit, the first sample defined in the `samples` argument must be `Treatment`. 
 
 {% highlight R %}
 # Analysis model
@@ -680,6 +680,17 @@ case.study1.analysis.model = AnalysisModel() +
   Test(id = "Treatment vs Placebo",
        samples = samples( "Treatment", "Placebo"),
        method = "GLMNegBinomTest")
+{% endhighlight %}
+
+Alternatively, from version 1.0.6, it is possible to specify the argument `lower` in the parameters of the method. If set to `FALSE` a numerically lower value is expected in Sample 2. 
+
+{% highlight R %}
+# Analysis model
+case.study1.analysis.model = AnalysisModel() +
+  Test(id = "Treatment vs Placebo",
+       samples = samples( "Placebo", "Treatment"),
+       method = "GLMNegBinomTest",
+       par = parameters(larger = FALSE))
 {% endhighlight %}
 
 ### Define an Evaluation Model
