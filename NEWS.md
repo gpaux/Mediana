@@ -18,7 +18,7 @@
 
 ## Bug fixes
 
-* Due to difficulties for several users to install the Mediana R package because of java issue, the ReporteRs R pacakage is not required anymore (remove from Imports). However, to be able to generate the report, the user will require to have the ReporteRs R package installed.
+* Due to difficulties for several users to install the Mediana R package because of java issue, the `ReporteRs` R pacakage is not required anymore (remove from Imports). However, to be able to generate the report, the user will require to have the `ReporteRs` R package installed.
 
 * Minor revision to the two-sample non-inferiority test for proportions to ensure that the number of successes is not greater than the sample size
  
