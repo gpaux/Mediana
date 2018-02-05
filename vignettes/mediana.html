@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrieniko" />
 
-<meta name="date" content="2017-12-27" />
+<meta name="date" content="2018-02-05" />
 
 <title>Mediana: an R package for clinical trial simulations</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Mediana: an R package for clinical trial simulations</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrieniko</em></h4>
-<h4 class="date"><em>2017-12-27</em></h4>
+<h4 class="date"><em>2018-02-05</em></h4>
 
 
 
@@ -99,7 +99,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>Development version</h3>
 <p>The up-to-date development version can be found and installed directly from the GitHub web site. You need to install the <code>devtools</code> package and then call the <code>install_github</code> function in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;devtools&quot;)</span>
-devtools::<span class="kw">install_github</span>(<span class="st">&quot;gpaux/Mediana&quot;</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;gpaux/Mediana&quot;</span>)</code></pre></div>
 </div>
 <div id="potential-installations-issue" class="section level3">
 <h3>Potential installation’s issue</h3>
@@ -152,11 +152,11 @@ outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<s
 outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
 
 <span class="co"># Data model</span>
-case.study1.data.model =<span class="st">  </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
-<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>)) +
+case.study1.data.model =<span class="st">  </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment, outcome2.treatment))</code></pre></div>
 <div id="outcomedist-object" class="section level3">
@@ -262,11 +262,11 @@ outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<
 <p>Specify two samples with a time-to-event (survival) endpoint following an exponential distribution:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters</span>
 median.time.placebo =<span class="st"> </span><span class="dv">6</span>
-rate.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.placebo
+rate.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.placebo
 outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.placebo)
 
 median.time.treatment =<span class="st"> </span><span class="dv">9</span>
-rate.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.treatment
+rate.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.treatment
 outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.treatment)
 
 <span class="co"># Placebo sample object</span>
@@ -282,13 +282,13 @@ var.type =<span class="st"> </span><span class="kw">list</span>(<span class="st"
 
 <span class="co"># Outcome distribution parameters</span>
 placebo.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.3</span>), 
-                         <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.10</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                         <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.10</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 
 dosel.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.40</span>), 
-                       <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.20</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                       <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.20</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 
 doseh.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), 
-                       <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                       <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 
 <span class="co"># Correlation between two endpoints</span>
 corr.matrix =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>,
@@ -416,10 +416,10 @@ analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>()
 <h2>Components of an analysis model</h2>
 <p>After an <code>AnalysisModel</code> object has been initialized, components of the analysis model can be specified by adding objects to the model using the ‘+’ operator as shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
-       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Treatment&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MeanStat&quot;</span>,
             <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>))</code></pre></div>
@@ -436,15 +436,15 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 </ul>
 <p>Several commonly used significance tests are already implemented in the Mediana package. In addition, the user can easily define custom significance tests (see the dedicated vignette <code>vignette(&quot;custom-functions&quot;, package = &quot;Mediana&quot;)</code>). The built-in tests are listed below along with the required parameters that need to be included in the <code>par</code> argument:</p>
 <ul>
-<li><p><code>TTest</code>: perform the <strong>two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
-<li><p><code>TTestNI</code>: perform the <strong>non-inferiority two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin). Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
-<li><p><code>WilcoxTest</code>: perform the <strong>Wilcoxon-Mann-Whitney test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
-<li><p><code>PropTest</code>: perform the <strong>two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>) and <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
-<li><p><code>PropTestNI</code>: perform the <strong>non-inferiority two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin). Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>) and <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
-<li><p><code>FisherTest</code>: perform the <strong>Fisher exact test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
-<li><p><code>GLMPoissonTest</code>: perform the <strong>Poisson regression test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
-<li><p><code>GLMNegBinomTest</code>: perform the <strong>Negative-binomial regression test</strong> between the two <code>samples</code> defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
-<li><p><code>LogrankTest</code>: perform the <strong>Log-rank test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (TRUE or FALSE)).</p></li>
+<li><p><code>TTest</code>: perform the <strong>two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
+<li><p><code>TTestNI</code>: perform the <strong>non-inferiority two-sample t-test</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin). Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
+<li><p><code>WilcoxTest</code>: perform the <strong>Wilcoxon-Mann-Whitney test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
+<li><p><code>PropTest</code>: perform the <strong>two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>) and <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
+<li><p><code>PropTestNI</code>: perform the <strong>non-inferiority two-sample test for proportions</strong> between the two samples defined in the <code>samples</code> argument. Required parameter: <code>margin</code> (positive non-inferiority margin). Optional parameter: <code>yates</code> (Yates’ continuity correction flag that is set to <code>TRUE</code> or <code>FALSE</code>) and <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
+<li><p><code>FisherTest</code>: perform the <strong>Fisher exact test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
+<li><p><code>GLMPoissonTest</code>: perform the <strong>Poisson regression test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
+<li><p><code>GLMNegBinomTest</code>: perform the <strong>Negative-binomial regression test</strong> between the two <code>samples</code> defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
+<li><p><code>LogrankTest</code>: perform the <strong>Log-rank test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
 </ul>
 <p>It needs to be noted that the significance tests listed above are implemented as <strong>one-sided</strong> tests and thus the sample order in the <code>samples</code> argument is important. In particular, the Mediana package assumes by default that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure), or alternatively (from version 1.0.6), the optional parameters <code>larger</code> must be set to FALSE to indicate that a larger value is expected on the first Sample.</p>
 <p>Several <code>Test</code> objects can be added to an <code>AnalysisModel</code>object.</p>
@@ -636,25 +636,25 @@ mult.adj.trialB =<span class="st"> </span><span class="kw">MultAdjProc</span>(<s
                                             <span class="st">&quot;Trial B Pla vs Trt End3&quot;</span>))
 
 <span class="co"># Analysis model</span>
-analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
-<span class="st">  </span><span class="kw">MultAdjStrategy</span>(mult.adj.trialA, mult.adj.trialB) +
+analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">MultAdjStrategy</span>(mult.adj.trialA, mult.adj.trialB) <span class="op">+</span>
 <span class="st">  </span><span class="co"># Tests for study A</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial A Pla vs Trt End1&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,
-       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial A Plac End1&quot;</span>, <span class="st">&quot;Trial A Trt End1&quot;</span>)) +
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial A Plac End1&quot;</span>, <span class="st">&quot;Trial A Trt End1&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial A Pla vs Trt End2&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
-       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial A Plac End2&quot;</span>, <span class="st">&quot;Trial A Trt End2&quot;</span>)) +
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial A Plac End2&quot;</span>, <span class="st">&quot;Trial A Trt End2&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial A Pla vs Trt End3&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
-       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial A Plac End3&quot;</span>, <span class="st">&quot;Trial A Trt End3&quot;</span>)) +
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial A Plac End3&quot;</span>, <span class="st">&quot;Trial A Trt End3&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="co"># Tests for study B</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial B Pla vs Trt End1&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,
-       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial B Plac End1&quot;</span>, <span class="st">&quot;Trial B Trt End1&quot;</span>)) +
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial B Plac End1&quot;</span>, <span class="st">&quot;Trial B Trt End1&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial B Pla vs Trt End2&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
-       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial B Plac End2&quot;</span>, <span class="st">&quot;Trial B Trt End2&quot;</span>)) +
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial B Plac End2&quot;</span>, <span class="st">&quot;Trial B Trt End2&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Trial B Pla vs Trt End3&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Trial B Plac End3&quot;</span>, <span class="st">&quot;Trial B Trt End3&quot;</span>))</code></pre></div>
@@ -677,29 +677,29 @@ mult.adj2 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span cl
 mult.adj3 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>)
 
 <span class="co"># Analysis model</span>
-analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
-<span class="st">                 </span><span class="kw">MultAdj</span>(mult.adj1, mult.adj2, mult.adj3) +
+analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
+<span class="st">                 </span><span class="kw">MultAdj</span>(mult.adj1, mult.adj2, mult.adj3) <span class="op">+</span>
 <span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose L&quot;</span>,
                       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),
-                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose M&quot;</span>,
                       <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),
-                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose H&quot;</span>,
                       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),
                       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)
 
 <span class="co"># Note that the code presented above is equivalent to:</span>
-analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
-<span class="st">                 </span>mult.adj1 +
-<span class="st">                 </span>mult.adj2 +
-<span class="st">                 </span>mult.adj3 +
+analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
+<span class="st">                 </span>mult.adj1 <span class="op">+</span>
+<span class="st">                 </span>mult.adj2 <span class="op">+</span>
+<span class="st">                 </span>mult.adj3 <span class="op">+</span>
 <span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose L&quot;</span>,
                       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),
-                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose M&quot;</span>,
                       <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),
-                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+                      <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">                 </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Pl vs Dose H&quot;</span>,
                       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),
                       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
@@ -721,12 +721,12 @@ evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</spa
 <h2>Components of an evaluation model</h2>
 <p>After an <code>EvaluationModel</code> object has been initialized, components of the evaluation model can be specified by adding objects to the model using the ‘+’ operator as shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))  +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))  <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Average Mean&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
             <span class="dt">statistics =</span> <span class="kw">statistics</span>(<span class="st">&quot;Mean Treatment&quot;</span>),
@@ -772,7 +772,7 @@ case.study1.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
                         <span class="st">&quot;Placebo vs treatment - Endpoint 2&quot;</span>),
           <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Weighted power&quot;</span>),
           <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>,
-                           <span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">2</span>/<span class="dv">3</span>, <span class="dv">1</span>/<span class="dv">3</span>)))</code></pre></div>
+                           <span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)))</code></pre></div>
 <p>Compute disjunctive power with alpha = 0.025:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
           <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
@@ -845,22 +845,22 @@ outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<s
 outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">70</span>)
 
 <span class="co"># Data model</span>
-case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
-<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>)) +
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment, outcome2.treatment))
 
 <span class="co"># Analysis model</span>
-case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)
 
 <span class="co"># Evaluation model</span>
-case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
@@ -1094,11 +1094,11 @@ presentation.model =<span class="st"> </span><span class="kw">PresentationModel<
 <h3>Examples</h3>
 <p>This example illustrates the use of the <code>GenerateReport</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a presentation model</span>
-case.study1.presentation.model =<span class="st"> </span><span class="kw">PresentationModel</span>() +
-<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) +
-<span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) +
+case.study1.presentation.model =<span class="st"> </span><span class="kw">PresentationModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;sample.size&quot;</span>,
-              <span class="dt">label=</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>,<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>))) +
+              <span class="dt">label=</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>,<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>))) <span class="op">+</span>
 <span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;outcome.parameter&quot;</span>,
               <span class="dt">label=</span><span class="kw">c</span>(<span class="st">&quot;Standard 1&quot;</span>, <span class="st">&quot;Standard 2&quot;</span>))
 
@@ -1117,7 +1117,7 @@ case.study1.presentation.model =<span class="st"> </span><span class="kw">Presen
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

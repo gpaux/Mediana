@@ -33,6 +33,7 @@ Several distribution are already implemented in the Mediana package (listed belo
 \item \code{TruncatedExpoDist}: generate data following a truncated exponential distribution. Required parameter: \code{rate} and \code{trunc}.
 \item \code{PoissonDist}: generate data following a Poisson distribution. Required parameter: \code{lambda}.
 \item \code{NegBinomDist}: generate data following a negative binomial distribution. Required parameters: \code{dispersion} and \code{mean}.
+\item \code{MultinomialDist}: generate data following a multinomial distribution. Required parameter: \code{prob}.
 \item \code{MVNormalDist}: generate data following a multivariate normal distribution. Required parameters: \code{par} and \code{corr}. For each generated endpoint, the \code{par} parameter must contain the required parameters \code{mean} and \code{sd}. The \code{corr} parameter specifies the correlation matrix for the endpoints.
 \item \code{MVBinomDist}: generate data following a multivariate binomial distribution. Required parameters: \code{par} and \code{corr}.For each generated endpoint, the \code{par} parameter must contain the required parameter \code{prop}.  The \code{corr} parameter specifies the correlation matrix for the endpoints.
 \item \code{MVExpoDist}: generate data following a multivariate exponential distribution. Required parameters: \code{par} and \code{corr}. For each generated endpoint, the \code{par} parameter must contain the required parameter \code{rate}.  The \code{corr} parameter specifies the correlation matrix for the endpoints.

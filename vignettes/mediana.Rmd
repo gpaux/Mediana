@@ -148,6 +148,8 @@ Several distributions that can be specified using the `outcome.dist` argument ar
 
 - `NegBinomDist`: generate data following a **negative binomial distribution**. Required parameters: `dispersion` and `mean`.
 
+- `MultinomialDist`: generate data following a **multinomial distribution**. Required parameters: `prob`.
+
 - `MVNormalDist`: generate data following a **multivariate normal distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameters `mean` and `sd`. The `corr` parameter specifies the correlation matrix for the endpoints.
 
 - `MVBinomDist`: generate data following a **multivariate binomial distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `prop`. The `corr` parameter specifies the correlation matrix for the endpoints.
@@ -490,6 +492,8 @@ Several commonly used significance tests are already implemented in the Mediana 
 - `GLMNegBinomTest`: perform the **Negative-binomial regression test** between the two `samples` defined in the `samples` argument. Optional parameter: `larger` (Larger value is expected in the second sample (`TRUE` or `FALSE`)).
 
 - `LogrankTest`: perform the **Log-rank test** between the two samples defined in the `samples` argument. Optional parameter: `larger` (Larger value is expected in the second sample (`TRUE` or `FALSE`)).
+
+- `OrdinalLogisticRegTest`: perform an **ordinal logistic regression test** between the two samples defined in the `samples` argument. Optional parameter: `larger` (Larger value is expected in the second sample (`TRUE` or `FALSE`)).
 
 It needs to be noted that the significance tests listed above are implemented as **one-sided** tests and thus the sample order in the `samples` argument is important. In particular, the Mediana package assumes by default that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas
 Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure), or alternatively (from version 1.0.6), the optional parameters `larger` must be set to FALSE to indicate that a larger value is expected on the first Sample.

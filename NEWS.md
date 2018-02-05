@@ -2,6 +2,10 @@
 
 ## New features
 
+* Addition of the multinomial distribution (`MultinomialDist`, see [Analysis model](http://gpaux.github.io/Mediana/DataModel.html#OutcomeDistobject)).
+
+* Addition of the ordinal logistic regression test (`OrdinalLogisticRegTest`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Testobject)).
+
 * Addition of the Proportion statistic (`PropStat`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
  
 * Addition of the Fallback procedure (`FallbackAdj`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#MultAdjProcobject)).
