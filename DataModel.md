@@ -58,31 +58,19 @@ This object specifies the distribution of patient outcomes in a data model. An `
 Several distributions that can be specified using the `outcome.dist` argument are already implemented in the Mediana package. These distributions are listed below along with the required parameters to be included in the `outcome.par` argument of the `Sample` object:
 
 - `UniformDist`: generate data following a **univariate distribution**. Required parameter: `max`.
-
 - `NormalDist`: generate data following a **normal distribution**. Required parameters: `mean` and `sd`.
-
 - `BinomDist`: generate data following a **binomial distribution**. Required parameter: `prop`.
-
 - `BetaDist`: generate data following a **beta distribution**. Required parameter: `a` and `b`.
-
 - `ExpoDist`: generate data following an **exponential distribution**. Required parameter: `rate`.
-
 - `WeibullDist`: generate data following a **weibull distribution**. Required parameter: `shape` and `scale`.
-
 - `TruncatedExpoDist`: generate data following a **truncated exponential distribution**. Required parameter: `rate` an `trunc`.
-
 - `PoissonDist`: generate data following a **Poisson distribution**. Required parameter: `lambda`.
-
 - `NegBinomDist`: generate data following a **negative binomial distribution**. Required parameters: `dispersion` and `mean`.
-
+- `MultinomialDist`: generate data following a **multinomial  distribution**. Required parameters: `prob`.
 - `MVNormalDist`: generate data following a **multivariate normal distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameters `mean` and `sd`. The `corr` parameter specifies the correlation matrix for the endpoints.
-
 - `MVBinomDist`: generate data following a **multivariate binomial distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `prop`. The `corr` parameter specifies the correlation matrix for the endpoints.
-
 - `MVExpoDist`: generate data following a **multivariate exponential distribution**. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `rate`. The `corr `parameter specifies the correlation matrix for the endpoints.
-
 - `MVExpoPFSOSDist`: generate data following a **multivariate exponential distribution to generate PFS and OS endpoints**. The PFS value is imputed to the OS value if the latter occurs earlier. Required parameters: `par` and `corr`. For each generated endpoint, the `par` parameter must contain the required parameter `rate`. The` corr` parameter specifies the correlation matrix for the endpoints.
-
 - `MVMixedDist`: generate data following a **multivariate mixed distribution**. Required parameters: `type`, `par` and `corr`. The `type` parameter assumes the following values: `NormalDist`, `BinomDist` and `ExpoDist`. For each generated endpoint, the `par` parameter must contain the required parameters according to the distribution type. The `corr` parameter specifies the correlation matrix for the endpoints.
 
 
