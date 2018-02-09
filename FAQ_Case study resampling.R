@@ -31,12 +31,11 @@ SamplingDist <- function(parameter){
     if (!is.logical(replace))
       stop("Data model: SamplingDist distribution: replace argument must be TRUE or FALSE.")
     
-    if (!replace & (n > length(dataset)))
-      stop("Data model: SamplingDist distribution: replace cannot be set to FALSE if the sample size is greater than the data set length.")
-    
     # Error checks on dataset
     if (!is.vector(dataset))
       stop("Data model: SamplingDist distribution: dataset argument must be vector of values to sample from.")
+    if (!replace & (n > length(dataset)))
+      stop("Data model: SamplingDist distribution: replace cannot be set to FALSE if the sample size is greater than the data set length.")
     
     ##############################################################
     # Distribution-specific component

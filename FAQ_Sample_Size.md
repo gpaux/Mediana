@@ -145,12 +145,12 @@ Click on the icons below to download the R code used in this case study and repo
 
 <center>
   <div class="col-md-6">
-    <a href="Case study sample size.docx" class="img-responsive">
+    <a href="FAQ_Case study sample size.docx" class="img-responsive">
       <img src="Logo_Microsoft_Word.png" class="img-responsive" height="100">
     </a>
   </div>
   <div class="col-md-6">
-    <a href="Case study sample size.R" class="img-responsive">
+    <a href="FAQ_Case study sample size.R" class="img-responsive">
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>

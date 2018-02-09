@@ -47,6 +47,7 @@ The data model will be constructed by sampling data from these pre-existing data
 In order to sample from these datasets, a new outcome distribution function have to be implemented. The key idea of this function will simply be to sample data from the dataset. To create a customized outcome distribution function, please refer to this [page](CustomFunctions.html#User-definedfunctionsforadatamodel). This function will require two specific parameters in addition to the sample size, the pre-existing data, and a boolean indicating whether or not the sampling will be done with or without replacement. The customized function is presented below.
 
 {% highlight R %}
+
 # Custom function to sample from a pre-existing dataset
 SamplingDist <- function(parameter){
   # Determine the function call, either to generate distribution or to return the distribution's description
@@ -73,14 +74,12 @@ SamplingDist <- function(parameter){
     # Error checks on replace
     if (!is.logical(replace))
       stop("Data model: SamplingDist distribution: replace argument must be TRUE or FALSE.")
-      
-    if (!replace & (n > length(dataset)))
-      stop("Data model: SamplingDist distribution: replace cannot be set to FALSE if the sample size is greater than the data set length.")
-
-
+    
     # Error checks on dataset
     if (!is.vector(dataset))
       stop("Data model: SamplingDist distribution: dataset argument must be vector of values to sample from.")
+    if (!replace & (n > length(dataset)))
+      stop("Data model: SamplingDist distribution: replace cannot be set to FALSE if the sample size is greater than the data set length.")
     
     ##############################################################
     # Distribution-specific component
@@ -103,6 +102,7 @@ SamplingDist <- function(parameter){
   }
   return(result)
 }
+
 {% endhighlight %}
 
 
@@ -180,11 +180,11 @@ case.study1.results = CSE(case.study1.data.model,
 
 ## Download
 
-Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
+Click on the icons below to download the R code used in this case study:
 
 <center>
   <div class="col-md-6">
-    <a href="Case study resampling.R" class="img-responsive">
+    <a href="FAQ_Case study resampling.R" class="img-responsive">
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
