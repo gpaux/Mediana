@@ -48,18 +48,18 @@ summary(case.study1.results)
 
 ############################################################################################################################
 # Function: PowerConfidenceInterval
-# Argument: CSE (object returned by the CSE function) and ci (level of the ci)
+# Argument: CSE (object returned by the CSE function) and covprob (coverage probability)
 # Description: Compute binomial confidence interval based on normal approximation.
-PowerConfidenceInterval = function(CSE, ci) {
+PowerConfidenceInterval = function(CSE, covprob) {
 
   # Error check
   if (class(CSE) != "CSE") stop("PowerConfidenceInterval: a CSE object must be used in the CSE argument.")
   results = CSE$simulation.results
   n.sims = CSE$sim.parameters$n.sims
 
-  if (ci <= 0 | ci >=1) stop("PowerConfidenceInterval: ci parameter must lies between 0 and 1.")
+  if (covprob <= 0 | covprob >=1) stop("PowerConfidenceInterval: covprob parameter must lies between 0 and 1.")
 
-  q = qnorm(1-(1-ci)/2)
+  q = qnorm(1-(1-covprob)/2)
   power = results$result
 
 
@@ -76,5 +76,5 @@ PowerConfidenceInterval = function(CSE, ci) {
 
 # Compute 95% confidence interval
 case.study1.results = PowerConfidenceInterval(CSE = case.study1.results,
-                                              ci = 0.95)
+                                              covprob = 0.95)
 summary(case.study1.results)

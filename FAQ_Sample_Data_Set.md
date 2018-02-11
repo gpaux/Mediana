@@ -9,19 +9,17 @@ group: navigation
 
 ## Summary
 
-The Mediana R package uses Monte-Carlo simulations to generate data. However, it is also possible to create a data model by resampling from an existing data set. This will be illustrated in the following page.
+The Mediana R package uses Monte-Carlo simulations to generate patient outcomes in a clinical trial. The simulation parameter are specified in a data model. In addition, as explained below, a data model can also be created by resampling from an existing data set, e.g., a clinical trial database. 
 
-A simple example will be used to illustrate how to create a data model by resampling from an existing data set. We will consider a pool of three Phase II clinical trials with 200 patients, where data on the Phase III primary endpoint have been collected for the treatment arm. Control data have been collected in several previously conducted trial with several experimental drugs and a large database with 3000 patients exists.
+The following case study will be used to illustrate how to create a data model by resampling from an existing data set. We will consider a database of three Phase II clinical trials. This database contains data on the primary endpoint to be used in an upcoming Phase III trial for the experimental treatment. Furthermore, a large database with control data collected in several previously conducted trials with other investigational treatments is available. The sponsor wishes to estimate statistical power in the Phase III trial by sampling from these existing databases. 
 
-The objective for the sponsor is to estimate the statistical power by sampling from these existing datasets. 
-
-For simplicity, we will consider a Phase III clinical trial with two arms and a normally distributed endpoints (a Phase III clinical trial in patients with pulmonary arterial hypertension where the primary endpoint is the change in the six-minute walk distance).
+For simplicity, we will consider a Phase III clinical trial with two arms and a normally distributed endpoint (a Phase III clinical trial in patients with pulmonary arterial hypertension where the primary endpoint is the change in the six-minute walk distance).
 
 ## Data Model
 
-As mentioned previously, the data model will be constructed by sampling from pre-existing dataset. For the purpose of illustration, we will generate these pre-existing datasets. 
+The data model will be constructed by sampling from several pre-existing datasets. For the purposes of illustration, we will generate these datasets. 
 
-For the treatment arm, we consider the data collected from three Phase II clinical trial with respectively 75, 75 and 50 patients. The observed mean and SD of the six-minute walking test in each trial is used to generate the data, then the data are merged within a dataset. Data are generated using a normal distribution.
+Beginning with the database containing treatment data, we consider the outcome data collected from three Phase II clinical trials with 75, 75 and 50 patients, respectively. The observed means and SDs of the primary endpoint in each trial will be used to generate the treatment database as shown below:
 
 {% highlight R %}
 treatment_PhaseII_data1 = data.frame(trt = rep(1,75),
@@ -35,20 +33,19 @@ treatment_PhaseII_data = rbind(treatment_PhaseII_data1,
                                treatment_PhaseII_data3)
 {% endhighlight %}
 
-For the placebo group, data are obtained using a pooled database with data collected from several research development program in the same indications. 3000 placebo patients compose this dataset. As for the treatment group, data of the 3000 patients are generated using a normal distribution with observed mean and SD.
+For the control database, consider a database set up by pooling outcome data from several development programs with the same indications (there are 3000 patients in this database). The control database will be generated using an approach similar to the one utilized above:
 
 {% highlight R %}
 control_data = data.frame(trt = rep(2,3000),
                           y = rnorm(3000, mean = 0, sd = 70))
 {% endhighlight %}
 
-The data model will be constructed by sampling data from these pre-existing datasets. Several sample size scenarios will be evaluated, from 40 patients per treatment arm to 70, with a step of 10 patients. 
+The data model in this case study will be constructed by sampling data from these two databases. Several sample size scenarios will be evaluated to compute power in the Phase III trial, from 40 patients per treatment arm to 70, with a step of 10 patients. 
 
-In order to sample from these datasets, a new outcome distribution function have to be implemented. The key idea of this function will simply be to sample data from the dataset. To create a customized outcome distribution function, please refer to this [page](CustomFunctions.html#User-definedfunctionsforadatamodel). This function will require two specific parameters in addition to the sample size, the pre-existing data, and a boolean indicating whether or not the sampling will be done with or without replacement. The customized function is presented below.
+In order to sample from the treatment and control data sets, a new outcome distribution function needs to be implemented. The key idea behind this function is to simply enable sampling outcome data from the two data sets. To create a custom outcome distribution function, please refer to this [page](CustomFunctions.html#User-definedfunctionsforadatamodel). This function will require two parameters in addition to the sample size per arm, name of the existing data set and a boolean variable indicating whether the sampling will be done with or without replacement. The custom function, named `SamplingDist`, is presented below.
 
 {% highlight R %}
-
-# Custom function to sample from a pre-existing dataset
+# Custom function to sample from a pre-existing data set
 SamplingDist <- function(parameter){
   # Determine the function call, either to generate distribution or to return the distribution's description
   call = (parameter[[1]] == "description")
@@ -74,16 +71,18 @@ SamplingDist <- function(parameter){
     # Error checks on replace
     if (!is.logical(replace))
       stop("Data model: SamplingDist distribution: replace argument must be TRUE or FALSE.")
-    
+      
+    if (!replace & (n > length(dataset)))
+      stop("Data model: SamplingDist distribution: replace cannot be set to FALSE if the sample size is greater than the data set length.")
+
+
     # Error checks on dataset
     if (!is.vector(dataset))
       stop("Data model: SamplingDist distribution: dataset argument must be vector of values to sample from.")
-    if (!replace & (n > length(dataset)))
-      stop("Data model: SamplingDist distribution: replace cannot be set to FALSE if the sample size is greater than the data set length.")
     
     ##############################################################
     # Distribution-specific component
-    # Observations are sampled from the dataset
+    # Patient outcomes are sampled from the data set
     result = sample(x = dataset, size = n, replace = replace)
     ##############################################################
 
@@ -102,14 +101,11 @@ SamplingDist <- function(parameter){
   }
   return(result)
 }
-
 {% endhighlight %}
 
+The first block in the `SamplingDist` function is used to get the function's parameters, i.e., the data set's name and the boolean indicator. The second block focuses on sampling `n` values from the `dataset` with an option to sample with or without replacement (based on `replace`). Lastly, the third block creates an object that will be used in a simulation report and will not be discussed here. 
 
-
-The key part of this function named `SamplingDist` are within blocks. The first block is used to get the parameters of the function, i.e., the dataset and the replacement indicator. The second block is used to sample `n` values from the `dataset` with the option to `replace`  or not. Lastly, the third block is used for the purpose of creating the simulation report and will not be described here. 
-
-For the purpose of illustration, we will consider a sampling with replacement. The outcome parameters for each group and the data model can be defined as follows. The outcome distribution specified in the `OutcomeDist` object is `SamplingDist`.
+For the purpose of illustration, we will consider a sampling scheme with replacement. The outcome parameters for each trial arm and the data model can be defined as follows. The outcome distribution specified in the `OutcomeDist` object is `SamplingDist`.
 
 {% highlight R %}
 
@@ -130,11 +126,11 @@ case.study1.data.model = DataModel() +
 
 {% endhighlight %}
 
-Then the analysis model and the evaluation model can be defined as usual. 
+After the data model has been set up, the analysis model and the evaluation model can be defined using a standard approach. 
 
 ## Analysis model
 
-Only one significance test is planned to be carried out in the PAH clinical trial (treatment versus placebo). The treatment effect will be assessed using the one-sided two-sample *t*-test:
+The analysis model defines a single significance test that will be carried out in the Phase III trial (treatment versus placebo). The treatment effect will be assessed using the one-sided two-sample *t*-test:
 
 {% highlight R %}
 case.study1.analysis.model = AnalysisModel() +
@@ -145,7 +141,7 @@ case.study1.analysis.model = AnalysisModel() +
 
 ## Evaluation model
 
-The data and analysis models specified above collectively define the Clinical Scenarios to be examined in the PAH clinical trial. The scenarios are evaluated using success criteria or metrics that are aligned with the clinical objectives of the trial. In this case it is most appropriate to use regular power or, more formally, *marginal power*. This success criterion is specified in the evaluation model.
+The data and analysis models specified above define the Clinical Scenarios that will be examined in the Phase III trial. In general, clinical scenarios are evaluated using success criteria based on the trial's clinical objectives. Regular power, also known as *marginal power*, will be computed in this trial. This success criterion is specified in the following evaluation model.
 
 {% highlight R %}
 case.study1.evaluation.model = EvaluationModel() +
@@ -158,9 +154,7 @@ case.study1.evaluation.model = EvaluationModel() +
 
 ## Perform Clinical Scenario Evaluation
 
-After the clinical scenarios (data and analysis models) and evaluation model have been defined, the user is ready to evaluate the success criteria specified in the evaluation model by calling the `CSE` function. 
-
-To accomplish this, the simulation parameters need to be defined in a `SimParameters` object:
+After the clinical scenarios (data and analysis models) and evaluation model have been defined, the user is ready to evaluate the success criteria specified in the evaluation model by invoking the `CSE` function. The simulation parameters need to be defined in a `SimParameters` object:
 
 {% highlight R %}
 # Simulation parameters
@@ -169,7 +163,7 @@ case.study1.sim.parameters = SimParameters(n.sims = 10000,
                                            seed = 42938001)
 {% endhighlight %}
 
-The function call for `CSE` specifies the individual components of Clinical Scenario Evaluation in this case study as well as the simulation parameters:
+The `CSE` call specifies the individual components of Clinical Scenario Evaluation in this case study as well as the simulation parameters:
 {% highlight R %}
 # Perform clinical scenario evaluation
 case.study1.results = CSE(case.study1.data.model,
@@ -180,11 +174,11 @@ case.study1.results = CSE(case.study1.data.model,
 
 ## Download
 
-Click on the icons below to download the R code used in this case study:
+Click on the icons below to download the R code used in this case study and report that summarizes the results of Clinical Scenario Evaluation:
 
 <center>
   <div class="col-md-6">
-    <a href="FAQ_Case study resampling.R" class="img-responsive">
+    <a href="Case study resampling.R" class="img-responsive">
       <img src="Logo_R.png" class="img-responsive" height="100">
     </a>
   </div>
