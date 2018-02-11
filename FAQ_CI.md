@@ -68,19 +68,20 @@ where $\hat{p}$ is the estimated power, $z_{\alpha}$ is the $1-\alpha/2$ quantil
 The following function can be called to compute a confidence interval for the estimated power from the simulation results returned by the `CSE` function.
 
 {% highlight R %}
+############################################################################################################################
 # Function: PowerConfidenceInterval
-# Argument: CSE (object returned by the CSE function) and ci (level of the ci)
-# Description: Compute a binomial confidence interval based on normal approximation.
-PowerConfidenceInterval = function(CSE, ci) {
+# Argument: CSE (object returned by the CSE function) and covprob (coverage probability)
+# Description: Compute binomial confidence interval based on normal approximation.
+PowerConfidenceInterval = function(CSE, covprob) {
 
   # Error check
   if (class(CSE) != "CSE") stop("PowerConfidenceInterval: a CSE object must be used in the CSE argument.")
   results = CSE$simulation.results
   n.sims = CSE$sim.parameters$n.sims
 
-  if (ci <= 0 | ci >=1) stop("PowerConfidenceInterval: CI parameter must lie between 0 and 1.")
+  if (covprob <= 0 | covprob >=1) stop("PowerConfidenceInterval: covprob parameter must lies between 0 and 1.")
 
-  q = qnorm(1-(1-ci)/2)
+  q = qnorm(1-(1-covprob)/2)
   power = results$result
 
 
