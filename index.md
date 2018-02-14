@@ -7,6 +7,10 @@ tagline:
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana) ![cranlogs](http://cranlogs.r-pkg.org./badges/Mediana)
 
+## New FAQ page
+
+A  [Frequently Asked Question](FAQ_index.html) page has been created! Don't hesitate to [contact us](mailto: gautier@paux.fr) if you have questions and we will be happy to guide you in the use of Mediana R package for your case study.
+
 ## Clinical trial optimization using R
 
 <center>
@@ -25,13 +29,25 @@ Mediana R package has been widely used to implement the case studies presented i
 
 ## New release ! [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana)
 
-The version 1.0.5 of the Mediana R package has been released on 25 May 2017. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
+The version 1.0.6 of the Mediana R package has been released on 13 February 2018. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
 
-- Addition of the `AdjustPvalues` function which can be used to get adjusted p-values from a Multiple Testing Procedure. This function cannot be used within the CSE framework but it is an add-on function to compute adjusted p-values. Documentation is presented in this [page](AdjustPvalues.html)
+- Addition of the multinomial distribution (`MultinomialDist`, see [Analysis model](http://gpaux.github.io/Mediana/DataModel.html#OutcomeDistobject)).
 
-- Addition of the `AdjustCIs` function which can be used to get simultaneous confidence intervals from a Multiple Testing Procedure. This function cannot be used within the CSE framework but it is an add-on function to simultaneous confidence intervals. Documentation is presented in this [page](AdjustPvalues.html#AdjustCIsfunction)
+- Addition of the ordinal logistic regression test (`OrdinalLogisticRegTest`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Testobject)).
 
-- Creation of vignettes
+- Addition of the Proportion statistic (`PropStat`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
+
+- Addition of the Fallback procedure (`FallbackAdj`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#MultAdjProcobject)).
+
+- Addition of a function to get the analysis results generated in the CSE using the `AnalysisStack` function (see [Analysis stack](http://gpaux.github.io/Mediana/AnalysisStack.html)).
+
+- Addition of the `ExtractAnalysisStack` function to extract a specific set of results in an `AnalysisStack` object (see [Analysis stack](http://gpaux.github.io/Mediana/AnalysisStack.html#ExtractAnalysisStack.html)).
+
+- Creation of a vignette to describe the functions implementing the adjusted *p*-values (`AdjustPvalues`) and one-sided simultaneous confidence intervals (`AdjustCIs`).
+
+- Minor revisions of the generated report. Note that the dependency to the `ReporteRs` R package has been removed to facilitate the package installation in case of issue with java. However, in order to generate a Word-based report, the ReporteRs R package must be installed.
+
+- It is now possible to use an option to specify the desirable direction of the treatment effect in a test, e.g., `larger = TRUE` means that numerically larger values are expected in the second sample compared to the first sample and `larger = FALSE` otherwise.  This is an optional argument for all two-sample statistical tests to be included in the Test object. By default, if this argument is not specified, it is expected that a numerically larger value is expected in the second sample (i.e., by default `larger = TRUE`).
 
 - Some bug fixes.
 
@@ -98,4 +114,5 @@ The Mediana package has been successfully used in multiple clinical trials to pe
 
 - [Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.](https://www.jstage.jst.go.jp/article/jjscs/28/1/28_1411001_213/_article)
 - [Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics. 26, 120-140.](http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1092032?journalCode=lbps20)
-
+- [Paux, G. and Dmitrienko A. (2018). Penalty-based approaches to evaluating multiplicity adjustments in clinical trials: Traditional multiplicity problems. Journal of Biopharmaceutical Statistics. 28, 146-168.](https://doi.org/10.1080/10543406.2017.1397010)
+- [Paux, G. and Dmitrienko A. (2018). Penalty-based approaches to evaluating multiplicity adjustments in clinical trials: Advanced multiplicity problems. Journal of Biopharmaceutical Statistics. 28, 169-188.](https://doi.org/10.1080/10543406.2017.1397011)
