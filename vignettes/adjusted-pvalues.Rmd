@@ -4,7 +4,7 @@ author: "Gautier Paux and Alex Dmitrienko"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Adjusted p-values and one-sided simultaneous confidence limits}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
