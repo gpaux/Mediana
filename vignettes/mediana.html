@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrieniko" />
 
-<meta name="date" content="2018-02-05" />
+<meta name="date" content="2018-07-16" />
 
 <title>Mediana: an R package for clinical trial simulations</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Mediana: an R package for clinical trial simulations</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrieniko</em></h4>
-<h4 class="date"><em>2018-02-05</em></h4>
+<h4 class="date"><em>2018-07-16</em></h4>
 
 
 
@@ -100,13 +100,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The up-to-date development version can be found and installed directly from the GitHub web site. You need to install the <code>devtools</code> package and then call the <code>install_github</code> function in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;devtools&quot;)</span>
 devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;gpaux/Mediana&quot;</span>)</code></pre></div>
-</div>
-<div id="potential-installations-issue" class="section level3">
-<h3>Potential installation’s issue</h3>
-<p>When installing Mediana package, an error could occur if a java version &gt;= 1.6 is not installed. Java is used in the ReporteRs R package which is required in the Mediana R package to <a href="#simulation-report">generate Word report</a>.</p>
-<p><code>system(&quot;java -version&quot;)</code> should return java version ‘1.6.0’ or greater.</p>
-<p>In order to ensure a proper installation, it is highly recommended to install the latest version of Java in the same architecture of R (32-bit or 64-bit).</p>
-<p>The latest version can be found at <a href="https://www.java.com/en/download/manual.jsp" class="uri">https://www.java.com/en/download/manual.jsp</a>.</p>
 </div>
 </div>
 <div id="clinical-scenario-evaluation-framework" class="section level2">
@@ -179,6 +172,7 @@ case.study1.data.model =<span class="st">  </span><span class="kw">DataModel</sp
 <li><p><code>TruncatedExpoDist</code>: generate data following a <strong>truncated exponential distribution</strong>. Required parameter: <code>rate</code> an <code>trunc</code>.</p></li>
 <li><p><code>PoissonDist</code>: generate data following a <strong>Poisson distribution</strong>. Required parameter: <code>lambda</code>.</p></li>
 <li><p><code>NegBinomDist</code>: generate data following a <strong>negative binomial distribution</strong>. Required parameters: <code>dispersion</code> and <code>mean</code>.</p></li>
+<li><p><code>MultinomialDist</code>: generate data following a <strong>multinomial distribution</strong>. Required parameters: <code>prob</code>.</p></li>
 <li><p><code>MVNormalDist</code>: generate data following a <strong>multivariate normal distribution</strong>. Required parameters: <code>par</code> and <code>corr</code>. For each generated endpoint, the <code>par</code> parameter must contain the required parameters <code>mean</code> and <code>sd</code>. The <code>corr</code> parameter specifies the correlation matrix for the endpoints.</p></li>
 <li><p><code>MVBinomDist</code>: generate data following a <strong>multivariate binomial distribution</strong>. Required parameters: <code>par</code> and <code>corr</code>. For each generated endpoint, the <code>par</code> parameter must contain the required parameter <code>prop</code>. The <code>corr</code> parameter specifies the correlation matrix for the endpoints.</p></li>
 <li><p><code>MVExpoDist</code>: generate data following a <strong>multivariate exponential distribution</strong>. Required parameters: <code>par</code> and <code>corr</code>. For each generated endpoint, the <code>par</code> parameter must contain the required parameter <code>rate</code>. The <code>corr</code>parameter specifies the correlation matrix for the endpoints.</p></li>
@@ -445,6 +439,7 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <li><p><code>GLMPoissonTest</code>: perform the <strong>Poisson regression test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
 <li><p><code>GLMNegBinomTest</code>: perform the <strong>Negative-binomial regression test</strong> between the two <code>samples</code> defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
 <li><p><code>LogrankTest</code>: perform the <strong>Log-rank test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
+<li><p><code>OrdinalLogisticRegTest</code>: perform an <strong>ordinal logistic regression test</strong> between the two samples defined in the <code>samples</code> argument. Optional parameter: <code>larger</code> (Larger value is expected in the second sample (<code>TRUE</code> or <code>FALSE</code>)).</p></li>
 </ul>
 <p>It needs to be noted that the significance tests listed above are implemented as <strong>one-sided</strong> tests and thus the sample order in the <code>samples</code> argument is important. In particular, the Mediana package assumes by default that a numerically larger value of the endpoint is expected in Sample 2 compared to Sample 1. Suppose, for example, that a higher treatment response indicates a beneficial effect (e.g., higher improvement rate). In this case Sample 1 should include control patients whereas Sample 2 should include patients allocated to the experimental treatment arm. The sample order needs to be reversed if a beneficial treatment effect is associated with a lower value of the endpoint (e.g., lower blood pressure), or alternatively (from version 1.0.6), the optional parameters <code>larger</code> must be set to FALSE to indicate that a larger value is expected on the first Sample.</p>
 <p>Several <code>Test</code> objects can be added to an <code>AnalysisModel</code>object.</p>
@@ -897,7 +892,7 @@ case.study1.results =<span class="st"> </span><span class="kw">CSE</span>(case.s
 </div>
 <div id="simulation-report" class="section level1">
 <h1>Simulation report</h1>
-<p>The Mediana R package uses the <a href="http://davidgohel.github.io/ReporteRs/">ReporteRs R package</a> package to generate a Microsoft Word-based report that summarizes the results of Clinical Scenario Evaluation-based simulations.</p>
+<p>The Mediana R package uses the <a href="http://davidgohel.github.io/officer/">officer R package</a> package to generate a Microsoft Word-based report that summarizes the results of Clinical Scenario Evaluation-based simulations.</p>
 <p>The user can easily customize this simulation report by adding a description of the project as well as labels to each scenario, including data scenarios (sample size, outcome distribution parameters, design parameters) and analysis scenarios (multiplicity adjustment). The user can also customize the report’s structure, e.g., create sections and subsections within the report and specify how the rows will be sorted within each table.</p>
 <p>In order to customize the report, the user has to use a <code>PresentationModel</code> object described below.</p>
 <p>Once a <code>PresentationModel</code> object has been defined, the <code>GenerateReport</code> function can be called to generate a Clinical Scenario Evaluation report.</p>
@@ -1055,7 +1050,7 @@ presentation.model =<span class="st"> </span><span class="kw">PresentationModel<
 <li><p><code>report.filename</code> defines the filename of the Word-based report generated by this function.</p></li>
 <li><p><code>report.template</code> defines a Word-based template (it is an optional argument).</p></li>
 </ul>
-<p>The <code>GenerateReport</code> function requires the <a href="http://davidgohel.github.io/ReporteRs/">ReporteRs R package</a> package to generate a Word-based simulation report. Optionally, a custom template can be selected by defining <code>report.template</code>, this argument specifies the name of a Word document located in the working directory.</p>
+<p>The <code>GenerateReport</code> function requires the <a href="http://davidgohel.github.io/officer/">officer R package</a> package to generate a Word-based simulation report. Optionally, a custom template can be selected by defining <code>report.template</code>, this argument specifies the name of a Word document located in the working directory.</p>
 <p>The Word-based simulation report is structured as follows:</p>
 <ol style="list-style-type: decimal">
 <li>GENERAL INFORMATION

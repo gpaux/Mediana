@@ -106,7 +106,7 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
                         text = {
                           if (label != "") doc = officer::body_add_par(doc, value = paste(label, value), style = "Normal")
                           else  doc = officer::body_add_par(doc, value = value, style = "Normal")
-                          doc = flextable::fp_text(my.text.format)
+                          doc = officer::fp_text(my.text.format)
                         },
                         table = {
                           #header.columns = (is.null(param$groupedheader.row))
@@ -119,12 +119,12 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
                               summary_table = flextable::merge_v(summary_table, j = param$span.columns[ind.span])
                             }
                           }
-                          summary_table = flextable::border(summary_table, inner.vertical = officer::borderNone(),
-                                                            outer.vertical = officer::borderNone())
-                          if (!is.null(param$groupedheader.row)) {
-                            summary_table = flextable::add_header(summary_table, value = param$groupedheader.row$values, colspan = param$groupedheader.row$colspan)
-                            summary_table = flextable::add_header(summary_table, value = colnames( value ))
-                          }
+
+                          # if (!is.null(param$groupedheader.row)) {
+                          #   header = paste0(summary_table$header$col_keys, ' = ', rep(param$groupedheader.row$values, param$groupedheader.row$colspan))
+                          #   summary_table = flextable::add_header(summary_table, header)
+                          #   summary_table = flextable::add_header(summary_table, value = colnames( value ))
+                          # }
                           width_table = flextable::dim_pretty(summary_table)$width/(sum(flextable::dim_pretty(summary_table)$width)/(dim_doc$page['width'] - dim_doc$margins['left']/2 - dim_doc$margins['right']/2))
                           summary_table = flextable::autofit(summary_table)
                           summary_table = flextable::width(summary_table, width = width_table)
@@ -132,8 +132,8 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
                           doc = flextable::body_add_flextable(doc, summary_table)
                         },
                         plot =  {
-                          doc = officer::addPlot(doc, fun = print, x = value, width = 6, height = 5, main = label)
-                          doc = officer::body_add_par(doc, value = label, style = "graphic titme")
+                          doc = officer::body_add_gg(doc, x = value, width = 6, height = 5, main = label)
+                          doc = officer::body_add_par(doc, value = label, style = "rPlotLegend")
                         }
                 )
               }
@@ -173,12 +173,12 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
                             summary_table = flextable::merge_v(summary_table, j = param$span.columns[ind.span])
                           }
                         }
-                        # summary_table = flextable::border(summary_table, inner.vertical = officer::borderNone(),
-                        #                                 outer.vertical = officer::borderNone())
-                        if (!is.null(param$groupedheader.row)) {
-                          summary_table = flextable::add_header(summary_table, value = param$groupedheader.row$values, colspan = param$groupedheader.row$colspan)
-                          summary_table = flextable::add_header(summary_table, value = colnames( value ))
-                        }
+
+                        # if (!is.null(param$groupedheader.row)) {
+                        #   header = paste0(summary_table$header$col_keys, ' = ', rep(param$groupedheader.row$values, param$groupedheader.row$colspan))
+                        #   summary_table = flextable::add_header(summary_table, header)
+                        #   summary_table = flextable::add_header(summary_table, value = colnames( value ))
+                        # }
                         width_table = flextable::dim_pretty(summary_table)$width/(sum(flextable::dim_pretty(summary_table)$width)/(dim_doc$page['width'] - dim_doc$margins['left']/2 - dim_doc$margins['right']/2))
                         summary_table = flextable::autofit(summary_table)
                         summary_table = flextable::width(summary_table, width = width_table)
@@ -229,8 +229,6 @@ GenerateReport.default = function(presentation.model = NULL, cse.results, report
                         summary_table = flextable::merge_v(summary_table, j = param$span.columns[ind.span])
                       }
                     }
-                    # summary_table = flextable::border(summary_table, inner.vertical = officer::borderNone(),
-                    #                                 outer.vertical = officer::borderNone())
                     # if (!is.null(param$groupedheader.row)) {
                     #   header = paste0(summary_table$header$col_keys, ' = ', rep(param$groupedheader.row$values, param$groupedheader.row$colspan))
                     #   summary_table = flextable::add_header(summary_table, header)

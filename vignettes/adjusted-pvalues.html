@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrienko" />
 
-<meta name="date" content="2017-08-09" />
+<meta name="date" content="2018-07-16" />
 
 <title>Adjusted p-values and one-sided simultaneous confidence limits</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Adjusted p-values and one-sided simultaneous confidence limits</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrienko</em></h4>
-<h4 class="date"><em>2017-08-09</em></h4>
+<h4 class="date"><em>2018-07-16</em></h4>
 
 
 
@@ -124,7 +124,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 proc =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;BonferroniAdj&quot;</span>, <span class="st">&quot;HolmAdj&quot;</span>, <span class="st">&quot;HochbergAdj&quot;</span>, <span class="st">&quot;HommelAdj&quot;</span>, <span class="st">&quot;FixedSeqAdj&quot;</span>, <span class="st">&quot;FallbackAdj&quot;</span>)</code></pre></div>
 <p>In order to obtain the adjusted <em>p</em>-values for all these procedures, the <code>sapply</code> function can be used as follows. Note that as no <code>weight</code> parameter is defined, the equally weighted procedures are used to adjust the <em>p</em>-values. Finally, for the fixed-sequence procedure (<code>FixedSeqAdj</code>), the order of the testing sequence is based on the order of the <em>p</em>-values in the vector.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Equally weighted</span>
-<span class="kw">sapply</span>(proc, function(x) {<span class="kw">AdjustPvalues</span>(rawp,
+<span class="kw">sapply</span>(proc, <span class="cf">function</span>(x) {<span class="kw">AdjustPvalues</span>(rawp,
                                         <span class="dt">proc =</span> x)})</code></pre></div>
 <p>The output is as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">     BonferroniAdj HolmAdj HochbergAdj HommelAdj FixedSeqAdj FallbackAdj
@@ -133,9 +133,9 @@ proc =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;
 [<span class="dv">3</span>,]         <span class="fl">0.069</span>   <span class="fl">0.027</span>       <span class="fl">0.023</span>     <span class="fl">0.023</span>       <span class="fl">0.023</span>      <span class="fl">0.0345</span></code></pre></div>
 <p>In order to specify unequal weights for the three raw <em>p</em>-values, the <code>weight</code> parameter can be defined as follows. Note that this parameter has no effect on the adjustment with the fixed-sequence procedure.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Unequally weighted (no effect on the fixed-sequence procedure)</span>
-<span class="kw">sapply</span>(proc, function(x) {<span class="kw">AdjustPvalues</span>(rawp,
+<span class="kw">sapply</span>(proc, <span class="cf">function</span>(x) {<span class="kw">AdjustPvalues</span>(rawp,
                                         <span class="dt">proc =</span> x,
-                                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span>/<span class="dv">2</span>, <span class="dv">1</span>/<span class="dv">4</span>, <span class="dv">1</span>/<span class="dv">4</span>)))})</code></pre></div>
+                                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>)))})</code></pre></div>
 <p>The output is as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">     BonferroniAdj HolmAdj HochbergAdj HommelAdj FixedSeqAdj FallbackAdj
 [<span class="dv">1</span>,]         <span class="fl">0.024</span>   <span class="fl">0.024</span>       <span class="fl">0.018</span>     <span class="fl">0.018</span>       <span class="fl">0.012</span>       <span class="fl">0.024</span>
@@ -161,22 +161,22 @@ sd =<span class="st"> </span><span class="fl">9.5</span>
 n =<span class="st"> </span><span class="dv">180</span>
 
 <span class="co"># Standard errors</span>
-stderror =<span class="st"> </span><span class="kw">rep</span>(sd*<span class="kw">sqrt</span>(<span class="dv">2</span>/n),<span class="dv">3</span>)
+stderror =<span class="st"> </span><span class="kw">rep</span>(sd<span class="op">*</span><span class="kw">sqrt</span>(<span class="dv">2</span><span class="op">/</span>n),<span class="dv">3</span>)
 
 <span class="co"># T-statistics associated with the three dose-placebo tests</span>
-stat =<span class="st"> </span>est/stderror</code></pre></div>
+stat =<span class="st"> </span>est<span class="op">/</span>stderror</code></pre></div>
 <p>Based on the <em>T</em>-statistics, the raw <em>p</em>-values can be easily obtained:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># One-sided pvalue</span>
-rawp =<span class="st"> </span><span class="dv">1</span>-<span class="kw">pt</span>(stat,<span class="dv">2</span>*(n<span class="dv">-1</span>))</code></pre></div>
+rawp =<span class="st"> </span><span class="dv">1</span><span class="op">-</span><span class="kw">pt</span>(stat,<span class="dv">2</span><span class="op">*</span>(n<span class="op">-</span><span class="dv">1</span>))</code></pre></div>
 <p>The adjusted <em>p</em>-values based on the single step Dunnett and step-down Dunnett procedures are obtained as follows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Adjusted p-values based on the Dunnett procedures</span>
 <span class="co"># (assuming that each test statistic follows a t distribution)</span>
 <span class="kw">AdjustPvalues</span>(rawp,<span class="dt">proc =</span> <span class="st">&quot;DunnettAdj&quot;</span>, <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">n =</span> n))
 <span class="kw">AdjustPvalues</span>(rawp,<span class="dt">proc =</span> <span class="st">&quot;StepDownDunnettAdj&quot;</span>, <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">n =</span> n))</code></pre></div>
 <p>The outputs are presented below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">AdjustPvalues</span>(rawp,<span class="dt">proc =</span> <span class="st">&quot;DunnettAdj&quot;</span>,<span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">n =</span> n))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">AdjustPvalues</span>(rawp,<span class="dt">proc =</span> <span class="st">&quot;DunnettAdj&quot;</span>,<span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">n =</span> n))
 [<span class="dv">1</span>] <span class="fl">0.02887019</span> <span class="fl">0.01722656</span> <span class="fl">0.07213393</span>
-&gt;<span class="st"> </span><span class="kw">AdjustPvalues</span>(rawp,<span class="dt">proc =</span> <span class="st">&quot;StepDownDunnettAdj&quot;</span>,<span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">n =</span> n))
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">AdjustPvalues</span>(rawp,<span class="dt">proc =</span> <span class="st">&quot;StepDownDunnettAdj&quot;</span>,<span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">n =</span> n))
 [<span class="dv">1</span>] <span class="fl">0.02043820</span> <span class="fl">0.01722544</span> <span class="fl">0.02909082</span></code></pre></div>
 </div>
 <div id="gatekeeping-procedures" class="section level3">
@@ -250,7 +250,7 @@ gamma =<span class="st"> </span><span class="kw">families</span>(<span class="dt
 </ul>
 <p>The treatment effect estimates, corresponding to the mean dose-placebo difference are specified below, as well as the pooled standard deviation, the sample size.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Null hypotheses of no treatment effect are equally weighted</span>
-weight&lt;-<span class="kw">c</span>(<span class="dv">1</span>/<span class="dv">3</span>,<span class="dv">1</span>/<span class="dv">3</span>,<span class="dv">1</span>/<span class="dv">3</span>)
+weight&lt;-<span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
 
 <span class="co"># Treatment effect estimates (mean  dose-placebo differences)</span>
 est =<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.3</span>,<span class="fl">2.5</span>,<span class="fl">1.9</span>)
@@ -265,7 +265,7 @@ n =<span class="st"> </span><span class="dv">180</span></code></pre></div>
 proc =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;BonferroniAdj&quot;</span>, <span class="st">&quot;HolmAdj&quot;</span>, <span class="st">&quot;FixedSeqAdj&quot;</span>, <span class="st">&quot;DunnettAdj&quot;</span>, <span class="st">&quot;StepDownDunnettAdj&quot;</span>)
 
 <span class="co"># Equally weighted</span>
-<span class="kw">sapply</span>(proc, function(x) {<span class="kw">AdjustCIs</span>(est,
+<span class="kw">sapply</span>(proc, <span class="cf">function</span>(x) {<span class="kw">AdjustCIs</span>(est,
                                     <span class="dt">proc =</span> x,
                                     <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">sd =</span> sd,
                                                      <span class="dt">n =</span> n,
@@ -273,9 +273,9 @@ proc =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;
                                                      <span class="dt">weight =</span> weight))})</code></pre></div>
 <p>The output obtained is presented below:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">     BonferroniAdj     HolmAdj FixedSeqAdj  DunnettAdj StepDownDunnettAdj
-[<span class="dv">1</span>,]   -<span class="fl">0.09730247</span>  <span class="fl">0.00000000</span>  <span class="fl">0.00000000</span> -<span class="fl">0.05714354</span>         <span class="fl">0.00000000</span>
+[<span class="dv">1</span>,]   <span class="op">-</span><span class="fl">0.09730247</span>  <span class="fl">0.00000000</span>  <span class="fl">0.00000000</span> <span class="op">-</span><span class="fl">0.05714354</span>         <span class="fl">0.00000000</span>
 [<span class="dv">2</span>,]    <span class="fl">0.10269753</span>  <span class="fl">0.00000000</span>  <span class="fl">0.00000000</span>  <span class="fl">0.14285646</span>         <span class="fl">0.00000000</span>
-[<span class="dv">3</span>,]   -<span class="fl">0.49730247</span> -<span class="fl">0.06268427</span> -<span class="fl">0.06268427</span> -<span class="fl">0.45714354</span>        -<span class="fl">0.06934203</span></code></pre></div>
+[<span class="dv">3</span>,]   <span class="op">-</span><span class="fl">0.49730247</span> <span class="op">-</span><span class="fl">0.06268427</span> <span class="op">-</span><span class="fl">0.06268427</span> <span class="op">-</span><span class="fl">0.45714354</span>        <span class="op">-</span><span class="fl">0.06934203</span></code></pre></div>
 </div>
 </div>
 
@@ -286,7 +286,7 @@ proc =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
