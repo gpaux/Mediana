@@ -25,7 +25,7 @@ defines a word-based template (optional).
 }
 }
 \details{
-This function requires the package \code{ReporteRs}. A customized template can be specified in the argument \code{report.template} (optional), which consists in a Word document to place in the working directory folder.
+This function requires the package \code{officer}. A customized template can be specified in the argument \code{report.template} (optional), which consists in a Word document to place in the working directory folder.
 }
 
 \references{

@@ -46,16 +46,6 @@ The up-to-date development version can be found and installed directly from the 
 devtools::install_github("gpaux/Mediana")
 ```
 
-### Potential installation's issue
-
-When installing Mediana package, an error could occur if a java version >= 1.6 is not installed. Java is used in the ReporteRs R package which is required in the Mediana R package to [generate Word report](#simulation-report). 
-
-`system("java -version")` should return java version ‘1.6.0’ or greater.
-
-In order to ensure a proper installation, it is highly recommended to install the latest version of Java in the same architecture of R (32-bit or 64-bit). 
-
-The latest version can be found at [https://www.java.com/en/download/manual.jsp](https://www.java.com/en/download/manual.jsp).
-
 ## Clinical Scenario Evaluation Framework
 
 The Mediana R package was developed to provide a general software implementation of the Clinical Scenario Evaluation (CSE) framework. This framework introduced by [Benda et al. (2010)](http://dij.sagepub.com/content/44/3/299.abstract) and [Friede et al. (2010)](http://dij.sagepub.com/content/44/6/713.abstract) recognizes that sample size calculation and power evaluation in clinical trials are high-dimensional statistical problems. This approach helps decompose this complex problem by identifying key elements of the evaluation process. These components are termed models:
@@ -1074,7 +1064,7 @@ A Microsoft Word-based simulation report can be generated from the simulation re
 
 # Simulation report
 
-The Mediana R package uses the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) package to generate a Microsoft Word-based report that summarizes the results of Clinical Scenario Evaluation-based simulations. 
+The Mediana R package uses the [officer R package](http://davidgohel.github.io/officer/) package to generate a Microsoft Word-based report that summarizes the results of Clinical Scenario Evaluation-based simulations. 
 
 The user can easily customize this simulation report by adding a description of the project as well as labels to each scenario, including data scenarios (sample size, outcome distribution parameters, design parameters) and analysis scenarios (multiplicity adjustment). The user can also customize the report's structure, e.g., create sections and subsections within the report and specify how the rows will be sorted within each table.
 
@@ -1297,7 +1287,7 @@ The Clinical Scenario Evaluation Report is generated using the `GenerateReport` 
 
 - `report.template` defines a Word-based template (it is an optional argument).
 
-The `GenerateReport` function requires the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) package to generate a Word-based simulation report. Optionally, a custom template can be selected by defining `report.template`, this argument specifies the name of a Word document located in the working directory.
+The `GenerateReport` function requires the [officer R package](http://davidgohel.github.io/officer/) package to generate a Word-based simulation report. Optionally, a custom template can be selected by defining `report.template`, this argument specifies the name of a Word document located in the working directory.
 
 The Word-based simulation report is structured as follows:
 
