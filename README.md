@@ -21,15 +21,6 @@ Or the development version from github:
 devtools::install_github("gpaux/Mediana")
 ```
 
-When installing Mediana package, an error could occur if a java version >= 1.6 is not installed. Java is used in the ReporteRs R package which is required in the Mediana R package to [generate Word report](Reporting.html). 
-
-`system("java -version")` should return java version ‘1.6.0’ or greater.
-
-In order to ensure a proper installation, it is highly recommended to install the latest version of Java in the same architecture of R (32-bit or 64-bit). 
-
-The latest version can be found at [https://www.java.com/en/download/manual.jsp](https://www.java.com/en/download/manual.jsp).
-
-
 # Online Manual
 
 A detailed online manual is accessible at [http://gpaux.github.io/Mediana/](http://gpaux.github.io/Mediana/)
