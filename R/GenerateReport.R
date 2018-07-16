@@ -10,6 +10,10 @@ GenerateReport = function(presentation.model = NULL, cse.results, report.filenam
    stop("officer R package is needed for to generate the report. Please install it.",
          call. = FALSE)
   }
+  if (!requireNamespace("flextable", quietly = TRUE)) {
+    stop("flextable R package is needed for to generate the report. Please install it.",
+         call. = FALSE)
+  }
   UseMethod("GenerateReport")
 
 }
