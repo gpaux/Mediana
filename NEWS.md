@@ -1,8 +1,8 @@
 # Mediana 1.0.7
 
-## New features
-
 ## Bug fixes
+
+- As the `ReporteRs` R package is not available on the CRAN anymore, the report generation feature has been revised using the `officer` and `flextable` R packages. These packages are now required to use the `GenerateReport` function.
 
 # Mediana 1.0.6
 
@@ -13,11 +13,11 @@
 * Addition of the ordinal logistic regression test (`OrdinalLogisticRegTest`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Testobject)).
 
 * Addition of the Proportion statistic (`PropStat`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
- 
+
 * Addition of the Fallback procedure (`FallbackAdj`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#MultAdjProcobject)).
- 
+
 * Addition of a function to get the analysis results generated in the CSE using the `AnalysisStack` function (see [Analysis stack](http://gpaux.github.io/Mediana/AnalysisStack.html)).
- 
+
 * Addition of the `ExtractAnalysisStack` function to extract a specific set of results in an `AnalysisStack` object (see [Analysis stack](http://gpaux.github.io/Mediana/AnalysisStack.html#ExtractAnalysisStack.html)).
 
 * Creation of a vignette to describe the functions implementing the adjusted *p*-values (`AdjustPvalues`) and one-sided simultaneous confidence intervals (`AdjustCIs`).
@@ -28,10 +28,10 @@
 
 ## Bug fixes
 
-* Due to difficulties for several users to install the Mediana R package because of java issue, the `ReporteRs` R pacakage is not required anymore (remove from Imports). However, to be able to generate the report, the user will require to have the `ReporteRs` R package installed.
+* Due to difficulties for several users to install the Mediana R package because of java issue, the `ReporteRs` R package is not required anymore (remove from Imports). However, to be able to generate the report, the user will require to have the `ReporteRs` R package installed.
 
 * Minor revision to the two-sample non-inferiority test for proportions to ensure that the number of successes is not greater than the sample size
- 
+
 # Mediana 1.0.5
 
 ## New features
@@ -41,7 +41,7 @@
 * Addition of the `AdjustCIs` function which can be used to get simultaneous confidence intervals from a Multiple Testing Procedure. This function cannot be used within the CSE framework but it is an add-on function to simultaneous confidence intervals.
 
 * Creation of vignettes
- 
+
 ## Bug fixes
 
 * Revision of the dropout generation mechanism for time-to-event endpoints.
@@ -55,7 +55,7 @@
 * Addition of the Cox method to calculate the HR, effect size and ratio of effect size for time-to-event endpoint. This can be accomplished by setting the  `method` argument in the parameter list to set-up the calculation based on the Cox method. (`par = parameters(method = "Cox"`), see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
 
 * Addition of the package version information in the report.
- 
+
 ## Bug fixes
 
 * Revision of one-sided p-value computation for Log-Rank test.
