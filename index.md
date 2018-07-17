@@ -29,27 +29,7 @@ Mediana R package has been widely used to implement the case studies presented i
 
 ## New release ! [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana)
 
-The version 1.0.6 of the Mediana R package has been released on 13 February 2018. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). The principal revisions compared to the previous version include the following features:
-
-- Addition of the multinomial distribution (`MultinomialDist`, see [Analysis model](http://gpaux.github.io/Mediana/DataModel.html#OutcomeDistobject)).
-
-- Addition of the ordinal logistic regression test (`OrdinalLogisticRegTest`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Testobject)).
-
-- Addition of the Proportion statistic (`PropStat`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
-
-- Addition of the Fallback procedure (`FallbackAdj`, see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#MultAdjProcobject)).
-
-- Addition of a function to get the analysis results generated in the CSE using the `AnalysisStack` function (see [Analysis stack](http://gpaux.github.io/Mediana/AnalysisStack.html)).
-
-- Addition of the `ExtractAnalysisStack` function to extract a specific set of results in an `AnalysisStack` object (see [Analysis stack](http://gpaux.github.io/Mediana/AnalysisStack.html#ExtractAnalysisStack.html)).
-
-- Creation of a vignette to describe the functions implementing the adjusted *p*-values (`AdjustPvalues`) and one-sided simultaneous confidence intervals (`AdjustCIs`).
-
-- Minor revisions of the generated report. Note that the dependency to the `ReporteRs` R package has been removed to facilitate the package installation in case of issue with java. However, in order to generate a Word-based report, the ReporteRs R package must be installed.
-
-- It is now possible to use an option to specify the desirable direction of the treatment effect in a test, e.g., `larger = TRUE` means that numerically larger values are expected in the second sample compared to the first sample and `larger = FALSE` otherwise.  This is an optional argument for all two-sample statistical tests to be included in the Test object. By default, if this argument is not specified, it is expected that a numerically larger value is expected in the second sample (i.e., by default `larger = TRUE`).
-
-- Some bug fixes.
+The version 1.0.7 of the Mediana R package has been released on 16 July 2018. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). As the `ReporteRs` R package is not available on the CRAN anymore, the report generation feature has been revised using the `officer` and `flextable` R packages. These packages are now required to use the `GenerateReport` function.
 
 ## About
 
@@ -86,15 +66,9 @@ The up-to-date development version can be found and installed directly from the 
 devtools::install_github("gpaux/Mediana")
 {% endhighlight %}
 
-### Potential installation's issue
+### Suggested packages
 
-When installing Mediana package, an error could occur if a java version >= 1.6 is not installed. Java is used in the ReporteRs R package which is required in the Mediana R package to [generate Word report](Reporting.html). 
-
-`system("java -version")` should return java version ‘1.6.0’ or greater.
-
-In order to ensure a proper installation, it is highly recommended to install the latest version of Java in the same architecture of R (32-bit or 64-bit). 
-
-The latest version can be found at [https://www.java.com/en/download/manual.jsp](https://www.java.com/en/download/manual.jsp).
+When installing Mediana package, it is recommended to install the `officer` and `flextable` R packages to enable the [generation of Word-based report](Reporting.html).
 
 ## Clinical Scenario Evaluation Framework
 

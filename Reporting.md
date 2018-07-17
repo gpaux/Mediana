@@ -9,7 +9,7 @@ group: navigation
 
 ## Summary
 
-The Mediana R package uses the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) package to generate a Microsoft Word-based report that summarizes the results of Clinical Scenario Evaluation-based simulations. 
+The Mediana R package uses the [officer](http://davidgohel.github.io/officer/) and [flextable](https://davidgohel.github.io/flextable/) R packages to generate a Microsoft Word-based report that summarizes the results of Clinical Scenario Evaluation-based simulations. 
 
 The user can easily customize this simulation report by adding a description of the project as well as labels to each scenario, including data scenarios (sample size, outcome distribution parameters, design parameters) and analysis scenarios (multiplicity adjustment). The user can also customize the report's structure, e.g., create sections and subsections within the report and specify how the rows will be sorted within each table.
 
@@ -76,7 +76,7 @@ The `by` argument can contain several parameters from the following list:
 - `design.parameter`: a separate section will be created for each design parameter scenario.
 
 - `multiplicity.adjustment`: a separate section will be created for each multiplicity adjustment scenario.
- 
+
 Note that, if a parameter is defined in the `by` argument, it must be defined only in this object (i.e., neither in the `Subection` object nor in the `Table` object).
 
 A single object of the `Section` class can be added to an object of the `PresentationModel` class.
@@ -232,7 +232,7 @@ The Clinical Scenario Evaluation Report is generated using the `GenerateReport` 
 
 - `report.template` defines a Word-based template (it is an optional argument).
 
-The `GenerateReport` function requires the [ReporteRs R package](http://davidgohel.github.io/ReporteRs/) package to generate a Word-based simulation report. Optionally, a custom template can be selected by defining `report.template`, this argument specifies the name of a Word document located in the working directory.
+The `GenerateReport` function requires the he [officer](http://davidgohel.github.io/officer/) and [flextable](https://davidgohel.github.io/flextable/) R packages to generate a Word-based simulation report. Optionally, a custom template can be selected by defining `report.template`, this argument specifies the name of a Word document located in the working directory.
 
 The Word-based simulation report is structured as follows:
 
