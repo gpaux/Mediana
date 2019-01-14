@@ -1,27 +1,83 @@
-# Mediana
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana) ![cranlogs](http://cranlogs.r-pkg.org./badges/Mediana)
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+Mediana
+=======
+
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana) [![CRAN\_Logs\_Badge](http://cranlogs.r-pkg.org/badges/Mediana)](https://cran.r-project.org/package=Mediana) [![CRAN\_Logs\_Badge\_Total](http://cranlogs.r-pkg.org/badges/grand-total/Mediana)](https://cran.r-project.org/package=Mediana)
 
 Mediana is an R package which provides a general framework for clinical trial simulations based on the Clinical Scenario Evaluation approach. The package supports a broad class of data models (including clinical trials with continuous, binary, survival-type and count-type endpoints as well as multivariate outcomes that are based on combinations of different endpoints), analysis strategies and commonly used evaluation criteria.
 
-Find out more at [http://gpaux.github.io/Mediana/](http://gpaux.github.io/Mediana/) and check out the case studies.
+Find out more at <http://gpaux.github.io/Mediana/> and check out the case studies.
 
-# Installation
+Installation
+============
 
 Get the released version from CRAN:
 
-```R
+``` r
 install.packages("Mediana")
 ```
 
 Or the development version from github:
 
-```R
+``` r
 # install.packages("devtools")
 devtools::install_github("gpaux/Mediana")
 ```
 
-# Online Manual
+Online Manual
+=============
 
-A detailed online manual is accessible at [http://gpaux.github.io/Mediana/](http://gpaux.github.io/Mediana/)
+A detailed online manual is accessible at <http://gpaux.github.io/Mediana/>
 
+Citation
+========
+
+If you find `Mediana` useful, please cite it in your publications:
+
+``` r
+citation("Mediana")
+#> 
+#> To cite package 'Mediana' in publications use:
+#> 
+#>   Gautier Paux and Alex Dmitrienko. (2018). Mediana: Clinical Trial Simulations. R
+#>   package version 1.0.7. https://CRAN.R-project.org/package=Mediana
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {Mediana: Clinical Trial Simulations},
+#>     author = {Gautier Paux and Alex Dmitrienko.},
+#>     year = {2018},
+#>     note = {R package version 1.0.7},
+#>     url = {https://CRAN.R-project.org/package=Mediana},
+#>   }
+#> 
+#> ATTENTION: This citation information has been auto-generated from the package DESCRIPTION
+#> file and may need manual editing, see 'help("citation")'.
+```
+
+Clinical trial optimization using R book
+----------------------------------------
+
+<center>
+    <a href="https://www.crcpress.com/Clinical-Trial-Optimization-using-R/Dmitrienko/p/book/9781498735070" class="img-responsive">
+      <img src="book.jpg" class="img-responsive"/>
+    </a>
+
+</center>
+[Clinical Trial Optimization Using R](https://www.crcpress.com/Clinical-Trial-Optimization-using-R/Dmitrienko/p/book/9781498735070) explores a unified and broadly applicable framework for optimizing decision making and strategy selection in clinical development, through a series of examples and case studies.It provides the clinical researcher with a powerful evaluation paradigm, as well as supportive R tools, to evaluate and select among simultaneous competing designs or analysis options. It is applicable broadly to statisticians and other quantitative clinical trialists, who have an interest in optimizing clinical trials, clinical trial programs, or associated analytics and decision making.
+
+This book presents in depth the Clinical Scenario Evaluation (CSE) framework, and discusses optimization strategies, including the quantitative assessment of tradeoffs. A variety of common development challenges are evaluated as case studies, and used to show how this framework both simplifies and optimizes strategy selection. Specific settings include optimizing adaptive designs, multiplicity and subgroup analysis strategies, and overall development decision-making criteria around Go/No-Go. After this book, the reader will be equipped to extend the CSE framework to their particular development challenges as well.
+
+Mediana R package has been widely used to implement the case studies presented in this book. The detailed description and R code of these case studies are available on this website.
+
+References
+==========
+
+The Mediana package has been successfully used in multiple clinical trials to perform power calculations as well as optimally select trial designs and analysis strategies (clinical trial optimization). For more information on applications of the Mediana package, download the following papers:
+
+-   [Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.](https://www.jstage.jst.go.jp/article/jjscs/28/1/28_1411001_213/_article)
+-   [Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics. 26, 120-140.](http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1092032?journalCode=lbps20)
+-   [Paux, G. and Dmitrienko A. (2018). Penalty-based approaches to evaluating multiplicity adjustments in clinical trials: Traditional multiplicity problems. Journal of Biopharmaceutical Statistics. 28, 146-168.](https://doi.org/10.1080/10543406.2017.1397010)
+-   [Paux, G. and Dmitrienko A. (2018). Penalty-based approaches to evaluating multiplicity adjustments in clinical trials: Advanced multiplicity problems. Journal of Biopharmaceutical Statistics. 28, 169-188.](https://doi.org/10.1080/10543406.2017.1397011)
