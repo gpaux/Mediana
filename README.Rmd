@@ -1,10 +1,10 @@
 ---
-output: github_document
+  output: github_document
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, echo = FALSE}
+  
+  <!-- README.md is generated from README.Rmd. Please edit that file -->
+  
+  ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -31,14 +31,14 @@ Find out more at [http://gpaux.github.io/Mediana/](http://gpaux.github.io/Median
 # Installation
 
 Get the released version from CRAN:
-
-```R
+  
+  ```R
 install.packages("Mediana")
 ```
 
 Or the development version from github:
-
-```R
+  
+  ```R
 # install.packages("devtools")
 devtools::install_github("gpaux/Mediana")
 ```
@@ -50,8 +50,8 @@ A detailed online manual is accessible at [http://gpaux.github.io/Mediana/](http
 # Citation
 
 If you find `Mediana` useful, please cite it in your publications:
-
-```{r citation}
+  
+  ```{r citation}
 citation("Mediana")
 ```
 
@@ -66,8 +66,8 @@ This book presents in depth the Clinical Scenario Evaluation (CSE) framework, an
 # References
 
 The `Mediana` package has been successfully used in multiple clinical trials to perform power calculations as well as optimally select trial designs and analysis strategies (clinical trial optimization). For more information on applications of the `Mediana` package, download the following papers:
-
-- [Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.](https://www.jstage.jst.go.jp/article/jjscs/28/1/28_1411001_213/_article)
+  
+  - [Dmitrienko, A., Paux, G., Brechenmacher, T. (2016). Power calculations in clinical trials with complex clinical objectives. Journal of the Japanese Society of Computational Statistics. 28, 15-50.](https://www.jstage.jst.go.jp/article/jjscs/28/1/28_1411001_213/_article)
 - [Dmitrienko, A., Paux, G., Pulkstenis, E., Zhang, J. (2016). Tradeoff-based optimization criteria in clinical trials with multiple objectives and adaptive designs. Journal of Biopharmaceutical Statistics. 26, 120-140.](http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1092032?journalCode=lbps20)
 - [Paux, G. and Dmitrienko A. (2018). Penalty-based approaches to evaluating multiplicity adjustments in clinical trials: Traditional multiplicity problems. Journal of Biopharmaceutical Statistics. 28, 146-168.](https://doi.org/10.1080/10543406.2017.1397010)
 - [Paux, G. and Dmitrienko A. (2018). Penalty-based approaches to evaluating multiplicity adjustments in clinical trials: Advanced multiplicity problems. Journal of Biopharmaceutical Statistics. 28, 169-188.](https://doi.org/10.1080/10543406.2017.1397011)

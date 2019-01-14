@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 Mediana <img src="inst/figures/hexMediana.png" width = "150" align="right" />
 =============================================================================
 
@@ -14,16 +15,11 @@ Installation
 
 Get the released version from CRAN:
 
-``` r
-install.packages("Mediana")
-```
+`R install.packages("Mediana")`
 
 Or the development version from github:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("gpaux/Mediana")
-```
+`R # install.packages("devtools") devtools::install_github("gpaux/Mediana")`
 
 Online Manual
 =============
@@ -35,27 +31,7 @@ Citation
 
 If you find `Mediana` useful, please cite it in your publications:
 
-``` r
-citation("Mediana")
-#> 
-#> To cite package 'Mediana' in publications use:
-#> 
-#>   Gautier Paux and Alex Dmitrienko. (2019). Mediana: Clinical Trial Simulations. R
-#>   package version 1.0.8. http://gpaux.github.io/Mediana/
-#> 
-#> A BibTeX entry for LaTeX users is
-#> 
-#>   @Manual{,
-#>     title = {Mediana: Clinical Trial Simulations},
-#>     author = {Gautier Paux and Alex Dmitrienko.},
-#>     year = {2019},
-#>     note = {R package version 1.0.8},
-#>     url = {http://gpaux.github.io/Mediana/},
-#>   }
-#> 
-#> ATTENTION: This citation information has been auto-generated from the package DESCRIPTION
-#> file and may need manual editing, see 'help("citation")'.
-```
+`r   citation("Mediana")   #>    #> To cite package 'Mediana' in publications use:   #>    #>   Gautier Paux and Alex Dmitrienko. (2019). Mediana: Clinical Trial Simulations. R   #>   package version 1.0.8. http://gpaux.github.io/Mediana/   #>    #> A BibTeX entry for LaTeX users is   #>    #>   @Manual{,   #>     title = {Mediana: Clinical Trial Simulations},   #>     author = {Gautier Paux and Alex Dmitrienko.},   #>     year = {2019},   #>     note = {R package version 1.0.8},   #>     url = {http://gpaux.github.io/Mediana/},   #>   }   #>    #> ATTENTION: This citation information has been auto-generated from the package DESCRIPTION   #> file and may need manual editing, see 'help("citation")'.`
 
 Clinical trial optimization using R book
 ========================================
