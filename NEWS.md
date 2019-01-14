@@ -2,13 +2,15 @@
 
 ## New features
 
+* Create an hexagon sticker for the package
+
 ## Bug fixes
 
 # Mediana 1.0.7
 
 ## Bug fixes
 
-- As the `ReporteRs` R package is not available on the CRAN anymore, the report generation feature has been revised using the `officer` and `flextable` R packages. These packages are now required to use the `GenerateReport` function.
+* As the `ReporteRs` R package is not available on the CRAN anymore, the report generation feature has been revised using the `officer` and `flextable` R packages. These packages are now required to use the `GenerateReport` function.
 
 # Mediana 1.0.6
 
