@@ -140,7 +140,7 @@ MultipleSequenceGatekeepingAdj = function(rawp, par) {
       }
 
       # Compute the intersection p-value for the current intersection hypothesis
-      pint[i] = pmin(1, min(pcomp[i, ]/c[i, ]))
+      pint[i] = pmin(1, min(ifelse(c[i,]>0, pcomp[i, ]/c[i, ], NA), na.rm = TRUE))
       # Compute the p-value for each hypothesis within the current intersection
       p[i, ] = int_orig[i, ] * pint[i]
 
