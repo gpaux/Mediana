@@ -1,11 +1,14 @@
 ---
 layout: page
-title: Mediana R package 
+title: Mediana R package
 tagline:
 ---
 {% include JB/setup %}
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana) ![cranlogs](http://cranlogs.r-pkg.org./badges/Mediana)
+
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana) [![CRAN_Logs_Badge](http://cranlogs.r-pkg.org/badges/Mediana)](https://cran.r-project.org/package=Mediana)
+[![CRAN_Logs_Badge_Total](http://cranlogs.r-pkg.org/badges/grand-total/Mediana)](https://cran.r-project.org/package=Mediana)
 
 ## New FAQ page
 
