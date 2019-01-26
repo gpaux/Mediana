@@ -2,9 +2,11 @@
 
 ## New features
 
-* Create an hexagon sticker for the package
+* Create an hexagon sticker for the package.
 
 ## Bug fixes
+
+* Fix the calculation of intersection hypothesis pvalue when family weights is null for all gatekeeping procedures.
 
 # Mediana 1.0.7
 
