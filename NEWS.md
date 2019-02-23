@@ -8,6 +8,8 @@
 
 * Fix the calculation of intersection hypothesis pvalue when family weights is null for all gatekeeping procedures.
 
+* Revise the error fraction function to avoid floating point issue 
+
 # Mediana 1.0.7
 
 ## Bug fixes
