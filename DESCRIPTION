@@ -2,7 +2,7 @@ Package: Mediana
 Type: Package
 Title: Clinical Trial Simulations
 Version: 1.0.8
-Date: 2019-02-23
+Date: 2019-03-06
 Author: Gautier Paux, Alex Dmitrienko.
 Maintainer: Gautier Paux <gautier@paux.fr>
 BugReports: https://github.com/gpaux/Mediana/issues
