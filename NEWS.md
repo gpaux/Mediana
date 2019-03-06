@@ -10,6 +10,8 @@
 
 * Revise the error fraction function to avoid floating point issue 
 
+* Fix the images in the Case studies vignette
+
 # Mediana 1.0.7
 
 ## Bug fixes

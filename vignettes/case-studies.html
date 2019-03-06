@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrienko" />
 
-<meta name="date" content="2019-01-26" />
+<meta name="date" content="2019-03-06" />
 
 <title>Case studies</title>
 
@@ -300,7 +300,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Case studies</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrienko</em></h4>
-<h4 class="date"><em>2019-01-26</em></h4>
+<h4 class="date"><em>2019-03-06</em></h4>
 
 
 
@@ -1217,11 +1217,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="define-an-analysis-model-7" class="section level2">
 <h2>Define an Analysis Model</h2>
 <p>The treatment comparisons for both endpoints will be carried out based on the log-rank test (<code>method = &quot;LogrankTest&quot;</code>). Further, as was stated in the beginning of this page, the two endpoints will be tested hierarchically using a multiplicity adjustment procedure known as the fixed-sequence procedure. This procedure belongs to the class of chain procedures (<code>proc = &quot;ChainAdj&quot;</code>) and the following figure provides a visual summary of the decision rules used in this procedure.</p>
-<center>
-<div class="col-md-12">
-<pre><code>&lt;img src=&quot;CaseStudy04-fig1.png&quot; class=&quot;img-responsive&quot; height=&quot;150&quot;&gt;</code></pre>
-</div>
-</center>
+<p><img src="data:image/png;base64,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" /></p>
 <p>The circles in this figure denote the two null hypotheses of interest:</p>
 <ul>
 <li><p>H1: Null hypothesis of no difference between the two arms with respect to PFS.</p></li>
@@ -1229,54 +1225,50 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </ul>
 <p>The value displayed above a circle defines the initial weight of each null hypothesis. All of the overall α is allocated to H1 to ensure that the OS test will be carried out only after the PFS test is significant and the arrow indicates that H2 will be tested after H1 is rejected.</p>
 <p>More formally, a chain procedure is uniquely defined by specifying a vector of hypothesis weights (W) and matrix of transition parameters (G). Based on the figure, these parameters are given by</p>
-<center>
-<div class="col-md-12">
-<pre><code>&lt;img src=&quot;CaseStudy04-fig2.png&quot; class=&quot;img-responsive&quot;&gt;</code></pre>
-</div>
-</center>
+<p><img src="data:image/png;base64,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" /></p>
 <p>Two objects (named <code>chain.weight</code> and <code>chain.transition</code>) are defined below to pass the hypothesis weights and transition parameters to the multiplicity adjustment parameters.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="co"># Parameters of the chain procedure (fixed-sequence procedure)</span></a>
-<a class="sourceLine" id="cb50-2" title="2"><span class="co"># Vector of hypothesis weights</span></a>
-<a class="sourceLine" id="cb50-3" title="3">chain.weight =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb50-4" title="4"><span class="co"># Matrix of transition parameters</span></a>
-<a class="sourceLine" id="cb50-5" title="5">chain.transition =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb50-6" title="6">                            <span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb50-7" title="7"></a>
-<a class="sourceLine" id="cb50-8" title="8"><span class="co"># Analysis model</span></a>
-<a class="sourceLine" id="cb50-9" title="9">case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb50-10" title="10"><span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;ChainAdj&quot;</span>,</a>
-<a class="sourceLine" id="cb50-11" title="11">              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> chain.weight, <span class="dt">transition =</span> chain.transition)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb50-12" title="12"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;PFS test&quot;</span>,</a>
-<a class="sourceLine" id="cb50-13" title="13">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Treatment PFS&quot;</span>),</a>
-<a class="sourceLine" id="cb50-14" title="14">       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb50-15" title="15"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OS test&quot;</span>,</a>
-<a class="sourceLine" id="cb50-16" title="16">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo OS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),</a>
-<a class="sourceLine" id="cb50-17" title="17">       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co"># Parameters of the chain procedure (fixed-sequence procedure)</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="co"># Vector of hypothesis weights</span></a>
+<a class="sourceLine" id="cb48-3" title="3">chain.weight =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb48-4" title="4"><span class="co"># Matrix of transition parameters</span></a>
+<a class="sourceLine" id="cb48-5" title="5">chain.transition =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb48-6" title="6">                            <span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb48-7" title="7"></a>
+<a class="sourceLine" id="cb48-8" title="8"><span class="co"># Analysis model</span></a>
+<a class="sourceLine" id="cb48-9" title="9">case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb48-10" title="10"><span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;ChainAdj&quot;</span>,</a>
+<a class="sourceLine" id="cb48-11" title="11">              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> chain.weight, <span class="dt">transition =</span> chain.transition)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb48-12" title="12"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;PFS test&quot;</span>,</a>
+<a class="sourceLine" id="cb48-13" title="13">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Treatment PFS&quot;</span>),</a>
+<a class="sourceLine" id="cb48-14" title="14">       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb48-15" title="15"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OS test&quot;</span>,</a>
+<a class="sourceLine" id="cb48-16" title="16">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo OS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),</a>
+<a class="sourceLine" id="cb48-17" title="17">       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</a></code></pre></div>
 <p>As shown above, the two significance tests included in the analysis model reflect the two-fold objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (<code>id = &quot;PFS test&quot;</code>) whereas the other test is carried out to assess the treatment effect on OS (<code>test.id = &quot;OS test&quot;</code>).</p>
 <p>Alternatively, the fixed-sequence procedure can be implemented using the method <code>FixedSeqAdj</code> introduced from version 1.0.4. This implementation is facilitated as no parameters have to be specified.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># Analysis model</span></a>
-<a class="sourceLine" id="cb51-2" title="2">case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb51-3" title="3"><span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;FixedSeqAdj&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb51-4" title="4"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;PFS test&quot;</span>,</a>
-<a class="sourceLine" id="cb51-5" title="5">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Treatment PFS&quot;</span>),</a>
-<a class="sourceLine" id="cb51-6" title="6">       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb51-7" title="7"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OS test&quot;</span>,</a>
-<a class="sourceLine" id="cb51-8" title="8">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo OS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),</a>
-<a class="sourceLine" id="cb51-9" title="9">       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="co"># Analysis model</span></a>
+<a class="sourceLine" id="cb49-2" title="2">case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;FixedSeqAdj&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-4" title="4"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;PFS test&quot;</span>,</a>
+<a class="sourceLine" id="cb49-5" title="5">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Treatment PFS&quot;</span>),</a>
+<a class="sourceLine" id="cb49-6" title="6">       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb49-7" title="7"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OS test&quot;</span>,</a>
+<a class="sourceLine" id="cb49-8" title="8">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo OS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),</a>
+<a class="sourceLine" id="cb49-9" title="9">       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</a></code></pre></div>
 </div>
 <div id="define-an-evaluation-model-7" class="section level2">
 <h2>Define an Evaluation Model</h2>
 <p>The evaluation model specifies the most basic criterion for assessing the probability of success in the PFS and OS analyses (marginal power). A criterion based on disjunctive power could be considered but it would not provide additional information.</p>
 <p>Due to the hierarchical testing approach, the probability of detecting a significant treatment effect on at least one endpoint (disjunctive power) is simply equal to the probability of establishing a significant PFS effect.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># Evaluation model</span></a>
-<a class="sourceLine" id="cb52-2" title="2">case.study4.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb52-3" title="3"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,</a>
-<a class="sourceLine" id="cb52-4" title="4">            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,</a>
-<a class="sourceLine" id="cb52-5" title="5">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;PFS test&quot;</span>,</a>
-<a class="sourceLine" id="cb52-6" title="6">                          <span class="st">&quot;OS test&quot;</span>),</a>
-<a class="sourceLine" id="cb52-7" title="7">            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;PFS test&quot;</span>,</a>
-<a class="sourceLine" id="cb52-8" title="8">                       <span class="st">&quot;OS test&quot;</span>),</a>
-<a class="sourceLine" id="cb52-9" title="9">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="co"># Evaluation model</span></a>
+<a class="sourceLine" id="cb50-2" title="2">case.study4.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,</a>
+<a class="sourceLine" id="cb50-4" title="4">            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,</a>
+<a class="sourceLine" id="cb50-5" title="5">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;PFS test&quot;</span>,</a>
+<a class="sourceLine" id="cb50-6" title="6">                          <span class="st">&quot;OS test&quot;</span>),</a>
+<a class="sourceLine" id="cb50-7" title="7">            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;PFS test&quot;</span>,</a>
+<a class="sourceLine" id="cb50-8" title="8">                       <span class="st">&quot;OS test&quot;</span>),</a>
+<a class="sourceLine" id="cb50-9" title="9">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</a></code></pre></div>
 </div>
 <div id="download-7" class="section level2">
 <h2>Download</h2>
@@ -1396,74 +1388,74 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><p>Correlation matrix of the multivariate normal distribution used in the copula method.</p></li>
 </ul>
 <p>These parameters are combined to define three outcome parameter sets (e.g., <code>outcome1.plac</code>, <code>outcome1.dosel</code> and <code>outcome1.doseh</code>) that will be included in the <code>Sample</code> object in the data model.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co"># Variable types</span></a>
-<a class="sourceLine" id="cb53-2" title="2">var.type =<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;BinomDist&quot;</span>, <span class="st">&quot;NormalDist&quot;</span>)</a>
-<a class="sourceLine" id="cb53-3" title="3"></a>
-<a class="sourceLine" id="cb53-4" title="4"><span class="co"># Outcome distribution parameters</span></a>
-<a class="sourceLine" id="cb53-5" title="5">placebo.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.3</span>), </a>
-<a class="sourceLine" id="cb53-6" title="6">                         <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.10</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb53-7" title="7"></a>
-<a class="sourceLine" id="cb53-8" title="8">dosel.par1 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.40</span>), </a>
-<a class="sourceLine" id="cb53-9" title="9">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.20</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb53-10" title="10">dosel.par2 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.45</span>), </a>
-<a class="sourceLine" id="cb53-11" title="11">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.25</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb53-12" title="12">dosel.par3 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), </a>
-<a class="sourceLine" id="cb53-13" title="13">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb53-14" title="14"></a>
-<a class="sourceLine" id="cb53-15" title="15">doseh.par1 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), </a>
-<a class="sourceLine" id="cb53-16" title="16">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb53-17" title="17">doseh.par2 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.55</span>), </a>
-<a class="sourceLine" id="cb53-18" title="18">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.35</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb53-19" title="19">doseh.par3 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.60</span>), </a>
-<a class="sourceLine" id="cb53-20" title="20">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.40</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb53-21" title="21"></a>
-<a class="sourceLine" id="cb53-22" title="22"><span class="co"># Correlation between two endpoints</span></a>
-<a class="sourceLine" id="cb53-23" title="23">corr.matrix =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>,</a>
-<a class="sourceLine" id="cb53-24" title="24">                       <span class="fl">0.5</span>, <span class="fl">1.0</span>), <span class="dv">2</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb53-25" title="25"></a>
-<a class="sourceLine" id="cb53-26" title="26"><span class="co"># Outcome parameter set 1</span></a>
-<a class="sourceLine" id="cb53-27" title="27">outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
-<a class="sourceLine" id="cb53-28" title="28">                              <span class="dt">par =</span> placebo.par, </a>
-<a class="sourceLine" id="cb53-29" title="29">                              <span class="dt">corr =</span> corr.matrix)</a>
-<a class="sourceLine" id="cb53-30" title="30">outcome1.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
-<a class="sourceLine" id="cb53-31" title="31">                            <span class="dt">par =</span> dosel.par1, </a>
-<a class="sourceLine" id="cb53-32" title="32">                            <span class="dt">corr =</span> corr.matrix)</a>
-<a class="sourceLine" id="cb53-33" title="33">outcome1.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
-<a class="sourceLine" id="cb53-34" title="34">                            <span class="dt">par =</span> doseh.par1, </a>
-<a class="sourceLine" id="cb53-35" title="35">                            <span class="dt">corr =</span> corr.matrix)</a>
-<a class="sourceLine" id="cb53-36" title="36"></a>
-<a class="sourceLine" id="cb53-37" title="37"><span class="co"># Outcome parameter set 2</span></a>
-<a class="sourceLine" id="cb53-38" title="38">outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
-<a class="sourceLine" id="cb53-39" title="39">                              <span class="dt">par =</span> placebo.par, </a>
-<a class="sourceLine" id="cb53-40" title="40">                              <span class="dt">corr =</span> corr.matrix)</a>
-<a class="sourceLine" id="cb53-41" title="41">outcome2.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
-<a class="sourceLine" id="cb53-42" title="42">                            <span class="dt">par =</span> dosel.par2, </a>
-<a class="sourceLine" id="cb53-43" title="43">                            <span class="dt">corr =</span> corr.matrix)</a>
-<a class="sourceLine" id="cb53-44" title="44">outcome2.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
-<a class="sourceLine" id="cb53-45" title="45">                            <span class="dt">par =</span> doseh.par2, </a>
-<a class="sourceLine" id="cb53-46" title="46">                            <span class="dt">corr =</span> corr.matrix)</a>
-<a class="sourceLine" id="cb53-47" title="47"></a>
-<a class="sourceLine" id="cb53-48" title="48"><span class="co"># Outcome parameter set 3</span></a>
-<a class="sourceLine" id="cb53-49" title="49">outcome3.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
-<a class="sourceLine" id="cb53-50" title="50">                              <span class="dt">par =</span> placebo.par, </a>
-<a class="sourceLine" id="cb53-51" title="51">                              <span class="dt">corr =</span> corr.matrix)</a>
-<a class="sourceLine" id="cb53-52" title="52">outcome3.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
-<a class="sourceLine" id="cb53-53" title="53">                            <span class="dt">par =</span> doseh.par3, </a>
-<a class="sourceLine" id="cb53-54" title="54">                            <span class="dt">corr =</span> corr.matrix)</a>
-<a class="sourceLine" id="cb53-55" title="55">outcome3.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
-<a class="sourceLine" id="cb53-56" title="56">                            <span class="dt">par =</span> dosel.par3, </a>
-<a class="sourceLine" id="cb53-57" title="57">                            <span class="dt">corr =</span> corr.matrix)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># Variable types</span></a>
+<a class="sourceLine" id="cb51-2" title="2">var.type =<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;BinomDist&quot;</span>, <span class="st">&quot;NormalDist&quot;</span>)</a>
+<a class="sourceLine" id="cb51-3" title="3"></a>
+<a class="sourceLine" id="cb51-4" title="4"><span class="co"># Outcome distribution parameters</span></a>
+<a class="sourceLine" id="cb51-5" title="5">placebo.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.3</span>), </a>
+<a class="sourceLine" id="cb51-6" title="6">                         <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.10</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb51-7" title="7"></a>
+<a class="sourceLine" id="cb51-8" title="8">dosel.par1 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.40</span>), </a>
+<a class="sourceLine" id="cb51-9" title="9">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.20</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb51-10" title="10">dosel.par2 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.45</span>), </a>
+<a class="sourceLine" id="cb51-11" title="11">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.25</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb51-12" title="12">dosel.par3 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), </a>
+<a class="sourceLine" id="cb51-13" title="13">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb51-14" title="14"></a>
+<a class="sourceLine" id="cb51-15" title="15">doseh.par1 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), </a>
+<a class="sourceLine" id="cb51-16" title="16">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb51-17" title="17">doseh.par2 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.55</span>), </a>
+<a class="sourceLine" id="cb51-18" title="18">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.35</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb51-19" title="19">doseh.par3 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.60</span>), </a>
+<a class="sourceLine" id="cb51-20" title="20">                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">-0.40</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb51-21" title="21"></a>
+<a class="sourceLine" id="cb51-22" title="22"><span class="co"># Correlation between two endpoints</span></a>
+<a class="sourceLine" id="cb51-23" title="23">corr.matrix =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>,</a>
+<a class="sourceLine" id="cb51-24" title="24">                       <span class="fl">0.5</span>, <span class="fl">1.0</span>), <span class="dv">2</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb51-25" title="25"></a>
+<a class="sourceLine" id="cb51-26" title="26"><span class="co"># Outcome parameter set 1</span></a>
+<a class="sourceLine" id="cb51-27" title="27">outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
+<a class="sourceLine" id="cb51-28" title="28">                              <span class="dt">par =</span> placebo.par, </a>
+<a class="sourceLine" id="cb51-29" title="29">                              <span class="dt">corr =</span> corr.matrix)</a>
+<a class="sourceLine" id="cb51-30" title="30">outcome1.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
+<a class="sourceLine" id="cb51-31" title="31">                            <span class="dt">par =</span> dosel.par1, </a>
+<a class="sourceLine" id="cb51-32" title="32">                            <span class="dt">corr =</span> corr.matrix)</a>
+<a class="sourceLine" id="cb51-33" title="33">outcome1.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
+<a class="sourceLine" id="cb51-34" title="34">                            <span class="dt">par =</span> doseh.par1, </a>
+<a class="sourceLine" id="cb51-35" title="35">                            <span class="dt">corr =</span> corr.matrix)</a>
+<a class="sourceLine" id="cb51-36" title="36"></a>
+<a class="sourceLine" id="cb51-37" title="37"><span class="co"># Outcome parameter set 2</span></a>
+<a class="sourceLine" id="cb51-38" title="38">outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
+<a class="sourceLine" id="cb51-39" title="39">                              <span class="dt">par =</span> placebo.par, </a>
+<a class="sourceLine" id="cb51-40" title="40">                              <span class="dt">corr =</span> corr.matrix)</a>
+<a class="sourceLine" id="cb51-41" title="41">outcome2.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
+<a class="sourceLine" id="cb51-42" title="42">                            <span class="dt">par =</span> dosel.par2, </a>
+<a class="sourceLine" id="cb51-43" title="43">                            <span class="dt">corr =</span> corr.matrix)</a>
+<a class="sourceLine" id="cb51-44" title="44">outcome2.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
+<a class="sourceLine" id="cb51-45" title="45">                            <span class="dt">par =</span> doseh.par2, </a>
+<a class="sourceLine" id="cb51-46" title="46">                            <span class="dt">corr =</span> corr.matrix)</a>
+<a class="sourceLine" id="cb51-47" title="47"></a>
+<a class="sourceLine" id="cb51-48" title="48"><span class="co"># Outcome parameter set 3</span></a>
+<a class="sourceLine" id="cb51-49" title="49">outcome3.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
+<a class="sourceLine" id="cb51-50" title="50">                              <span class="dt">par =</span> placebo.par, </a>
+<a class="sourceLine" id="cb51-51" title="51">                              <span class="dt">corr =</span> corr.matrix)</a>
+<a class="sourceLine" id="cb51-52" title="52">outcome3.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
+<a class="sourceLine" id="cb51-53" title="53">                            <span class="dt">par =</span> doseh.par3, </a>
+<a class="sourceLine" id="cb51-54" title="54">                            <span class="dt">corr =</span> corr.matrix)</a>
+<a class="sourceLine" id="cb51-55" title="55">outcome3.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">type =</span> var.type, </a>
+<a class="sourceLine" id="cb51-56" title="56">                            <span class="dt">par =</span> dosel.par3, </a>
+<a class="sourceLine" id="cb51-57" title="57">                            <span class="dt">corr =</span> corr.matrix)</a></code></pre></div>
 <p>These outcome parameter set are then combined within each <code>Sample</code> object and the common sample size per treatment arm ranges between 100 and 120:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co"># Data model</span></a>
-<a class="sourceLine" id="cb54-2" title="2">case.study5.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb54-3" title="3"><span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;MVMixedDist&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb54-4" title="4"><span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb54-5" title="5"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>),</a>
-<a class="sourceLine" id="cb54-6" title="6">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo, outcome3.placebo)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb54-7" title="7"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseL ACR20&quot;</span>, <span class="st">&quot;DoseL HAQ-DI&quot;</span>),</a>
-<a class="sourceLine" id="cb54-8" title="8">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel, outcome3.dosel)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb54-9" title="9"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseH ACR20&quot;</span>, <span class="st">&quot;DoseH HAQ-DI&quot;</span>),</a>
-<a class="sourceLine" id="cb54-10" title="10">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.doseh, outcome2.doseh, outcome3.doseh))</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># Data model</span></a>
+<a class="sourceLine" id="cb52-2" title="2">case.study5.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb52-3" title="3"><span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;MVMixedDist&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb52-4" title="4"><span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb52-5" title="5"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>),</a>
+<a class="sourceLine" id="cb52-6" title="6">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo, outcome3.placebo)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb52-7" title="7"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseL ACR20&quot;</span>, <span class="st">&quot;DoseL HAQ-DI&quot;</span>),</a>
+<a class="sourceLine" id="cb52-8" title="8">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel, outcome3.dosel)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb52-9" title="9"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseH ACR20&quot;</span>, <span class="st">&quot;DoseH HAQ-DI&quot;</span>),</a>
+<a class="sourceLine" id="cb52-10" title="10">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.doseh, outcome2.doseh, outcome3.doseh))</a></code></pre></div>
 </div>
 <div id="define-an-analysis-model-8" class="section level2">
 <h2>Define an Analysis Model</h2>
@@ -1477,35 +1469,31 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>H2: Null hypothesis of no difference between Dose H and placebo with respect to Endpoint 1.</p>
 <p>H3: Null hypothesis of no difference between Dose L and placebo with respect to Endpoint 2.</p>
 <p>H4: Null hypothesis of no difference between Dose H and placebo with respect to Endpoint 2.</p>
-<center>
-<div class="col-md-12">
-<pre><code>&lt;img src=&quot;CaseStudy05-fig1.png&quot; class=&quot;img-responsive&quot;&gt;</code></pre>
-</div>
-</center>
+<p><img src="data:image/png;base64,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" /></p>
 <p>A multiple testing procedure known as the multiple-sequence gatekeeping procedure will be applied to account for the hierarchical structure of this multiplicity problem. This procedure belongs to the class of mixture-based gatekeeping procedures introduced in <a href="http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1074917">Dmitrienko et al. (2015)</a>. This gatekeeping procedure is specified by defining the following three parameters:</p>
 <ul>
 <li><p>Families of null hypotheses (<code>family</code>).</p></li>
 <li><p>Component procedures used in the families (<code>component.procedure</code>).</p></li>
 <li><p>Truncation parameters used in the families (<code>gamma</code>).</p></li>
 </ul>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># Parameters of the gatekeeping procedure procedure (multiple-sequence gatekeeping procedure)</span></a>
-<a class="sourceLine" id="cb56-2" title="2"><span class="co"># Tests to which the multiplicity adjustment will be applied</span></a>
-<a class="sourceLine" id="cb56-3" title="3">test.list =<span class="st"> </span><span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>, </a>
-<a class="sourceLine" id="cb56-4" title="4">                  <span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>, </a>
-<a class="sourceLine" id="cb56-5" title="5">                  <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>, </a>
-<a class="sourceLine" id="cb56-6" title="6">                  <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>)</a>
-<a class="sourceLine" id="cb56-7" title="7"></a>
-<a class="sourceLine" id="cb56-8" title="8"><span class="co"># Families of hypotheses</span></a>
-<a class="sourceLine" id="cb56-9" title="9">family =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb56-10" title="10">                  <span class="dt">family2 =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))</a>
-<a class="sourceLine" id="cb56-11" title="11"></a>
-<a class="sourceLine" id="cb56-12" title="12"><span class="co"># Component procedures for each family</span></a>
-<a class="sourceLine" id="cb56-13" title="13">component.procedure =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span><span class="st">&quot;HolmAdj&quot;</span>, </a>
-<a class="sourceLine" id="cb56-14" title="14">                               <span class="dt">family2 =</span> <span class="st">&quot;HolmAdj&quot;</span>)</a>
-<a class="sourceLine" id="cb56-15" title="15"></a>
-<a class="sourceLine" id="cb56-16" title="16"><span class="co"># Truncation parameter for each family</span></a>
-<a class="sourceLine" id="cb56-17" title="17">gamma =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="fl">0.8</span>, </a>
-<a class="sourceLine" id="cb56-18" title="18">                 <span class="dt">family2 =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co"># Parameters of the gatekeeping procedure procedure (multiple-sequence gatekeeping procedure)</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="co"># Tests to which the multiplicity adjustment will be applied</span></a>
+<a class="sourceLine" id="cb53-3" title="3">test.list =<span class="st"> </span><span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>, </a>
+<a class="sourceLine" id="cb53-4" title="4">                  <span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>, </a>
+<a class="sourceLine" id="cb53-5" title="5">                  <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>, </a>
+<a class="sourceLine" id="cb53-6" title="6">                  <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>)</a>
+<a class="sourceLine" id="cb53-7" title="7"></a>
+<a class="sourceLine" id="cb53-8" title="8"><span class="co"># Families of hypotheses</span></a>
+<a class="sourceLine" id="cb53-9" title="9">family =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb53-10" title="10">                  <span class="dt">family2 =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb53-11" title="11"></a>
+<a class="sourceLine" id="cb53-12" title="12"><span class="co"># Component procedures for each family</span></a>
+<a class="sourceLine" id="cb53-13" title="13">component.procedure =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span><span class="st">&quot;HolmAdj&quot;</span>, </a>
+<a class="sourceLine" id="cb53-14" title="14">                               <span class="dt">family2 =</span> <span class="st">&quot;HolmAdj&quot;</span>)</a>
+<a class="sourceLine" id="cb53-15" title="15"></a>
+<a class="sourceLine" id="cb53-16" title="16"><span class="co"># Truncation parameter for each family</span></a>
+<a class="sourceLine" id="cb53-17" title="17">gamma =<span class="st"> </span><span class="kw">families</span>(<span class="dt">family1 =</span> <span class="fl">0.8</span>, </a>
+<a class="sourceLine" id="cb53-18" title="18">                 <span class="dt">family2 =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p>These parameters are included in the <code>MultAdjProc</code> object defined below. The tests to which the multiplicity adjustment will be applied are defined in the <code>tests</code> argument. The use of this argument is optional if all tests included in the analysis model are to be included. The argument <code>family</code> states that the null hypotheses will be grouped into two families:</p>
 <ul>
 <li><p>Family 1: H1 and H2.</p></li>
@@ -1514,25 +1502,25 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>It is to be noted that the order corresponds to the order of the tests defined in the analysis model, except if the tests are specifically specified in the <code>tests</code> argument of the <code>MultAdjProc</code> object.</p>
 <p>The families will be tested sequentially and a truncated Holm procedure will be applied within each family (<code>component.procedure</code>). Lastly, the truncation parameter will be set to 0.8 in Family 1 and to 1 in Family 2 (<code>gamma</code>). The resulting parameters are included in the <code>par</code> argument of the <code>MultAdjProc</code> object and, as before, the <code>proc</code> argument is used to specify the multiple testing procedure (<code>MultipleSequenceGatekeepingAdj</code>).</p>
 <p>The test are then specified in the analysis model and the overall analysis model is defined as follows:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># Analysis model</span></a>
-<a class="sourceLine" id="cb57-2" title="2">case.study5.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb57-3" title="3"><span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;MultipleSequenceGatekeepingAdj&quot;</span>,</a>
-<a class="sourceLine" id="cb57-4" title="4">              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">family =</span> family, </a>
-<a class="sourceLine" id="cb57-5" title="5">                               <span class="dt">proc =</span> component.procedure, </a>
-<a class="sourceLine" id="cb57-6" title="6">                               <span class="dt">gamma =</span> gamma),</a>
-<a class="sourceLine" id="cb57-7" title="7">              <span class="dt">tests =</span> test.list) <span class="op">+</span></a>
-<a class="sourceLine" id="cb57-8" title="8"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,</a>
-<a class="sourceLine" id="cb57-9" title="9">       <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,</a>
-<a class="sourceLine" id="cb57-10" title="10">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseL ACR20&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb57-11" title="11"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,</a>
-<a class="sourceLine" id="cb57-12" title="12">       <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,</a>
-<a class="sourceLine" id="cb57-13" title="13">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseH ACR20&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb57-14" title="14"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,</a>
-<a class="sourceLine" id="cb57-15" title="15">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,</a>
-<a class="sourceLine" id="cb57-16" title="16">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;DoseL HAQ-DI&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb57-17" title="17"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>,</a>
-<a class="sourceLine" id="cb57-18" title="18">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,</a>
-<a class="sourceLine" id="cb57-19" title="19">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;DoseH HAQ-DI&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co"># Analysis model</span></a>
+<a class="sourceLine" id="cb54-2" title="2">case.study5.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-3" title="3"><span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;MultipleSequenceGatekeepingAdj&quot;</span>,</a>
+<a class="sourceLine" id="cb54-4" title="4">              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">family =</span> family, </a>
+<a class="sourceLine" id="cb54-5" title="5">                               <span class="dt">proc =</span> component.procedure, </a>
+<a class="sourceLine" id="cb54-6" title="6">                               <span class="dt">gamma =</span> gamma),</a>
+<a class="sourceLine" id="cb54-7" title="7">              <span class="dt">tests =</span> test.list) <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-8" title="8"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,</a>
+<a class="sourceLine" id="cb54-9" title="9">       <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,</a>
+<a class="sourceLine" id="cb54-10" title="10">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseL ACR20&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-11" title="11"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,</a>
+<a class="sourceLine" id="cb54-12" title="12">       <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,</a>
+<a class="sourceLine" id="cb54-13" title="13">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseH ACR20&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-14" title="14"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,</a>
+<a class="sourceLine" id="cb54-15" title="15">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,</a>
+<a class="sourceLine" id="cb54-16" title="16">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;DoseL HAQ-DI&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb54-17" title="17"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>,</a>
+<a class="sourceLine" id="cb54-18" title="18">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,</a>
+<a class="sourceLine" id="cb54-19" title="19">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;DoseH HAQ-DI&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>))</a></code></pre></div>
 <p>Recall that a numerically lower value indicates a beneficial effect for the HAQ-DI score and, as a result, the experimental treatment arm must be defined prior to the placebo arm in the test.samples parameters corresponding to the HAQ-DI tests, e.g., <code>samples = samples(&quot;DoseL HAQ-DI&quot;, &quot;Placebo HAQ-DI&quot;)</code>.</p>
 </div>
 <div id="define-an-evaluation-model-8" class="section level2">
@@ -1540,31 +1528,31 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>In order to assess the probability of success in this clinical trial, a hybrid criterion based on the conjunctive criterion (both trial endpoints must be significant) and disjunctive criterion (at least one dose-placebo comparison must be significant) can be considered.</p>
 <p>This criterion will be met if a significant effect is established at one or two doses on Endpoint 1 (ACR20) and also at one or two doses on Endpoint 2 (HAQ-DI). However, due to the hierarchical structure of the testing strategy (see Figure), this is equivalent to demonstrating a significant difference between Placebo and at least one dose with respect to Endpoint 2. The corresponding criterion is a subset disjunctive criterion based on the two Endpoint 2 tests (subset disjunctive power was briefly mentioned in <a href="CaseStudy02">Case study 2</a>).</p>
 <p>In addition, the sponsor may also be interested in evaluating marginal power as well as subset disjunctive power based on the Endpoint 1 tests. The latter criterion will be met if a significant difference between Placebo and at least one dose is established with respect to Endpoint 1. Additionally, as in <a href="CaseStudy02">Case study 2</a>, the user could consider defining custom evaluation criteria. The three resulting evaluation criteria (marginal power, subset disjunctive criterion based on the Endpoint 1 tests and subset disjunctive criterion based on the Endpoint 2 tests) are included in the following evaluation model.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># Evaluation model</span></a>
-<a class="sourceLine" id="cb58-2" title="2">case.study5.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb58-3" title="3"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,</a>
-<a class="sourceLine" id="cb58-4" title="4">            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,</a>
-<a class="sourceLine" id="cb58-5" title="5">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,</a>
-<a class="sourceLine" id="cb58-6" title="6">                          <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,</a>
-<a class="sourceLine" id="cb58-7" title="7">                          <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,</a>
-<a class="sourceLine" id="cb58-8" title="8">                          <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),</a>
-<a class="sourceLine" id="cb58-9" title="9">            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,</a>
-<a class="sourceLine" id="cb58-10" title="10">                       <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,</a>
-<a class="sourceLine" id="cb58-11" title="11">                       <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,</a>
-<a class="sourceLine" id="cb58-12" title="12">                       <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),</a>
-<a class="sourceLine" id="cb58-13" title="13">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb58-14" title="14"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power - ACR20&quot;</span>,</a>
-<a class="sourceLine" id="cb58-15" title="15">            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,</a>
-<a class="sourceLine" id="cb58-16" title="16">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,</a>
-<a class="sourceLine" id="cb58-17" title="17">                          <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>),</a>
-<a class="sourceLine" id="cb58-18" title="18">            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power - ACR20&quot;</span>,</a>
-<a class="sourceLine" id="cb58-19" title="19">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb58-20" title="20"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power - HAQ-DI&quot;</span>,</a>
-<a class="sourceLine" id="cb58-21" title="21">            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,</a>
-<a class="sourceLine" id="cb58-22" title="22">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,</a>
-<a class="sourceLine" id="cb58-23" title="23">                          <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),</a>
-<a class="sourceLine" id="cb58-24" title="24">            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power - HAQ-DI&quot;</span>,</a>
-<a class="sourceLine" id="cb58-25" title="25">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="co"># Evaluation model</span></a>
+<a class="sourceLine" id="cb55-2" title="2">case.study5.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb55-3" title="3"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,</a>
+<a class="sourceLine" id="cb55-4" title="4">            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,</a>
+<a class="sourceLine" id="cb55-5" title="5">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,</a>
+<a class="sourceLine" id="cb55-6" title="6">                          <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,</a>
+<a class="sourceLine" id="cb55-7" title="7">                          <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,</a>
+<a class="sourceLine" id="cb55-8" title="8">                          <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),</a>
+<a class="sourceLine" id="cb55-9" title="9">            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,</a>
+<a class="sourceLine" id="cb55-10" title="10">                       <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,</a>
+<a class="sourceLine" id="cb55-11" title="11">                       <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,</a>
+<a class="sourceLine" id="cb55-12" title="12">                       <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),</a>
+<a class="sourceLine" id="cb55-13" title="13">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb55-14" title="14"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power - ACR20&quot;</span>,</a>
+<a class="sourceLine" id="cb55-15" title="15">            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,</a>
+<a class="sourceLine" id="cb55-16" title="16">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,</a>
+<a class="sourceLine" id="cb55-17" title="17">                          <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>),</a>
+<a class="sourceLine" id="cb55-18" title="18">            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power - ACR20&quot;</span>,</a>
+<a class="sourceLine" id="cb55-19" title="19">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb55-20" title="20"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power - HAQ-DI&quot;</span>,</a>
+<a class="sourceLine" id="cb55-21" title="21">            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,</a>
+<a class="sourceLine" id="cb55-22" title="22">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,</a>
+<a class="sourceLine" id="cb55-23" title="23">                          <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),</a>
+<a class="sourceLine" id="cb55-24" title="24">            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power - HAQ-DI&quot;</span>,</a>
+<a class="sourceLine" id="cb55-25" title="25">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</a></code></pre></div>
 </div>
 <div id="download-8" class="section level2">
 <h2>Download</h2>
@@ -1650,30 +1638,30 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="co"># Standard</span></a>
-<a class="sourceLine" id="cb59-2" title="2">outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">16</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb59-3" title="3">outcome1.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">19.5</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb59-4" title="4">outcome1.dosem =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb59-5" title="5">outcome1.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb59-6" title="6"></a>
-<a class="sourceLine" id="cb59-7" title="7"><span class="co"># Optimistic</span></a>
-<a class="sourceLine" id="cb59-8" title="8">outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">16</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb59-9" title="9">outcome2.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">20</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb59-10" title="10">outcome2.dosem =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb59-11" title="11">outcome2.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb59-12" title="12"></a>
-<a class="sourceLine" id="cb59-13" title="13"><span class="co"># Data model</span></a>
-<a class="sourceLine" id="cb59-14" title="14">case.study6.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb59-15" title="15"><span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb59-16" title="16"><span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb59-17" title="17"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,</a>
-<a class="sourceLine" id="cb59-18" title="18">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb59-19" title="19"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose L&quot;</span>,</a>
-<a class="sourceLine" id="cb59-20" title="20">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb59-21" title="21"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose M&quot;</span>,</a>
-<a class="sourceLine" id="cb59-22" title="22">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosem, outcome2.dosem)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb59-23" title="23"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H&quot;</span>,</a>
-<a class="sourceLine" id="cb59-24" title="24">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.doseh, outcome2.doseh))</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># Standard</span></a>
+<a class="sourceLine" id="cb56-2" title="2">outcome1.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">16</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb56-3" title="3">outcome1.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="fl">19.5</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb56-4" title="4">outcome1.dosem =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb56-5" title="5">outcome1.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb56-6" title="6"></a>
+<a class="sourceLine" id="cb56-7" title="7"><span class="co"># Optimistic</span></a>
+<a class="sourceLine" id="cb56-8" title="8">outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">16</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb56-9" title="9">outcome2.dosel =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">20</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb56-10" title="10">outcome2.dosem =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb56-11" title="11">outcome2.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> <span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb56-12" title="12"></a>
+<a class="sourceLine" id="cb56-13" title="13"><span class="co"># Data model</span></a>
+<a class="sourceLine" id="cb56-14" title="14">case.study6.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-15" title="15"><span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-16" title="16"><span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-17" title="17"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,</a>
+<a class="sourceLine" id="cb56-18" title="18">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-19" title="19"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose L&quot;</span>,</a>
+<a class="sourceLine" id="cb56-20" title="20">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-21" title="21"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose M&quot;</span>,</a>
+<a class="sourceLine" id="cb56-22" title="22">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosem, outcome2.dosem)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb56-23" title="23"><span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H&quot;</span>,</a>
+<a class="sourceLine" id="cb56-24" title="24">         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.doseh, outcome2.doseh))</a></code></pre></div>
 </div>
 <div id="define-an-analysis-model-9" class="section level2">
 <h2>Define an Analysis Model</h2>
@@ -1684,81 +1672,81 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><p>H3: Null hypothesis of no difference between Dose H and placebo.</p></li>
 </ul>
 <p>In this case study, as in <a href="#case-study-2-1">Case study 2</a>, the overall success criterion in the trial is formulated in terms of demonstrating a beneficial effect at any of the three doses, inducing an inflation of the overall Type I error rate. In this case study, the sponsor is interested in comparing several Multiple Testing Procedures, such as the weighted Bonferroni, Holm and Hochberg procedures. These MTPs are defined as below:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="co"># Multiplicity adjustments</span></a>
-<a class="sourceLine" id="cb60-2" title="2"><span class="co"># No adjustment</span></a>
-<a class="sourceLine" id="cb60-3" title="3">mult.adj1 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb60-4" title="4"></a>
-<a class="sourceLine" id="cb60-5" title="5"><span class="co"># Bonferroni adjustment (with unequal weights)</span></a>
-<a class="sourceLine" id="cb60-6" title="6">mult.adj2 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;BonferroniAdj&quot;</span>,</a>
-<a class="sourceLine" id="cb60-7" title="7">                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)))</a>
-<a class="sourceLine" id="cb60-8" title="8"></a>
-<a class="sourceLine" id="cb60-9" title="9"><span class="co"># Holm adjustment (with unequal weights)</span></a>
-<a class="sourceLine" id="cb60-10" title="10">mult.adj3 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HolmAdj&quot;</span>, </a>
-<a class="sourceLine" id="cb60-11" title="11">                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)))</a>
-<a class="sourceLine" id="cb60-12" title="12"></a>
-<a class="sourceLine" id="cb60-13" title="13"><span class="co"># Hochberg adjustment (with unequal weights)</span></a>
-<a class="sourceLine" id="cb60-14" title="14">mult.adj4 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>, </a>
-<a class="sourceLine" id="cb60-15" title="15">                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># Multiplicity adjustments</span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="co"># No adjustment</span></a>
+<a class="sourceLine" id="cb57-3" title="3">mult.adj1 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb57-4" title="4"></a>
+<a class="sourceLine" id="cb57-5" title="5"><span class="co"># Bonferroni adjustment (with unequal weights)</span></a>
+<a class="sourceLine" id="cb57-6" title="6">mult.adj2 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;BonferroniAdj&quot;</span>,</a>
+<a class="sourceLine" id="cb57-7" title="7">                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)))</a>
+<a class="sourceLine" id="cb57-8" title="8"></a>
+<a class="sourceLine" id="cb57-9" title="9"><span class="co"># Holm adjustment (with unequal weights)</span></a>
+<a class="sourceLine" id="cb57-10" title="10">mult.adj3 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HolmAdj&quot;</span>, </a>
+<a class="sourceLine" id="cb57-11" title="11">                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)))</a>
+<a class="sourceLine" id="cb57-12" title="12"></a>
+<a class="sourceLine" id="cb57-13" title="13"><span class="co"># Hochberg adjustment (with unequal weights)</span></a>
+<a class="sourceLine" id="cb57-14" title="14">mult.adj4 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>, </a>
+<a class="sourceLine" id="cb57-15" title="15">                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)))</a></code></pre></div>
 <p>The <code>mult.adj1</code> object, which specified that no adjustment will be used, is defined in order to observe the decrease in power induced by each MTPs.</p>
 <p>It should be noted that for each weighted procedure, a higher weight is assigned to the test of Placebo vs Dose H (1/2), and the remaining weight is equally assigned to the two other tests (i.e. 1/4 for each test). These parameters are specified in the <code>par</code> argument of each MTP.</p>
 <p>The analysis model is defined as follows:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="co"># Analysis model</span></a>
-<a class="sourceLine" id="cb61-2" title="2">case.study6.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb61-3" title="3"><span class="st">  </span><span class="kw">MultAdj</span>(mult.adj1, mult.adj2, mult.adj3, mult.adj4) <span class="op">+</span></a>
-<a class="sourceLine" id="cb61-4" title="4"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
-<a class="sourceLine" id="cb61-5" title="5">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),</a>
-<a class="sourceLine" id="cb61-6" title="6">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb61-7" title="7"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
-<a class="sourceLine" id="cb61-8" title="8">       <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),</a>
-<a class="sourceLine" id="cb61-9" title="9">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb61-10" title="10"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose H&quot;</span>,</a>
-<a class="sourceLine" id="cb61-11" title="11">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),</a>
-<a class="sourceLine" id="cb61-12" title="12">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># Analysis model</span></a>
+<a class="sourceLine" id="cb58-2" title="2">case.study6.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="st">  </span><span class="kw">MultAdj</span>(mult.adj1, mult.adj2, mult.adj3, mult.adj4) <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-4" title="4"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
+<a class="sourceLine" id="cb58-5" title="5">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),</a>
+<a class="sourceLine" id="cb58-6" title="6">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-7" title="7"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
+<a class="sourceLine" id="cb58-8" title="8">       <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),</a>
+<a class="sourceLine" id="cb58-9" title="9">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-10" title="10"><span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose H&quot;</span>,</a>
+<a class="sourceLine" id="cb58-11" title="11">       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),</a>
+<a class="sourceLine" id="cb58-12" title="12">       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</a></code></pre></div>
 <p>For the sake of compactness, all MTPs are combined using a <code>MultAdj</code> object, but it is worth mentioning that each MTP could have been directly added to the <code>AnalysisModel</code> object using the <code>+</code> operator.</p>
 </div>
 <div id="define-an-evaluation-model-9" class="section level2">
 <h2>Define an Evaluation Model</h2>
 <p>As for the data model, the same evaluation model as in <a href="#case-study-2-1">Case study 2</a> will be used in this case study. Refer to <a href="#case-study-2-1">Case study 2</a> for more information.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="co"># Evaluation model</span></a>
-<a class="sourceLine" id="cb62-2" title="2">case.study6.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-3" title="3"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,</a>
-<a class="sourceLine" id="cb62-4" title="4">            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,</a>
-<a class="sourceLine" id="cb62-5" title="5">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
-<a class="sourceLine" id="cb62-6" title="6">                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
-<a class="sourceLine" id="cb62-7" title="7">                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),</a>
-<a class="sourceLine" id="cb62-8" title="8">            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
-<a class="sourceLine" id="cb62-9" title="9">                       <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
-<a class="sourceLine" id="cb62-10" title="10">                       <span class="st">&quot;Placebo vs Dose H&quot;</span>),</a>
-<a class="sourceLine" id="cb62-11" title="11">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-12" title="12"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,</a>
-<a class="sourceLine" id="cb62-13" title="13">            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,</a>
-<a class="sourceLine" id="cb62-14" title="14">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
-<a class="sourceLine" id="cb62-15" title="15">                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
-<a class="sourceLine" id="cb62-16" title="16">                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),</a>
-<a class="sourceLine" id="cb62-17" title="17">            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power&quot;</span>,</a>
-<a class="sourceLine" id="cb62-18" title="18">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-19" title="19"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H and at least one dose&quot;</span>,</a>
-<a class="sourceLine" id="cb62-20" title="20">            <span class="dt">method =</span> <span class="st">&quot;case.study6.criterion&quot;</span>,</a>
-<a class="sourceLine" id="cb62-21" title="21">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
-<a class="sourceLine" id="cb62-22" title="22">                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
-<a class="sourceLine" id="cb62-23" title="23">                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),</a>
-<a class="sourceLine" id="cb62-24" title="24">            <span class="dt">labels =</span> <span class="st">&quot;Dose H and at least one of the two other doses are significant&quot;</span>,</a>
-<a class="sourceLine" id="cb62-25" title="25">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="co"># Evaluation model</span></a>
+<a class="sourceLine" id="cb59-2" title="2">case.study6.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,</a>
+<a class="sourceLine" id="cb59-4" title="4">            <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,</a>
+<a class="sourceLine" id="cb59-5" title="5">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
+<a class="sourceLine" id="cb59-6" title="6">                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
+<a class="sourceLine" id="cb59-7" title="7">                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),</a>
+<a class="sourceLine" id="cb59-8" title="8">            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
+<a class="sourceLine" id="cb59-9" title="9">                       <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
+<a class="sourceLine" id="cb59-10" title="10">                       <span class="st">&quot;Placebo vs Dose H&quot;</span>),</a>
+<a class="sourceLine" id="cb59-11" title="11">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-12" title="12"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,</a>
+<a class="sourceLine" id="cb59-13" title="13">            <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,</a>
+<a class="sourceLine" id="cb59-14" title="14">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
+<a class="sourceLine" id="cb59-15" title="15">                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
+<a class="sourceLine" id="cb59-16" title="16">                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),</a>
+<a class="sourceLine" id="cb59-17" title="17">            <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power&quot;</span>,</a>
+<a class="sourceLine" id="cb59-18" title="18">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-19" title="19"><span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H and at least one dose&quot;</span>,</a>
+<a class="sourceLine" id="cb59-20" title="20">            <span class="dt">method =</span> <span class="st">&quot;case.study6.criterion&quot;</span>,</a>
+<a class="sourceLine" id="cb59-21" title="21">            <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,</a>
+<a class="sourceLine" id="cb59-22" title="22">                          <span class="st">&quot;Placebo vs Dose M&quot;</span>,</a>
+<a class="sourceLine" id="cb59-23" title="23">                          <span class="st">&quot;Placebo vs Dose H&quot;</span>),</a>
+<a class="sourceLine" id="cb59-24" title="24">            <span class="dt">labels =</span> <span class="st">&quot;Dose H and at least one of the two other doses are significant&quot;</span>,</a>
+<a class="sourceLine" id="cb59-25" title="25">            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</a></code></pre></div>
 <p>The last <code>Criterion</code> object specifies the custom criterion which computes the probability of a significant treatment effect at Dose H and a significant treatment difference at Dose L or Dose M.</p>
 </div>
 <div id="perform-clinical-scenario-evaluation-1" class="section level2">
 <h2>Perform Clinical Scenario Evaluation</h2>
 <p>Using the data, analysis and evaluation models, simulation-based Clinical Scenario Evaluation is performed by calling the <code>CSE</code> function:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="co"># Simulation Parameters</span></a>
-<a class="sourceLine" id="cb63-2" title="2">case.study6.sim.parameters =<span class="st">  </span><span class="kw">SimParameters</span>(<span class="dt">n.sims =</span> <span class="dv">1000</span>, </a>
-<a class="sourceLine" id="cb63-3" title="3">                                            <span class="dt">proc.load =</span> <span class="st">&quot;full&quot;</span>, </a>
-<a class="sourceLine" id="cb63-4" title="4">                                            <span class="dt">seed =</span> <span class="dv">42938001</span>)</a>
-<a class="sourceLine" id="cb63-5" title="5"></a>
-<a class="sourceLine" id="cb63-6" title="6"><span class="co"># Perform clinical scenario evaluation</span></a>
-<a class="sourceLine" id="cb63-7" title="7">case.study6.results =<span class="st"> </span><span class="kw">CSE</span>(case.study6.data.model,</a>
-<a class="sourceLine" id="cb63-8" title="8">                          case.study6.analysis.model,</a>
-<a class="sourceLine" id="cb63-9" title="9">                          case.study6.evaluation.model,</a>
-<a class="sourceLine" id="cb63-10" title="10">                          case.study6.sim.parameters)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="co"># Simulation Parameters</span></a>
+<a class="sourceLine" id="cb60-2" title="2">case.study6.sim.parameters =<span class="st">  </span><span class="kw">SimParameters</span>(<span class="dt">n.sims =</span> <span class="dv">1000</span>, </a>
+<a class="sourceLine" id="cb60-3" title="3">                                            <span class="dt">proc.load =</span> <span class="st">&quot;full&quot;</span>, </a>
+<a class="sourceLine" id="cb60-4" title="4">                                            <span class="dt">seed =</span> <span class="dv">42938001</span>)</a>
+<a class="sourceLine" id="cb60-5" title="5"></a>
+<a class="sourceLine" id="cb60-6" title="6"><span class="co"># Perform clinical scenario evaluation</span></a>
+<a class="sourceLine" id="cb60-7" title="7">case.study6.results =<span class="st"> </span><span class="kw">CSE</span>(case.study6.data.model,</a>
+<a class="sourceLine" id="cb60-8" title="8">                          case.study6.analysis.model,</a>
+<a class="sourceLine" id="cb60-9" title="9">                          case.study6.evaluation.model,</a>
+<a class="sourceLine" id="cb60-10" title="10">                          case.study6.sim.parameters)</a></code></pre></div>
 </div>
 <div id="generate-a-simulation-report" class="section level2">
 <h2>Generate a Simulation Report</h2>
@@ -1774,52 +1762,52 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><p>A report with combined sections.</p></li>
 </ul>
 <p>First of all, a default <code>PresentationModel</code> object (<code>case.study6.presentation.model.default</code>) will be created. This object will include the common components of the report that are shared across the presentation models. The project information (<code>Project</code> object), sorting options in summary tables (<code>Table</code> object) and specification of custom labels (<code>CustomLabel</code> objects) are included in this object:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">case.study6.presentation.model.default =<span class="st"> </span><span class="kw">PresentationModel</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-2" title="2"><span class="st">  </span><span class="kw">Project</span>(<span class="dt">username =</span> <span class="st">&quot;[Mediana&#39;s User]&quot;</span>,</a>
-<a class="sourceLine" id="cb64-3" title="3">          <span class="dt">title =</span> <span class="st">&quot;Case study 6&quot;</span>,</a>
-<a class="sourceLine" id="cb64-4" title="4">          <span class="dt">description =</span> <span class="st">&quot;Clinical trial in patients with schizophrenia - Several MTPs&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-5" title="5"><span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-6" title="6"><span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;sample.size&quot;</span>, </a>
-<a class="sourceLine" id="cb64-7" title="7">              <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>, <span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-8" title="8"><span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;multiplicity.adjustment&quot;</span>, </a>
-<a class="sourceLine" id="cb64-9" title="9">              <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;No adjustment&quot;</span>, <span class="st">&quot;Bonferroni adjustment&quot;</span>, <span class="st">&quot;Holm adjustment&quot;</span>, <span class="st">&quot;Hochberg adjustment&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">case.study6.presentation.model.default =<span class="st"> </span><span class="kw">PresentationModel</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="st">  </span><span class="kw">Project</span>(<span class="dt">username =</span> <span class="st">&quot;[Mediana&#39;s User]&quot;</span>,</a>
+<a class="sourceLine" id="cb61-3" title="3">          <span class="dt">title =</span> <span class="st">&quot;Case study 6&quot;</span>,</a>
+<a class="sourceLine" id="cb61-4" title="4">          <span class="dt">description =</span> <span class="st">&quot;Clinical trial in patients with schizophrenia - Several MTPs&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb61-5" title="5"><span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb61-6" title="6"><span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;sample.size&quot;</span>, </a>
+<a class="sourceLine" id="cb61-7" title="7">              <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>, <span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb61-8" title="8"><span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;multiplicity.adjustment&quot;</span>, </a>
+<a class="sourceLine" id="cb61-9" title="9">              <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;No adjustment&quot;</span>, <span class="st">&quot;Bonferroni adjustment&quot;</span>, <span class="st">&quot;Holm adjustment&quot;</span>, <span class="st">&quot;Hochberg adjustment&quot;</span>))</a></code></pre></div>
 </div>
 <div id="report-without-subsections" class="section level4">
 <h4>Report without subsections</h4>
 <p>The first simulation report will include a section for each outcome parameter set. To accomplish this, a <code>Section</code> object is added to the default <code>PresentationModel</code> object and the report is generated:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="co"># Reporting 1 - Without subsections</span></a>
-<a class="sourceLine" id="cb65-2" title="2">case.study6.presentation.model1 =<span class="st"> </span>case.study6.presentation.model.default <span class="op">+</span></a>
-<a class="sourceLine" id="cb65-3" title="3"><span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>)</a>
-<a class="sourceLine" id="cb65-4" title="4"></a>
-<a class="sourceLine" id="cb65-5" title="5"><span class="co"># Report Generation</span></a>
-<a class="sourceLine" id="cb65-6" title="6"><span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study6.presentation.model1,</a>
-<a class="sourceLine" id="cb65-7" title="7">               <span class="dt">cse.results =</span> case.study6.results,</a>
-<a class="sourceLine" id="cb65-8" title="8">               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 6 - Without subsections.docx&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="co"># Reporting 1 - Without subsections</span></a>
+<a class="sourceLine" id="cb62-2" title="2">case.study6.presentation.model1 =<span class="st"> </span>case.study6.presentation.model.default <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-3" title="3"><span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>)</a>
+<a class="sourceLine" id="cb62-4" title="4"></a>
+<a class="sourceLine" id="cb62-5" title="5"><span class="co"># Report Generation</span></a>
+<a class="sourceLine" id="cb62-6" title="6"><span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study6.presentation.model1,</a>
+<a class="sourceLine" id="cb62-7" title="7">               <span class="dt">cse.results =</span> case.study6.results,</a>
+<a class="sourceLine" id="cb62-8" title="8">               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 6 - Without subsections.docx&quot;</span>)</a></code></pre></div>
 </div>
 <div id="report-with-subsections" class="section level4">
 <h4>Report with subsections</h4>
 <p>The second report will include a section for each outcome parameter set and, in addition, a subsection will be created for each multiplicity adjustment procedure. The <code>Section</code> and <code>Subsection</code> objects are added to the default <code>PresentationModel</code> object as shown below and the report is generated:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="co"># Reporting 2 - With subsections</span></a>
-<a class="sourceLine" id="cb66-2" title="2">case.study6.presentation.model2 =<span class="st"> </span>case.study6.presentation.model.default <span class="op">+</span></a>
-<a class="sourceLine" id="cb66-3" title="3"><span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb66-4" title="4"><span class="st">  </span><span class="kw">Subsection</span>(<span class="dt">by =</span> <span class="st">&quot;multiplicity.adjustment&quot;</span>) </a>
-<a class="sourceLine" id="cb66-5" title="5"></a>
-<a class="sourceLine" id="cb66-6" title="6"><span class="co"># Report Generation</span></a>
-<a class="sourceLine" id="cb66-7" title="7"><span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study6.presentation.model2,</a>
-<a class="sourceLine" id="cb66-8" title="8">               <span class="dt">cse.results =</span> case.study6.results,</a>
-<a class="sourceLine" id="cb66-9" title="9">               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 6 - With subsections.docx&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="co"># Reporting 2 - With subsections</span></a>
+<a class="sourceLine" id="cb63-2" title="2">case.study6.presentation.model2 =<span class="st"> </span>case.study6.presentation.model.default <span class="op">+</span></a>
+<a class="sourceLine" id="cb63-3" title="3"><span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb63-4" title="4"><span class="st">  </span><span class="kw">Subsection</span>(<span class="dt">by =</span> <span class="st">&quot;multiplicity.adjustment&quot;</span>) </a>
+<a class="sourceLine" id="cb63-5" title="5"></a>
+<a class="sourceLine" id="cb63-6" title="6"><span class="co"># Report Generation</span></a>
+<a class="sourceLine" id="cb63-7" title="7"><span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study6.presentation.model2,</a>
+<a class="sourceLine" id="cb63-8" title="8">               <span class="dt">cse.results =</span> case.study6.results,</a>
+<a class="sourceLine" id="cb63-9" title="9">               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 6 - With subsections.docx&quot;</span>)</a></code></pre></div>
 </div>
 <div id="report-with-combined-sections" class="section level4">
 <h4>Report with combined sections</h4>
 <p>Finally, the third report will include a section for each combination of outcome parameter set and each multiplicity adjustment procedure. This is accomplished by adding a <code>Section</code> object to the default <code>PresentationModel</code> object and specifying the outcome parameter and multiplicity adjustment in the section’s <code>by</code> argument.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># Reporting 3 - Combined sections</span></a>
-<a class="sourceLine" id="cb67-2" title="2">case.study6.presentation.model3 =<span class="st"> </span>case.study6.presentation.model.default <span class="op">+</span></a>
-<a class="sourceLine" id="cb67-3" title="3"><span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;outcome.parameter&quot;</span>, <span class="st">&quot;multiplicity.adjustment&quot;</span>))</a>
-<a class="sourceLine" id="cb67-4" title="4"></a>
-<a class="sourceLine" id="cb67-5" title="5"><span class="co"># Report Generation</span></a>
-<a class="sourceLine" id="cb67-6" title="6"><span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study6.presentation.model3,</a>
-<a class="sourceLine" id="cb67-7" title="7">               <span class="dt">cse.results =</span> case.study6.results,</a>
-<a class="sourceLine" id="cb67-8" title="8">               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 6 - Combined Sections.docx&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="co"># Reporting 3 - Combined sections</span></a>
+<a class="sourceLine" id="cb64-2" title="2">case.study6.presentation.model3 =<span class="st"> </span>case.study6.presentation.model.default <span class="op">+</span></a>
+<a class="sourceLine" id="cb64-3" title="3"><span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;outcome.parameter&quot;</span>, <span class="st">&quot;multiplicity.adjustment&quot;</span>))</a>
+<a class="sourceLine" id="cb64-4" title="4"></a>
+<a class="sourceLine" id="cb64-5" title="5"><span class="co"># Report Generation</span></a>
+<a class="sourceLine" id="cb64-6" title="6"><span class="kw">GenerateReport</span>(<span class="dt">presentation.model =</span> case.study6.presentation.model3,</a>
+<a class="sourceLine" id="cb64-7" title="7">               <span class="dt">cse.results =</span> case.study6.results,</a>
+<a class="sourceLine" id="cb64-8" title="8">               <span class="dt">report.filename =</span> <span class="st">&quot;Case study 6 - Combined Sections.docx&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 </div>

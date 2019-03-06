@@ -1057,9 +1057,7 @@ case.study4.data.model = DataModel() +
 The treatment comparisons for both endpoints will be carried out based on the log-rank test (`method = "LogrankTest"`). Further, as was stated in the beginning of this page, the two endpoints will be tested hierarchically using a multiplicity adjustment procedure known as the fixed-sequence procedure. This procedure belongs to the class of chain procedures (`proc = "ChainAdj"`) and the following figure provides a visual summary of the decision rules used in this procedure. 
 
 <center>
-  <div class="col-md-12">
-    <img src="CaseStudy04-fig1.png" class="img-responsive" height="150">
-  </div>
+![](figures/CaseStudy04-fig1.png)
 </center>
 
 The circles in this figure denote the two null hypotheses of interest:
@@ -1075,9 +1073,7 @@ after H1 is rejected.
 More formally, a chain procedure is uniquely defined by specifying a vector of hypothesis weights (W) and matrix of transition parameters (G). Based on the figure, these parameters are given by
 
 <center>
-  <div class="col-md-12">
-    <img src="CaseStudy04-fig2.png" class="img-responsive">
-  </div>
+![](figures/CaseStudy04-fig2.png)
 </center>
 
 Two objects (named `chain.weight` and `chain.transition`) are defined below to pass the hypothesis weights and transition parameters to the multiplicity adjustment parameters.
@@ -1296,9 +1292,7 @@ H4: Null hypothesis of no difference between Dose H and placebo with respect
 to Endpoint 2.
 
 <center>
-  <div class="col-md-12">
-    <img src="CaseStudy05-fig1.png" class="img-responsive">
-  </div>
+![](figures/CaseStudy05-fig1.png)
 </center>
 
 A multiple testing procedure known as the multiple-sequence gatekeeping procedure will be applied to account for the hierarchical structure of this multiplicity problem. This procedure belongs to the class of mixture-based gatekeeping procedures introduced in [Dmitrienko et al. (2015)](http://www.tandfonline.com/doi/abs/10.1080/10543406.2015.1074917). This gatekeeping procedure is specified by defining the following three parameters:
