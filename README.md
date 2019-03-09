@@ -30,7 +30,7 @@ Or the development version from github:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("gpaux/Mediana")
+devtools::install_github("gpaux/Mediana", build_opts = NULL)
 ```
 
 ## Vignettes

@@ -40,7 +40,7 @@ Or the development version from github:
   
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("gpaux/Mediana")
+devtools::install_github("gpaux/Mediana", build_opts = NULL)
 ```
 
 ## Vignettes
