@@ -66,7 +66,7 @@ The up-to-date development version can be found and installed directly from the 
 
 {% highlight R %}
 # install.packages("devtools")
-devtools::install_github("gpaux/Mediana")
+devtools::install_github("gpaux/Mediana", build_opts = NULL)
 {% endhighlight %}
 
 ### Suggested packages
