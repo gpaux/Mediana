@@ -13,7 +13,7 @@ Provides a general framework for clinical trial simulations based on the Clinica
 Package: \tab Mediana\cr
 Type: \tab Package\cr
 Version: \tab 1.0.8\cr
-Date: \tab 2019-03-06\cr
+Date: \tab 2019-03-10\cr
 License: \tab GPL-2\cr
 }
 %~~ An overview of how to use the package, including the most important functions ~~

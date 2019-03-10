@@ -12,6 +12,8 @@
 
 * Fix the images in the Case studies vignette
 
+* Revise the specification of serial and parallel parameters in MixtureGatekeepingAdj (matrix instead of list) 
+
 # Mediana 1.0.7
 
 ## Bug fixes

@@ -24,9 +24,9 @@ MixtureGatekeepingAdj = function(rawp, par) {
     family = par[[2]]$family
     # Number of families in the multiplicity problem
     nfam = length(family)
-    # Extract the list of parallel resriction set (m list containint vectors (1 x m))
+    # Extract the matrix of parallel resriction set (matrix (m x m))
     parallel = par[[2]]$parallel
-    # Extract the vector of serial resriction set (m list containint vectors (1 x m))
+    # Extract the matrix of serial resriction set (matrix (m x m))
     serial = par[[2]]$serial
 
     # Number of null hypotheses per family
@@ -55,16 +55,20 @@ MixtureGatekeepingAdj = function(rawp, par) {
               stop("Mixture-based gatekeeping adjustment: Gamma must be set to 0 for the global Bonferroni procedure.")
         }
       }
-    if (nhyp != length(parallel))
-      stop("Mixture-based gatekeeping adjustment: Length of the parallel restriction set must be equal to the number of hypothesis.")
-    if (any(unlist(lapply(parallel, function(x) length(x)!= nhyp))))
-      stop("Mixture-based gatekeeping adjustment: Each lenght's vector of the parallel restriction set must be equal to the number of hypothesis.")
-    if (nhyp != length(serial))
-      stop("Mixture-based gatekeeping adjustment: Length of the serial restriction set must be equal to the number of hypothesis.")
-    if (any(unlist(lapply(serial, function(x) length(x)!= nhyp))))
-      stop("Mixture-based gatekeeping adjustment: Each lenght's vector of the serial restriction set must be equal to the number of hypothesis.")
+    if(!is.matrix(parallel))
+      stop("Mixture-based gatekeeping adjustment: A matrix must be used to specify the parallel restriction set")
+    if(!is.matrix(serial))
+      stop("Mixture-based gatekeeping adjustment: A matrix must be used to specify the serial restriction set")
+    if (nhyp != ncol(parallel))
+      stop("Mixture-based gatekeeping adjustment: Number of columns of the parallel restriction set must be equal to the number of hypothesis.")
+    if (nhyp != nrow(parallel))
+      stop("Mixture-based gatekeeping adjustment: Number of rows of the parallel restriction set must be equal to the number of hypothesis.")
+    if (nhyp != ncol(serial))
+      stop("Mixture-based gatekeeping adjustment: Number of columns of the serial restriction set must be equal to the number of hypothesis.")
+    if (nhyp != nrow(serial))
+      stop("Mixture-based gatekeeping adjustment: Number of rows of the serial restriction set must be equal to the number of hypothesis.")
 
-        # Number of intersection hypotheses in the closed family
+    # Number of intersection hypotheses in the closed family
     nint = 2^nhyp - 1
 
     # Construct the intersection index sets (int_orig) before the logical restrictions are applied.  Each row is a vector of binary indicators (1 if the hypothesis is
@@ -81,9 +85,9 @@ MixtureGatekeepingAdj = function(rawp, par) {
         if (k/2 == floor(k/2))  int_orig[j + 1, i] = 1
       }
       # Serial index indicates for each row if the hypothesis is testebale after having applied the serial restriction
-      serial_index[,i] = apply(int_orig, 1, function(x) all((x * serial[[i]])==0))
+      serial_index[,i] = apply(int_orig, 1, function(x) all((x * serial[i,])==0))
       # Parallel index indicates for each row if the hypothesis is testebale after having applied the parallel restriction
-      parallel_index[,i] = apply(int_orig, 1, function(x) ifelse(any(parallel[[i]]==1), any((x * parallel[[i]])[which(parallel[[i]]==1)]==0),1))
+      parallel_index[,i] = apply(int_orig, 1, function(x) ifelse(any(parallel[i,]==1), any((x * parallel[i,])[which(parallel[i,]==1)]==0),1))
       # Testable index: if serial or parallel indicates that the hypothesis is testable
       testable_index[,i] = mapply(x = serial_index[,i], y = parallel_index[,i], function(x,y) x==TRUE & y == TRUE)
       # Construct the intersection index sets (int_rest) and family index sets (fam_rest) after the logical restrictions are applied.
@@ -145,7 +149,7 @@ MixtureGatekeepingAdj = function(rawp, par) {
       }
 
       # Compute the intersection p-value for the current intersection hypothesis
-      pint[i] = pmin(1, min(ifelse(c[i,]>0, pcomp[i, ]/c[i, ], NA), na.rm = TRUE))
+      pint[i] = pmin(1, min(pcomp[i, ]/c[i, ]))
       # Compute the p-value for each hypothesis within the current intersection
       p[i, ] = int_orig[i, ] * pint[i]
 
@@ -180,11 +184,11 @@ MixtureGatekeepingAdj = function(rawp, par) {
         index = index + 1
         hyp.par[index,1] = i
         hyp.par[index,2] = test.id[family[[i]][j]]
-        hyp.par[index,3] = ifelse(sum(parallel[[family[[i]][j]]])>0,paste0("{",paste(test.id[which(parallel[[family[[i]][j]]]==1)], collapse = ", "),"}"),"")
-        hyp.par[index,4] = ifelse(sum(serial[[family[[i]][j]]])>0,paste0("{",paste(test.id[which(serial[[family[[i]][j]]]==1)], collapse = ", "),"}"),"")
+        hyp.par[index,3] = ifelse(sum(parallel[family[[i]][j],])>0,paste0("{",paste(test.id[which(parallel[family[[i]][j],]==1)], collapse = ", "),"}"),"")
+        hyp.par[index,4] = ifelse(sum(serial[family[[i]][j],])>0,paste0("{",paste(test.id[which(serial[family[[i]][j],]==1)], collapse = ", "),"}"),"")
       }
     }
-    colnames(hyp.par) = c("Family", "Tests", "Parallel rejection set", "Serial rejection set")
+    colnames(hyp.par) = c("Family", "Hypothesis", "Parallel rejection set", "Serial rejection set")
     result=list(list("Mixture-based gatekeeping"),list(proc.par, hyp.par))
   }
 
