@@ -32,7 +32,7 @@ Mediana R package has been widely used to implement the case studies presented i
 
 ## New release ! [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Mediana)](https://cran.r-project.org/package=Mediana)
 
-The version 1.0.7 of the Mediana R package has been released on 16 July 2018. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). As the `ReporteRs` R package is not available on the CRAN anymore, the report generation feature has been revised using the `officer` and `flextable` R packages. These packages are now required to use the `GenerateReport` function.
+The version 1.0.8 of the Mediana R package has been released on 05 May 2019. This latest stable version can be downloaded from the [CRAN website](https://cran.r-project.org/web/packages/Mediana/index.html). 
 
 ## About
 
