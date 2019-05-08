@@ -12,7 +12,9 @@
 
 * Fix the images in the Case studies vignette
 
-* Revise the specification of serial and parallel parameters in MixtureGatekeepingAdj (matrix instead of list) 
+* Revise the specification of serial and parallel parameters in MixtureGatekeepingAdj (matrix instead of list)
+
+* Revise the Outcome table generation function used for reporting
 
 # Mediana 1.0.7
 
