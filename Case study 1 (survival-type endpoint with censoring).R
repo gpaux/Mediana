@@ -79,6 +79,7 @@ case.study1.results = CSE(case.study1.data.model,
                           case.study1.analysis.model,
                           case.study1.evaluation.model,
                           case.study1.sim.parameters)
+summary(case.study1.results)
 
 # Reporting
 case.study1.presentation.model = PresentationModel() +
