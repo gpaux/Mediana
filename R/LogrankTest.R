@@ -52,24 +52,32 @@ LogrankTest = function(sample.list, parameter) {
     data = data.frame(time = outcome,
                       event = event,
                       treatment = treatment)
-    data = data[order(data$time),]
-    data$event1 = data$event*(data$treatment==0)
-    data$event2 = data$event*(data$treatment==1)
-    data$eventtot = data$event1 + data$event2
-    data$n.risk1.prior = length(outcome1) - cumsum(data$treatment==0) + (data$treatment==0)
-    data$n.risk2.prior = length(outcome2) - cumsum(data$treatment==1) + (data$treatment==1)
-    data$n.risk.prior = data$n.risk1.prior + data$n.risk2.prior
+    # data = data[order(data$time),]
+    # data$event1 = data$event*(data$treatment==0)
+    # data$event2 = data$event*(data$treatment==1)
+    # data$eventtot = data$event1 + data$event2
+    # data$n.risk1.prior = length(outcome1) - cumsum(data$treatment==0) + (data$treatment==0)
+    # data$n.risk2.prior = length(outcome2) - cumsum(data$treatment==1) + (data$treatment==1)
+    # data$n.risk.prior = data$n.risk1.prior + data$n.risk2.prior
+    #
+    # data$e1 = data$n.risk1.prior*data$eventtot/data$n.risk.prior
+    # data$u1 = data$event1 - data$e1
+    # data$v1 = ifelse(data$n.risk.prior > 1,
+    #                  (data$n.risk1.prior*data$n.risk2.prior*data$eventtot*(data$n.risk.prior - data$eventtot))/(data$n.risk.prior**2*(data$n.risk.prior-1)),
+    #                  0)
+    #
+    # stat.test = sum(data$u1)/sqrt(sum(data$v1))
+    #
+    # # Compute one-sided p-value
+    # result = stats::pnorm(stat.test, lower.tail = !larger)
 
-    data$e1 = data$n.risk1.prior*data$eventtot/data$n.risk.prior
-    data$u1 = data$event1 - data$e1
-    data$v1 = ifelse(data$n.risk.prior > 1,
-                     (data$n.risk1.prior*data$n.risk2.prior*data$eventtot*(data$n.risk.prior - data$eventtot))/(data$n.risk.prior**2*(data$n.risk.prior-1)),
-                     0)
-
-    stat.test = sum(data$u1)/sqrt(sum(data$v1))
+    # Get log-rank test statistic
+    LR = survdiff(Surv(time, event) ~ treatment, data = data)
+    HR = (LR$obs[2]/LR$exp[2])/(LR$obs[1]/LR$exp[1])
 
     # Compute one-sided p-value
-    result = stats::pnorm(stat.test, lower.tail = !larger)
+    pval = pchisq(LR$chisq, length(LR$n)-1, lower.tail = FALSE)/2
+    result = ifelse((HR<1 & isTRUE(larger)) | (HR>1 & isFALSE(larger)), pval, 1)
 
   }
 
