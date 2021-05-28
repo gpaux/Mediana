@@ -1,8 +1,13 @@
-# Function: families
-# Argument: Multiple character strings.
-# Description: This function is used mostly for the user's convenience. It simply creates a list of character strings and
-# can be used in the specification of parameters for gatekeeping procedures.
-#' @export
+#' Create list of character strings
+#'
+#' This function is used mostly for user's convenience. It simply creates a
+#' list of character strings.
+#'
+#'
+#' @aliases tests samples statistics parameters families
+#' @param \dots defines character strings to be passed into the function.
+#' @references \url{http://gpaux.github.io/Mediana/}
+#' @export families
 families = function(...) {
 
   args = list(...)

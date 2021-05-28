@@ -1,9 +1,43 @@
-######################################################################################################################
-
-# Function: PresentationModel.
-# Argument: ....
-# Description: This function is used to call the corresponding function according to the class of the argument.
-#' @export
+#' PresentationModel object
+#'
+#' \code{PresentationModel()} initializes an object of class
+#' \code{PresentationModel}.
+#'
+#' Presentation models can be used to create a customized structure to report
+#' the results. Project information, structure of the sections and subsections,
+#' as well as sorting the results tables and labeling of scenarios can be
+#' defined.
+#'
+#' \code{PresentationModel()} is used to create an object of class
+#' \code{PresentationModel} incrementally, using the '+' operator to add
+#' objects to the existing \code{PresentationModel} object. The advantage is to
+#' explicitely define which objects are added to the \code{PresentationModel}
+#' object. Initialization with \code{PresentationModel()} is highly
+#' recommended.
+#'
+#' Objects of class \code{Project}, \code{Section}, \code{Subsection},
+#' \code{Table} and \code{CustomLabel} can be added to an object of class
+#' \code{PresentationModel}.
+#'
+#' @param \dots defines the arguments passed to create the object of class
+#' \code{PresentationModel}.
+#' @seealso See Also \code{\link{Project}}, \code{\link{Section}},
+#' \code{\link{Subsection}}, \code{\link{Table}} and \code{\link{CustomLabel}}.
+#' @references \url{http://gpaux.github.io/Mediana/}
+#' @examples
+#'
+#' presentation.model = PresentationModel() +
+#'   Project(username = "Gautier Paux",
+#'           title = "Clinical trial",
+#'           description = "Simulation report for my clinical trial") +
+#'   Section(by = "outcome.parameter") +
+#'   Table(by = "sample.size") +
+#'   CustomLabel(param = "sample.size",
+#'               label= paste0("N = ",c(50, 55, 60, 65, 70))) +
+#'   CustomLabel(param = "outcome.parameter",
+#'               label=c("Standard 1", "Standard 2"))
+#'
+#' @export PresentationModel
 PresentationModel = function(...) {
   UseMethod("PresentationModel")
 }
