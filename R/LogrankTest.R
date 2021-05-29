@@ -72,11 +72,11 @@ LogrankTest = function(sample.list, parameter) {
     # result = stats::pnorm(stat.test, lower.tail = !larger)
 
     # Get log-rank test statistic
-    LR = survdiff(Surv(time, event) ~ treatment, data = data)
+    LR = survival::survdiff(survival::Surv(time, event) ~ treatment, data = data)
     HR = (LR$obs[2]/LR$exp[2])/(LR$obs[1]/LR$exp[1])
 
     # Compute one-sided p-value
-    pval = pchisq(LR$chisq, length(LR$n)-1, lower.tail = FALSE)/2
+    pval = stats::pchisq(LR$chisq, length(LR$n)-1, lower.tail = FALSE)/2
     result = ifelse((HR<1 & isTRUE(larger)) | (HR>1 & isFALSE(larger)), pval, 1)
 
   }
