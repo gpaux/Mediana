@@ -1,3 +1,13 @@
+# Mediana 1.0.9
+
+## New features
+
+* Use of roxygen for package documentation
+
+## Bug fixes
+
+* Revision of LogRankTest function to avoid integer overflow issue
+
 # Mediana 1.0.8
 
 ## New features
